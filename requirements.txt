@@ -1,0 +1,15 @@
+# Core (Mac, Phase 0-1)
+numpy
+scipy
+matplotlib
+sarpy            # NGA library: reads SICD (.nitf) and CPHD (.cphd) — Umbra/Capella native
+boto3            # download from public S3 open-data buckets (use UNSIGNED config)
+
+# Optional / later
+gdal             # geocoding, raster IO (via conda is easiest on mac)
+scikit-image     # sub-pixel coregistration, image utils
+tqdm
+
+# GPU stage (rented A100 box, NOT the mac) — install separately there:
+#   cupy-cuda12x   # GPU FFT / linear algebra
+#   torch          # if using learned priors / autodiff inversion

@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this software or its findings, please cite the preprint below."
+title: "Subsurface SAR Doppler Tomography: a controlled reproduction and refutation"
+abstract: >-
+  An independent, controls-first reproduction and refutation of the single-pass
+  SAR Doppler micro-motion tomography method (Biondi & Malanga) used to claim
+  deep subsurface structures beneath the Giza plateau. Open pipeline, controls,
+  stress tests, and figure-generation scripts.
+type: software
+authors:
+  - family-names: Foreman
+    given-names: Hassan
+    affiliation: "Independent researcher"
+license: MIT
+repository-code: "https://github.com/Hassanforeman/subsurface-sar-tomo"
+keywords:
+  - synthetic aperture radar
+  - SAR Doppler tomography
+  - micro-motion
+  - reproducibility
+  - null result
+  - remote sensing
+preferred-citation:
+  type: article
+  title: >-
+    No Reproducible Evidence for Deep Subsurface Structures Beneath the Giza
+    Plateau: A Controlled Reproduction of Single-Source SAR Doppler Micro-Motion
+    Tomography
+  authors:
+    - family-names: Foreman
+      given-names: Hassan
+      affiliation: "Independent researcher"
+  year: 2026
+  notes: "Preprint (merged reproduction + refutation, v1.0)."
