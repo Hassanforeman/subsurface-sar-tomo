@@ -1,5 +1,8 @@
 # Subsurface SAR Doppler Tomography — Controlled Reproduction & Refutation
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21065675.svg)](https://doi.org/10.5281/zenodo.21065675)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 An independent, **controls-first reproduction** of the single-pass SAR Doppler
 "micro-motion tomography" method of F. Biondi & C. Malanga — the method behind the
 disputed 2025 claims of an "underground city" beneath the Giza plateau.
