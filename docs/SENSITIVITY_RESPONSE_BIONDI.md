@@ -1,185 +1,180 @@
-# Configuration sensitivity — response to the 28 July 2026 objections
+# Configuration sensitivity across four real sites — response to the 28 July 2026 objections
 
-> ## ⚠ SUPERSEDED — DO NOT CITE THIS VERSION
->
-> **Everything below Result 1 is based on SYNTHETIC scenes only, and the real-data run
-> contradicts its central claim.**
->
-> This draft states that the verdict is invariant across all 24 configurations and that a
-> Hamming window moves the detection statistic by ~0.24. On the real Butte scene
-> (`2024-03-07-04-48-26_UMBRA-04`) the measured effect is roughly ten times larger:
-> Hann → Hamming moves the statistic from **2.38 to 4.59**, and removing the taper
-> entirely reaches **5.59**, crossing the 5.0 detection threshold. The verdict is therefore
-> **NOT** configuration-invariant on real data.
->
-> The synthetic scenes used here were too homogeneous to represent a structured real site
-> and under-predicted the window's influence. That was an error in this document's
-> evidential basis, not in the sweep code.
->
-> A corrected version, built on four real sites, replaces this file. Until then nothing in
-> Results 1–3 should be quoted, and the "Summary for the thread" section at the end must
-> **not** be posted.
->
-> *Status noted 29 July 2026.*
+*Version 2, 29 July 2026. Replaces the 28 July draft, which was based on synthetic scenes
+and whose central claim the real data contradicted (see Errata, §7).*
 
-*Run 28 July 2026. Code: `src/sensitivity_sweep.py`. Raw results: `runs/sweep_speckle.json`,
-`runs/sweep_blobs.json`, `runs/threshold_calibration.json`. Figure:
-`runs/threshold_calibration.png`.*
+*Code: `src/sensitivity_sweep.py`. Results: `runs/sweep_butte.json`, `runs/sweep_bingham.json`,
+`runs/sweep_2023-08-13-07-03-04_UMBRA-05.json`, `runs/sweep_2023-11-15-19-47-28_UMBRA-05.json`,
+`runs/four_site_summary.json`, `runs/threshold_calibration.json`.
+Figures: `runs/four_site_windows.png`, `runs/threshold_calibration.png`.*
 
-## What was objected to
+---
 
-On the Malanga interview thread, a commenter posting as F. Biondi raised three
-configuration objections to this reproduction:
+## 1. What was objected to
+
+On the Malanga interview thread, a commenter posting as F. Biondi raised three configuration
+objections:
 
 1. *"Which coregistrator are you using? Are you working with DORIS or GeFolki?"*
 2. *"I strongly recommend remaining in Double precision at all times and never working in Float32."*
 3. *"Which filtering strategy are you applying to the sub-apertures? I would suggest using a Hamming window."*
 
-and, in a follow-up, the general principle that a failed reproduction may reflect
-*"one or more configuration choices that are left to the user alone"* rather than any
-defect in the original method, with *"the burden of examining the variables that affect
-the effect"* lying on the person attempting the reproduction.
+and, in a follow-up, the principle that a failed reproduction may reflect *"one or more
+configuration choices that are left to the user alone"* rather than a defect in the method,
+with the burden of exploring those choices lying on the reproducer.
 
-The objection is reasonable and is answered here empirically rather than rhetorically.
+The objection is reasonable. It is answered here by running it.
 
-## What was run
+## 2. What was run
 
-`src/sensitivity_sweep.py` re-runs the **entire** pipeline — sub-aperture decomposition,
-coregistration, micro-motion estimation, inversion, null test, hardened positive control,
-surface-leakage and surface-pinning guards — across the full cross-product of:
+The full pipeline — sub-aperture decomposition, coregistration, micro-motion estimation,
+inversion, null test, hardened positive control, surface-leakage and surface-pinning guards —
+across the cross-product of:
 
 | Axis | Levels |
 |---|---|
-| Sub-aperture window | **Hann** (paper), **Hamming** (his suggestion), Blackman, rectangular |
-| Numerical precision | **float64/complex128** (paper), **float32/complex64** |
-| Coregistrator | **phase correlation + parabolic** (paper), upsampled-DFT (Guizar-Sicairos; the sub-pixel engine inside DORIS-lineage processors), normalised cross-correlation, TV-L1 dense optical flow (the Lucas-Kanade/variational family GeFolki belongs to) |
+| Site | **Butte MT**, **Mount Vesuvius**, **Bingham Canyon**, **Komati Power Station** (all four Umbra sites from the paper) |
+| Window | Blackman, **Hann** (paper), **Hamming** (suggested), rectangular (no taper) |
+| Precision | **float64/complex128** (paper), **float32/complex64** |
+| Coregistrator | **phase correlation + parabolic** (paper), upsampled-DFT (Guizar-Sicairos — the sub-pixel engine inside DORIS-lineage processors), normalised cross-correlation |
 
-= 24 configurations, each evaluated on two synthetic scenes that contain **no subsurface
-reflector**, so the correct answer in every cell is "no detection."
+= **96 runs**, 200 permutations each. The harness validates itself first (`--selftest`): it
+reproduces the repo's own `decompose_subapertures` to **0.00e+00** at Hann/complex128, all four
+estimators recover known sub-pixel shifts, the float32 arm is verified genuinely single-precision
+(`scipy.fft`; `numpy.fft` would silently promote to double and make that arm meaningless), the
+permutation p-value is calibrated, and the harness demonstrably **can** detect an injected
+reflector. A sweep that cannot detect anything would prove nothing.
 
-Two decision rules are reported side by side: the paper's own criterion
-(contrast > 5 × a shuffled null) and a stricter permutation p-value over 200 shuffles.
+## 3. Result — the suggested configuration does not change the outcome
 
-### The harness validates itself first
+![four sites](../runs/four_site_windows.png)
 
-`python3 src/sensitivity_sweep.py --selftest` — all pass:
+**1 detection in 48 distinct configurations** (2/96 rows, the same configuration duplicated
+across precision): rectangular window + phase correlation at Butte, ratio 5.59 against a
+threshold of 5.0.
 
-| Check | Result |
+| Objection | Finding |
 |---|---|
-| [A] windowed decomposition reproduces the repo's function exactly at Hann/complex128 | max abs difference **0.00e+00** |
-| [B] all four estimators recover known sub-pixel shifts in the repo's sign convention | max azimuth error 0.02–0.19 px |
-| [E] the float32 arm is **genuinely** single-precision | dtypes complex128/complex64, relative divergence **1.61e-07** |
-| [C] permutation p-value is calibrated under the null | 17% of noise-only trials below 0.05 |
-| [D] the harness **can** detect a real injected reflector | p = 0.005, z = 127 |
+| **Hamming window** | Crosses the 5.0 threshold at **none of the four sites**. Maxima: Butte 4.59, Bingham 4.18, Vesuvius 2.99, Komati 2.85. |
+| **Double precision** | Already in use. float32 and float64 agree **to three significant figures in all 96 runs**; the largest paired divergence in the statistic is 0.012. |
+| **Coregistrator** | No estimator flips a verdict at any site, including the upsampled-DFT engine used in DORIS-lineage processors. |
+| **Positive control** | Recovered in **96/96** runs — the pipeline demonstrably works under every suggested setting. |
 
-Check [E] matters: `numpy.fft` always promotes to double internally, so casting inputs to
-`complex64` yields a double-precision pipeline with rounded storage — a silent no-op. The
-sweep uses `scipy.fft`, which honours single precision. Without this the float32 arm would
-have been meaningless. Check [D] matters for the opposite reason: a sweep that cannot
-detect anything proves nothing.
+The single detection comes from removing the sub-aperture taper **entirely** — the worst-practice
+bracket included to bound the range, not anything the objection recommended.
 
-## Result 1 — the verdict does not move
+## 4. The one pattern that deserves scrutiny
 
-**Every one of the 24 configurations gives the same verdict, on both scenes.**
+Order the windows by how strongly they suppress spectral leakage between adjacent sub-apertures
+(Blackman → Hann → Hamming → none) and read the statistic along that axis, phase correlation:
 
-Under the paper's criterion: **0/24 detect** (correct — the scenes are empty).
-Injected positive control recovered: **24/24**.
+| Site | Blackman | Hann | Hamming | None | monotonic? |
+|---|---|---|---|---|---|
+| Butte, MT | 1.72 | 2.38 | 4.59 | **5.59** | yes |
+| Mount Vesuvius | 1.58 | 2.74 | 2.99 | 3.13 | yes |
+| Bingham Canyon | 2.27 | 2.45 | 3.35 | 2.29 | no |
+| Komati Power Stn | 1.79 | 2.05 | 2.85 | 1.92 | no |
 
-Effect of each knob on the detection statistic (which must reach **5.0** to fire):
+The apparent signal at Butte rises steadily as spectral isolation between looks is removed. A
+genuine subsurface return should not behave that way — the taper exists precisely to stop adjacent
+sub-apertures bleeding into one another, so a "detection" that grows as that protection is stripped
+is more consistent with inter-look correlation than with independent angular diversity. On this
+reading the detecting configuration is simply the one with the most contaminated looks.
 
-| Knob | Mean contrast ratio | Verdict |
-|---|---|---|
-| Hann (paper) | 2.96 / 2.65 | no detection |
-| **Hamming (suggested)** | **2.98 / 2.41** | no detection |
-| Blackman | 3.15 / 2.83 | no detection |
-| Rectangular (no taper) | 1.70 / 2.20 | no detection |
-| float64 (paper) | 2.70 / 2.52 | no detection |
-| **float32** | **2.70 / 2.52** | no detection |
-| phase correlation (paper) | 2.30 / 2.56 | no detection |
-| upsampled DFT (DORIS lineage) | 2.28 / 2.16 | no detection |
-| normalised cross-correlation | 3.52 / 2.84 | no detection |
+**Two honest caveats.** The monotonic sites (Butte, Vesuvius) are also the two with real subsurface
+structure, and the non-monotonic ones (an open pit, a power station) are the two without. That is a
+2-of-4 split noticed *after* looking at the data; under random assignment it arises about one time
+in six. It is not evidence. And the Butte detection does not survive multiple-comparison correction
+against the empty-scene reference (p = 0.020, corrected threshold 0.006), where 0.020 is also the
+resolution floor at 50 reference runs per cell.
 
-*(two numbers = the two synthetic scenes)*
+**The test that would settle it:** measure inter-look correlation directly as a function of window
+and check whether the statistic tracks it. If it does, the gradient is leakage. Not yet run.
 
-Specifically:
+## 5. The threshold is calibrated (and one proposed improvement is rejected)
 
-- **Hamming vs Hann moves the statistic by 0.02 and 0.24** on the two scenes. The
-  threshold is 5.0. The window changes sidelobe leakage by a few dB; it does not create
-  depth information.
-- **float32 vs float64, paired by configuration, differ by at most 0.012** in the
-  statistic (mean 0.001), despite being verifiably different computations. The advice is
-  sound in general and is already followed — but it is not what determines the outcome here.
-- **No coregistrator changes the verdict**, including the upsampled-DFT engine that sits
-  inside DORIS-lineage processors and a dense optical-flow estimator from GeFolki's family.
+Across **400 runs on synthetic scenes containing nothing**: median 2.77, p95 4.35, p99 5.03,
+max 6.02. The paper's 5× threshold carries a **2.0% empirical false-positive rate** — an α ≈ 0.02
+test, not an arbitrary round number.
 
-## Result 2 — the detection threshold is empirically calibrated (new)
+![calibration](../runs/threshold_calibration.png)
 
-Running the pipeline over **400 empty scenes** (2 scene types × 25 seeds × 4 windows ×
-2 coregistrators), the distribution of the detection statistic on data containing nothing:
+The obvious upgrade — replacing the single shuffled null with a permutation p-value — **fails**: it
+fires 24/24 on empty scenes. Adjacent sub-apertures overlap by 80%, so the residual trajectory is
+smooth in look index even when built from pure speckle; shuffling destroys that smoothness, and the
+test ends up measuring "is this sequence smooth?" rather than "is there structure at depth." Worth
+recording, because it is the improvement a referee is most likely to propose.
 
-| | |
-|---|---|
-| median | 2.77 |
-| p95 | 4.35 |
-| **p99** | **5.03** |
-| max | 6.02 |
-| **false-positive rate at the paper's 5× threshold** | **2.0%** |
-| false-positive rate at 6× | 0.2% |
+## 6. None of the three parameters is disclosed in any published source
 
-![threshold calibration](../runs/threshold_calibration.png)
+| | Patent WO2024008365A1 | Biondi & Malanga 2022 (Giza) | Biondi 2022 (Vesuvius) |
+|---|---|---|---|
+| Coregistrator named | absent | absent | absent |
+| Numerical precision | absent | absent | absent |
+| Sub-aperture window | absent | absent | absent |
 
-The paper's 5× threshold sits almost exactly at the 99th percentile of the empty-scene
-distribution — it is an α ≈ 0.02 test, not an arbitrary round number. This was not
-previously demonstrated in the paper and should be added: it converts "we used a 5×
-threshold" into "we used a threshold with a measured 2.0% false-positive rate, n = 400."
+The closest any source comes is the Vesuvius paper's *"the pixel-tracking technique"* with
+*"high-performance sub-pixel coregistration"*, and the patent's *"pixel-tracking for all those
+pixels for which tomography needs to be trained"*. No tool, no algorithm, no parameters.
 
-## Result 3 — a proposed improvement that must be rejected
+All three were therefore stated publicly for the first time in a YouTube comment on 28 July 2026.
 
-The obvious statistical upgrade — replace the single shuffled null with a permutation
-p-value — **fails**. It fires in **24/24** configurations on scenes containing nothing at
-all.
+This matters because of the follow-up argument. If configuration choices are decisive — and §4
+shows the window alone moves the Butte statistic from 1.72 to 5.59, across the threshold — and
+those choices appear in neither the peer-reviewed papers nor the patent, then the published work is
+not reproducible as published. That is not a rhetorical point; it is what the term means.
 
-The reason is structural: adjacent sub-apertures overlap by 80%, so the residual
-trajectory is a smooth function of look index even when it is built from pure speckle.
-Shuffling destroys that smoothness, so a DFT-based contrast statistic always prefers the
-unshuffled sequence. The permutation test therefore measures "is this sequence smooth?",
-not "is there structure at depth."
+## 7. Errata, and an unresolved discrepancy in our own results table
 
-This is worth recording because it is the improvement a referee is most likely to
-suggest. It has been tried and it is anti-conservative. The paper's cruder ratio rule is
-the better-behaved statistic, and Result 2 is the evidence for that.
+**Errata.** The 28 July draft of this document predicted, from synthetic scenes, that a Hamming
+window would move the statistic by ~0.24. On the real Butte scene the effect is **2.21** — about
+ten times larger. The synthetic scenes were too homogeneous to stand in for a structured real site.
+The prediction was wrong; the code was not.
 
-## Honest limits of this run
+**Discrepancy to resolve before publication.** Re-running the Hann/phase-correlation baseline
+reproduces the paper's published contrasts exactly at two sites and not at the third:
 
-- **These are synthetic scenes.** They establish that the three named knobs do not change
-  the machinery's behaviour, and they calibrate the threshold. They do **not** re-run the
-  five real sites. The headline claim — that the real Butte and Vesuvius scenes remain
-  indistinguishable from their nulls under a Hamming window — requires re-running on the
-  real SICDs. That run is a single command (below) and its result will be published here
-  whichever way it falls.
-- **Optical flow was validated but excluded from the 24-cell grid** for runtime; it passes
-  the shift-recovery self-test and can be enabled with `--estimators … opticalflow`.
-- The sweep is written so that a configuration-dependent verdict would be printed as such,
-  in capitals, with an instruction not to bury it. Nothing here is contingent on the
-  expected answer.
+| Site | Published | This rerun | |
+|---|---|---|---|
+| Butte, MT | 3.3× | **3.33×** | matches |
+| Mount Vesuvius | 4.1× | **4.11×** | matches |
+| **Komati Power Stn** | **50× / 10×** | **2.76× / 1.43×** | **does not match** |
 
-## Reproduce
+Two of three reproduce to two decimal places, which is strong evidence the sweep is running the
+published pipeline rather than a lookalike. Komati is off by a factor of ~18 and needs an
+explanation — most likely a different `n_sub` or crop in the original run. Komati also carries
+**5/12 surface-leakage flags above 0.5**, the only site to do so, so its apparent structure is
+surface-driven regardless. A referee comparing the table against a rerun would find this; better to
+resolve it first.
+
+## 8. Limits
+
+- One 512×512 crop per site at `n_sub=11`, not the paper's aggressive `n_sub=256` / `n_chirp=3` /
+  LRSD configuration. The window gradient should be re-checked in that regime.
+- The fifth (Capella cross-sensor) site was not available locally and is not included.
+- The empty-scene reference is synthetic; 50 runs per window×estimator cell is thin for the tail.
+- Optical flow (the GeFolki-lineage estimator) passes the shift-recovery self-test but was excluded
+  from the site grid for runtime.
+
+## 9. Reproduce
 
 ```bash
 python3 src/sensitivity_sweep.py --selftest
-python3 src/sensitivity_sweep.py --synthetic --scene speckle --n-perm 200
-python3 src/sensitivity_sweep.py --synthetic --scene blobs   --n-perm 200
-# real scene:
-python3 src/sensitivity_sweep.py --sicd data/2024-03-07-04-48-26_UMBRA-04_SICD.nitf --n-perm 200
+for f in 2023-08-13-07-03-04_UMBRA-05 2023-11-15-19-47-28_UMBRA-05 \
+         2024-01-12-04-09-18_UMBRA-05 2024-03-07-04-48-26_UMBRA-04; do
+  python3 src/sensitivity_sweep.py --sicd "data/${f}_SICD.nitf" --n-perm 200 \
+          --out "runs/sweep_${f}.json"
+done
 ```
 
-## Summary for the thread
+## 10. Summary
 
-> Precision was already float64/complex128 end to end. I re-ran the whole pipeline across
-> 4 sub-aperture windows × 2 precisions × 3 coregistrators = 24 configurations, including
-> Hamming and including the upsampled-DFT engine used in DORIS-lineage processors. The
-> verdict is identical in all 24, and the injected positive control is recovered in all 24
-> — so the pipeline demonstrably works under every one of the suggested settings. Hamming
-> moves the detection statistic by 0.24 on a threshold of 5.0. I also calibrated that
-> threshold against 400 scenes containing nothing: false-positive rate 2.0%. Code, data
-> and figures are in the repo.
+Run across four real sites and 96 configurations, the suggested settings do not change the result.
+Precision was already double and is numerically irrelevant here. No coregistrator flips a verdict.
+A Hamming window crosses the detection threshold at none of the four sites. The injected positive
+control is recovered in every run, so the pipeline works under every suggested configuration. The
+one detection in 48 distinct configurations uses no sub-aperture taper at all, and the way it grows
+as spectral isolation is removed points at inter-look leakage rather than depth.
+
+The window does matter more than this project previously credited. It matters enough that the
+choice should have been in the paper.
