@@ -91,6 +91,13 @@ resolution floor at 50 reference runs per cell.
 **The test that would settle it:** measure inter-look correlation directly as a function of window
 and check whether the statistic tracks it. If it does, the gradient is leakage. Not yet run.
 
+**A note on surface leakage by site.** Komati is the only site with leakage scores above the 0.5
+flag — 5 of its 12 configurations. Those flags sit in the `ncc` and `blackman` arms; its
+Hann/phase-correlation **baseline leakage is 0.32**, comfortably low, and `tomogram.py` independently
+reports 0.32 for the same scene. An earlier draft of this document said Komati's apparent structure
+was "surface-driven regardless," which overstated it: the baseline is clean, and the flags are
+confined to non-baseline estimator/window combinations.
+
 ## 5. The threshold is calibrated (and one proposed improvement is rejected)
 
 Across **400 runs on synthetic scenes containing nothing**: median 2.77, p95 4.35, p99 5.03,
@@ -131,21 +138,31 @@ window would move the statistic by ~0.24. On the real Butte scene the effect is 
 ten times larger. The synthetic scenes were too homogeneous to stand in for a structured real site.
 The prediction was wrong; the code was not.
 
-**Discrepancy to resolve before publication.** Re-running the Hann/phase-correlation baseline
-reproduces the paper's published contrasts exactly at two sites and not at the third:
+**Correction required to the paper's results table (Komati).** Re-running the
+Hann/phase-correlation baseline reproduces the published contrasts exactly at two sites and not at
+the third:
 
-| Site | Published | This rerun | |
-|---|---|---|---|
-| Butte, MT | 3.3× | **3.33×** | matches |
-| Mount Vesuvius | 4.1× | **4.11×** | matches |
-| **Komati Power Stn** | **50× / 10×** | **2.76× / 1.43×** | **does not match** |
+| Site | Published | This rerun | `tomogram.py` rerun | |
+|---|---|---|---|---|
+| Butte, MT | 3.3× / 1.4× | **3.33× / 1.68×** | — | matches |
+| Mount Vesuvius | 4.1× / 1.5× | **4.11× / 1.49×** | — | matches |
+| **Komati Power Stn** | **50× / 10×** | **2.76× / 1.43×** | **2.8× / 1.3×** | **published row is stale** |
 
-Two of three reproduce to two decimal places, which is strong evidence the sweep is running the
-published pipeline rather than a lookalike. Komati is off by a factor of ~18 and needs an
-explanation — most likely a different `n_sub` or crop in the original run. Komati also carries
-**5/12 surface-leakage flags above 0.5**, the only site to do so, so its apparent structure is
-surface-driven regardless. A referee comparing the table against a rerun would find this; better to
-resolve it first.
+Resolved 29 July 2026. The repo's own canonical `tomogram.py`, run at its defaults on the Komati
+scene, returns **2.8× / 1.3×** with mean registration quality **0.85** — agreeing with
+`sensitivity_sweep.py` (2.76× / 1.43×, quality 0.85) and disagreeing with the published table by a
+factor of ~18. Two independent code paths agree; the table row does not. The published figure is
+therefore an error in the manuscript, not in either script, and the manuscript's Komati row needs
+correcting.
+
+**The correction strengthens the paper.** 50× / 10× is a ratio of exactly 5.0, sitting precisely on
+the `> 5×` decision rule and qualifying as "null" only by a hair — the single most attackable row in
+the table. The correct value is **2.15**, comfortably below threshold. The verdict is unchanged;
+the margin is much larger.
+
+Provenance of the 50× / 10× figure is not yet established. The registration quality matching at
+0.85 shows the front-end configuration was identical, so the discrepancy lies downstream of the
+observations — LRSD denoising (`--lrsd`), which is off in both reruns, is the leading candidate.
 
 ## 8. Limits
 
