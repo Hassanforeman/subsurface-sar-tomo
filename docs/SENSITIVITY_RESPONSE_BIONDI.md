@@ -1,5 +1,27 @@
 # Configuration sensitivity — response to the 28 July 2026 objections
 
+> ## ⚠ SUPERSEDED — DO NOT CITE THIS VERSION
+>
+> **Everything below Result 1 is based on SYNTHETIC scenes only, and the real-data run
+> contradicts its central claim.**
+>
+> This draft states that the verdict is invariant across all 24 configurations and that a
+> Hamming window moves the detection statistic by ~0.24. On the real Butte scene
+> (`2024-03-07-04-48-26_UMBRA-04`) the measured effect is roughly ten times larger:
+> Hann → Hamming moves the statistic from **2.38 to 4.59**, and removing the taper
+> entirely reaches **5.59**, crossing the 5.0 detection threshold. The verdict is therefore
+> **NOT** configuration-invariant on real data.
+>
+> The synthetic scenes used here were too homogeneous to represent a structured real site
+> and under-predicted the window's influence. That was an error in this document's
+> evidential basis, not in the sweep code.
+>
+> A corrected version, built on four real sites, replaces this file. Until then nothing in
+> Results 1–3 should be quoted, and the "Summary for the thread" section at the end must
+> **not** be posted.
+>
+> *Status noted 29 July 2026.*
+
 *Run 28 July 2026. Code: `src/sensitivity_sweep.py`. Raw results: `runs/sweep_speckle.json`,
 `runs/sweep_blobs.json`, `runs/threshold_calibration.json`. Figure:
 `runs/threshold_calibration.png`.*
