@@ -97,6 +97,39 @@ def peak_depth(T, zgrid):
     return float(zgrid[np.argmax(T.sum(0))])
 
 
+def pinned_absolute(T, zgrid, dz_phys, guard_cells=2.0):
+    """SCALE-STABLE surface-pinning guard (supersedes shallow_pinned).
+
+    shallow_pinned() flags a peak in the shallowest `frac` OF THE AXIS. Because
+    zgrid's extent scales with n_sub, that cutoff changes meaning when n_sub changes:
+    the same 3 m peak is flagged at n_sub=128 (2.2% of a 135 m axis) and cleared at
+    n_sub=32 (8.9% of a 33.8 m axis). This version flags on ABSOLUTE depth, in units
+    of the depth-resolution cell, so its meaning does not depend on axis length.
+    Returns (is_pinned, peak_depth_m)."""
+    z_m = zgrid * (dz_phys / DZ_TARGET)
+    pk = float(z_m[int(np.argmax(T.sum(0)))])
+    return bool(pk <= guard_cells * dz_phys), pk
+
+
+def per_patch_tomograms(obs, zgrid):
+    A, _ = steering(obs.shape[1], zgrid)
+    return np.array([np.abs(A.conj().T @ analytic1d(r))**2 for r in obs])
+
+
+def alignment_null(obs, zgrid, rng, n_perm=1):
+    """CORRECTLY-SPECIFIED null (supersedes null_tomogram for decision-making).
+
+    null_tomogram() shuffles look order, which destroys the look-to-look smoothness
+    that 80% sub-aperture overlap guarantees even under pure speckle — so it is
+    anti-conservative and fires on empty data. This null instead preserves each
+    patch's depth profile EXACTLY and randomises only whether patches AGREE on a
+    depth, which is the scientific question. Returns an array of contrast values."""
+    Tp = per_patch_tomograms(obs, zgrid)
+    nz = Tp.shape[1]
+    return np.array([contrast(np.array([np.roll(t, int(rng.integers(nz))) for t in Tp]))
+                     for _ in range(n_perm)])
+
+
 def shallow_pinned(T, frac=0.05):
     """Guard against the high-n_sub artifact: a peak in the shallowest `frac` of the
     depth axis (or most energy there) is a surface/low-frequency detrend artifact, NOT
@@ -228,7 +261,7 @@ def _plot_fcompare(T, zgrid, freqs, v, R_km, A_km, title, out):
 def run_on_sicd(path, crop=512, n_sub=11, patch=64, n_patch=24, overlap=0.8,
                 n_chirp=1, use_lrsd=False, velocity=6000.0, f_invest=22000.0,
                 aperture_km=42.0, range_km=650.0, ground_truth=False, stability=False,
-                f_compare=False):
+                f_compare=False, guard_cells=2.0):
     from sarpy.io.complex.converter import open_complex
     reader = open_complex(path)
     R, C = reader.data_size
@@ -259,13 +292,20 @@ def run_on_sicd(path, crop=512, n_sub=11, patch=64, n_patch=24, overlap=0.8,
 
     leak = leakage_correlation(T, bright)
     c_real, c_null = contrast(T), contrast(Tn)
-    pinned, pkfrac, shen = shallow_pinned(T)
-    above = c_real > 5 * c_null
+    pinned_frac, pkfrac, shen = shallow_pinned(T)
+    pinned, pk_m = pinned_absolute(T, zgrid, dz_phys, guard_cells)
+    c_align = float(np.median(alignment_null(obs, zgrid, np.random.default_rng(1), n_perm=64)))
+    above = c_real > 5 * c_align
+    above_shuffle = c_real > 5 * c_null
     metric_peak = z_m[np.argmax(T.sum(0))]
     print(f"  mean registration quality: {np.mean(quals):.2f}")
     print(f"  depth calibration: v={velocity:.0f} m/s, f={f_invest:.0f} Hz -> "
           f"δz_phys={dz_phys:.2f} m; metric depth range 0–{z_m[-1]:.0f} m")
-    print(f"  REAL tomogram contrast {c_real:.1f}x ; null {c_null:.1f}x")
+    print(f"  REAL tomogram contrast {c_real:.1f}x")
+    print(f"    shuffle null   {c_null:.1f}x  -> ratio {c_real/(c_null+1e-12):.2f}x "
+          f"(anti-conservative; retained for comparison with earlier results)")
+    print(f"    ALIGNMENT null {c_align:.1f}x  -> ratio {c_real/(c_align+1e-12):.2f}x "
+          f"(decision statistic)")
     if above and pinned:
         verdict = (f"ABOVE NULL but SURFACE-PINNED at {metric_peak:.0f} m "
                    f"-> detrend/surface ARTIFACT, NOT subsurface structure")
@@ -274,8 +314,13 @@ def run_on_sicd(path, crop=512, n_sub=11, patch=64, n_patch=24, overlap=0.8,
     else:
         verdict = "INDISTINGUISHABLE FROM NULL (no subsurface signal; no hallucination)"
     print(f"  VERDICT: {verdict}")
-    print(f"  NEAR-SURFACE GUARD: peak at {pkfrac*100:.0f}% of axis; {shen*100:.0f}% of energy in shallowest 5% "
+    print(f"  NEAR-SURFACE GUARD (absolute): peak at {pk_m:.1f} m; threshold "
+          f"{guard_cells:g} cells = {guard_cells*dz_phys:.1f} m "
           f"-> {'ARTIFACT-SUSPECT' if pinned else 'ok (not surface-pinned)'}")
+    print(f"    legacy 5%-of-axis rule would say: peak at {pkfrac*100:.0f}% of axis, "
+          f"{shen*100:.0f}% of energy in shallowest 5% "
+          f"-> {'ARTIFACT-SUSPECT' if pinned_frac else 'ok'}"
+          + ("   [DISAGREES with the absolute guard]" if pinned_frac != pinned else ""))
     print(f"  HARDENED POSITIVE CONTROL (damped): recovered at z={pc_z:.0f}/{z_deep:.0f} "
           f"-> {'PASS' if pc_ok else 'FAIL (damped signal lost -> detection floor is higher than a pure tone)'}")
     print(f"  SURFACE-LEAKAGE: corr = {leak:.2f} "
@@ -380,6 +425,9 @@ if __name__ == "__main__":
                     help="overlay Butte West Camp ground truth in a comparison figure")
     ap.add_argument("--stability", action="store_true",
                     help="sub-aperture-count stability guard (re-runs at n/4, n/2, n)")
+    ap.add_argument("--guard-cells", type=float, default=2.0,
+                    help="surface-pinning guard: peak within this many depth cells of the "
+                         "surface is an artifact (scale-stable; replaces the 5%-of-axis rule)")
     ap.add_argument("--f-compare", action="store_true",
                     help="render the same tomogram at 22000/1000/50 Hz (relabelling demo)")
     args = ap.parse_args()
@@ -388,6 +436,6 @@ if __name__ == "__main__":
                     use_lrsd=args.lrsd, velocity=args.velocity, f_invest=args.f_investigation,
                     aperture_km=args.aperture_km, range_km=args.range_km,
                     ground_truth=args.ground_truth, stability=args.stability,
-                    f_compare=args.f_compare)
+                    f_compare=args.f_compare, guard_cells=args.guard_cells)
     else:
         selftest()

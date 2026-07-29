@@ -238,7 +238,7 @@ P("At honest settings (with the depth-of-peak and stability guards active), five
   "once controls are applied.")
 tbl = [["Site", "Sensor", "Reg. quality", "Real / Null", "Verdict", "Pos. ctrl"],
        ["Bingham Canyon", "Umbra", "0.67", "front-end only", "no signal", "n/a"],
-       ["Komati Power Stn", "Umbra", "0.85", "50x / 10x", "null", "n/a"],
+       ["Komati Power Stn", "Umbra", "0.85", "2.8x / 1.3x", "NULL", "PASS"],
        ["Mount Vesuvius", "Umbra", "0.72", "4.1x / 1.5x", "NULL", "PASS"],
        ["Butte, MT", "Umbra", "0.82", "3.3x / 1.4x", "NULL", "PASS"],
        ["Cairo (central)", "Capella", "0.62", "2.8x / 1.6x", "NULL", "PASS"]]

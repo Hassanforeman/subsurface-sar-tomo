@@ -1,0 +1,2802 @@
+[
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 0,
+  "ratio": 3.58876313881272
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 0,
+  "ratio": 2.8336825145061884
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 0,
+  "ratio": 5.289739854260699
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 0,
+  "ratio": 3.9325582632167113
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 0,
+  "ratio": 4.114517880178891
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 0,
+  "ratio": 4.114126843052461
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 0,
+  "ratio": 2.2413069979299602
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 0,
+  "ratio": 2.8522499400214394
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 1,
+  "ratio": 3.01445835077353
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 1,
+  "ratio": 3.056871375037654
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 1,
+  "ratio": 4.019285100772825
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 1,
+  "ratio": 4.14067470306877
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 1,
+  "ratio": 3.6971516860578935
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 1,
+  "ratio": 3.1527581040168426
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 1,
+  "ratio": 2.224082014814356
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 1,
+  "ratio": 1.4673059708953273
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 2,
+  "ratio": 5.002346962097916
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 2,
+  "ratio": 4.901535008930917
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 2,
+  "ratio": 4.246680787161872
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 2,
+  "ratio": 3.759778735604854
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 2,
+  "ratio": 3.1746095410082784
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 2,
+  "ratio": 3.4882005407798116
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 2,
+  "ratio": 2.39830290378771
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 2,
+  "ratio": 3.5456218603015133
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 3,
+  "ratio": 3.686540837845025
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 3,
+  "ratio": 4.855129858145852
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 3,
+  "ratio": 4.312397197982854
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 3,
+  "ratio": 5.015849227341283
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 3,
+  "ratio": 3.3055369081724573
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 3,
+  "ratio": 4.446763846882988
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 3,
+  "ratio": 4.084158722632358
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 3,
+  "ratio": 3.584240797827563
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 4,
+  "ratio": 2.273444338683269
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 4,
+  "ratio": 3.2367959614236392
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 4,
+  "ratio": 2.7112616212631697
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 4,
+  "ratio": 3.1321780757162374
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 4,
+  "ratio": 2.3821605997356903
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 4,
+  "ratio": 2.3670820181626904
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 4,
+  "ratio": 2.6259665288947622
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 4,
+  "ratio": 2.5875305203718955
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 5,
+  "ratio": 2.414326353000217
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 5,
+  "ratio": 2.180659201645402
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 5,
+  "ratio": 3.531067313060675
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 5,
+  "ratio": 3.006353723297331
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 5,
+  "ratio": 1.9872781753776254
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 5,
+  "ratio": 1.2186072897110565
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 5,
+  "ratio": 3.6019810810254187
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 5,
+  "ratio": 4.236117683784152
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 6,
+  "ratio": 2.9063458528768975
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 6,
+  "ratio": 1.9455178540966727
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 6,
+  "ratio": 2.6096887875289
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 6,
+  "ratio": 2.08451750357863
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 6,
+  "ratio": 2.863616248788413
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 6,
+  "ratio": 2.051874539630027
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 6,
+  "ratio": 2.7726657854335475
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 6,
+  "ratio": 3.377870595621698
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 7,
+  "ratio": 2.2619372311631203
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 7,
+  "ratio": 2.004850651245871
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 7,
+  "ratio": 2.84317461712482
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 7,
+  "ratio": 2.2769140559860332
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 7,
+  "ratio": 1.801548007529647
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 7,
+  "ratio": 1.6360201955504008
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 7,
+  "ratio": 3.6875432222807905
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 7,
+  "ratio": 3.3073097945140293
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 8,
+  "ratio": 2.3697678758063594
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 8,
+  "ratio": 3.2077428939649675
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 8,
+  "ratio": 1.7774938488947798
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 8,
+  "ratio": 2.350554615825528
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 8,
+  "ratio": 2.626746447318939
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 8,
+  "ratio": 2.312289767286472
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 8,
+  "ratio": 2.922899565028847
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 8,
+  "ratio": 2.73447528037114
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 9,
+  "ratio": 3.214242456560982
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 9,
+  "ratio": 2.5553908618447916
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 9,
+  "ratio": 3.3424066640950434
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 9,
+  "ratio": 2.835420061675046
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 9,
+  "ratio": 2.2864640894672665
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 9,
+  "ratio": 2.3910314440208156
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 9,
+  "ratio": 1.5976859052099817
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 9,
+  "ratio": 2.339530310206997
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 10,
+  "ratio": 3.364515323477321
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 10,
+  "ratio": 3.7043673632436103
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 10,
+  "ratio": 3.6157322206864837
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 10,
+  "ratio": 3.136661746825915
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 10,
+  "ratio": 3.2110278010423117
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 10,
+  "ratio": 2.9644439154114934
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 10,
+  "ratio": 2.9606214556648163
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 10,
+  "ratio": 3.0452554370988425
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 11,
+  "ratio": 3.515889003942814
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 11,
+  "ratio": 3.779500746269979
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 11,
+  "ratio": 3.5747383109536757
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 11,
+  "ratio": 3.6543550379287306
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 11,
+  "ratio": 2.317743486142591
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 11,
+  "ratio": 2.030120941213016
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 11,
+  "ratio": 3.482973569997836
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 11,
+  "ratio": 3.473082458844459
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 12,
+  "ratio": 4.461406363874804
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 12,
+  "ratio": 3.667233415293941
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 12,
+  "ratio": 6.021759696989494
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 12,
+  "ratio": 4.163202170022255
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 12,
+  "ratio": 2.5569087881621115
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 12,
+  "ratio": 2.6360845320046855
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 12,
+  "ratio": 2.586183122781603
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 12,
+  "ratio": 2.196599480766003
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 13,
+  "ratio": 2.2085013541812115
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 13,
+  "ratio": 2.7008432409770577
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 13,
+  "ratio": 1.5662025755961275
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 13,
+  "ratio": 1.6179827019226694
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 13,
+  "ratio": 1.6596154272634396
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 13,
+  "ratio": 2.113215986487067
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 13,
+  "ratio": 3.336013546252818
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 13,
+  "ratio": 3.409429139653013
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 14,
+  "ratio": 3.322871392032211
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 14,
+  "ratio": 3.3005361357366985
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 14,
+  "ratio": 4.092196958838408
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 14,
+  "ratio": 4.237977278752179
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 14,
+  "ratio": 2.0811591063024295
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 14,
+  "ratio": 2.158342145527175
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 14,
+  "ratio": 2.2758320764845803
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 14,
+  "ratio": 2.044668569975668
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 15,
+  "ratio": 1.9800021203923563
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 15,
+  "ratio": 1.3655186494976406
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 15,
+  "ratio": 1.991485387373965
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 15,
+  "ratio": 1.4757468575143828
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 15,
+  "ratio": 2.868534245954826
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 15,
+  "ratio": 2.8435604793263427
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 15,
+  "ratio": 2.0670148493529643
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 15,
+  "ratio": 1.987498032702285
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 16,
+  "ratio": 2.6158936523453566
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 16,
+  "ratio": 2.1430247990589915
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 16,
+  "ratio": 3.5021391852231156
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 16,
+  "ratio": 2.324947806330125
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 16,
+  "ratio": 1.9538194756753782
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 16,
+  "ratio": 1.9702920986016565
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 16,
+  "ratio": 2.7805965539232442
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 16,
+  "ratio": 2.06626382794361
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 17,
+  "ratio": 2.3296720062317307
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 17,
+  "ratio": 2.6274497410375366
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 17,
+  "ratio": 3.2484341481155496
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 17,
+  "ratio": 2.7700629537528147
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 17,
+  "ratio": 3.07991285264733
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 17,
+  "ratio": 2.5087798589051844
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 17,
+  "ratio": 2.37155308923511
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 17,
+  "ratio": 2.7825143189585
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 18,
+  "ratio": 3.0376104022395696
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 18,
+  "ratio": 2.7954833480976715
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 18,
+  "ratio": 3.882147483728345
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 18,
+  "ratio": 3.1864943417147695
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 18,
+  "ratio": 4.938949758253567
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 18,
+  "ratio": 3.800477016771733
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 18,
+  "ratio": 3.2207328905178003
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 18,
+  "ratio": 3.3368842731472084
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 19,
+  "ratio": 3.3878803247873397
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 19,
+  "ratio": 2.7987934743487473
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 19,
+  "ratio": 2.8437836805147287
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 19,
+  "ratio": 2.225665474132665
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 19,
+  "ratio": 1.9641865578025177
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 19,
+  "ratio": 4.158124757925614
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 19,
+  "ratio": 2.4072488361307336
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 19,
+  "ratio": 2.8078321889920197
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 20,
+  "ratio": 2.434859915044167
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 20,
+  "ratio": 2.457977633216783
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 20,
+  "ratio": 3.9203888435043517
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 20,
+  "ratio": 3.849055211034262
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 20,
+  "ratio": 2.536261550540269
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 20,
+  "ratio": 2.6733305798689035
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 20,
+  "ratio": 3.2389800561409623
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 20,
+  "ratio": 2.339755831368994
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 21,
+  "ratio": 3.4887021944339485
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 21,
+  "ratio": 4.059366599096437
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 21,
+  "ratio": 3.9382712410337
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 21,
+  "ratio": 4.248017265879085
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 21,
+  "ratio": 2.4647457743845234
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 21,
+  "ratio": 2.406715165674288
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 21,
+  "ratio": 2.57194257421272
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 21,
+  "ratio": 2.0735801978501325
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 22,
+  "ratio": 4.127806394660316
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 22,
+  "ratio": 3.990284558282017
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 22,
+  "ratio": 3.3423008280831135
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 22,
+  "ratio": 2.4034530881397793
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 22,
+  "ratio": 4.642693359195703
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 22,
+  "ratio": 3.7075647676567374
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 22,
+  "ratio": 2.9494562573569185
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 22,
+  "ratio": 2.42072979956201
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 23,
+  "ratio": 1.676453179701211
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 23,
+  "ratio": 1.6917345259117902
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 23,
+  "ratio": 1.4654888883328474
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 23,
+  "ratio": 1.8220752400467872
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 23,
+  "ratio": 2.250446625570452
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 23,
+  "ratio": 2.6420708967978785
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 23,
+  "ratio": 2.779070110794037
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 23,
+  "ratio": 2.451206205634556
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 24,
+  "ratio": 1.5865569527750245
+ },
+ {
+  "scene": "speckle",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 24,
+  "ratio": 2.0872296550722207
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 24,
+  "ratio": 2.054547368425308
+ },
+ {
+  "scene": "speckle",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 24,
+  "ratio": 2.4330668702416114
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 24,
+  "ratio": 2.057222025203714
+ },
+ {
+  "scene": "speckle",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 24,
+  "ratio": 1.76126247537513
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 24,
+  "ratio": 1.740557294431026
+ },
+ {
+  "scene": "speckle",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 24,
+  "ratio": 2.375499682976281
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 0,
+  "ratio": 2.5080644884869607
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 0,
+  "ratio": 2.3440700482973322
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 0,
+  "ratio": 4.88511378754012
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 0,
+  "ratio": 3.909232797611255
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 0,
+  "ratio": 3.1767114236695906
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 0,
+  "ratio": 2.4404863609600556
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 0,
+  "ratio": 1.860841932524053
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 0,
+  "ratio": 2.0691791585078545
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 1,
+  "ratio": 3.442858847033898
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 1,
+  "ratio": 3.565721401604252
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 1,
+  "ratio": 4.379488095473874
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 1,
+  "ratio": 3.58974565104756
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 1,
+  "ratio": 2.92218342301992
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 1,
+  "ratio": 2.6845216006970394
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 1,
+  "ratio": 3.273913238037805
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 1,
+  "ratio": 2.8966039250450044
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 2,
+  "ratio": 4.726340219245218
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 2,
+  "ratio": 4.116452913365024
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 2,
+  "ratio": 5.2683923567271895
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 2,
+  "ratio": 4.832852928158551
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 2,
+  "ratio": 4.167176349423608
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 2,
+  "ratio": 3.5445260875065228
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 2,
+  "ratio": 2.0393551029182793
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 2,
+  "ratio": 2.3562730561430008
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 3,
+  "ratio": 3.1474965413307476
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 3,
+  "ratio": 3.089108403660405
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 3,
+  "ratio": 3.629325954933113
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 3,
+  "ratio": 3.3477857285597956
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 3,
+  "ratio": 2.424155687068489
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 3,
+  "ratio": 3.1959300828120947
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 3,
+  "ratio": 2.8739773201886045
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 3,
+  "ratio": 2.379952870870949
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 4,
+  "ratio": 3.207538805745163
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 4,
+  "ratio": 3.0822287495721308
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 4,
+  "ratio": 3.1975412980236313
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 4,
+  "ratio": 2.6826853246895683
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 4,
+  "ratio": 3.0260541355344563
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 4,
+  "ratio": 2.514518100312353
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 4,
+  "ratio": 2.1598399843326974
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 4,
+  "ratio": 1.8686456533145999
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 5,
+  "ratio": 2.29465105186864
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 5,
+  "ratio": 1.882849741876004
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 5,
+  "ratio": 2.721903195470873
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 5,
+  "ratio": 2.7758480363555136
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 5,
+  "ratio": 1.8489835407030233
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 5,
+  "ratio": 2.0008021375789404
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 5,
+  "ratio": 3.0612651088469294
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 5,
+  "ratio": 2.7134401273638957
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 6,
+  "ratio": 2.334183004705029
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 6,
+  "ratio": 2.007085559015864
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 6,
+  "ratio": 3.3391260544021764
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 6,
+  "ratio": 2.373481813562064
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 6,
+  "ratio": 1.9952312868079691
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 6,
+  "ratio": 1.5466842365198736
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 6,
+  "ratio": 2.419433447318882
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 6,
+  "ratio": 2.552114392926628
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 7,
+  "ratio": 2.2868753156795303
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 7,
+  "ratio": 2.131349197129254
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 7,
+  "ratio": 2.5056315415074355
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 7,
+  "ratio": 2.088006881845394
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 7,
+  "ratio": 1.4600040713441917
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 7,
+  "ratio": 1.5505863760845986
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 7,
+  "ratio": 3.145139531035382
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 7,
+  "ratio": 2.833310179509712
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 8,
+  "ratio": 2.697385219168197
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 8,
+  "ratio": 4.352054196856453
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 8,
+  "ratio": 3.101392415809472
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 8,
+  "ratio": 2.7793952761278278
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 8,
+  "ratio": 3.0813351610361224
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 8,
+  "ratio": 2.9511805602919834
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 8,
+  "ratio": 2.224089031790537
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 8,
+  "ratio": 2.6542653651792003
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 9,
+  "ratio": 3.2218875606710315
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 9,
+  "ratio": 2.3901698683797528
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 9,
+  "ratio": 2.8415077751096667
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 9,
+  "ratio": 1.5808145645289082
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 9,
+  "ratio": 1.7656156472099218
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 9,
+  "ratio": 1.8477519670852098
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 9,
+  "ratio": 2.111922561771805
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 9,
+  "ratio": 2.1561250841869417
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 10,
+  "ratio": 3.059643863900289
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 10,
+  "ratio": 2.7152649375501166
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 10,
+  "ratio": 3.5558577493824925
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 10,
+  "ratio": 2.7472124624135996
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 10,
+  "ratio": 2.9472274664974694
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 10,
+  "ratio": 2.6376988105787587
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 10,
+  "ratio": 3.8041938689166996
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 10,
+  "ratio": 3.4647275925938867
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 11,
+  "ratio": 3.210242300681702
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 11,
+  "ratio": 2.3436156709729143
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 11,
+  "ratio": 2.5301241594443766
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 11,
+  "ratio": 2.720123771733454
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 11,
+  "ratio": 2.3115130045333934
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 11,
+  "ratio": 2.1394603853983045
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 11,
+  "ratio": 3.464004848669721
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 11,
+  "ratio": 3.0089389668050543
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 12,
+  "ratio": 5.031716111058409
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 12,
+  "ratio": 5.509767920225794
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 12,
+  "ratio": 5.020638606379693
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 12,
+  "ratio": 4.091123235681414
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 12,
+  "ratio": 4.891914110215252
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 12,
+  "ratio": 3.2093523284462915
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 12,
+  "ratio": 3.5433768995708057
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 12,
+  "ratio": 2.5080521848895247
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 13,
+  "ratio": 2.684382714412312
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 13,
+  "ratio": 2.372482196852102
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 13,
+  "ratio": 1.7869938858516252
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 13,
+  "ratio": 2.0734874968858152
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 13,
+  "ratio": 3.019582910524998
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 13,
+  "ratio": 3.613416503845615
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 13,
+  "ratio": 3.1362699464758625
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 13,
+  "ratio": 3.255242023103437
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 14,
+  "ratio": 3.0776706669842353
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 14,
+  "ratio": 3.1895826790739217
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 14,
+  "ratio": 3.291164659819392
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 14,
+  "ratio": 4.839359471216645
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 14,
+  "ratio": 2.7602119065209934
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 14,
+  "ratio": 3.637931143476594
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 14,
+  "ratio": 2.273782566094867
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 14,
+  "ratio": 1.5410810177368301
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 15,
+  "ratio": 2.057621185785168
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 15,
+  "ratio": 1.2203935181276948
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 15,
+  "ratio": 2.3663062127056467
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 15,
+  "ratio": 1.8963757171232252
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 15,
+  "ratio": 4.290978872062247
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 15,
+  "ratio": 3.3394108047569904
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 15,
+  "ratio": 3.5833034337221155
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 15,
+  "ratio": 3.127578165340814
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 16,
+  "ratio": 3.4317369115900576
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 16,
+  "ratio": 2.3845636030363937
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 16,
+  "ratio": 3.726825625367967
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 16,
+  "ratio": 3.131075614352214
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 16,
+  "ratio": 2.215867052446291
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 16,
+  "ratio": 1.7681890559503126
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 16,
+  "ratio": 2.73714785778661
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 16,
+  "ratio": 2.3609226691186547
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 17,
+  "ratio": 2.9167506074865006
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 17,
+  "ratio": 2.9876635244832936
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 17,
+  "ratio": 2.409761908677561
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 17,
+  "ratio": 2.5472299308760977
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 17,
+  "ratio": 3.334595292698217
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 17,
+  "ratio": 2.5936866802425635
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 17,
+  "ratio": 2.169553896500919
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 17,
+  "ratio": 2.3428357588807813
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 18,
+  "ratio": 2.9760640413448445
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 18,
+  "ratio": 2.8674765417068295
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 18,
+  "ratio": 3.337661701478714
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 18,
+  "ratio": 3.1432489106648367
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 18,
+  "ratio": 4.0634361677367
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 18,
+  "ratio": 2.734383419348098
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 18,
+  "ratio": 3.072661335128381
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 18,
+  "ratio": 3.197337450898272
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 19,
+  "ratio": 2.4635020721509813
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 19,
+  "ratio": 2.251034100079608
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 19,
+  "ratio": 2.0780396602152074
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 19,
+  "ratio": 2.144548948029049
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 19,
+  "ratio": 1.8407799669445912
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 19,
+  "ratio": 1.72311599099299
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 19,
+  "ratio": 2.713560872732047
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 19,
+  "ratio": 2.2750892924811716
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 20,
+  "ratio": 1.4018647893105332
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 20,
+  "ratio": 2.309955730672588
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 20,
+  "ratio": 2.5939073911511
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 20,
+  "ratio": 3.160196867470126
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 20,
+  "ratio": 1.5833071202339264
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 20,
+  "ratio": 2.118336747549891
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 20,
+  "ratio": 2.0864887623595196
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 20,
+  "ratio": 1.7191511482188515
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 21,
+  "ratio": 2.777786354159851
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 21,
+  "ratio": 2.922314790484353
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 21,
+  "ratio": 3.7062141648289093
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 21,
+  "ratio": 3.6633576453702923
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 21,
+  "ratio": 3.5243130246924266
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 21,
+  "ratio": 3.4568311989148155
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 21,
+  "ratio": 2.987416192602828
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 21,
+  "ratio": 2.8603010147771304
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 22,
+  "ratio": 3.682779033287507
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 22,
+  "ratio": 3.60414600987425
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 22,
+  "ratio": 2.575752413345175
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 22,
+  "ratio": 2.3173875814911313
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 22,
+  "ratio": 3.4261348484879477
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 22,
+  "ratio": 2.7463296594339046
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 22,
+  "ratio": 2.3069464094366023
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 22,
+  "ratio": 2.6094550362642623
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 23,
+  "ratio": 2.0460926138519664
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 23,
+  "ratio": 2.405699905780164
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 23,
+  "ratio": 2.4768047460641283
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 23,
+  "ratio": 2.101149501964591
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 23,
+  "ratio": 1.9139286999128482
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 23,
+  "ratio": 2.9415208695122685
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 23,
+  "ratio": 3.014554899997374
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 23,
+  "ratio": 3.286207381513038
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "phasecorr",
+  "seed": 24,
+  "ratio": 2.606393303629947
+ },
+ {
+  "scene": "blobs",
+  "window": "hann",
+  "est": "upsampdft",
+  "seed": 24,
+  "ratio": 2.7089960313141344
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "phasecorr",
+  "seed": 24,
+  "ratio": 2.249749190311671
+ },
+ {
+  "scene": "blobs",
+  "window": "hamming",
+  "est": "upsampdft",
+  "seed": 24,
+  "ratio": 2.8553329116817365
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "phasecorr",
+  "seed": 24,
+  "ratio": 2.540031957198372
+ },
+ {
+  "scene": "blobs",
+  "window": "blackman",
+  "est": "upsampdft",
+  "seed": 24,
+  "ratio": 2.047965526548044
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "phasecorr",
+  "seed": 24,
+  "ratio": 1.5753608991006411
+ },
+ {
+  "scene": "blobs",
+  "window": "rect",
+  "est": "upsampdft",
+  "seed": 24,
+  "ratio": 2.2062889992727177
+ }
+]

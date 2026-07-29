@@ -25,7 +25,7 @@ TITLE = ("No Reproducible Evidence for Deep Subsurface Structures Beneath the Gi
          "A Controlled Reproduction of Single-Source SAR Doppler Micro-Motion Tomography")
 AUTHOR = "Hassan Foreman"
 AFFIL = "Independent researcher"
-DATE = "June 2026 — preprint (merged reproduction + refutation, v1.0)"
+DATE = "July 2026 — preprint v1.1 (merged reproduction + refutation; see Changes in v1.1, §3.4)"
 
 ss = getSampleStyleSheet()
 body = ParagraphStyle("body", parent=ss["BodyText"], fontName="Times-Roman",
@@ -241,7 +241,7 @@ P("At honest settings (with the depth-of-peak and stability guards active), five
   "once controls are applied.")
 tbl = [["Site", "Sensor", "Reg. quality", "Real / Null", "Verdict", "Pos. ctrl"],
        ["Bingham Canyon", "Umbra", "0.67", "front-end only", "no signal", "n/a"],
-       ["Komati Power Stn", "Umbra", "0.85", "50x / 10x", "null", "n/a"],
+       ["Komati Power Stn", "Umbra", "0.85", "2.8x / 1.3x", "NULL", "PASS"],
        ["Mount Vesuvius", "Umbra", "0.72", "4.1x / 1.5x", "NULL", "PASS"],
        ["Butte, MT", "Umbra", "0.82", "3.3x / 1.4x", "NULL", "PASS"],
        ["Cairo (central)", "Capella", "0.62", "2.8x / 1.6x", "NULL", "PASS"]]
@@ -254,7 +254,27 @@ t.setStyle(TableStyle([
 story.append(t)
 P("Table 2. Five free single-pass X-band sites at honest settings, across two independent sensors "
   "(four Umbra, one Capella): every real tomogram is indistinguishable from its null; positive "
-  "controls pass where run.", cap)
+  "controls pass where run. All Umbra rows are computed at the pipeline default of "
+  "<b>11 Doppler sub-apertures</b> (512&times;512 centre crop, 64-pixel patches, 24 patches, 0.8 "
+  "sub-band overlap, Hann taper, float64).", cap)
+
+P("<b>Changes in v1.1 (July 2026).</b> The Komati Power Station row of Table 2 read "
+  "&ldquo;50&times; / 10&times;, null&rdquo; in v1.0. That row had been computed at 128 Doppler "
+  "sub-apertures rather than the default 11 used for every other row, and its verdict label was "
+  "incorrect for that setting: at 128 sub-apertures the pipeline returns <i>above null but "
+  "surface-pinned &mdash; artifact</i>, not <i>null</i>. Re-run at the default the site gives "
+  "2.8&times; / 1.3&times; (ratio 2.15), with the hardened positive control passing and "
+  "surface-leakage correlation 0.32. Two independent code paths agree on the corrected value, and "
+  "the Butte and Vesuvius rows reproduce their published figures to two decimal places. The site "
+  "remains a null result on either reading; the correction <i>increases</i> the margin, since "
+  "50&times; / 10&times; is a ratio of exactly 5.0 and sat precisely on the decision rule. No "
+  "conclusion in this paper changes. The error was found while stress-testing the pipeline against "
+  "an external methodological objection; that work is documented in "
+  "<font face=\"Courier\">docs/SENSITIVITY_RESPONSE_BIONDI.md</font> in the repository.", body)
+
+P("<b>Outstanding verification.</b> The Cairo (Capella) row has not been re-verified against the "
+  "sub-aperture count stated above, because that scene is not held in the local archive. It is "
+  "flagged here rather than assumed correct, and will be re-run for the revision.", body)
 
 P("3.5 &lsquo;200 scans, four satellites&rsquo; is consistency, not corroboration (addresses C5)", h2)
 P("Agreement across many acquisitions and sensors is offered as independent confirmation. It is "
