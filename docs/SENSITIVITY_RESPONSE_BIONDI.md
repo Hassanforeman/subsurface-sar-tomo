@@ -194,6 +194,77 @@ that moves — precisely because a result that depends this strongly on `n_sub` 
 The Komati curve is the clearest demonstration of that guard's necessity produced so far, and it
 argues the guard should be mandatory rather than opt-in (`--stability`).
 
+## 4c. Follow-up experiments (29 July) — the open criticisms, closed
+
+`src/followup_experiments.py`, self-test 5/5. Four experiments, run on the real scenes.
+
+![followup](./followup_results.png)
+
+### E1 — most of the apparent `n_sub` sensitivity was the depth axis
+
+Evaluating every sub-aperture count on **one fixed depth window** (0–11.6 m, inside the unambiguous
+range of every configuration tested) instead of the native stretching axis:
+
+| | spread across `n_sub` = 11…128 |
+|---|---|
+| native axis (as published) | 2.76 – 49.00 — **17.8×** |
+| **fixed window** | 2.75 – 5.28 — **1.9×** |
+
+So roughly nine-tenths of the apparent sensitivity was the confound. The honest statement is that
+`n_sub` moves the statistic by about **1.9×** on Komati, not by orders of magnitude. This replaces
+the withdrawn 194× figure with a defensible number rather than leaving a hole.
+
+### E2 — the repaired guard catches what the old one let through
+
+Replacing "peak in the shallowest 5% of the axis" with "peak within 2 depth-resolution cells
+(4.2 m) of the surface":
+
+| | flagged as surface-pinned |
+|---|---|
+| old 5%-of-axis rule | 3 / 8 |
+| **absolute-depth rule** | **8 / 8** |
+
+Every Komati run peaks at **3.2–3.7 m** — the same shallow feature at every sub-aperture count. The
+fractional rule let five of eight through purely because their axes were shorter. The `n_sub=32`
+false positive reported in §4b was a **failure of this reproduction's own guard**, and it is fixed.
+
+### E3 — under a correctly-specified null, Komati is null everywhere
+
+The alignment null preserves each patch's depth profile exactly and randomises only whether patches
+agree on a depth. Against it, Komati returns **0 / 8 detections** across all sub-aperture counts
+(ratios 1.01–2.41). The verdict does not flip at all once the null is specified properly and the
+guard is scale-stable.
+
+**This retracts the "flips the verdict four times" framing of §4b.** Those flips were artefacts of
+the reproduction's own diagnostics, not of the method under test. Corrected: with a scale-stable
+guard and a correctly-specified null, Komati is a consistent shallow surface artefact at every
+`n_sub`, which is the right answer for a power station.
+
+### E4 — the leakage reading is now a measurement, not an inference
+
+Measuring the lag-1 autocorrelation of the **detrended residual trajectories that enter the
+inverter**, per window, at Butte:
+
+| window | lag-1 autocorrelation | detection statistic |
+|---|---|---|
+| Blackman | **−0.103** | 1.98 |
+| Hann | −0.010 | 3.33 |
+| Hamming | +0.095 | 5.95 |
+| rectangular | **+0.244** | 8.30 |
+
+**r = +0.994.** The statistic tracks inter-look correlation almost exactly, and the correlation
+changes *sign* — from anti-correlated under the strongest taper to strongly positive with no taper.
+
+This discriminates between the two competing explanations. The bandwidth/SNR account predicts weaker
+residuals under stronger tapers, but predicts **nothing** about inter-look autocorrelation rising
+monotonically and crossing zero. That is a leakage signature specifically. §4's hypothesis is
+therefore upgraded: the Butte window gradient is inter-look leakage, and the single configuration
+that crossed the threshold is the leakiest one.
+
+*Caveat: four windows, so four points. The ordering was predicted from theory before measurement
+rather than selected after it, and the sign change is not something a fishing expedition produces —
+but n = 4.*
+
 ## 5. The threshold is calibrated (and one proposed improvement is rejected)
 
 Across **400 runs on synthetic scenes containing nothing**: median 2.77, p95 4.35, p99 5.03,
