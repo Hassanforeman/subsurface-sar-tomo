@@ -245,15 +245,24 @@ guard and a correctly-specified null, Komati is a consistent shallow surface art
 Measuring the lag-1 autocorrelation of the **detrended residual trajectories that enter the
 inverter**, per window, at Butte:
 
-| window | lag-1 autocorrelation | detection statistic |
-|---|---|---|
-| Blackman | **−0.103** | 1.98 |
-| Hann | −0.010 | 3.33 |
-| Hamming | +0.095 | 5.95 |
-| rectangular | **+0.244** | 8.30 |
+| window | lag-1 autocorrelation | contrast | vs shuffle null | vs **alignment null** |
+|---|---|---|---|---|
+| Blackman | **−0.103** | 1.98 | 1.33 | 1.34 |
+| Hann | −0.010 | 3.33 | 2.07 | 1.53 |
+| Hamming | +0.095 | 5.95 | 3.86 | 3.17 |
+| rectangular | **+0.244** | 8.30 | 5.59 | **5.07** |
 
-**r = +0.994.** The statistic tracks inter-look correlation almost exactly, and the correlation
-changes *sign* — from anti-correlated under the strongest taper to strongly positive with no taper.
+The relationship is essentially the same whichever response variable is used:
+r(lag-1, contrast) = **+0.995**, r(lag-1, shuffle ratio) = **+0.994**,
+r(lag-1, alignment ratio) = **+0.977**. The script reports the shuffle-ratio figure. The statistic
+tracks inter-look correlation almost exactly, and the correlation changes *sign* — from
+anti-correlated under the strongest taper to strongly positive with no taper.
+
+**Note that the rectangular-window detection at Butte survives the alignment null** (5.07, above the
+5× threshold) — it is not an artefact of the mis-specified shuffle null. It is a real, reproducible
+excess. What E4 establishes is its *mechanism*: the excess is carried by inter-look correlation that
+the taper exists to suppress, and it is absent in every configuration that suppresses it. A
+subsurface return should not require the removal of spectral isolation in order to appear.
 
 This discriminates between the two competing explanations. The bandwidth/SNR account predicts weaker
 residuals under stronger tapers, but predicts **nothing** about inter-look autocorrelation rising
