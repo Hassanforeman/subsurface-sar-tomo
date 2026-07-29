@@ -107,8 +107,12 @@ resolution floor at 50 reference runs per cell.
 **The test that would settle it** — and the right quantity matters. Measure the correlation
 structure of the **detrended residual trajectories that actually enter the inverter**, as a function
 of window, and test whether it tracks the statistic. Correlating the complex looks, or the magnitude
-images, measures the wrong thing. Not yet run. Until it is, the leakage reading is an attractive
-hypothesis, not a demonstrated fact, and should not be asserted as the explanation.
+images, measures the wrong thing.
+
+> **That test has since been run. §4 states the hypothesis and the test it requires; §4c (E4)
+> reports the result — the statistic tracks inter-look autocorrelation at r ≈ +0.99, with a sign
+> change. Read the two together: as of 29 July the leakage reading is a measurement, not the
+> hypothesis this section describes.**
 
 **A note on surface leakage by site.** Komati is the only site with leakage scores above the 0.5
 flag — 5 of its 12 configurations. Those flags sit in the `ncc` and `blackman` arms; its
@@ -117,12 +121,19 @@ reports 0.32 for the same scene. An earlier draft of this document said Komati's
 was "surface-driven regardless," which overstated it: the baseline is clean, and the flags are
 confined to non-baseline estimator/window combinations.
 
-## 4b. The dominant parameter is one nobody asked about — and nobody published
+## 4b. An undisclosed parameter that appeared to dominate — and the two reasons it did not
+
+> **SUPERSEDED BY §4c.** This section records what the pipeline *as published* did, and why both of
+> its headline readings were wrong. The 194× figure is withdrawn (axis-extent confound), and the
+> "flips the verdict four times" framing is retracted (a failure of this reproduction's own guard
+> and null, not a property of the method). §4c reports the corrected experiments. The section is
+> kept because the failure modes it documents are the point.
 
 **The 194× figure quoted in the previous draft is withdrawn.** The contrast statistic is not
-comparable across `n_sub`, so no ratio of ratios across that axis is interpretable. What survives is
-the qualitative result, which is the important one: **changing only the sub-aperture count flips the
-verdict four times on a site with nothing underneath it.**
+comparable across `n_sub`, so no ratio of ratios across that axis is interpretable. At the time of
+writing, what appeared to survive was the qualitative result — that changing only the sub-aperture
+count flips the verdict four times on a site with nothing underneath it. **That too is now
+retracted; see §4c (E1–E3).**
 
 ![komati n_sub](./komati_nsub.png)
 
@@ -406,17 +417,32 @@ done
 ## 10. Summary
 
 Run across four real sites and 96 configurations, the suggested settings do not change the result.
-Precision was already double and is numerically irrelevant here. No coregistrator flips a verdict.
-A Hamming window crosses the detection threshold at none of the four sites. The injected positive
-control is recovered in every run, so the pipeline works under every suggested configuration. The
-one detection in 48 distinct configurations uses no sub-aperture taper at all, and the way it grows
-as spectral isolation is removed points at inter-look leakage rather than depth.
+Precision was already double and is numerically irrelevant. No coregistrator flips a verdict at any
+site. A Hamming window crosses the detection threshold at none of the four. The injected positive
+control is recovered in every run, so the pipeline finds a signal when one is present.
 
-The window does matter more than this project previously credited. It matters enough that the
-choice should have been in the paper.
+**The window does matter, and the mechanism is now measured rather than argued.** Across the four
+windows at Butte, the lag-1 autocorrelation of the detrended residual trajectories tracks the
+detection statistic at r ≈ +0.99 and changes sign, from −0.103 under Blackman to +0.244 with no
+taper (§4c, E4). The choice should have been in the paper.
 
-And the window is not even the dominant term. The sub-aperture count flips the verdict four times on
-a site with nothing under it, including a false positive at the strongest verdict level the pipeline
-can issue. That parameter is undisclosed too. The objection asked which coregistrator, which
-precision, which window; the honest answer is that a larger lever than any of them was never named
-by anyone.
+**One genuine excess remains, and it is not dismissed here.** The rectangular-window configuration
+at Butte reaches 5.07 against the alignment null — above threshold, and *not* an artefact of the
+mis-specified shuffle null. It is real and reproducible. What the leakage measurement supplies is
+its mechanism: the excess is carried by the inter-look correlation that a taper exists to suppress,
+and it is absent from every configuration that suppresses it. A subsurface return should not require
+the removal of spectral isolation in order to appear.
+
+**Three claims made earlier in this project are withdrawn**, all by our own testing rather than
+anyone else's. The 194× sub-aperture-count figure was an artefact of a depth axis whose extent
+scales with `n_sub`; on a fixed window the spread is **1.9×**. The "flips the verdict four times"
+framing is retracted: with a scale-stable guard and a correctly-specified null, Komati returns
+**0/8 detections** across sub-aperture counts from 11 to 128, peaking at 3.2–3.7 m every time — one
+consistent shallow surface feature, which is the right answer for a power station. And the
+`n_sub=32` "investigate" false positive was a failure of this reproduction's own fractional guard,
+which flagged 3/8 shallow peaks where the absolute guard flags 8/8.
+
+What survives is narrower and better supported than what was claimed on 28 July. The coregistrator,
+the precision, the window and the sub-aperture count are given no values in either 2022 paper or in
+the patent. At least one of them — the window — demonstrably changes the outcome, for a reason that
+can now be measured. That is the finding.
