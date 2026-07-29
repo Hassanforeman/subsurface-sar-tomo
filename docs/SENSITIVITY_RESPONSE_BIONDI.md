@@ -40,8 +40,10 @@ across the cross-product of:
 
 = **96 runs**, 200 permutations each. The harness validates itself first (`--selftest`): it
 reproduces the repo's own `decompose_subapertures` to **0.00e+00** at Hann/complex128, all four
-estimators recover known sub-pixel shifts, the float32 arm is verified genuinely single-precision
-(`scipy.fft`; `numpy.fft` would silently promote to double and make that arm meaningless), the
+estimators recover known sub-pixel shifts, the float32 arm is verified single-precision through the
+decomposition and the baseline estimator (`scipy.fft`; `numpy.fft` would silently promote to double
+and make that arm meaningless) — though `upsampdft` and `opticalflow` hand data to scikit-image,
+which may promote internally, so the claim is weaker for those two — the
 permutation p-value is calibrated, and the harness demonstrably **can** detect an injected
 reflector. A sweep that cannot detect anything would prove nothing.
 
@@ -49,9 +51,17 @@ reflector. A sweep that cannot detect anything would prove nothing.
 
 ![four sites](./four_site_windows.png)
 
-**1 detection in 48 distinct configurations** (2/96 rows, the same configuration duplicated
-across precision): rectangular window + phase correlation at Butte, ratio 5.59 against a
-threshold of 5.0.
+**The only configuration that crossed the threshold used no sub-aperture taper at all**
+(rectangular window + phase correlation at Butte, ratio 5.59 against a threshold of 5.0). Every
+window, precision and coregistrator combination that was actually recommended — or that the paper
+uses by default — stayed below.
+
+*A previous draft framed this as "1 detection in 48 distinct configurations." That overstates the
+robustness: the 48 cells are not independent. Windows share the same SLC and the same patches, the
+three coregistrators operate on heavily overlapping information, and the four sites share a code
+path and similar Umbra acquisition geometry. The effective number of independent tests is
+substantially smaller than 48, so the "1 in 48" ratio understates family-wise false-positive risk.
+The claim above does not depend on counting.*
 
 | Objection | Finding |
 |---|---|
@@ -75,11 +85,17 @@ Order the windows by how strongly they suppress spectral leakage between adjacen
 | Bingham Canyon | 2.27 | 2.45 | 3.35 | 2.29 | no |
 | Komati Power Stn | 1.79 | 2.05 | 2.85 | 1.92 | no |
 
-The apparent signal at Butte rises steadily as spectral isolation between looks is removed. A
-genuine subsurface return should not behave that way — the taper exists precisely to stop adjacent
-sub-apertures bleeding into one another, so a "detection" that grows as that protection is stripped
-is more consistent with inter-look correlation than with independent angular diversity. On this
-reading the detecting configuration is simply the one with the most contaminated looks.
+The apparent signal at Butte rises steadily as spectral isolation between looks is removed. One
+reading is inter-look leakage: the taper exists to stop adjacent sub-apertures bleeding into one
+another, so a "detection" that grows as that protection is stripped may simply be the configuration
+with the most contaminated looks.
+
+**This is a hypothesis, and at least two competing explanations are not ruled out.** (i) Stronger
+tapers reduce the effective bandwidth of each look, and therefore its SNR and shift-estimate
+precision — weaker residuals under Blackman and Hann are expected *even for a real signal*.
+(ii) Surface structure may couple into the residual trajectory differently under different spectral
+weightings, so the gradient could be a surface-modulated bias that happens to be monotonic at these
+two sites. Nothing here distinguishes these from leakage.
 
 **Two honest caveats.** The monotonic sites (Butte, Vesuvius) are also the two with real subsurface
 structure, and the non-monotonic ones (an open pit, a power station) are the two without. That is a
@@ -88,8 +104,11 @@ in six. It is not evidence. And the Butte detection does not survive multiple-co
 against the empty-scene reference (p = 0.020, corrected threshold 0.006), where 0.020 is also the
 resolution floor at 50 reference runs per cell.
 
-**The test that would settle it:** measure inter-look correlation directly as a function of window
-and check whether the statistic tracks it. If it does, the gradient is leakage. Not yet run.
+**The test that would settle it** — and the right quantity matters. Measure the correlation
+structure of the **detrended residual trajectories that actually enter the inverter**, as a function
+of window, and test whether it tracks the statistic. Correlating the complex looks, or the magnitude
+images, measures the wrong thing. Not yet run. Until it is, the leakage reading is an attractive
+hypothesis, not a demonstrated fact, and should not be asserted as the explanation.
 
 **A note on surface leakage by site.** Komati is the only site with leakage scores above the 0.5
 flag — 5 of its 12 configurations. Those flags sit in the `ncc` and `blackman` arms; its
@@ -100,8 +119,10 @@ confined to non-baseline estimator/window combinations.
 
 ## 4b. The dominant parameter is one nobody asked about — and nobody published
 
-The window moves the Butte statistic by about 2×. The **sub-aperture count moves the Komati
-statistic by 194×, and flips the verdict four times.**
+**The 194× figure quoted in the previous draft is withdrawn.** The contrast statistic is not
+comparable across `n_sub`, so no ratio of ratios across that axis is interpretable. What survives is
+the qualitative result, which is the important one: **changing only the sub-aperture count flips the
+verdict four times on a site with nothing underneath it.**
 
 ![komati n_sub](./komati_nsub.png)
 
@@ -114,10 +135,58 @@ The `n_sub=32` result is the one to sit with: it is a **false positive at the st
 level the pipeline can issue**, on a power station, produced by nothing but a different
 sub-aperture count.
 
+### Why the magnitude is uninterpretable
+
+`tomogram.py` builds `zgrid = np.linspace(0, n_sub*DZ_TARGET/2, 300)` — the *physical extent* of the
+depth axis scales with `n_sub` while the bin count stays fixed at 300 — and `contrast()` is
+peak-over-median across those bins. When energy is concentrated near the surface, extending the axis
+into empty deep bins lowers the median while the peak is unchanged, so contrast rises even if the
+underlying residuals are identical.
+
+Holding a surface-pinned profile *fixed in physical units* and resampling it onto each `n_sub` grid
+confirms the mechanism: contrast climbs 1.0× → 3.7× on identical physics, then saturates once the
+profile has decayed to its floor.
+
+Two consequences, and they pull in opposite directions:
+
+- The confound is real, so the raw magnitude cannot be quoted as method sensitivity.
+- But it **saturates at ~3.7×** in that test, so it does not by itself account for the observed
+  spread — the rest depends on profile shape, which also changes with `n_sub`. It would be equally
+  wrong to call the whole effect a geometric artefact.
+
+The correct conclusion is neither: **the statistic is not comparable across `n_sub` at all**, so the
+magnitude should not be quoted in either direction. A defensible version would fix the depth range
+in metres under a stated velocity model, re-bin, and recompute — or replace peak-over-median with a
+scale-invariant statistic. Not yet done.
+
+The real/null ratio does **not** rescue it. Shuffling destroys the surface concentration, so the
+null profile is spread and does not receive the same inflation: Komati nulls run 1.3, 1.6, 2.7, 7.4,
+2.5 across `n_sub` = 11…256, with no consistent scaling. The ratio inflates specifically in the
+surface-pinned regime.
+
+### A new finding: the surface-pinning guard's threshold is uncalibrated
+
+The `n_sub=32` false positive survives the confound — it is the one run that is **not**
+surface-pinned, so axis stretching cannot explain its verdict. But it clears the guard only
+marginally. `shallow_pinned()` flags a peak in the shallowest 5% of the axis; at `n_sub=32` the
+metric range is 0–33.8 m and the peak sits at 3 m, i.e. **8.9% of the axis** — past the cutoff by
+less than four percentage points, with a peak still only three metres down.
+
+| `n_sub` | metric range | peak | peak % of axis | 5% guard |
+|---|---|---|---|---|
+| 32 | 0–33.8 m | 3 m | **8.9%** | **clears** |
+| 128 | 0–135 m | 3 m | 2.2% | flagged |
+| 256 | 0–270 m | 4 m | 1.5% | flagged |
+
+The same 3-metre-deep feature is flagged as an artefact at `n_sub=128` and passes as
+"investigate" at `n_sub=32`, purely because the axis it is measured against is shorter. The 5%
+cutoff is an unjustified constant, and it should be calibrated — or replaced by a criterion in
+physical units — before the guard is relied on.
+
 `n_sub` is specified in **neither 2022 paper nor the patent**. The patent describes `N_D` as
 *"the sampling-rate of the mechanical wave existing on the Earth that we are observing digitally"*
-and never gives a value. So the parameter that dominates the output by two orders of magnitude is
-undisclosed, alongside the three raised in the objection.
+and never gives a value. So the parameter that can flip the verdict on a null
+site is undisclosed, alongside the three raised in the objection.
 
 **This is what the reproduction's sub-aperture-count stability guard exists for.**
 `tomogram.py`'s `look_count_stability()` re-runs the inversion at n/4, n/2 and n and flags a peak
@@ -128,8 +197,16 @@ argues the guard should be mandatory rather than opt-in (`--stability`).
 ## 5. The threshold is calibrated (and one proposed improvement is rejected)
 
 Across **400 runs on synthetic scenes containing nothing**: median 2.77, p95 4.35, p99 5.03,
-max 6.02. The paper's 5× threshold carries a **2.0% empirical false-positive rate** — an α ≈ 0.02
-test, not an arbitrary round number.
+max 6.02. The paper's 5× threshold carries a **2.0% false-positive rate against that reference** —
+so it is not an arbitrary round number.
+
+**Treat 2.0% as an optimistic lower bound, not a calibrated α.** Real SAR scenes carry spatially
+structured surface reflectivity, varying temporal coherence, residual range migration and
+non-Gaussian residual statistics after sub-aperture formation. Speckle-only and blob-modulated
+synthetics do not reproduce the null distribution of this statistic under those conditions. A more
+credible reference would be built from real data: crops with no plausible subsurface, or
+phase-scrambled versions of the real SLCs that preserve surface magnitude structure while destroying
+the residual trajectories.
 
 ![calibration](./threshold_calibration.png)
 
@@ -138,6 +215,11 @@ fires 24/24 on empty scenes. Adjacent sub-apertures overlap by 80%, so the resid
 smooth in look index even when built from pure speckle; shuffling destroys that smoothness, and the
 test ends up measuring "is this sequence smooth?" rather than "is there structure at depth." Worth
 recording, because it is the improvement a referee is most likely to propose.
+
+The fix is not to abandon permutation testing but to specify the null correctly: a surrogate that
+**preserves look-to-look autocorrelation** while destroying depth coherence — phase-randomised
+surrogates, circular shifts of the trajectory that retain its power spectrum, or block permutation
+at the scale of the sub-aperture overlap. Not yet implemented.
 
 ## 6. None of the three parameters is disclosed in any published source
 
@@ -214,6 +296,21 @@ prints *surface-pinned artifact*, not *null*.
 - The empty-scene reference is synthetic; 50 runs per window×estimator cell is thin for the tail.
 - Optical flow (the GeFolki-lineage estimator) passes the shift-recovery self-test but was excluded
   from the site grid for runtime.
+- The contrast statistic is not comparable across `n_sub` (§4b). Any future cross-`n_sub` comparison
+  needs a fixed metric depth range or a scale-invariant statistic.
+- The 48 configuration cells are not independent; counting-based framings of robustness are avoided
+  for that reason.
+
+## 8b. Independent adversarial review
+
+This document was reviewed adversarially by a second model (xAI Grok) on 29 July 2026, working from
+the code, the results and the draft reply but without access to the SAR scenes. Its substantive
+findings — the `zgrid` axis-extent confound, the non-independence of the configuration cells, the
+over-assertion of the leakage reading, the scikit-image precision caveat, and the limits of a
+synthetic reference distribution — are adopted above. Its characterisation of the 194× effect as
+"largely" geometric was checked and is not supported: the geometric term saturates near 3.7× on a
+fixed profile. The conclusion drawn here is that the statistic is not comparable across `n_sub` in
+either direction, which is why the number is withdrawn rather than reattributed.
 
 ## 9. Reproduce
 
@@ -238,8 +335,8 @@ as spectral isolation is removed points at inter-look leakage rather than depth.
 The window does matter more than this project previously credited. It matters enough that the
 choice should have been in the paper.
 
-And the window is not even the dominant term. The sub-aperture count moves the Komati statistic by
-194x and flips the verdict four times on a site with nothing under it, including one false positive
-at the strongest verdict level the pipeline can issue. That parameter is undisclosed too. The
-objection asked which coregistrator, which precision, which window; the honest answer is that the
-largest lever of all was never named by anyone.
+And the window is not even the dominant term. The sub-aperture count flips the verdict four times on
+a site with nothing under it, including a false positive at the strongest verdict level the pipeline
+can issue. That parameter is undisclosed too. The objection asked which coregistrator, which
+precision, which window; the honest answer is that a larger lever than any of them was never named
+by anyone.
