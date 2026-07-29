@@ -259,7 +259,7 @@ P("Table 2. Five free single-pass X-band sites at honest settings, across two in
   "sub-band overlap, Hann taper, float64).", cap)
 
 P("<b>Changes in v3 (July 2026).</b> The Komati Power Station row of Table 2 read "
-  "&ldquo;50&times; / 10&times;, null&rdquo; in v2 (Zenodo 10.5281/zenodo.21066657). That row had been computed at 128 Doppler "
+  "&ldquo;50&times; / 10&times;, null&rdquo; in the published v2 of this preprint (Zenodo 10.5281/zenodo.21067830; that PDF labels itself &lsquo;v1.0&rsquo; internally). That row had been computed at 128 Doppler "
   "sub-apertures rather than the default 11 used for every other row, and its verdict label was "
   "incorrect for that setting: at 128 sub-apertures the pipeline returns <i>above null but "
   "surface-pinned &mdash; artifact</i>, not <i>null</i>. Re-run at the default the site gives "
