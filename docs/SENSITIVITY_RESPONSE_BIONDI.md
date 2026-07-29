@@ -6,7 +6,7 @@ and whose central claim the real data contradicted (see Errata, §7).*
 *Code: `src/sensitivity_sweep.py`. Results: `runs/sweep_butte.json`, `runs/sweep_bingham.json`,
 `runs/sweep_2023-08-13-07-03-04_UMBRA-05.json`, `runs/sweep_2023-11-15-19-47-28_UMBRA-05.json`,
 `runs/four_site_summary.json`, `runs/threshold_calibration.json`.
-Figures: `runs/four_site_windows.png`, `runs/threshold_calibration.png`.*
+Figures (committed under `docs/`): `four_site_windows.png`, `threshold_calibration.png`, `komati_nsub.png`.*
 
 ---
 
@@ -47,7 +47,7 @@ reflector. A sweep that cannot detect anything would prove nothing.
 
 ## 3. Result — the suggested configuration does not change the outcome
 
-![four sites](../runs/four_site_windows.png)
+![four sites](./four_site_windows.png)
 
 **1 detection in 48 distinct configurations** (2/96 rows, the same configuration duplicated
 across precision): rectangular window + phase correlation at Butte, ratio 5.59 against a
@@ -98,13 +98,40 @@ reports 0.32 for the same scene. An earlier draft of this document said Komati's
 was "surface-driven regardless," which overstated it: the baseline is clean, and the flags are
 confined to non-baseline estimator/window combinations.
 
+## 4b. The dominant parameter is one nobody asked about — and nobody published
+
+The window moves the Butte statistic by about 2×. The **sub-aperture count moves the Komati
+statistic by 194×, and flips the verdict four times.**
+
+![komati n_sub](./komati_nsub.png)
+
+Komati Power Station is a surface industrial site with no documented subsurface structure. The
+correct answer at every `n_sub` is "nothing there." Instead the script returns null at 11, *"above
+null, not surface-pinned → investigate"* at 32, null again at 64, and surface-pinned artifact at
+128 and 256.
+
+The `n_sub=32` result is the one to sit with: it is a **false positive at the strongest verdict
+level the pipeline can issue**, on a power station, produced by nothing but a different
+sub-aperture count.
+
+`n_sub` is specified in **neither 2022 paper nor the patent**. The patent describes `N_D` as
+*"the sampling-rate of the mechanical wave existing on the Earth that we are observing digitally"*
+and never gives a value. So the parameter that dominates the output by two orders of magnitude is
+undisclosed, alongside the three raised in the objection.
+
+**This is what the reproduction's sub-aperture-count stability guard exists for.**
+`tomogram.py`'s `look_count_stability()` re-runs the inversion at n/4, n/2 and n and flags a peak
+that moves — precisely because a result that depends this strongly on `n_sub` is not a measurement.
+The Komati curve is the clearest demonstration of that guard's necessity produced so far, and it
+argues the guard should be mandatory rather than opt-in (`--stability`).
+
 ## 5. The threshold is calibrated (and one proposed improvement is rejected)
 
 Across **400 runs on synthetic scenes containing nothing**: median 2.77, p95 4.35, p99 5.03,
 max 6.02. The paper's 5× threshold carries a **2.0% empirical false-positive rate** — an α ≈ 0.02
 test, not an arbitrary round number.
 
-![calibration](../runs/threshold_calibration.png)
+![calibration](./threshold_calibration.png)
 
 The obvious upgrade — replacing the single shuffled null with a permutation p-value — **fails**: it
 fires 24/24 on empty scenes. Adjacent sub-apertures overlap by 80%, so the residual trajectory is
@@ -119,6 +146,7 @@ recording, because it is the improvement a referee is most likely to propose.
 | Coregistrator named | absent | absent | absent |
 | Numerical precision | absent | absent | absent |
 | Sub-aperture window | absent | absent | absent |
+| **Sub-aperture count `n_sub`** | **`N_D` named, no value** | absent | absent |
 
 The closest any source comes is the Vesuvius paper's *"the pixel-tracking technique"* with
 *"high-performance sub-pixel coregistration"*, and the patent's *"pixel-tracking for all those
@@ -160,9 +188,23 @@ the `> 5×` decision rule and qualifying as "null" only by a hair — the single
 the table. The correct value is **2.15**, comfortably below threshold. The verdict is unchanged;
 the margin is much larger.
 
-Provenance of the 50× / 10× figure is not yet established. The registration quality matching at
-0.85 shows the front-end configuration was identical, so the discrepancy lies downstream of the
-observations — LRSD denoising (`--lrsd`), which is off in both reruns, is the leading candidate.
+**Provenance established: the row was run at `n_sub=128`.** LRSD was ruled out first (`--lrsd`
+gives 4.0× / 1.2×, ratio 3.33 — nowhere near). Sweeping the sub-aperture count on the same scene
+locates it exactly:
+
+| `n_sub` | contrast / null | ratio | verdict printed by `tomogram.py` |
+|---|---|---|---|
+| 11 (default) | 2.8× / 1.3× | 2.15 | indistinguishable from null |
+| 32 | 16.2× / 1.6× | **10.12** | **above null, NOT surface-pinned → "investigate"** |
+| 64 | 4.8× / 2.7× | 1.78 | indistinguishable from null |
+| **128** | **49.0× / 7.4×** | **6.62** | above null but surface-pinned → artifact |
+| 256 | 542.0× / 2.5× | **216.8** | above null but surface-pinned → artifact |
+
+49.0× / 7.4× rounds to the published "50× / 10×". The manuscript's Komati row was therefore
+produced at `n_sub=128` while the Butte and Vesuvius rows reproduce at the default of 11 — the
+table **mixes configurations across rows**, and the erratum must state per-row settings rather than
+simply correct a number. Its verdict column is also wrong for that run: at `n_sub=128` the script
+prints *surface-pinned artifact*, not *null*.
 
 ## 8. Limits
 
@@ -195,3 +237,9 @@ as spectral isolation is removed points at inter-look leakage rather than depth.
 
 The window does matter more than this project previously credited. It matters enough that the
 choice should have been in the paper.
+
+And the window is not even the dominant term. The sub-aperture count moves the Komati statistic by
+194x and flips the verdict four times on a site with nothing under it, including one false positive
+at the strongest verdict level the pipeline can issue. That parameter is undisclosed too. The
+objection asked which coregistrator, which precision, which window; the honest answer is that the
+largest lever of all was never named by anyone.
