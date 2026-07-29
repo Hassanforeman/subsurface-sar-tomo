@@ -181,7 +181,7 @@ P("Table 1 summarises the four sites. In every case the real tomogram is indisti
 data = [
     ["Site", "Collect", "Reg. quality", "Real / Null", "Verdict", "Pos. ctrl", "Leakage"],
     ["Bingham Canyon", "2024-01-12 UMBRA-05", "0.67", "front-end only", "no signal", "n/a", "n/a"],
-    ["Komati Power Stn", "2023-08-13 UMBRA-05", "0.85", "50x / 10x", "null", "n/a", "n/a"],
+    ["Komati Power Stn", "2023-08-13 UMBRA-05", "0.85", "2.8x / 1.3x", "NULL", "PASS", "0.32"],
     ["Mount Vesuvius", "2023-11-15 UMBRA-05", "0.72", "4.1x / 1.5x", "NULL", "PASS", "0.03"],
     ["Butte, MT", "2024-03-07 UMBRA-04", "0.82", "3.3x / 1.4x", "NULL", "PASS (z=19/19)", "0.28"],
 ]
