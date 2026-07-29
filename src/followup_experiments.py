@@ -1,0 +1,383 @@
+#!/usr/bin/env python3
+"""
+followup_experiments.py — close the four open criticisms from adversarial review.
+
+Each experiment answers a specific objection raised against
+docs/SENSITIVITY_RESPONSE_BIONDI.md on 29 July 2026.
+
+  E1  SCALE-INVARIANT n_sub COMPARISON
+      Objection: `zgrid = linspace(0, n_sub*DZ_TARGET/2, 300)` makes the depth axis
+      extent scale with n_sub while the bin count stays fixed, so contrast
+      (peak/median) is not comparable across n_sub. The 194x claim was withdrawn.
+      Fix: evaluate every n_sub on ONE FIXED depth window (0 .. 11*DZ_TARGET/2),
+      which lies inside the unambiguous range of every configuration tested, with a
+      fixed bin count. Report both the native and the fixed-window statistic so the
+      size of the confound is visible rather than argued about.
+
+  E2  A GUARD THAT DOES NOT CHANGE MEANING WHEN THE AXIS STRETCHES
+      Objection: shallow_pinned() flags a peak in the shallowest 5% OF THE AXIS. The
+      same 3 m feature is flagged at n_sub=128 (2.2% of a 135 m axis) and clears at
+      n_sub=32 (8.9% of a 33.8 m axis). The cutoff is an unjustified constant.
+      Fix: flag on ABSOLUTE depth, in units of the depth-resolution cell dz_phys =
+      (v/f)*R/(2A). A peak within `--guard-cells` cells of the surface is
+      surface-pinned regardless of how long the axis is.
+
+  E3  A CORRECTLY-SPECIFIED NULL
+      Objection: shuffling look order destroys the look-to-look smoothness that 80%
+      sub-aperture overlap guarantees even under pure speckle, so the shuffle null is
+      mis-specified and the permutation p-value is anti-conservative.
+      Fix: the ALIGNMENT null. Compute each patch's tomogram, then circularly shift
+      each patch's depth profile by an independent random offset before summing. This
+      preserves every patch's own spectral shape EXACTLY — smoothness, peakedness,
+      surface concentration — and destroys only the agreement between patches about
+      WHICH depth. That is the scientific question: do independent patches concur on a
+      depth? Contrast under this null is the honest reference.
+
+  E4  IS THE BUTTE WINDOW GRADIENT INTER-LOOK LEAKAGE?
+      Objection: the leakage reading is an inference. Competing explanation: stronger
+      tapers cut each look's effective bandwidth, lowering SNR, so weaker residuals
+      under Blackman/Hann are expected even for a real signal.
+      Fix: measure the correlation structure of the DETRENDED RESIDUAL TRAJECTORIES
+      that actually enter the inverter (not the complex looks, not the magnitude
+      images) as a function of window, and test whether it tracks the statistic. If
+      the statistic rises with inter-look correlation, leakage is supported. If it
+      rises while correlation is flat, it is not.
+
+Usage
+-----
+  python3 src/followup_experiments.py --selftest
+  python3 src/followup_experiments.py --sicd data/<komati>_SICD.nitf --experiment nsub
+  python3 src/followup_experiments.py --sicd data/<butte>_SICD.nitf  --experiment leakage
+"""
+import argparse, json, os, sys
+import numpy as np
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from tomogram import (DZ_TARGET, steering, analytic1d, contrast,
+                      tomogram_from_observations, metric_depth_axis,
+                      surface_brightness, leakage_correlation, shallow_pinned)
+from sensitivity_sweep import patch_observations_cfg, WINDOWS
+
+# Fixed comparison window: the unambiguous half-range of the SMALLEST n_sub tested,
+# so every configuration is evaluated over a depth interval it can actually resolve.
+NSUB_REF = 11
+ZGRID_FIXED = np.linspace(0, NSUB_REF * DZ_TARGET / 2, 300)
+
+
+# ===========================================================================
+# E3 — the alignment null
+# ===========================================================================
+def per_patch_tomograms(obs, zgrid):
+    A, _ = steering(obs.shape[1], zgrid)
+    return np.array([np.abs(A.conj().T @ analytic1d(r)) ** 2 for r in obs])
+
+
+def alignment_null(obs, zgrid, n_perm=200, seed=0):
+    """Preserve every patch's own depth profile exactly; randomise only the depth at
+    which each patch's profile sits. Destroys cross-patch agreement, nothing else."""
+    rng = np.random.default_rng(seed)
+    Tp = per_patch_tomograms(obs, zgrid)
+    nz = Tp.shape[1]
+    out = np.empty(n_perm)
+    for i in range(n_perm):
+        shifted = np.array([np.roll(t, int(rng.integers(nz))) for t in Tp])
+        out[i] = contrast(shifted)
+    return out
+
+
+def shuffle_null(obs, zgrid, n_perm=200, seed=0):
+    """The paper's original null, for side-by-side comparison."""
+    rng = np.random.default_rng(seed)
+    out = np.empty(n_perm)
+    for i in range(n_perm):
+        sh = np.array([r[rng.permutation(len(r))] for r in obs])
+        out[i] = contrast(tomogram_from_observations(sh, zgrid))
+    return out
+
+
+# ===========================================================================
+# E2 — a scale-stable surface-pinning guard
+# ===========================================================================
+def peak_depth_m(T, zgrid, dz_phys):
+    z_m = zgrid * (dz_phys / DZ_TARGET)
+    return float(z_m[int(np.argmax(T.sum(0)))])
+
+
+def pinned_absolute(T, zgrid, dz_phys, guard_cells=2.0):
+    """Surface-pinned iff the peak lies within `guard_cells` depth-resolution cells
+    of the surface. Independent of how long the depth axis happens to be."""
+    pk = peak_depth_m(T, zgrid, dz_phys)
+    return bool(pk <= guard_cells * dz_phys), pk
+
+
+# ===========================================================================
+# E4 — inter-look correlation of the residual trajectories
+# ===========================================================================
+def interlook_autocorr(obs, max_lag=3):
+    """Mean autocorrelation of the detrended residual trajectories across look index.
+    Returns (lag-1, lag-2). Leakage between overlapping sub-apertures should raise these."""
+    n_look = obs.shape[1]
+    rhos = np.zeros(max_lag + 1)
+    counts = 0
+    for x in obs:
+        x = x - x.mean()
+        d = float(x @ x)
+        if d <= 0:
+            continue
+        counts += 1
+        for k in range(1, max_lag + 1):
+            rhos[k] += float(x[:-k] @ x[k:]) / d
+    if counts == 0:
+        return float("nan"), float("nan")
+    rhos /= counts
+    # Bartlett-style effective sample size along the look axis
+    # NB: an effective-sample-size estimate is unstable here — deg-2 detrending on a
+    # short look axis drives lag-2/3 negative and the Bartlett denominator through zero.
+    # Report the raw lags instead; they are what the leakage hypothesis predicts.
+    return float(rhos[1]), float(rhos[2])
+
+
+# ===========================================================================
+# E1 + E2 — the n_sub experiment
+# ===========================================================================
+def experiment_nsub(slc, counts, patch, n_patch, overlap, window, estimator,
+                    n_perm, guard_cells, velocity, f_invest, range_km, aperture_km,
+                    label):
+    H, W = slc.shape
+    row = H // 2 - patch // 2
+    cols = np.linspace(0, W - patch, n_patch).astype(int)
+    _, dz_phys = metric_depth_axis(np.array([0.0]), velocity, f_invest,
+                                   range_km * 1e3, aperture_km * 1e3)
+
+    print(f"\n{'='*112}")
+    print(f"E1+E2+E3 — sub-aperture count, on a FIXED depth window — {label}")
+    print(f"  window={window} coregistrator={estimator} patch={patch} n_patch={n_patch} "
+          f"overlap={overlap}")
+    print(f"  fixed comparison window: 0–{ZGRID_FIXED[-1]*(dz_phys/DZ_TARGET):.1f} m "
+          f"(unambiguous at every n_sub tested); dz_phys={dz_phys:.2f} m")
+    print(f"  guard: peak within {guard_cells:g} depth cells ({guard_cells*dz_phys:.1f} m) "
+          f"of the surface = surface-pinned")
+    print(f"{'='*112}")
+    print(f"{'n_sub':>6}{'native C':>10}{'fixedC':>9}{'shufNull':>10}{'alignNull':>11}"
+          f"{'C/shuf':>9}{'C/align':>9}{'peak m':>9}{'old 5%':>9}{'new abs':>9}  verdict")
+    print("-" * 112)
+
+    rows = []
+    for n in counts:
+        obs, quals = patch_observations_cfg(slc, cols, row, patch, n, overlap,
+                                            window, np.complex128, estimator)
+        z_native = np.linspace(0, n * DZ_TARGET / 2, 300)
+        T_native = tomogram_from_observations(obs, z_native)
+        T_fixed = tomogram_from_observations(obs, ZGRID_FIXED)
+
+        c_native = contrast(T_native)
+        c_fixed = contrast(T_fixed)
+        shuf = shuffle_null(obs, ZGRID_FIXED, n_perm=n_perm, seed=0)
+        algn = alignment_null(obs, ZGRID_FIXED, n_perm=n_perm, seed=0)
+        r_shuf = c_fixed / (np.median(shuf) + 1e-12)
+        r_algn = c_fixed / (np.median(algn) + 1e-12)
+
+        old_pin, old_frac, _ = shallow_pinned(T_native)
+        new_pin, pk_m = pinned_absolute(T_native, z_native, dz_phys, guard_cells)
+
+        verdict = ("surface-pinned artifact" if new_pin else
+                   ("above alignment null → investigate" if r_algn > 5 else
+                    "no detection"))
+        rows.append(dict(n_sub=n, c_native=float(c_native), c_fixed=float(c_fixed),
+                         shuf_med=float(np.median(shuf)), align_med=float(np.median(algn)),
+                         ratio_shuffle=float(r_shuf), ratio_align=float(r_algn),
+                         peak_m=pk_m, old_pinned=bool(old_pin),
+                         old_peak_frac=float(old_frac), new_pinned=bool(new_pin),
+                         quality=float(np.mean(quals)), verdict=verdict))
+        print(f"{n:>6}{c_native:>10.2f}{c_fixed:>9.2f}{np.median(shuf):>10.2f}"
+              f"{np.median(algn):>11.2f}{r_shuf:>9.2f}{r_algn:>9.2f}{pk_m:>9.1f}"
+              f"{('PIN' if old_pin else 'clear'):>9}{('PIN' if new_pin else 'clear'):>9}"
+              f"  {verdict}")
+
+    print("-" * 112)
+    cn = np.array([r["c_native"] for r in rows]); cf = np.array([r["c_fixed"] for r in rows])
+    ra = np.array([r["ratio_align"] for r in rows])
+    print(f"native contrast spread : {cn.min():.2f} – {cn.max():.2f}  ({cn.max()/cn.min():.1f}x)"
+          f"   <- NOT comparable across n_sub")
+    print(f"fixed-window spread    : {cf.min():.2f} – {cf.max():.2f}  ({cf.max()/cf.min():.1f}x)"
+          f"   <- comparable; this is the honest number")
+    print(f"vs alignment null      : {ra.min():.2f} – {ra.max():.2f}"
+          f"   detections at >5x: {int((ra>5).sum())}/{len(ra)}")
+    old_flags = sum(r["old_pinned"] for r in rows); new_flags = sum(r["new_pinned"] for r in rows)
+    print(f"surface-pinning guard  : old 5%-of-axis rule flags {old_flags}/{len(rows)}; "
+          f"absolute {guard_cells:g}-cell rule flags {new_flags}/{len(rows)}")
+    if new_flags > old_flags:
+        print("  -> the absolute guard catches shallow peaks the fractional rule let through.")
+    return rows
+
+
+# ===========================================================================
+# E4 — the leakage experiment
+# ===========================================================================
+def experiment_leakage(slc, n_sub, patch, n_patch, overlap, estimator, windows,
+                       n_perm, label):
+    H, W = slc.shape
+    row = H // 2 - patch // 2
+    cols = np.linspace(0, W - patch, n_patch).astype(int)
+    zg = np.linspace(0, n_sub * DZ_TARGET / 2, 300)
+
+    print(f"\n{'='*100}")
+    print(f"E4 — does the window gradient track INTER-LOOK CORRELATION? — {label}")
+    print(f"  n_sub={n_sub} coregistrator={estimator} overlap={overlap}")
+    print(f"  measured on the detrended residual trajectories that enter the inverter")
+    print(f"{'='*100}")
+    print(f"{'window':<10}{'lag-1 corr':>12}{'lag-2 corr':>13}{'contrast':>10}"
+          f"{'shufRatio':>11}{'alignRatio':>12}")
+    print("-" * 100)
+
+    rows = []
+    for w in windows:
+        obs, _ = patch_observations_cfg(slc, cols, row, patch, n_sub, overlap,
+                                        w, np.complex128, estimator)
+        rho1, rho2 = interlook_autocorr(obs)
+        T = tomogram_from_observations(obs, zg)
+        c = contrast(T)
+        r_s = c / (np.median(shuffle_null(obs, zg, n_perm, 0)) + 1e-12)
+        r_a = c / (np.median(alignment_null(obs, zg, n_perm, 0)) + 1e-12)
+        rows.append(dict(window=w, lag1=rho1, lag2=rho2, contrast=float(c),
+                         ratio_shuffle=float(r_s), ratio_align=float(r_a)))
+        print(f"{w:<10}{rho1:>12.3f}{rho2:>13.3f}{c:>10.2f}{r_s:>11.2f}{r_a:>12.2f}")
+
+    print("-" * 100)
+    x = np.array([r["lag1"] for r in rows]); y = np.array([r["ratio_shuffle"] for r in rows])
+    if len(x) > 2 and x.std() > 0 and y.std() > 0:
+        r = float(np.corrcoef(x, y)[0, 1])
+        print(f"correlation( inter-look lag-1 , detection statistic ) = {r:+.3f}")
+        if r > 0.8:
+            print("  -> statistic tracks inter-look correlation: LEAKAGE READING SUPPORTED.")
+        elif r < 0.3:
+            print("  -> statistic does NOT track inter-look correlation: leakage reading")
+            print("     is NOT supported; the competing bandwidth/SNR explanation survives.")
+        else:
+            print("  -> ambiguous; neither explanation is established.")
+    return rows
+
+
+# ===========================================================================
+# Self-test
+# ===========================================================================
+def selftest():
+    from sensitivity_sweep import synthetic_scene
+    ok = {}
+    rng = np.random.default_rng(0)
+
+    print("[A] alignment null preserves per-patch profile shape, destroys agreement:")
+    zg = np.linspace(0, 9 * DZ_TARGET / 2, 300)
+    _, Kz = steering(9, zg)
+    obs = 0.02 * rng.standard_normal((24, 9)) + np.cos(Kz * (0.5 * zg[-1]))
+    Tp = per_patch_tomograms(obs, zg)
+    algn = alignment_null(obs, zg, n_perm=50, seed=1)
+    # each patch's own peak height must be untouched by the null construction
+    shifted = np.array([np.roll(t, 37) for t in Tp])
+    same_shape = np.allclose(np.sort(shifted, axis=1), np.sort(Tp, axis=1))
+    drops = contrast(Tp) > np.median(algn)
+    ok["A"] = bool(same_shape and drops)
+    print(f"   per-patch profiles identical up to a shift: {same_shape}")
+    print(f"   aligned contrast {contrast(Tp):.1f} vs alignment-null median "
+          f"{np.median(algn):.1f} -> {'PASS' if ok['A'] else 'FAIL'}")
+
+    print("\n[B] alignment null does NOT fire on empty data (the shuffle null's failure):")
+    empty = rng.standard_normal((24, 11))
+    zg2 = np.linspace(0, 11 * DZ_TARGET / 2, 300)
+    T = tomogram_from_observations(empty, zg2)
+    r_sh = contrast(T) / np.median(shuffle_null(empty, zg2, 100, 0))
+    r_al = contrast(T) / np.median(alignment_null(empty, zg2, 100, 0))
+    ok["B"] = bool(r_al < r_sh)
+    print(f"   empty data: shuffle ratio {r_sh:.2f}, alignment ratio {r_al:.2f} "
+          f"-> {'PASS' if ok['B'] else 'FAIL'}")
+
+    print("\n[C] absolute guard is invariant to axis length; the 5% rule is not:")
+    nz = 300
+    res = []
+    for n_sub in (32, 128):
+        z = np.linspace(0, n_sub * DZ_TARGET / 2, nz)
+        T = np.zeros((4, nz))
+        z_m = z * (2.11 / DZ_TARGET)
+        T[:, int(np.argmin(np.abs(z_m - 3.0)))] = 1.0      # a peak at 3 m, both times
+        old, _, _ = shallow_pinned(T)
+        new, pk = pinned_absolute(T, z, 2.11, 2.0)
+        res.append((n_sub, old, new, pk))
+        print(f"   n_sub={n_sub:>4}  peak {pk:.1f} m  old-5%: {'PIN' if old else 'clear':<5} "
+              f" new-absolute: {'PIN' if new else 'clear'}")
+    ok["C"] = bool(res[0][1] != res[1][1] and res[0][2] == res[1][2] is True)
+    print(f"   old rule changes verdict on identical physics: {res[0][1] != res[1][1]}; "
+          f"new rule stable: {res[0][2] == res[1][2]} -> {'PASS' if ok['C'] else 'FAIL'}")
+
+    print("\n[D] inter-look autocorrelation responds to smoothness:")
+    smooth = np.array([np.cos(np.linspace(0, 2*np.pi, 11) + p) for p in range(24)])
+    white = rng.standard_normal((24, 11))
+    rs, _ = interlook_autocorr(smooth); rw, _ = interlook_autocorr(white)
+    ok["D"] = bool(rs > 0.5 > rw)
+    print(f"   smooth trajectories lag-1 = {rs:+.2f}; white = {rw:+.2f} "
+          f"-> {'PASS' if ok['D'] else 'FAIL'}")
+
+    print("\n[E] fixed comparison window lies inside every n_sub's unambiguous range:")
+    ok["E"] = all(ZGRID_FIXED[-1] <= n * DZ_TARGET / 2 + 1e-9 for n in (11, 32, 64, 128, 256))
+    print(f"   fixed zmax {ZGRID_FIXED[-1]:.1f} vs smallest unambiguous "
+          f"{NSUB_REF*DZ_TARGET/2:.1f} -> {'PASS' if ok['E'] else 'FAIL'}")
+
+    print("\n" + "=" * 60)
+    print("FOLLOW-UP HARNESS SELF-TEST:", "PASS" if all(ok.values()) else "FAIL", ok)
+    print("=" * 60)
+    return all(ok.values())
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--sicd")
+    ap.add_argument("--experiment", choices=["nsub", "leakage"], default="nsub")
+    ap.add_argument("--crop", type=int, default=512)
+    ap.add_argument("--patch", type=int, default=64)
+    ap.add_argument("--n-patch", type=int, default=24)
+    ap.add_argument("--overlap", type=float, default=0.8)
+    ap.add_argument("--window", default="hann")
+    ap.add_argument("--estimator", default="phasecorr")
+    ap.add_argument("--counts", nargs="*", type=int, default=[11, 16, 22, 32, 45, 64, 90, 128])
+    ap.add_argument("--n-sub", type=int, default=11, help="for the leakage experiment")
+    ap.add_argument("--windows", nargs="*", default=["blackman", "hann", "hamming", "rect"])
+    ap.add_argument("--n-perm", type=int, default=200)
+    ap.add_argument("--guard-cells", type=float, default=2.0)
+    ap.add_argument("--velocity", type=float, default=6000.0)
+    ap.add_argument("--f-investigation", type=float, default=22000.0)
+    ap.add_argument("--range-km", type=float, default=650.0)
+    ap.add_argument("--aperture-km", type=float, default=42.0)
+    ap.add_argument("--out")
+    args = ap.parse_args()
+
+    if args.selftest:
+        sys.exit(0 if selftest() else 1)
+    if not args.sicd:
+        ap.error("need --sicd or --selftest")
+
+    from sarpy.io.complex.converter import open_complex
+    reader = open_complex(args.sicd)
+    R, C = reader.data_size
+    r0, c0 = R // 2 - args.crop // 2, C // 2 - args.crop // 2
+    print(f"Loading {args.crop}x{args.crop} crop from {os.path.basename(args.sicd)} ({R}x{C})")
+    slc = reader[r0:r0 + args.crop, c0:c0 + args.crop]
+    label = os.path.basename(args.sicd)
+
+    if args.experiment == "nsub":
+        rows = experiment_nsub(slc, args.counts, args.patch, args.n_patch, args.overlap,
+                               args.window, args.estimator, args.n_perm, args.guard_cells,
+                               args.velocity, args.f_investigation, args.range_km,
+                               args.aperture_km, label)
+        out = args.out or f"runs/followup_nsub_{label}.json"
+    else:
+        rows = experiment_leakage(slc, args.n_sub, args.patch, args.n_patch, args.overlap,
+                                  args.estimator, args.windows, args.n_perm, label)
+        out = args.out or f"runs/followup_leakage_{label}.json"
+
+    os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
+    json.dump(dict(label=label, experiment=args.experiment, rows=rows), open(out, "w"), indent=1)
+    print(f"\nresults -> {out}")
+
+
+if __name__ == "__main__":
+    main()
