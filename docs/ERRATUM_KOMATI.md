@@ -1,5 +1,7 @@
 # Erratum — Komati Power Station row, results table
 
+*Applies to Zenodo preprint record 10.5281/zenodo.21066657 (v2 → v3). The code/data archive 10.5281/zenodo.21065675 is a separate record and is updated by cutting a GitHub release, not by manual upload.*
+
 *Prepared 29 July 2026 for the preprint under evaluation at PCI Archaeo:
 "No Reproducible Evidence for Deep Subsurface Structures Beneath the Giza Plateau:
 A Controlled Reproduction of Single-Source SAR Doppler Micro-Motion Tomography."*

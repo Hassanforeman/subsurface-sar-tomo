@@ -25,7 +25,7 @@ TITLE = ("No Reproducible Evidence for Deep Subsurface Structures Beneath the Gi
          "A Controlled Reproduction of Single-Source SAR Doppler Micro-Motion Tomography")
 AUTHOR = "Hassan Foreman"
 AFFIL = "Independent researcher"
-DATE = "July 2026 — preprint v1.1 (merged reproduction + refutation; see Changes in v1.1, §3.4)"
+DATE = "July 2026 — preprint v3 (merged reproduction + refutation; see Changes in v3, §3.4)"
 
 ss = getSampleStyleSheet()
 body = ParagraphStyle("body", parent=ss["BodyText"], fontName="Times-Roman",
@@ -258,8 +258,8 @@ P("Table 2. Five free single-pass X-band sites at honest settings, across two in
   "<b>11 Doppler sub-apertures</b> (512&times;512 centre crop, 64-pixel patches, 24 patches, 0.8 "
   "sub-band overlap, Hann taper, float64).", cap)
 
-P("<b>Changes in v1.1 (July 2026).</b> The Komati Power Station row of Table 2 read "
-  "&ldquo;50&times; / 10&times;, null&rdquo; in v1.0. That row had been computed at 128 Doppler "
+P("<b>Changes in v3 (July 2026).</b> The Komati Power Station row of Table 2 read "
+  "&ldquo;50&times; / 10&times;, null&rdquo; in v2 (Zenodo 10.5281/zenodo.21066657). That row had been computed at 128 Doppler "
   "sub-apertures rather than the default 11 used for every other row, and its verdict label was "
   "incorrect for that setting: at 128 sub-apertures the pipeline returns <i>above null but "
   "surface-pinned &mdash; artifact</i>, not <i>null</i>. Re-run at the default the site gives "
