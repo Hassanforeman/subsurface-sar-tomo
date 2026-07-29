@@ -18,3 +18,5 @@ runs/
 # macOS / editor cruft
 .DS_Store
 **/.DS_Store
+# Private submission correspondence (cover letters, plans) — keep out of public repo
+paper/submission/

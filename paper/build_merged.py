@@ -365,6 +365,23 @@ P("All scenes are free Umbra Open Data and Capella Open Data (CC-BY 4.0); the ex
   "nulls, the artifact, the frequency-relabelling, and the stacking result from the scene IDs and the "
   "scripts alone.")
 
+P("Conflict of interest disclosure", h1)
+P("The author declares that he complies with the PCI rule of having no financial conflicts of "
+  "interest in relation to the content of the article. The author declares no non-financial conflict "
+  "of interest.")
+
+P("Funding", h1)
+P("This work received no specific funding. All data analysed are free, openly licensed third-party "
+  "products (Umbra Open Data and Capella Open Data, CC-BY 4.0).")
+
+P("Use of artificial intelligence", h1)
+P("Artificial-intelligence tools (large language models) were used extensively to assist with "
+  "software development, data analysis, and the drafting of this manuscript. The author directed the "
+  "research, made all scientific decisions, and checked and verified every output &mdash; code, "
+  "figures, and text &mdash; against the underlying data and the cited sources, and is solely "
+  "accountable for the content. All figures are generated directly by the analysis pipeline from the "
+  "source data and are not AI-generated illustrations. No AI system is listed as an author.")
+
 P("References", h1)
 refs = [
     "Biondi, F. &amp; Malanga, C. (2022). Synthetic Aperture Radar Doppler Tomography Reveals "

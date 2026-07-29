@@ -17,7 +17,7 @@ they skipped, and test it against known ground truth.
 surface vibrometer) is legitimate; the *deep tomography* claim is unsupported and **reproducible as
 an artifact**. We have shown, on real data, how the confident "structures" arise.
 
-Read first: `docs/TECHNICAL_BIBLE.md` (v1.2), then `docs/BIONDI_PATENT_RECIPE.md`.
+Read first: `docs/TECHNICAL_BIBLE.md` (v1.3 — §8.3 holds the publication / DOIs / PCI-submission record), then `docs/BIONDI_PATENT_RECIPE.md`.
 
 ---
 
@@ -50,6 +50,22 @@ Synthetic Aperture Radar, Archaeological Prospection); auto-post skipped. **Stal
 **Academia housekeeping COMPLETE.** Optional future: a formal journal-formatted version (IEEE TGRS /
 Remote Sensing of Environment / MDPI) with display equations and H1–H5 framing — not required for
 preprint; and the user may write a measured announcement post (not auto-hyped).
+
+**MERGED, PUBLISHED OPEN, AND SUBMITTED FOR FREE PEER REVIEW (2026-07-01).** The two SAR papers were
+**merged** into one reproduction-and-refutation manuscript (`paper/Giza_SAR_Doppler_Reproduction_and_Refutation.pdf`,
+built by `paper/build_merged.py`). Code/data are **open on GitHub** (github.com/Hassanforeman/subsurface-sar-tomo —
+MIT license, CITATION.cff, rewritten README, release **v1.0.1**) and **archived on Zenodo**: code/data DOI
+**10.5281/zenodo.21065675**, **preprint DOI 10.5281/zenodo.21066657**. The manuscript was **submitted to
+PCI Archaeology** (Peer Community In — **free / diamond OA**; IEEE GRSL ruled out as not-free beyond ~3 pp)
+on **2026-07-01**: illustration = the Butte REAL-vs-Null-vs-ground-truth figure, opposed reviewers
+**Biondi + Malanga**, 5 suggested reviewers, **9 suggested recommenders incl. Flint Dibble**, AI-use
+disclosed, no COI. PCI's server was painfully slow (submit POST returned 200 but the next page hung
+repeatedly; the draft auto-saved each time, no duplicates); the **submission went through and the author
+completed the recommender step manually**. **Status: SUBMITTED, awaiting a recommender to take charge
+(~20-day window); if none does, no public record and it can go elsewhere — backup venue PCI Statistics &
+ML.** Every field value, URL, and DOI is recorded in **TECHNICAL_BIBLE §8.3**. Only optional follow-up: a
+**line-numbered PDF** if a reviewer requests one. An overnight auto-retry scheduled task was created and
+then **disabled** once the submission completed.
 
 ---
 
@@ -234,6 +250,10 @@ calls first, build nothing, never claim anything underground (it would discredit
 
 ---
 
-*To resume: `cd ~/Desktop/subsurface-sar-tomo`; finish the two Bingham downloads (§9) → run `stack.py`
-→ fold the result into `build_refutation.py` §3.5 → rebuild the refutation PDF. That completes the
-paper. Everything else (commercial) is parked with an honest "probably not" in §10.*
+*To resume (updated 2026-07-01): the experiments and the paper are **DONE**, and the merged manuscript is
+**public (GitHub + Zenodo DOIs) and submitted to PCI Archaeology for free peer review**. See
+TECHNICAL_BIBLE §8.3 for every DOI, URL, and form value. The next checkpoint is **external**: wait ~20
+days for a PCI recommender to pick it up. If a reviewer asks, build a **line-numbered** version of the
+PDF (the one open to-do). If no pickup, resubmit to **PCI Statistics & ML**. The Bingham stack and the
+cross-sensor Capella site are already folded in; the commercial idea is parked with an honest "probably
+not" in §10. The overnight PCI auto-retry task has been disabled.*

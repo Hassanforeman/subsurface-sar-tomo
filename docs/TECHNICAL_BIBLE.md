@@ -1,7 +1,7 @@
 # Technical Bible — Subsurface SAR Doppler Tomography
 
 *The complete working reference for this project. Read it before touching data.*
-*Version 1.2. Every quantitative claim is traceable to the References at the end.*
+*Version 1.3. Every quantitative claim is traceable to the References at the end.*
 
 ---
 
@@ -331,6 +331,65 @@ the sub-apertures, let the DFT concentrate surface/trend energy into a sharp hig
 label it deep via an unphysical 22 kHz. It demonstrates that **contrast-above-null is necessary but
 not sufficient** — depth-of-peak, ground truth, and (qualified) stability are required. Figures:
 `runs/repro_2024-03-07-04-48-26_UMBRA-04_SICD.nitf.png`. This is a centerpiece result for the preprint.
+
+---
+
+## 8.3 Publication, archival & peer review (the project's output is public and citable)
+
+The two SAR papers were **merged into one** controls-first reproduction-and-refutation manuscript and
+released as open, citable, peer-reviewable scholarship. This section is the canonical record of *where
+everything lives* so it is never lost.
+
+**The deliverable**
+- Merged manuscript: `paper/Giza_SAR_Doppler_Reproduction_and_Refutation.pdf` (7 pp), built by
+  `paper/build_merged.py` (reportlab). Contains the patent→code fidelity table, the five-site/two-sensor
+  null table, the §4 "could a wrong velocity model hide a real signal?" robustness section, explicit
+  falsifiability criteria, and a **Conflict-of-interest / Funding / Use-of-AI** disclosure block.
+- Title (final, softened): **"No Reproducible Evidence for Deep Subsurface Structures Beneath the Giza
+  Plateau: A Controlled Reproduction of Single-Source SAR Doppler Micro-Motion Tomography."**
+- Author of record: **Hassan Foreman** (cited on forms as "H. Foreman").
+
+**Open code + data (GitHub)**
+- Repo: **github.com/Hassanforeman/subsurface-sar-tomo** — full pipeline, controls, stress tests, scene
+  identifiers. Added for release: `LICENSE` (MIT, Hassan Foreman 2026), `CITATION.cff`, rewritten
+  `README.md`, `.gitignore` (raw SAR products and the private `paper/submission/` folder are excluded).
+- Release **v1.0.1** cut on GitHub triggered the Zenodo archive webhook.
+
+**Citable archive (Zenodo DOIs) — two distinct records, do not confuse them**
+- **Code/data archive:** `10.5281/zenodo.21065675` — the software/data deposit (this is the DOI used in
+  the paper's Data & Code Availability statement and in the PCI "data / scripts / codes" URL fields).
+- **Preprint (the manuscript PDF):** `10.5281/zenodo.21066657` — resolve as
+  `https://doi.org/10.5281/zenodo.21066657`. This is the DOI submitted to PCI as the preprint of record.
+- Use the **concept** DOI (resolves to latest) when citing; cut a Zenodo "New version" to update while
+  preserving the concept DOI.
+
+**Free peer review — PCI Archaeology (Peer Community In)**
+Chosen because it is **free / diamond open-access** (the Peer Community Journal charges no APC). IEEE
+GRSL was ruled out: it is **not free** beyond ~3 pages (US$230/page for non-members). The manuscript was
+**submitted to PCI Archaeology on 2026-07-01** via the "Submit your preprint" form. Recorded field values
+(so a resubmission or sibling submission can be reproduced):
+- Preprint DOI `https://doi.org/10.5281/zenodo.21066657`; server **Zenodo**; manuscript version **1**; year **2026**.
+- Illustration (required, non-AI): `runs/repro_2024-03-07-04-48-26_UMBRA-04_SICD.nitf.png` (REAL tomogram vs Null vs Butte ground truth).
+- Data / scripts / codes = "yes", each pointing to `https://doi.org/10.5281/zenodo.21065675`.
+- Thematic fields: **Remote sensing, Spatial analysis, Geoarchaeology, Computational archaeology, Archaeometry.**
+- Keywords + "methods requiring specific expertise" (SAR sub-aperture Doppler processing; spaceborne radar signal processing; reproducibility / null testing) filled.
+- **Opposed reviewers:** Filippo Biondi and Corrado Malanga (authors of the work under critique — legitimate conflict).
+- **Suggested reviewers (5):** Nazarij Bulawka, Hector Orengo, Piotr Wroniecki, Wouter Verschoof-van der Vaart, Arnau Garcia-Molsosa.
+- **Suggested recommenders (9):** Wroniecki, Orengo, Bulawka, Garcia-Molsosa, Ian Moffat, Verschoof-van der Vaart, Karsten Lambers, Jitte Waagen, **+ Flint Dibble** (wildcard / anti-pseudoarchaeology voice).
+- Declarations: all author/COI/guide boxes ticked. **"Lines are numbered"** — the Zenodo PDF is *not*
+  line-numbered (the form validated fine without it, but at final submission the author checked the box to
+  proceed). A **line-numbered build is the one optional follow-up** if a recommender/reviewer requests it.
+- AI-use disclosure is in the manuscript and was affirmed on the form; no financial or non-financial COI.
+- Operational note: PCI's server was **extremely slow** that night — the submit POST returned HTTP 200 but
+  the follow-up page hung repeatedly; the draft auto-saved each time (no duplicates). The author completed
+  the final recommender step manually. **Status: submitted; awaiting a recommender to take charge (~20-day
+  window). If none does, there is no public record and the work can go elsewhere.**
+- Methods-native backup venue if no pickup: **PCI Statistics and Machine Learning** (reframe as a
+  reproducibility / signal-processing critique).
+
+**Also public:** the refutation is posted on **Academia.edu** under Hassan Foreman (older 3-site/4-site
+precursors retired/relabeled, no duplicates). Private submission working notes (gitignored, not on GitHub):
+`paper/submission/cover_letter.md`, `submission_plan.md`, `pci_recommenders.md`, `PROJECT_LINKS.xlsx`.
 
 ---
 
