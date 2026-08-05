@@ -726,3 +726,53 @@ measurements of the ground.
 | PSF-matched null | **closed** — §15.1; conclusion unchanged and slightly strengthened |
 | Analytic account of `contrast` under random-walk inputs | **closed** — §15.2 gives an exact law for the peak position; the contrast magnitude remains empirical |
 | Acknowledge revision history in the manuscript | outstanding — see §8.3 item 8 |
+
+### 15.5 How far the derivation actually goes — precise version
+
+External review accepted §15.2 as "highly predictive and mechanistically sound" but flagged the
+phrase *"places its peak at the lowest spectral mode surviving the degree-2 detrend"* as one
+algebraic step short of closed. That is correct. Here is exactly what is derived and what is not.
+
+**Derived, directly from the code.** `steering()` builds `Kz[j] = j · 2π/(n_looks · DZ_TARGET)`, and
+`invert_patch()` computes `|Aᴴ · analytic1d(r)|²`. That is a DFT evaluated at
+`ω = 2π·z / (L·DZ_TARGET)`. It therefore peaks when `z = k · DZ_TARGET` for the dominant mode `k`:
+
+> **peak_cells = k**, the dominant surviving mode index. Exactly.
+
+This also explains the `bin × L` invariance without further assumption: a fixed mode maps to a fixed
+fraction of an axis whose extent is proportional to `L`.
+
+**Measured.** Direct simulation of the inversion (400 trials per cell, lengths 11/32/128):
+
+| detrend degree | peak_cells (simulated) | `bin × L` | (d+1)/2 rule |
+|---|---|---|---|
+| 0 | 0.856 – 0.883 | 512 – 528 | 0.50 |
+| 2 | **1.711 – 1.712** | **1023 – 1024** | 1.50 |
+| 4 | 2.515 – 2.594 | 1504 – 1551 | 2.50 |
+
+`peak_cells` at degree 2 is stable to four significant figures across a twelvefold range of lengths.
+
+**Not derived.** The standard rule of thumb — that a degree-*d* polynomial detrend high-passes at
+about (d+1)/2 cycles per record — predicts 1.5 cells at degree 2 against 1.712 observed, i.e. **14%
+low at the pipeline's operating degree**, converging by degree 4.
+
+The even degrees follow a cleaner empirical law:
+
+> **k ≈ 0.856 × (d/2 + 1)** → 0.856, 1.712, 2.568 for d = 0, 2, 4.
+
+**The constant 0.856 has not been derived.** Obtaining it would require working out the joint effect
+of least-squares polynomial removal and the `analytic1d` Hilbert step on a 1/f² spectrum over a
+finite record. That is the remaining algebraic step.
+
+**Consequence for wording.** Do not write that the peak sits at "the lowest surviving mode" as
+though the mode index were derived. The defensible statement is:
+
+> The inversion is a discrete Fourier transform, so the reported depth in resolution cells equals
+> the dominant surviving spectral mode of the trajectory. Because the trajectory is a random walk
+> with a 1/f² spectrum and the pipeline removes a degree-2 polynomial, that mode is fixed by the
+> detrend order alone: 1.71 cells, invariant across a twelvefold range of trajectory lengths and
+> reproduced at every site, on both sensors, and on synthetic series containing no scene.
+
+That claims the DFT identity (proved), the empirical invariance (measured across 12× in length),
+and the dependence on detrend order (measured across five degrees) — without asserting a mode index
+that has not been calculated.
