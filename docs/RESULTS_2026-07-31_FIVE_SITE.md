@@ -25,10 +25,10 @@ different constellations, different ground processors and different product chai
 
 > ### ⚠️ READ §10 BEFORE USING §2
 >
-> E6 (31 July) **falsified** the strongest reading of Finding A. Synthetic noise does *not*
-> reproduce the peak position — real data does something specific and consistent that noise does
-> not. The invariance is real, but its explanation is **not** "the inverter produces this with no
-> input." §2 is retained below as written, with the corrected interpretation in §10.
+> §2 states the invariance correctly but does not explain it. **§10 supplies the mechanism:**
+> correlated noise carrying nothing but the 80% sub-aperture overlap reproduces the peak position,
+> its tightness, and 83% of the contrast. Against a correctly correlated null the real excess is
+> ~20%, not the 2.4× quoted throughout §1–§5. Do not quote §2's ratios without §10's correction.
 
 ## 2. Finding A — the reported depth is a property of the pipeline, not the ground
 
@@ -213,66 +213,89 @@ Bingham's 1.64 – 1.78. **The geometry invariance is confirmed across sensors.*
 
 ---
 
-## 10. E6 — the noise test FAILED the hypothesis. This changes the claim.
+## 10. E6 — the mechanism: 80% sub-aperture overlap manufactures the peak
 
-Bingham, `n_sub = 11`, 300 trials per model, seed 0:
+**This section has been rewritten twice. Read §10.4 on how much confidence it deserves.**
+
+### 10.1 The first E6 was mis-specified — its conclusion is withdrawn
+
+The first run of E6 (31 July, commit `e5474cd`) compared *detrended* real observations against
+*undetrended* synthetic noise, and set the AR coefficient from the post-detrend residuals (0.009)
+instead of the raw trajectories (0.431). Both errors made the null far too easy. It concluded that
+noise does not reproduce the peak position. **That conclusion is withdrawn.**
+
+### 10.2 The corrected test — Bingham, `n_sub = 11`, 300 trials, seed 0
+
+Synthetic series are now generated at the raw look-to-look correlation and passed through the same
+degree-2 detrend as the real data. The AR coefficient is calibrated (a = 0.90) so the synthetic
+series reproduces the observed raw sample lag-1 of 0.431 — sample autocorrelation on an 11-point
+series is biased low, so setting a = 0.43 would under-correlate the null.
 
 | input | peak median | 5–95 pct | sd | in 1.2–1.9 band | contrast median |
 |---|---|---|---|---|---|
-| white noise | 3.11 | 0.97 – 5.06 | 1.37 | **7%** | 1.39 |
-| AR(1), r = 0.01 | 2.97 | 0.96 – 5.04 | 1.39 | **9%** | 1.42 |
-| **real data** | **1.66** | — | **0.05** (across 66 runs) | 100% | **3.87** |
+| white → detrend | 3.83 | 1.75 – 5.00 | 1.08 | 15% | 1.47 |
+| **AR(1) a = 0.90 → detrend** | **1.71** | **1.64 – 1.82** | **0.08** | **99%** | **3.22** |
+| **real data** | **1.66** | — | 0.05 (across 66 runs) | 100% | **3.87** |
 
-**Synthetic noise does not reproduce the peak position.** Noise peaks scatter across essentially the
-whole axis (sd 1.37 cells); real data pins at 1.66 with a standard deviation of 0.05 across five
-sites, two sensors, eight sub-aperture counts and thirteen geometries. Real contrast is 3.87 against
-a noise median of ~1.40.
+**Correlated noise containing no scene reproduces the peak position (1.71 vs 1.66), the tightness of
+that position (sd 0.08 vs 0.05), and 83% of the contrast (3.22 vs 3.87).**
 
-### What must now be retracted
+### 10.3 The mechanism
 
-The claim **"the output is the same whether or not there is any input"** is false. Do not write it.
-Real scenes are *not* indistinguishable from noise: they produce a far tighter and far more
-contrasted peak than noise does.
+The correlation is not incidental — it is built in. At **80% sub-aperture overlap**, adjacent looks
+share four-fifths of their spectral content, so their trajectories are correlated *by construction*,
+independently of anything beneath the surface. Fed through the inverter, that correlation alone
+produces a confident, tightly reproducible peak at a fixed shallow depth.
 
-### What survives, and why it is arguably better
+This is a complete mechanistic account of the surface-pinned artifact, and it connects directly to
+the inter-look leakage measured in E4.
 
-Something real, consistent and common to every SAR scene drives the peak to ~1.7 resolution cells.
-The most plausible candidate is **the surface itself** — a dominant common-mode component in the
-residual trajectories, absent from synthetic noise.
+**It also re-bases the detection margin.** Measured against uncorrelated noise: 3.87 / 1.47 =
+**2.63×**. Measured against a correctly correlated null: 3.87 / 3.22 = **1.20×**.
 
-That is not a retreat from the paper's thesis; it is a sharper version of it. The claim becomes:
+The real excess over a properly specified null is roughly **20%**, not a factor of two and a half.
+This quantifies exactly what the erratum told the recommender about the shuffle null being
+anti-conservative — the shuffle destroys look-to-look correlation, so it compares real data against
+something closer to the 1.47 column than the 3.22 column.
 
-> The method reliably detects something. What it detects is the surface, reported at a fixed shallow
-> depth, and relabelled as subsurface structure. It is not noise, and it is not two kilometres down.
+### 10.4 What must NOT be claimed
 
-This aligns with the "surface-pinned artifact" language already in the manuscript, and it explains
-why every site returns the same depth: every site has a surface.
+- **Not** "real data is indistinguishable from noise." Real contrast is 3.87 against 3.22; a
+  residual excess exists. The defensible statement is that *the overwhelming majority of the
+  apparent signal is accounted for by sub-aperture overlap, and the remainder does not clear any
+  sensible threshold.*
+- **Not** settled. This finding is one day old and the claim has moved twice — invariance implies
+  noise-equivalence, falsified, then revived under a corrected null. Both reversals came from nulls
+  built too weakly, which is the same failure the paper criticises. Before it enters the manuscript:
+  - reproduce on **Capella** and at least one further site;
+  - check the calibration at other `n_sub` values, since the overlap-induced correlation depends on
+    `n_sub` and the trajectory length;
+  - verify that a = 0.90 is not an artifact of the 11-point series length.
 
-**It is also a testable claim, and it has not been tested.** Correlate the peak against
-`surface_brightness` (already implemented in `tomogram.py`) across the five sites. If the peak
-tracks the surface return, the mechanistic account is complete.
+### 10.5 On the autocorrelation question raised against the erratum
 
-### A problem this exposes in what has already been sent to the recommender
+`src/check_detrend_autocorr.py`, Bingham:
 
-The measured **lag-1 autocorrelation of the trajectories entering the inverter is 0.009** —
-effectively zero.
+| series | lag-1 | lag-2 | lag-3 |
+|---|---|---|---|
+| real, raw trajectory | **0.431** | 0.116 | −0.080 |
+| real, deg-1 detrended | 0.191 | −0.166 | −0.287 |
+| real, deg-2 detrended (used) | **0.009** | −0.303 | −0.256 |
+| white noise, raw | −0.076 | −0.057 | −0.100 |
+| white noise, deg-1 detrended | −0.179 | −0.099 | −0.118 |
+| white noise, deg-2 detrended | **−0.269** | −0.173 | −0.088 |
 
-The erratum sent to Dr Di Palma on 29 July justifies replacing the shuffle null on the grounds that
-it "destroys the look-to-look smoothness that 80% spectral overlap guarantees even under pure
-noise." On the detrended residuals actually fed to the inverter, that smoothness is **not present**.
+The post-detrend 0.009 must be read against the identically-detrended noise reference of −0.269, not
+against zero: a degree-2 fit on a short series forces negative correlation. On both readings — raw
+0.431 vs −0.076, detrended 0.009 vs −0.269 — **the look-to-look smoothness is real.**
 
-The alignment null may still be the correct choice — it preserves each patch's depth profile and
-randomises only cross-patch agreement, which is a sound argument on its own terms and does not
-depend on autocorrelation. But **the stated justification does not match the measurement**, and that
-justification is now in the editor's inbox in writing. Resolve this before the revision:
+**The erratum's rationale sent to Dr Di Palma on 29 July is correct and needs no retraction.** For
+precision, the manuscript should cite the raw-trajectory figure and the noise reference rather than
+the bare post-detrend number.
 
-- is the smoothness present in the *raw* trajectories and removed by degree-2 detrending?
-- if so, say that precisely;
-- if not, the rationale must be rewritten.
+### 10.6 Next
 
-### Immediate follow-up
-
-Because the measured correlation was ~0, the "fair" AR(1) null collapsed to the strict null — E6 did
-not actually test a *smooth* null at all. Sweep the AR coefficient (r = 0.3, 0.5, 0.7, 0.9) and ask
-whether correlated noise alone can place the peak at ~1.7 cells. If it can, look-to-look correlation
-is the mechanism, which ties directly to the leakage result in E4.
+E7: a synthetic-only demonstration — generate a tomogram from correlated noise with no scene at all,
+and place the apparent structure at a chosen depth via the investigation frequency (depth ∝ 1/f is
+an identity, not a fit). Requires no satellite data and would be the most legible figure in the
+paper.
