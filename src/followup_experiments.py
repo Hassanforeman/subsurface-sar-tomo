@@ -527,19 +527,139 @@ def experiment_synthetic(n_sub, patch, n_patch, overlaps, window, estimator,
     hi = [r for r in rows if r["overlap"] >= 0.79]
     lo = [r for r in rows if r["overlap"] <= 0.01]
     if hi and lo:
-        print(f"\n  overlap 0.00 -> peak {lo[0]['peak_median']:.2f} cells, "
-              f"contrast {lo[0]['contrast_median']:.2f}")
-        print(f"  overlap 0.80 -> peak {hi[0]['peak_median']:.2f} cells, "
-              f"contrast {hi[0]['contrast_median']:.2f}")
-        if real_peak is not None and abs(hi[0]["peak_median"] - real_peak) < 0.3:
-            print("\n  -> At the overlap the method actually uses, pure noise reproduces the")
-            print("     real peak position WITHOUT ANY FITTED PARAMETER. The artifact is")
-            print("     produced by spectral overlap. E6's conclusion is confirmed on")
-            print("     stronger grounds.")
+        pk_lo, pk_hi = lo[0]["peak_median"], hi[0]["peak_median"]
+        c_lo, c_hi = lo[0]["contrast_median"], hi[0]["contrast_median"]
+        print(f"\n  overlap 0.00 -> peak {pk_lo:.2f} cells, contrast {c_lo:.2f}, "
+              f"raw lag-1 {lo[0]['lag1_raw']:.3f}")
+        print(f"  overlap 0.80 -> peak {pk_hi:.2f} cells, contrast {c_hi:.2f}, "
+              f"raw lag-1 {hi[0]['lag1_raw']:.3f}")
+
+        if real_peak is not None and abs(pk_hi - real_peak) < 0.3:
+            print("\n  -> Pure noise reproduces the real peak position with NOTHING FITTED.")
+        # Does the peak depend on overlap at all? This is the question the first
+        # version of this verdict failed to ask, and it produced a wrong conclusion.
+        if abs(pk_hi - pk_lo) < 0.3:
+            print("\n  -> The peak is present at ZERO overlap and barely moves across the")
+            print("     whole range. Spectral overlap is therefore NOT the source of the")
+            print("     peak. Note the raw lag-1 is already high at overlap 0.00 — the")
+            print("     look-to-look correlation does not come from the overlap either.")
+            print("     Candidate: adjacent_trajectory_e returns np.cumsum(inc), so the")
+            print("     trajectory is a random walk and smooth by construction.")
+            print("     Run --experiment increments (E8) to test that directly.")
         else:
-            print("\n  -> Noise does NOT reproduce the real peak once the correlation is")
-            print("     derived rather than fitted. E6's AR(1) result was an artifact of")
-            print("     the fitting. Section 5 of the Grok brief must be withdrawn.")
+            print("\n  -> The peak DOES move with overlap; spectral overlap is implicated.")
+        if c_hi > c_lo * 1.15:
+            print(f"\n  -> Overlap does raise the CONTRAST ({c_lo:.2f} -> {c_hi:.2f}), so it")
+            print("     amplifies the artifact without creating it.")
+        for r in rows:
+            if r["contrast_median"] > 5.0:
+                print(f"\n  -> WARNING: at overlap {r['overlap']:.2f} pure noise reaches "
+                      f"contrast {r['contrast_median']:.2f}, above the manuscript's own")
+                print("     >5x detection rule. The method returns a formal detection on")
+                print("     data containing nothing.")
+    return rows
+
+
+# ===========================================================================
+# E8 — is the artifact the CUMULATIVE SUM?
+#
+# adjacent_trajectory_e returns np.cumsum(inc): the trajectory is a running
+# total of adjacent-look displacement estimates. A running total of
+# independent increments is a random walk, which is smooth by construction
+# and strongly autocorrelated regardless of sub-aperture overlap. E7 showed
+# the peak survives at ZERO overlap, which points here.
+#
+# The control matters: inc and cumsum(inc) have the SAME length (inc[0]=0),
+# so the steering matrix is identical and the only difference is the running
+# total. inc is recovered exactly as concatenate([[0], diff(traj)]).
+#
+#   peak vanishes on increments -> the cumulative sum generates the artifact
+#   peak survives               -> the cumsum hypothesis is wrong
+# ===========================================================================
+def experiment_increments(slc, n_sub, patch, n_patch, overlap, window, estimator,
+                          n_trials, guard_cells, velocity, f_invest, range_km,
+                          aperture_km, canvas, label, seed=0):
+    from micromotion import detrend as _detrend
+    from sensitivity_sweep import decompose_subapertures_w, adjacent_trajectory_e
+
+    _, dz_phys = metric_depth_axis(np.array([0.0]), velocity, f_invest,
+                                   range_km * 1e3, aperture_km * 1e3)
+    z = np.linspace(0, n_sub * DZ_TARGET / 2, 300)
+    rng = np.random.default_rng(seed)
+
+    def trajectories(img):
+        looks, _ = decompose_subapertures_w(img, n_sub=n_sub, overlap=overlap, axis=1,
+                                            window=window, dtype=np.complex128)
+        r0 = img.shape[0] // 2 - patch // 2
+        cols = np.linspace(0, img.shape[1] - patch, n_patch).astype(int)
+        walk = []
+        for cc in cols:
+            lp = looks[:, r0:r0 + patch, cc:cc + patch]
+            t, _q = adjacent_trajectory_e(lp, estimator=estimator, dtype=np.complex128)
+            walk.append(np.asarray(t, dtype=float))
+        walk = np.array(walk)
+        incs = np.array([np.concatenate([[0.0], np.diff(w)]) for w in walk])
+        return walk, incs
+
+    def evaluate(arr):
+        obs = np.array([_detrend(t, deg=2) for t in arr], dtype=float)
+        T = tomogram_from_observations(obs, z)
+        return (peak_depth_m(T, z, dz_phys) / dz_phys, float(contrast(T)),
+                interlook_autocorr(arr)[0])
+
+    print(f"\n{'='*104}")
+    print(f"E8 — is the peak produced by the CUMULATIVE SUM? — {label}")
+    print(f"  n_sub={n_sub} overlap={overlap} patch={patch} n_patch={n_patch} "
+          f"window={window} coreg={estimator}")
+    print(f"  dz_phys={dz_phys:.2f} m   noise trials={n_trials}   seed={seed}")
+    print(f"  cumsum(inc) and inc have identical length, so the steering matrix is")
+    print(f"  the same and the ONLY difference is the running total.")
+    print(f"{'='*104}")
+    print(f"{'input':<26}{'series':<14}{'raw lag-1':>11}{'peak cells':>13}"
+          f"{'contrast':>11}{'pinned':>9}")
+    print("-" * 104)
+
+    rows = []
+    walk_r, inc_r = trajectories(slc)
+    for name, arr in (("cumsum (as published)", walk_r), ("increments", inc_r)):
+        pk, c, lag = evaluate(arr)
+        rows.append(dict(input="real", series=name, peak_cells=float(pk),
+                         contrast=c, lag1=float(lag)))
+        print(f"{'REAL DATA':<26}{name:<14}{lag:>11.3f}{pk:>13.2f}{c:>11.2f}"
+              f"{('PIN' if pk <= guard_cells else 'clear'):>9}")
+
+    acc = {"cumsum (as published)": ([], [], []), "increments": ([], [], [])}
+    for _ in range(n_trials):
+        img = (rng.normal(0, 1, (canvas, canvas))
+               + 1j * rng.normal(0, 1, (canvas, canvas))).astype(np.complex128)
+        w, i_ = trajectories(img)
+        for name, arr in (("cumsum (as published)", w), ("increments", i_)):
+            pk, c, lag = evaluate(arr)
+            acc[name][0].append(pk); acc[name][1].append(c); acc[name][2].append(lag)
+    for name, (pks, cs, lags) in acc.items():
+        pks, cs = np.array(pks), np.array(cs)
+        rows.append(dict(input="white noise", series=name,
+                         peak_median=float(np.median(pks)), peak_sd=float(pks.std()),
+                         contrast_median=float(np.median(cs)),
+                         lag1=float(np.mean(lags)),
+                         pinned_frac=float(np.mean(pks <= guard_cells))))
+        print(f"{'WHITE NOISE (median)':<26}{name:<14}{np.mean(lags):>11.3f}"
+              f"{np.median(pks):>13.2f}{np.median(cs):>11.2f}"
+              f"{100*np.mean(pks <= guard_cells):>8.0f}%")
+
+    print("-" * 104)
+    n_walk = [r for r in rows if r["input"] == "white noise"
+              and r["series"].startswith("cumsum")][0]
+    n_inc = [r for r in rows if r["input"] == "white noise"
+             and r["series"] == "increments"][0]
+    if n_inc["peak_median"] > n_walk["peak_median"] + 0.5 or n_inc["pinned_frac"] < 0.5:
+        print("\n  -> Removing the cumulative sum MOVES the peak away from the surface.")
+        print("     The running total generates the artifact. The cumsum hypothesis")
+        print("     in section 11.2 is supported.")
+    else:
+        print("\n  -> The peak SURVIVES without the cumulative sum. The cumsum hypothesis")
+        print("     in section 11.2 is WRONG and must be withdrawn. The artifact")
+        print("     originates elsewhere in the chain.")
     return rows
 
 
@@ -664,8 +784,8 @@ def main():
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--sicd")
     ap.add_argument("--experiment",
-                    choices=["nsub", "leakage", "geometry", "noise", "synthetic"],
-                    default="nsub")
+                    choices=["nsub", "leakage", "geometry", "noise", "synthetic",
+                             "increments"], default="nsub")
     ap.add_argument("--canvas", type=int, default=512)
     ap.add_argument("--n-trials", type=int, default=300)
     ap.add_argument("--crops", nargs="*", type=int, default=[256, 512, 1024])
@@ -735,6 +855,19 @@ def main():
 
     print(f"Loading {args.crop}x{args.crop} crop from {label} ({R}x{C})")
     slc = load_crop(args.crop)
+
+    if args.experiment == "increments":
+        rows = experiment_increments(slc, args.n_sub, args.patch, args.n_patch,
+                                     args.overlap, args.window, args.estimator,
+                                     args.n_trials, args.guard_cells, args.velocity,
+                                     args.f_investigation, args.range_km,
+                                     args.aperture_km, args.crop, label)
+        out = args.out or f"runs/followup_increments_{label}.json"
+        os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
+        json.dump(dict(label=label, experiment="increments", n_sub=args.n_sub,
+                       overlap=args.overlap, rows=rows), open(out, "w"), indent=1)
+        print(f"\nresults -> {out}")
+        return
 
     if args.experiment == "synthetic":
         rp = rc = None
