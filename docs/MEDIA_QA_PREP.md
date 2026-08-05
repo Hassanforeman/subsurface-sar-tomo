@@ -225,6 +225,126 @@ method, because nobody knows what's down there. That's rather the point.
 
 ---
 
+## [NEW] Questions for Dr Biondi — submittable through a press channel
+
+*If a journalist asks whether there's anything you'd want put to him, these are it. They are written
+to be forwarded verbatim. Every one is neutral, specific, and answerable — none of them accuses him
+of anything, and each has a good-faith answer available. That is deliberate: a question he can
+answer well is a fair question, and fair questions are the ones editors will actually pass on.*
+
+**1. The frequency question — the one to lead with.**
+
+> Your patent (WO2024008365A1, PCT/EP2023/064345) specifies an investigation frequency of
+> approximately 22,000 Hz and a seismic propagation velocity of about 3,000 m/s. The audio file
+> published on harmonicsar.com as "The sound of Khefren" is sampled at 1,189 Hz — which means it
+> cannot represent any frequency above 594 Hz — and roughly 96% of its energy lies below 50 Hz,
+> with dominant components near 13 Hz and 39 Hz.
+>
+> Is that file the native signal your method produces, or a frequency-shifted rendering made for
+> listening? If it is native, how does the 22,000 Hz figure enter the depth calculation? And if the
+> underlying signal genuinely lies in the 13–39 Hz range, what depth scale does that imply?
+
+*Why it's fair:* he has a clean answer available — "it's shifted so you can hear it." Ask it
+plainly and accept that answer if he gives it. The follow-up, if needed, is that you can't hear
+13 Hz either, and that 1,189 Hz is an unusual choice for a playback rendering.
+
+**2. The physical basis for 22 kHz.**
+
+> On the Symposium Podcast you explain that because the satellite's Doppler shift falls numerically
+> within the audible band, the signal can be treated as sound propagating through matter. Reflection
+> seismics operates in the single- to tens-of-hertz range because attenuation in rock rises steeply
+> with frequency. What is the physical basis for a 22 kHz elastic wave propagating coherently over
+> kilometres of limestone, and has that attenuation been measured or modelled?
+
+**3. Publish the blind tests.**
+
+> You have said that many double-blind tests were performed against known structures and that
+> almost all succeeded. Those results do not appear in the 2022 paper, the patent, or on
+> harmonicsar.com. Would you publish them — sites, dates, scene identifiers, and the comparison
+> against ground truth? That is the single piece of evidence that would most quickly settle the
+> disagreement about this method.
+
+**4. The Gotthard overlay.**
+
+> harmonicsar.com shows a tomographic result for the Sankt Gotthard tunnel. The as-built alignment
+> of that tunnel is published to metre accuracy. Would you release the overlay of your result on the
+> surveyed alignment, in plan and in depth? A match there would be the strongest validation
+> available for this technique.
+
+**5. The undisclosed processing choices.**
+
+> Independent reproduction requires four choices that are not stated in the 2022 paper, the patent,
+> or any presentation: the sub-aperture window function, the coregistration estimator, the
+> floating-point precision, and the number of Doppler sub-apertures. Would you state the values you
+> used? Published sensitivity testing shows the result depends on them.
+
+---
+
+## [NEW] "Did he release his data?" — concede first, then be precise
+
+*This follows naturally from any reproducibility argument, so have it rehearsed. The structure
+matters: make the fair concession before the criticism, or you sound like you're fault-hunting.*
+
+**Q: You published all your data and code. Did Biondi?**
+
+A: I want to be fair about this one. His 2022 paper uses COSMO-SkyMed data — that's the Italian
+Space Agency's satellite, licensed commercially, and the licence almost certainly forbids him from
+republishing the raw imagery. That's a genuine legal constraint, not evasion. I used free open data
+from Umbra and Capella specifically so that wouldn't be an issue, and that was a deliberate choice
+on my part rather than any virtue.
+
+But here's where the constraint stops. A licence prevents you sharing the pixels. It doesn't stop
+you from:
+
+- naming **which scenes** you used — the product IDs and acquisition times — so anyone with their
+  own licence can obtain the identical images;
+- stating your **processing settings**;
+- publishing your **code**;
+- publishing your **control tests**.
+
+That last one is the one I'd emphasise. **You don't need anybody's licence to run a null test** —
+you can run one on random numbers. So restricted data explains why the imagery isn't downloadable.
+It explains nothing at all about the missing controls, the missing settings, or the missing scene
+identifiers.
+
+**The sharper follow-up, which most people miss:**
+
+> The 2022 peer-reviewed paper is about the *inside of the Great Pyramid*. The famous claims — the
+> shafts, the chambers, the second Sphinx — were announced at press conferences. There's no paper
+> for those, so there's no data statement, no methods section, and no peer review that could have
+> required either. When someone says "but it was peer-reviewed," that's the distinction: the
+> reviewed work and the headline claims are not the same work.
+
+**Before using this, check one thing.** Remote Sensing (MDPI) requires a Data Availability
+Statement, so the 2022 paper will have one. Read it first. If it says "available on request," then
+the honest line is *"the statement says available on request, and the scene identifiers still
+aren't in the paper"* — not *"he didn't provide a data statement."*
+
+---
+
+## [NEW] The patent — get this right, it's easy to overstate
+
+Public records show a **published patent application, not a granted patent.**
+
+- `WO2024008365A1`, inventor Filippo Biondi, applicant listed as an individual.
+- Priority from a Malta filing (MTP4451), 4 July 2022; PCT filed 29 May 2023; published 11 January 2024.
+- Recorded events: **non-entry into the German national phase (5 Feb 2025)** and **non-entry into
+  the European regional phase (2 Jul 2025)**. Status shown as **ceased**.
+
+**How to say it:** *"There's a published patent application. On the public record it lapsed —
+he didn't take it into the European or German national phase, and the status now shows as ceased.
+That's an administrative fact about the filing, not a judgement on the science."*
+
+**How not to say it:** don't say "his patent was rejected." It wasn't rejected — it appears not to
+have been pursued, which is a different and much more ordinary thing. Patents lapse constantly, for
+reasons as mundane as fees. Overstating this makes you look like you're scoring points.
+
+Why it's worth knowing at all: "patented technology" gets used as a credibility marker in coverage
+of this work, and a published application is not a granted patent. That distinction is worth
+correcting calmly if a journalist repeats it.
+
+---
+
 ## Traps to avoid (say these wrong and it backfires)
 
 - Don't say "there's nothing under Giza." (You didn't show that.)

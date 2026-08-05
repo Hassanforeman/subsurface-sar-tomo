@@ -212,6 +212,94 @@ def experiment_nsub(slc, counts, patch, n_patch, overlap, window, estimator,
 
 
 # ===========================================================================
+# E5 — is the peak depth a property of the METHOD or of the PATCH GEOMETRY?
+#
+# Every result so far used one geometry: 512x512 centre crop, 64-px patches,
+# 24 patches, 0.8 overlap. The peak lands ~1.2-1.9 depth cells down at every
+# site and every n_sub. Before claiming that is a property of the method, vary
+# the geometry one factor at a time and see whether the peak cell moves.
+#
+#   peak cell stays put  -> the artifact is general; the depth is pipeline-fixed
+#   peak cell tracks geometry -> we have identified the MECHANISM, which is
+#                                a stronger result, not a weaker one
+# ===========================================================================
+def experiment_geometry(load_crop, combos, n_sub, window, estimator, n_perm,
+                        guard_cells, velocity, f_invest, range_km, aperture_km,
+                        label):
+    _, dz_phys = metric_depth_axis(np.array([0.0]), velocity, f_invest,
+                                   range_km * 1e3, aperture_km * 1e3)
+    z_native = np.linspace(0, n_sub * DZ_TARGET / 2, 300)
+    axis_m = z_native[-1] * (dz_phys / DZ_TARGET)
+
+    print(f"\n{'='*118}")
+    print(f"E5 — does the peak depth move when the PATCH GEOMETRY changes? — {label}")
+    print(f"  n_sub={n_sub} window={window} coregistrator={estimator} "
+          f"dz_phys={dz_phys:.2f} m  axis=0–{axis_m:.1f} m")
+    print(f"  guard: peak within {guard_cells:g} cells ({guard_cells*dz_phys:.1f} m) = surface-pinned")
+    print(f"  baseline geometry is crop=512 patch=64 n_patch=24 overlap=0.8")
+    print(f"{'='*118}")
+    print(f"{'varying':<12}{'crop':>6}{'patch':>7}{'nPatch':>8}{'ovl':>6}"
+          f"{'C':>9}{'alignN':>9}{'C/align':>9}{'peak m':>9}{'peak cells':>12}"
+          f"{'%axis':>8}{'guard':>8}")
+    print("-" * 118)
+
+    rows = []
+    cache = {}
+    for varying, crop, patch, n_patch, overlap in combos:
+        if patch >= crop:
+            print(f"{varying:<12}{crop:>6}{patch:>7}{n_patch:>8}{overlap:>6.2f}"
+                  f"{'  skipped: patch >= crop':>50}")
+            continue
+        if crop not in cache:
+            cache[crop] = load_crop(crop)
+        slc = cache[crop]
+        H, W = slc.shape
+        row0 = H // 2 - patch // 2
+        cols = np.linspace(0, W - patch, n_patch).astype(int)
+
+        obs, quals = patch_observations_cfg(slc, cols, row0, patch, n_sub, overlap,
+                                            window, np.complex128, estimator)
+        T = tomogram_from_observations(obs, z_native)
+        c = float(contrast(T))
+        algn = alignment_null(obs, z_native, n_perm=n_perm, seed=0)
+        r_algn = c / (float(np.median(algn)) + 1e-12)
+        pinned, pk_m = pinned_absolute(T, z_native, dz_phys, guard_cells)
+        pk_cells = pk_m / dz_phys
+        pct = 100.0 * pk_m / axis_m if axis_m > 0 else float("nan")
+
+        rows.append(dict(varying=varying, crop=crop, patch=patch, n_patch=n_patch,
+                         overlap=overlap, contrast=c, align_med=float(np.median(algn)),
+                         ratio_align=float(r_algn), peak_m=float(pk_m),
+                         peak_cells=float(pk_cells), peak_pct_axis=float(pct),
+                         pinned=bool(pinned), quality=float(np.mean(quals))))
+        print(f"{varying:<12}{crop:>6}{patch:>7}{n_patch:>8}{overlap:>6.2f}"
+              f"{c:>9.2f}{np.median(algn):>9.2f}{r_algn:>9.2f}{pk_m:>9.1f}"
+              f"{pk_cells:>12.2f}{pct:>7.1f}%{('PIN' if pinned else 'clear'):>8}")
+
+    print("-" * 118)
+    if rows:
+        pc = np.array([r["peak_cells"] for r in rows])
+        ra = np.array([r["ratio_align"] for r in rows])
+        print(f"peak depth in CELLS    : {pc.min():.2f} – {pc.max():.2f}  "
+              f"(spread {pc.max()/max(pc.min(),1e-9):.2f}x, sd {pc.std():.2f})")
+        print(f"vs alignment null      : {ra.min():.2f} – {ra.max():.2f}"
+              f"   detections at >5x: {int((ra>5).sum())}/{len(ra)}")
+        print(f"surface-pinned         : {sum(r['pinned'] for r in rows)}/{len(rows)}")
+        # per-factor drift: does any single factor move the peak?
+        print("\nper-factor peak-cell range (is the peak tracking any one knob?):")
+        for f in sorted(set(r["varying"] for r in rows)):
+            sub = [r["peak_cells"] for r in rows if r["varying"] == f]
+            print(f"  {f:<12} {min(sub):.2f} – {max(sub):.2f}   (n={len(sub)})")
+        if pc.max() - pc.min() < 1.0:
+            print("\n  -> peak cell is STABLE across geometry: the depth is a property of the\n"
+                  "     method, not of the patch layout. The invariance claim survives.")
+        else:
+            print("\n  -> peak cell MOVES with geometry. Identify which factor drives it: that\n"
+                  "     is the mechanism generating the artifact, and it is the better result.")
+    return rows
+
+
+# ===========================================================================
 # E4 — the leakage experiment
 # ===========================================================================
 def experiment_leakage(slc, n_sub, patch, n_patch, overlap, estimator, windows,
@@ -331,7 +419,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--sicd")
-    ap.add_argument("--experiment", choices=["nsub", "leakage"], default="nsub")
+    ap.add_argument("--experiment", choices=["nsub", "leakage", "geometry"], default="nsub")
+    ap.add_argument("--crops", nargs="*", type=int, default=[256, 512, 1024])
+    ap.add_argument("--patches", nargs="*", type=int, default=[32, 48, 64, 96, 128])
+    ap.add_argument("--n-patches", nargs="*", type=int, default=[12, 24, 48])
+    ap.add_argument("--overlaps", nargs="*", type=float, default=[0.0, 0.4, 0.6, 0.8, 0.9])
     ap.add_argument("--crop", type=int, default=512)
     ap.add_argument("--patch", type=int, default=64)
     ap.add_argument("--n-patch", type=int, default=24)
@@ -358,10 +450,43 @@ def main():
     from sarpy.io.complex.converter import open_complex
     reader = open_complex(args.sicd)
     R, C = reader.data_size
-    r0, c0 = R // 2 - args.crop // 2, C // 2 - args.crop // 2
-    print(f"Loading {args.crop}x{args.crop} crop from {os.path.basename(args.sicd)} ({R}x{C})")
-    slc = reader[r0:r0 + args.crop, c0:c0 + args.crop]
     label = os.path.basename(args.sicd)
+
+    def load_crop(crop):
+        crop = min(crop, R, C)
+        r0, c0 = R // 2 - crop // 2, C // 2 - crop // 2
+        print(f"  reading {crop}x{crop} centre crop ...")
+        return reader[r0:r0 + crop, c0:c0 + crop]
+
+    if args.experiment == "geometry":
+        print(f"Source {label} ({R}x{C})")
+        BASE = (512, 64, 24, 0.8)
+        combos = [("baseline",) + BASE]
+        for p in args.patches:
+            if p != BASE[1]:
+                combos.append(("patch", BASE[0], p, BASE[2], BASE[3]))
+        for k in args.n_patches:
+            if k != BASE[2]:
+                combos.append(("n_patch", BASE[0], BASE[1], k, BASE[3]))
+        for o in args.overlaps:
+            if abs(o - BASE[3]) > 1e-9:
+                combos.append(("overlap", BASE[0], BASE[1], BASE[2], o))
+        for cr in args.crops:
+            if cr != BASE[0]:
+                combos.append(("crop", cr, BASE[1], BASE[2], BASE[3]))
+        rows = experiment_geometry(load_crop, combos, args.n_sub, args.window,
+                                   args.estimator, args.n_perm, args.guard_cells,
+                                   args.velocity, args.f_investigation, args.range_km,
+                                   args.aperture_km, label)
+        out = args.out or f"runs/followup_geometry_{label}.json"
+        os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
+        json.dump(dict(label=label, experiment="geometry", n_sub=args.n_sub,
+                       rows=rows), open(out, "w"), indent=1)
+        print(f"\nresults -> {out}")
+        return
+
+    print(f"Loading {args.crop}x{args.crop} crop from {label} ({R}x{C})")
+    slc = load_crop(args.crop)
 
     if args.experiment == "nsub":
         rows = experiment_nsub(slc, args.counts, args.patch, args.n_patch, args.overlap,
