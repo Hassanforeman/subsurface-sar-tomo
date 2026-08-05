@@ -327,8 +327,26 @@ def experiment_noise(slc, n_sub, patch, n_patch, overlap, window, estimator,
     H, W = slc.shape
     row0 = H // 2 - patch // 2
     cols = np.linspace(0, W - patch, n_patch).astype(int)
-    obs, quals = patch_observations_cfg(slc, cols, row0, patch, n_sub, overlap,
-                                        window, np.complex128, estimator)
+
+    # RAW trajectories, before the degree-2 detrend the pipeline applies.
+    # The AR coefficient must be measured HERE: after detrending, a deg-2 fit on
+    # an ~11-point series forces negative correlation, so the post-detrend value
+    # (~0.009 on Bingham) badly understates the real look-to-look smoothness
+    # (~0.431 raw). Using the post-detrend number collapses the "fair" null into
+    # the white-noise null and makes the test far too easy.
+    from micromotion import detrend as _detrend
+    from sensitivity_sweep import decompose_subapertures_w, adjacent_trajectory_e
+    looks, _ = decompose_subapertures_w(slc, n_sub=n_sub, overlap=overlap, axis=1,
+                                        window=window, dtype=np.complex128)
+    raw = []
+    for cc in cols:
+        lp = looks[:, row0:row0 + patch, cc:cc + patch]
+        traj, _q = adjacent_trajectory_e(lp, estimator=estimator, dtype=np.complex128)
+        raw.append(np.asarray(traj, dtype=float))
+    raw = np.array(raw)
+    rho1_raw, _ = interlook_autocorr(raw)
+
+    obs = np.array([_detrend(t, deg=2) for t in raw], dtype=float)
     T_real = tomogram_from_observations(obs, z)
     pk_real = peak_depth_m(T_real, z, dz_phys) / dz_phys
     c_real = float(contrast(T_real))
@@ -343,8 +361,14 @@ def experiment_noise(slc, n_sub, patch, n_patch, overlap, window, estimator,
     print(f"  n_sub={n_sub} patch={patch} n_patch={n_patch} overlap={overlap} "
           f"window={window} coreg={estimator}")
     print(f"  dz_phys={dz_phys:.2f} m   trials={n_trials}   seed={seed}")
-    print(f"  real data: contrast={c_real:.2f}  peak={pk_real:.2f} cells  "
-          f"(lag-1 autocorr of trajectories = {rho1:.3f})")
+    print(f"  real data: contrast={c_real:.2f}  peak={pk_real:.2f} cells")
+    print(f"  lag-1 autocorr:  RAW trajectories = {rho1_raw:.3f}   "
+          f"after deg-2 detrend = {rho1:.3f}")
+    print(f"  NOTE: synthetic series are generated at the RAW correlation and then put")
+    print(f"        through the SAME deg-2 detrend as the real data, so the comparison")
+    print(f"        is like-for-like. A deg-2 fit on a short series forces negative")
+    print(f"        correlation, so post-detrend values must be read against the noise")
+    print(f"        reference, not against zero.")
     print(f"  reference band from every real run in this study: "
           f"{BAND[0]:.1f}–{BAND[1]:.1f} cells")
     print(f"{'='*104}")
@@ -353,20 +377,38 @@ def experiment_noise(slc, n_sub, patch, n_patch, overlap, window, estimator,
     print("-" * 104)
 
     rng = np.random.default_rng(seed)
-    sd_obs = float(np.std(obs))
-    a = float(np.clip(rho1, 0.0, 0.99))
+    sd_raw = float(np.std(raw))
+
+    def _ar(a_, shape, rng_):
+        e = rng_.normal(0.0, 1.0, shape)
+        if a_ <= 0:
+            return e
+        x = np.empty_like(e)
+        x[:, 0] = e[:, 0]
+        for k in range(1, shape[1]):
+            x[:, k] = a_ * x[:, k - 1] + np.sqrt(1.0 - a_ * a_) * e[:, k]
+        return x
+
+    # Calibrate the AR coefficient so the SYNTHETIC series reproduces the OBSERVED
+    # sample lag-1, rather than simply setting a = rho1_raw. Sample autocorrelation
+    # on an ~11-point series is biased low, so a = 0.43 yields a sample lag-1 of
+    # only ~0.25 — which would leave the "fair" null still easier than reality.
+    cal_rng = np.random.default_rng(seed + 1)
+    a, best = 0.0, 1e9
+    for cand in np.linspace(0.0, 0.95, 20):
+        m = np.mean([interlook_autocorr(_ar(cand, raw.shape, cal_rng))[0]
+                     for _ in range(30)])
+        if abs(m - rho1_raw) < best:
+            a, best = float(cand), abs(m - rho1_raw)
+    print(f"  AR coefficient calibrated to a={a:.2f} so synthetic sample lag-1 "
+          f"matches the observed {rho1_raw:.3f}")
     out = {}
-    for kind in ("white noise", f"AR(1) noise r={a:.2f}"):
+    for kind in ("white -> detrend", f"AR(1) r={a:.2f} -> detrend"):
         pks = np.empty(n_trials)
         cs = np.empty(n_trials)
         for i in range(n_trials):
-            e = rng.normal(0.0, sd_obs, obs.shape)
-            if kind.startswith("AR(1)") and a > 0:
-                x = np.empty_like(e)
-                x[:, 0] = e[:, 0]
-                for k in range(1, e.shape[1]):
-                    x[:, k] = a * x[:, k - 1] + np.sqrt(1.0 - a * a) * e[:, k]
-                e = x
+            e = sd_raw * _ar(a if kind.startswith("AR(1)") else 0.0, raw.shape, rng)
+            e = np.array([_detrend(t, deg=2) for t in e], dtype=float)
             T = tomogram_from_observations(e, z)
             pks[i] = peak_depth_m(T, z, dz_phys) / dz_phys
             cs[i] = float(contrast(T))
@@ -393,7 +435,8 @@ def experiment_noise(slc, n_sub, patch, n_patch, overlap, window, estimator,
         print("  -> Noise does NOT reproduce the peak position. Something in the real")
         print("     data influences it; the invariance claim must be qualified.")
     return dict(real=dict(peak_cells=float(pk_real), contrast=c_real,
-                          lag1=float(rho1), lag2=float(rho2)),
+                          lag1_raw=float(rho1_raw), lag1_detrended=float(rho1),
+                          lag2_detrended=float(rho2)),
                 band=list(BAND), trials=n_trials, models=out)
 
 
