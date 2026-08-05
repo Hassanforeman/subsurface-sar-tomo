@@ -748,6 +748,201 @@ def experiment_walk(lengths, n_patch, n_trials, guard_cells, velocity, f_invest,
 
 
 # ===========================================================================
+# E10 — the PSF-MATCHED null
+#
+# E7 used a white complex image. Real SAR speckle is NOT white: an SLC's
+# spectrum occupies a finite band (chirp bandwidth in range, Doppler
+# bandwidth in azimuth) and is essentially flat inside it and zero outside.
+# That band-limiting is what gives speckle its resolution-cell correlation.
+#
+# Here the synthetic image is built the physically correct way: complex white
+# noise is placed in a CENTRED SUB-BLOCK of the spectrum and inverse
+# transformed. bw_frac = 1.0 reproduces E7's white image; smaller values give
+# progressively longer resolution-cell correlation.
+#
+# The occupied bandwidth of the REAL scene is measured and printed, so the
+# synthetic can be compared at the matching fraction rather than guessed.
+# ===========================================================================
+def occupied_bandwidth(slc, axis=1, frac_energy=0.95):
+    """Fraction of the spectrum along `axis` holding `frac_energy` of the power."""
+    S = np.abs(np.fft.fftshift(np.fft.fft2(slc))) ** 2
+    p = S.sum(axis=0 if axis == 1 else 1)
+    p = p / p.sum()
+    order = np.argsort(p)[::-1]
+    csum = np.cumsum(p[order])
+    n_needed = int(np.searchsorted(csum, frac_energy) + 1)
+    return n_needed / len(p)
+
+
+def _bandlimited_slc(canvas, bw_frac, rng):
+    """Complex image whose spectrum is white inside a centred band, zero outside."""
+    if bw_frac >= 1.0:
+        return (rng.normal(0, 1, (canvas, canvas))
+                + 1j * rng.normal(0, 1, (canvas, canvas))).astype(np.complex128)
+    n = max(2, int(round(canvas * bw_frac)))
+    spec = np.zeros((canvas, canvas), dtype=np.complex128)
+    lo = canvas // 2 - n // 2
+    spec[lo:lo + n, lo:lo + n] = (rng.normal(0, 1, (n, n))
+                                  + 1j * rng.normal(0, 1, (n, n)))
+    img = np.fft.ifft2(np.fft.ifftshift(spec))
+    return (img / (np.abs(img).std() + 1e-30)).astype(np.complex128)
+
+
+def experiment_psf(slc, n_sub, patch, n_patch, overlap, window, estimator,
+                   n_trials, guard_cells, velocity, f_invest, range_km,
+                   aperture_km, canvas, bw_fracs, label, seed=0):
+    from micromotion import detrend as _detrend
+    from sensitivity_sweep import decompose_subapertures_w, adjacent_trajectory_e
+
+    _, dz_phys = metric_depth_axis(np.array([0.0]), velocity, f_invest,
+                                   range_km * 1e3, aperture_km * 1e3)
+    z = np.linspace(0, n_sub * DZ_TARGET / 2, 300)
+    rng = np.random.default_rng(seed)
+
+    def run(img):
+        looks, _ = decompose_subapertures_w(img, n_sub=n_sub, overlap=overlap, axis=1,
+                                            window=window, dtype=np.complex128)
+        r0 = img.shape[0] // 2 - patch // 2
+        cols = np.linspace(0, img.shape[1] - patch, n_patch).astype(int)
+        raw = np.array([np.asarray(
+            adjacent_trajectory_e(looks[:, r0:r0 + patch, c:c + patch],
+                                  estimator=estimator, dtype=np.complex128)[0],
+            dtype=float) for c in cols])
+        obs = np.array([_detrend(t, deg=2) for t in raw], dtype=float)
+        T = tomogram_from_observations(obs, z)
+        return (peak_depth_m(T, z, dz_phys) / dz_phys, float(contrast(T)),
+                interlook_autocorr(raw)[0])
+
+    bw_real_az = occupied_bandwidth(slc, axis=1)
+    bw_real_rg = occupied_bandwidth(slc, axis=0)
+    pk_real, c_real, lag_real = run(slc)
+
+    print(f"\n{'='*104}")
+    print(f"E10 — PSF-matched null: band-limited synthetic speckle — {label}")
+    print(f"  n_sub={n_sub} overlap={overlap} patch={patch} n_patch={n_patch} "
+          f"canvas={canvas}  trials={n_trials}")
+    print(f"  REAL scene occupied bandwidth (95% energy): azimuth {bw_real_az:.3f}, "
+          f"range {bw_real_rg:.3f}")
+    print(f"  bw_frac = 1.0 is E7's white image. Lower = longer resolution-cell")
+    print(f"  correlation. Compare the row nearest the real azimuth figure.")
+    print(f"{'='*104}")
+    print(f"{'bw_frac':>9}{'raw lag-1':>11}{'peak median':>13}{'5-95 pct':>18}"
+          f"{'contrast med':>14}{'pinned':>9}")
+    print("-" * 104)
+
+    rows = []
+    for bw in bw_fracs:
+        pks, cs, lags = [], [], []
+        for _ in range(n_trials):
+            pk, c, lag = run(_bandlimited_slc(canvas, bw, rng))
+            pks.append(pk); cs.append(c); lags.append(lag)
+        pks, cs = np.array(pks), np.array(cs)
+        rows.append(dict(bw_frac=float(bw), lag1=float(np.mean(lags)),
+                         peak_median=float(np.median(pks)),
+                         p05=float(np.percentile(pks, 5)),
+                         p95=float(np.percentile(pks, 95)),
+                         contrast_median=float(np.median(cs)),
+                         pinned_frac=float(np.mean(pks <= guard_cells))))
+        print(f"{bw:>9.2f}{np.mean(lags):>11.3f}{np.median(pks):>13.2f}"
+              f"{f'{np.percentile(pks,5):.2f} – {np.percentile(pks,95):.2f}':>18}"
+              f"{np.median(cs):>14.2f}{100*np.mean(pks <= guard_cells):>8.0f}%")
+    print("-" * 104)
+    print(f"{'REAL':>9}{lag_real:>11.3f}{pk_real:>13.2f}{'—':>18}{c_real:>14.2f}"
+          f"{'—':>9}")
+    print("-" * 104)
+
+    nearest = min(rows, key=lambda r: abs(r["bw_frac"] - bw_real_az))
+    print(f"\n  closest synthetic band to the real azimuth bandwidth "
+          f"({bw_real_az:.3f}): bw_frac={nearest['bw_frac']:.2f}")
+    print(f"    synthetic peak {nearest['peak_median']:.2f} cells, "
+          f"contrast {nearest['contrast_median']:.2f}")
+    print(f"    real      peak {pk_real:.2f} cells, contrast {c_real:.2f}")
+    if abs(nearest["peak_median"] - pk_real) < 0.4:
+        print("\n  -> With correctly correlated speckle the peak position still matches.")
+        print("     The white-noise objection does not change the mechanism result.")
+    else:
+        print("\n  -> Correlated speckle SHIFTS the peak. The white-noise null was not")
+        print("     representative and the absolute comparisons must be restated.")
+    return rows
+
+
+# ===========================================================================
+# E11 — the 1/f^2 account: does the detrend DEGREE move the peak bin?
+#
+# A random walk has a power spectrum falling as 1/f^2. The patent describes
+# the steering matrix as a DFT. If the tomogram of an accumulated series is
+# close to its power spectrum, that spectrum is monotonically decreasing and
+# its maximum sits at the LOWEST SURVIVING mode -- and a degree-d polynomial
+# detrend removes precisely the lowest d+1 components.
+#
+# Prediction: the peak BIN INDEX should advance with detrend degree, and
+# should not depend much on series length. That is a sharp, cheap test of
+# whether the fixed shallow peak has an analytic explanation.
+# ===========================================================================
+def experiment_detrend(lengths, degrees, n_patch, n_trials, velocity, f_invest,
+                       range_km, aperture_km, seed=0):
+    from micromotion import detrend as _detrend
+
+    _, dz_phys = metric_depth_axis(np.array([0.0]), velocity, f_invest,
+                                   range_km * 1e3, aperture_km * 1e3)
+    rng = np.random.default_rng(seed)
+
+    print(f"\n{'='*104}")
+    print("E11 — does the DETREND DEGREE move the peak bin, as a 1/f^2 spectrum predicts?")
+    print(f"  n_patch={n_patch}  trials={n_trials}  300-bin depth axis")
+    print("  prediction: peak bin advances with degree; weak dependence on length")
+    print(f"{'='*104}")
+    print(f"{'length':>8}{'deg':>6}{'peak bin':>11}{'5-95 pct':>16}"
+          f"{'peak cells':>12}{'contrast med':>14}")
+    print("-" * 104)
+
+    rows = []
+    for L in lengths:
+        z = np.linspace(0, L * DZ_TARGET / 2, 300)
+        for deg in degrees:
+            bins, cs, pks = [], [], []
+            for _ in range(n_trials):
+                inc = rng.normal(0.0, 1.0, (n_patch, L))
+                inc[:, 0] = 0.0
+                walk = np.cumsum(inc, axis=1)
+                obs = np.array([_detrend(t, deg=deg) for t in walk], dtype=float)
+                T = tomogram_from_observations(obs, z)
+                prof = T.sum(0)
+                bins.append(int(np.argmax(prof)))
+                pks.append(peak_depth_m(T, z, dz_phys) / dz_phys)
+                cs.append(float(contrast(T)))
+            bins, cs, pks = np.array(bins), np.array(cs), np.array(pks)
+            rows.append(dict(length=int(L), degree=int(deg),
+                             bin_median=float(np.median(bins)),
+                             p05=float(np.percentile(bins, 5)),
+                             p95=float(np.percentile(bins, 95)),
+                             peak_cells=float(np.median(pks)),
+                             contrast_median=float(np.median(cs))))
+            print(f"{L:>8}{deg:>6}{np.median(bins):>11.1f}"
+                  f"{f'{np.percentile(bins,5):.0f} – {np.percentile(bins,95):.0f}':>16}"
+                  f"{np.median(pks):>12.2f}{np.median(cs):>14.2f}")
+        print("-" * 104)
+
+    print("\n  peak bin by degree, averaged over lengths:")
+    for deg in degrees:
+        sub = [r["bin_median"] for r in rows if r["degree"] == deg]
+        print(f"    deg {deg}: {np.mean(sub):7.1f}   (spread across lengths "
+              f"{min(sub):.0f} – {max(sub):.0f})")
+    by_deg = [np.mean([r["bin_median"] for r in rows if r["degree"] == d])
+              for d in degrees]
+    monotone = all(b2 >= b1 - 1e-9 for b1, b2 in zip(by_deg, by_deg[1:]))
+    if monotone and by_deg[-1] > by_deg[0] + 1:
+        print("\n  -> The peak bin ADVANCES with detrend degree and is largely independent")
+        print("     of series length, exactly as a 1/f^2 spectrum truncated at the lowest")
+        print("     surviving mode predicts. The fixed shallow peak has an analytic")
+        print("     explanation, not merely an empirical one.")
+    else:
+        print("\n  -> The peak bin does NOT advance cleanly with degree. The 1/f^2 account")
+        print("     is not supported; treat the fixed peak as an empirical result only.")
+    return rows
+
+
+# ===========================================================================
 # E4 — the leakage experiment
 # ===========================================================================
 def experiment_leakage(slc, n_sub, patch, n_patch, overlap, estimator, windows,
@@ -869,9 +1064,12 @@ def main():
     ap.add_argument("--sicd")
     ap.add_argument("--experiment",
                     choices=["nsub", "leakage", "geometry", "noise", "synthetic",
-                             "increments", "walk"], default="nsub")
+                             "increments", "walk", "psf", "detrend"], default="nsub")
     ap.add_argument("--lengths", nargs="*", type=int,
                     default=[11, 16, 22, 32, 45, 64, 90, 128])
+    ap.add_argument("--bw-fracs", nargs="*", type=float,
+                    default=[1.0, 0.8, 0.6, 0.4, 0.25, 0.15])
+    ap.add_argument("--degrees", nargs="*", type=int, default=[0, 1, 2, 3, 4])
     ap.add_argument("--canvas", type=int, default=512)
     ap.add_argument("--n-trials", type=int, default=300)
     ap.add_argument("--crops", nargs="*", type=int, default=[256, 512, 1024])
@@ -898,6 +1096,18 @@ def main():
 
     if args.selftest:
         sys.exit(0 if selftest() else 1)
+
+    # E11 needs no image either.
+    if args.experiment == "detrend":
+        rows = experiment_detrend(args.lengths, args.degrees, args.n_patch,
+                                  args.n_trials, args.velocity,
+                                  args.f_investigation, args.range_km,
+                                  args.aperture_km)
+        out = args.out or "runs/followup_detrend.json"
+        os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
+        json.dump(dict(experiment="detrend", rows=rows), open(out, "w"), indent=1)
+        print(f"\nresults -> {out}")
+        return
 
     # E9 needs no image at all — it removes the SAR pipeline entirely.
     if args.experiment == "walk":
@@ -955,6 +1165,19 @@ def main():
 
     print(f"Loading {args.crop}x{args.crop} crop from {label} ({R}x{C})")
     slc = load_crop(args.crop)
+
+    if args.experiment == "psf":
+        rows = experiment_psf(slc, args.n_sub, args.patch, args.n_patch,
+                              args.overlap, args.window, args.estimator,
+                              args.n_trials, args.guard_cells, args.velocity,
+                              args.f_investigation, args.range_km,
+                              args.aperture_km, args.crop, args.bw_fracs, label)
+        out = args.out or f"runs/followup_psf_{label}.json"
+        os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
+        json.dump(dict(label=label, experiment="psf", n_sub=args.n_sub, rows=rows),
+                  open(out, "w"), indent=1)
+        print(f"\nresults -> {out}")
+        return
 
     if args.experiment == "increments":
         rows = experiment_increments(slc, args.n_sub, args.patch, args.n_patch,
