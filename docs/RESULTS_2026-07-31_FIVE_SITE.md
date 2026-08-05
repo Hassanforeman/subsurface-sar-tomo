@@ -23,7 +23,16 @@ Sites: an open-pit copper mine, a coal-fired power station, a historic hard-rock
 an active volcano, and a dense city centre. Imaged by two unrelated commercial operators with
 different constellations, different ground processors and different product chains.
 
-> ### ⚠️ §12 IS THE CURRENT POSITION — READ IT BEFORE QUOTING ANYTHING ABOVE
+> ### ⚠️ §14 IS THE CURRENT POSITION — READ §12–§14 BEFORE QUOTING ANYTHING ABOVE
+>
+> **§14 reproduces both signature behaviours of the method — the fixed shallow peak and the
+> `n_sub` contrast explosion — from accumulated Gaussian noise with no SAR data of any kind.**
+> Walk contrast rises 72.9× over the same length range while the increments of the same series
+> stay flat at 1.1×; the walk peak sits at 1.66–1.71 cells at every length, 100% pinned.
+>
+> ---
+>
+> ### §12 (retained for the mechanism experiment on real data)
 >
 > **Empirical findings (§1–§9, §11) stand.** Pure white noise through the identical pipeline
 > reproduces the peak position (1.71 vs 1.66 cells) and the contrast (3.60 vs 3.87). The real
@@ -497,3 +506,75 @@ matched-length control. §12 is no longer provisional on those axes.
 Still outstanding: the **PSF-matched null**. The synthetic SLC is white, whereas real speckle carries
 resolution-cell correlation from the system point-spread function. This is the last identified way
 the null could differ systematically from the data, and it was raised in external review.
+
+---
+
+## 14. E9 — the mechanism reproduced with no SAR data whatsoever
+
+External review accepted §13's unification as strong circumstantial evidence but noted it was one
+step short of proof: other `n_sub`-dependent factors (sub-aperture spectral weighting, estimator
+variance, per-look SNR) co-vary with trajectory length and had not been excluded.
+
+E9 excludes all of them by construction. **No image, no sub-apertures, no overlap, no window, no
+coregistration.** Only iid Gaussian increments, optionally accumulated, degree-2 detrended, and
+inverted on the axis the real pipeline uses at that `n_sub`. Length is the sole variable.
+60 trials per row, 24 series per trial.
+
+| length | series | lag-1 | contrast median | 5–95 pct | peak (cells) | pinned |
+|---|---|---|---|---|---|---|
+| 11 | **walk** | 0.471 | **3.29** | 2.26 – 4.84 | 1.70 | 100% |
+| 11 | increments | −0.107 | 1.48 | 1.30 – 1.84 | 3.77 | 8% |
+| 16 | **walk** | 0.610 | **5.18** | 3.36 – 7.81 | 1.71 | 100% |
+| 16 | increments | −0.066 | 1.55 | 1.33 – 1.89 | 4.64 | 7% |
+| 22 | **walk** | 0.711 | **9.26** | 7.04 – 13.61 | 1.69 | 100% |
+| 22 | increments | −0.056 | 1.49 | 1.29 – 1.77 | 5.94 | 2% |
+| 32 | **walk** | 0.790 | **17.12** | 11.66 – 24.24 | 1.69 | 100% |
+| 32 | increments | −0.033 | 1.53 | 1.32 – 1.73 | 9.12 | 5% |
+| 45 | **walk** | 0.847 | **32.15** | 22.01 – 42.49 | 1.66 | 100% |
+| 45 | increments | −0.025 | 1.58 | 1.40 – 1.74 | 12.45 | 0% |
+| 64 | **walk** | 0.889 | **65.61** | 44.11 – 86.30 | 1.71 | 100% |
+| 64 | increments | −0.015 | 1.62 | 1.43 – 1.85 | 17.18 | 2% |
+| 90 | **walk** | 0.920 | **122.01** | 86.84 – 156.29 | 1.66 | 100% |
+| 90 | increments | −0.011 | 1.60 | 1.45 – 1.93 | 18.59 | 0% |
+| 128 | **walk** | 0.942 | **239.77** | 167.83 – 316.03 | 1.71 | 100% |
+| 128 | increments | −0.007 | 1.68 | 1.49 – 1.99 | 33.39 | 0% |
+
+**Walk contrast rises 72.9× across the range. Increment contrast rises 1.1× — flat.**
+
+### 14.1 What this establishes
+
+Both signature behaviours of the method are reproduced by accumulated Gaussian noise alone:
+
+1. **The fixed shallow peak.** The walk peak sits at **1.66 – 1.71 cells at every length**, 100%
+   surface-pinned, matching the 1.2–1.9 band measured across five real sites, two sensors, eight
+   sub-aperture counts and thirteen geometries. The increments of the same series peak at 3.8 – 33.4
+   cells and pin in 0–8% of trials.
+2. **The `n_sub` sensitivity.** Contrast scales with length *only* for accumulated series. Since
+   every other `n_sub`-dependent factor has been removed, **walk length alone drives it.**
+
+The real-pipeline curve sits inside the synthetic one: Bingham reads 3.87 → 26.42 → 128.64 at
+`n_sub` 11/32/128, against 3.29 → 17.12 → 239.77 for pure walks at the same lengths, and 274.85 for
+noise pushed through the full SAR pipeline at 128.
+
+**The unification in §13.3 can now be stated causally rather than as a correlation.** The two
+headline behaviours of this method are properties of taking a running total of noise.
+
+### 14.2 The plainest statement available
+
+The characteristic outputs of the published method — a confident peak a metre or two beneath the
+surface, and a contrast that grows without limit as the sub-aperture count is raised — can be
+generated with a few lines of `numpy`: accumulate Gaussian noise, remove a quadratic, invert. No
+satellite, no scene, no ground.
+
+### 14.3 What it still does not establish
+
+- It does not show that accumulating displacements is the *wrong* operation. It shows that doing so
+  produces these outputs from noise, and that the published method has no control distinguishing
+  that case from a real detection.
+- The **PSF-matched null** remains open. Per external review, the E8 within-input contrast
+  (cumsum vs increments on the *same* series) is insulated from it, so the *mechanism* claim does
+  not depend on it. What it would firm up is the *absolute* comparison — the "noise exceeds real
+  data at `n_sub` = 128" figure. State quantitative noise-equivalence with that caveat attached.
+- `contrast` has still not been characterised analytically under strongly autocorrelated inputs.
+  E9 measures its behaviour empirically across a 12× range of series lengths, which is weaker than
+  a derivation but is no longer merely anecdotal.
