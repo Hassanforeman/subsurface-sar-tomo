@@ -136,23 +136,80 @@ under a fixed seed. Worth one sentence in the methods.
 - **The alignment null is itself a modelling choice.** It is more conservative than the shuffle
   null, but it is not the only defensible null.
 
-## 8. Changes for the revision
+## 8. Changes for the revision — REWRITTEN 31 July after §11–§14
+
+*The earlier version of this list predated E7–E9 and proposed the peak invariance as the principal
+finding. That ordering is now wrong: the invariance is the observation, and §12–§14 are the
+explanation.*
+
+### 8.1 Structure — lead with observation, then mechanism
+
+**Order the results as:**
+
+1. **The empirical invariances** (§1–§5). Peak confined to 1.2–1.9 cells across 5 sites, 2 sensors,
+   8 sub-aperture counts, 13 geometries, 2 sets of physical constants. Zero detections in 40 runs.
+2. **The depth scale is assigned, not measured** (§5, §6). Depth ∝ 1/f exactly, by construction —
+   this is a property of the code path, not a fitted result.
+3. **The `n_sub` sensitivity** (§3). Up to 98.9× on one scene from a parameter no published source
+   discloses.
+4. **The minimal reproduction** (§14). Accumulated Gaussian noise — no image, no sub-apertures, no
+   overlap, no coregistration — reproduces *both* the fixed shallow peak (1.66–1.71 cells at every
+   length) and the contrast explosion (72.9×), while the increments of the same series stay flat
+   at 1.1×.
+5. **The mechanism** (§12, §13). Matched-control experiment on real data: `inc` and `cumsum(inc)`
+   have identical length, so the steering matrix is unchanged and the only difference is the running
+   total. Removing it moves the peak off the surface and collapses the contrast.
+
+### 8.2 Table and text corrections (unchanged from the earlier list)
 
 1. Replace the results table with the grid in §1, under the absolute guard and the alignment null.
-2. Add the **peak-depth invariance** (§2) as the paper's principal finding — after the geometry test
-   in §7 is done.
-3. Add the **`n_sub` sensitivity** (§3) with the 272× figure; it is the sharpest single illustration
-   of why undisclosed parameters make the method unreproducible.
-4. Upgrade the **Bingham row** from "front-end only / no signal" — it produces a full tomogram and a
+2. Upgrade the **Bingham row** from "front-end only / no signal" — it produces a full tomogram and a
    surface-pinned verdict at every sub-aperture count.
-5. Fix the Table 2 lead-in, which describes all five sites as indistinguishable from look-shuffled
+3. Fix the Table 2 lead-in, which describes all five sites as indistinguishable from look-shuffled
    nulls while naming Bingham.
-6. Remove the **"Outstanding verification"** note on Cairo/Capella.
-7. Recompute the Komati ratio from unrounded values — v3 states **2.15**, derived from rounded
-   inputs (2.8 ÷ 1.3); the unrounded figure is **1.99**, further below threshold. No conclusion
-   changes, but this row has already required one erratum.
-8. State that the analysis was repeated at the patent's own velocity and aperture with identical
-   results.
+4. Remove the **"Outstanding verification"** note on Cairo/Capella — now verified (§6).
+5. Recompute the Komati ratio from unrounded values — v3 states **2.15**, derived from rounded
+   inputs (2.8 ÷ 1.3); the unrounded figure is **1.99**. No conclusion changes, but this row has
+   already required one erratum.
+6. State that the analysis was repeated at the patent's own velocity and aperture with identical
+   dimensionless results.
+
+### 8.3 New text required
+
+7. **Re-base every ratio.** The manuscript's contrasts are measured against the shuffle null, which
+   destroys the very autocorrelation that produces the artifact. Against a properly derived null the
+   excess is a few percent, and at `n_sub` = 128 noise *exceeds* real data.
+8. **Two sentences on the revision history.** The mechanism account changed twice under
+   progressively stronger nulls before settling. Disclosed, that is evidence of process; discovered,
+   it is a liability. The relevant distinction is that the current account rests on matched controls
+   rather than inference.
+9. **A limits paragraph** stating plainly what is *not* shown: that the published imagery is nothing
+   but this artifact. Those figures involve stacking, denoising and display choices that have not
+   been reproduced and whose inputs are not public. Claiming otherwise would be the one overreach
+   capable of discrediting the rest.
+
+### 8.4 Caveats to attach, per external review
+
+10. **PSF-matched null not run.** The synthetic SLC is white; real speckle carries resolution-cell
+    correlation. The mechanism claim does not depend on it — E8 is a within-series contrast and E9
+    removes the SAR front-end entirely — but **absolute** statements ("noise exceeds real data 2:1")
+    should carry a one-clause caveat.
+11. **`contrast` is characterised empirically, not analytically**, under strongly autocorrelated
+    inputs. §14 measures it across a 12× range of series lengths, which is short of a derivation.
+    See §8.5.
+
+### 8.5 One derivation worth attempting — untested
+
+A random walk has a power spectrum falling as 1/f². The steering matrix is described in the patent
+as a DFT. If the tomogram of an accumulated series is therefore close to its power spectrum, that
+spectrum is monotonically decreasing and its peak lands at the **lowest surviving mode** — and
+degree-2 detrending removes exactly the constant, linear and quadratic components. That would
+predict a peak at a fixed low bin index regardless of series length, which is what §14 measures.
+
+**This is a hypothesis, not a result.** It makes a sharp, cheap prediction: changing the detrend
+degree should move the peak bin by a predictable amount. Testing it would convert §14's empirical
+observation into an analytic account and close the last item in external review. It has not been
+tested, and the mechanism account in §12–§14 does not depend on it.
 
 ---
 
