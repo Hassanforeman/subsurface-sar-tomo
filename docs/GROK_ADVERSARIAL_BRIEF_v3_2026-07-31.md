@@ -13,15 +13,22 @@ Your v2 review left three items:
 | Your item | Status |
 |---|---|
 | **PSF-matched null** — white synthetic speckle is not representative | **run — §2** |
-| **Analytic account of `contrast` under random-walk inputs** — empirical only | **partially closed — §3 gives an exact law for the peak; contrast magnitude remains empirical** |
+| **Analytic account of `contrast` under random-walk inputs** — empirical only | **partially closed — §3 proves the DFT identity and measures the peak law; one constant is undetermined and the contrast magnitude remains empirical** |
 | Acknowledge the revision history in the manuscript | accepted, drafted |
 
 You also flagged **sentence 5** of my claim paragraph — the causal unification of `n_sub`
 sensitivity with walk length — as the one thing you would not sign. §4 addresses it.
 
-**What I want now: confirm or refute §3.** It is an exact arithmetic claim and it is either right or
-it is not. If it holds, the paper's central quantity is explained rather than merely characterised.
-I would also like you to check whether I have over-read §2.
+**What I want now: check §3.** It separates a proved identity (the inversion is a DFT, so the
+reported depth in cells equals the dominant surviving mode) from a measured law (that mode is fixed
+by the detrend degree) from an undetermined constant (0.856, not derived). Tell me if I have drawn
+those lines in the wrong places. I would also like you to check whether I have over-read §2.
+
+**Note on an earlier draft.** A previous version of this brief described §3 as "arithmetically
+determined" and asserted the peak sits at "the lowest spectral mode surviving the degree-2 detrend."
+Your v2 review flagged that phrasing as one algebraic step short. It was, and working the algebra
+showed the textbook (d+1)/2 rule is 14% low at the operating degree. The wording throughout has been
+corrected accordingly.
 
 ---
 
@@ -70,7 +77,7 @@ but I have not investigated the cause. **Does this non-monotonicity trouble you?
 
 ---
 
-## 3. E11 — the peak depth is arithmetically determined
+## 3. E11 — the peak depth is fixed by the detrend degree
 
 Pure random walks. No SAR pipeline. 60 trials, 8 lengths (11 → 128), 5 detrend degrees, 300-bin axis.
 
@@ -92,20 +99,49 @@ Pure random walks. No SAR pipeline. 60 trials, 8 lengths (11 → 128), 5 detrend
 **1.685 cells is the value returned by every real site, both sensors, all sub-aperture counts, all
 thirteen geometries and every noise run** (observed 1.2–1.9, central ~1.7).
 
-**The proposed account.** A random walk has a 1/f² power spectrum. The steering matrix is described
-in the patent as a DFT, so the tomogram of an accumulated series approximates its power spectrum —
-monotonically decreasing, with its maximum at the lowest surviving mode. A degree-*d* polynomial
-detrend deletes exactly the lowest *d*+1 components. Hence the peak sits at a fixed low mode,
-which maps to a fixed depth in cells and a bin index inversely proportional to length.
+### 3.1 What is PROVED, from the code
 
-**Consequence.** The characteristic depth is not approximately explained by the artifact; it is a
-consequence of two implementation choices — the cumulative sum and the degree-2 detrend. Setting the
-detrend to degree 4 moves the reported "structure" to 2.5 cells; degree 0 moves it to 0.88.
+`steering()` builds `Kz[j] = j · 2π/(n_looks · DZ_TARGET)`; `invert_patch()` computes
+`|Aᴴ · analytic1d(r)|²`. That is a DFT evaluated at `ω = 2π·z/(L·DZ_TARGET)`, so it peaks when
+`z = k·DZ_TARGET` for the dominant mode `k`. Therefore:
 
-**Please check this.** Is the 1/f²-truncated-at-the-lowest-surviving-mode account correct? Is the
-`bin × L = const` regularity what that account predicts, or does it require something else?
+> **peak_cells = k**, the dominant surviving spectral mode index. Exactly.
 
-### 3.1 A correction I am carrying
+This alone accounts for the `bin × L` invariance: a fixed mode occupies a fixed fraction of an axis
+whose extent is proportional to `L`. No further assumption needed.
+
+### 3.2 What is MEASURED, not derived
+
+Direct simulation of the inversion (400 trials, lengths 11/32/128):
+
+| detrend degree | peak_cells | `bin × L` | textbook (d+1)/2 rule |
+|---|---|---|---|
+| 0 | 0.856 – 0.883 | 512 – 528 | 0.50 |
+| 2 | **1.711 – 1.712** | **1023 – 1024** | 1.50 |
+| 4 | 2.515 – 2.594 | 1504 – 1551 | 2.50 |
+
+The standard rule that a degree-*d* polynomial detrend high-passes at ≈(d+1)/2 cycles per record
+predicts **1.5** cells at degree 2 against **1.712** observed — **14% low at the pipeline's operating
+degree**, converging by degree 4. The even degrees fit `k ≈ 0.856 × (d/2 + 1)`.
+
+**The constant 0.856 has not been derived.** Doing so requires the joint effect of least-squares
+polynomial removal and the `analytic1d` Hilbert step on a 1/f² spectrum over a finite record. That
+is the outstanding algebraic step, and I am not claiming it is closed.
+
+### 3.3 Please check
+
+- Is the DFT identity in §3.1 right, or have I misread `steering()` / `invert_patch()`?
+- Does the (d+1)/2 high-pass rule's 14% shortfall at degree 2 indicate a missing term, or is it
+  simply the known inaccuracy of that rule of thumb at low order on short records?
+- Is there a cleaner route to 0.856 than brute-force spectral algebra?
+
+### 3.4 Consequence
+
+The characteristic depth follows from two implementation choices — the cumulative sum and the
+degree-2 detrend — and from the DFT nature of the inversion. Setting the detrend to degree 4 moves
+the reported "structure" to 2.5 cells; degree 0 moves it to 0.88.
+
+### 3.5 A correction I am carrying
 
 The verdict text E11 prints says the peak **bin** is "largely independent of series length." **That
 is false** — bins run 4 to 48 at degree 0. The invariant is the depth in cells, not the bin index.
@@ -132,10 +168,12 @@ series and **1.1×** for their own increments, and lag-1 rose 0.47 → 0.94.
 > The per-patch trajectory in this method is a running total of adjacent-look displacement
 > estimates. A running total of noisy increments is a random walk: smooth by construction,
 > strongly autocorrelated, with a 1/f² spectrum, irrespective of scene content or sub-aperture
-> overlap. The inversion places its peak at the lowest spectral mode surviving the degree-2
-> detrend, which fixes the reported depth at approximately 1.7 resolution cells regardless of
-> trajectory length — the value observed at every site tested, on both sensors, and on synthetic
-> series containing no scene at all. Increasing the sub-aperture count lengthens the walk and
+> overlap. The inversion is a discrete Fourier transform, so the reported depth in resolution cells
+> equals the dominant surviving spectral mode of the trajectory; because the pipeline removes a
+> degree-2 polynomial from a 1/f² series, that mode is fixed by the detrend order alone at 1.71
+> cells — invariant across a twelvefold range of trajectory lengths, and the value observed at every
+> site tested, on both sensors, and on synthetic series containing no scene at all. Increasing the
+> sub-aperture count lengthens the walk and
 > inflates the reported contrast; at the largest count tested, an image containing nothing yields a
 > contrast more than twice that of a real scene. Substituting speckle with the correct
 > resolution-cell correlation does not change this. No control in the published method
