@@ -23,6 +23,13 @@ Sites: an open-pit copper mine, a coal-fired power station, a historic hard-rock
 an active volcano, and a dense city centre. Imaged by two unrelated commercial operators with
 different constellations, different ground processors and different product chains.
 
+> ### ⚠️ READ §10 BEFORE USING §2
+>
+> E6 (31 July) **falsified** the strongest reading of Finding A. Synthetic noise does *not*
+> reproduce the peak position — real data does something specific and consistent that noise does
+> not. The invariance is real, but its explanation is **not** "the inverter produces this with no
+> input." §2 is retained below as written, with the corrected interpretation in §10.
+
 ## 2. Finding A — the reported depth is a property of the pipeline, not the ground
 
 **Across all forty runs the peak lies between 2.5 m and 3.9 m** — between roughly 1.2 and 1.9
@@ -169,10 +176,19 @@ The reported depth is not a property of the scene, the geology, the sensor, the 
 the depth-calibration constants, or the patch geometry. It survives every knob we can turn. It is
 **a fixed output of the inversion itself.**
 
-Note the `% axis` column: the peak sits at **29.8–32.4% of the depth axis** in every single run. The
-peak is not at a fixed *depth*; it is at a fixed *fraction of whatever axis the method is given* —
-which is precisely why the original 5%-of-axis guard could never catch it, and why the axis-extent
-confound mattered.
+**Careful with the `% axis` column.** Within E5 the peak sits at 29.8–32.4% of the axis, but every
+E5 run uses `n_sub = 11`, so "fixed fraction of axis" and "fixed number of cells" are
+indistinguishable here. The `n_sub` sweeps in §1 break the tie: as `n_sub` rises from 11 to 128 the
+axis extent grows eightfold while the peak stays at 3.2–3.9 m. The invariant is therefore **a fixed
+number of resolution cells, not a fixed fraction of the axis.**
+
+Combining every experiment — five sites, two sensors, eight sub-aperture counts, thirteen
+geometries, two sets of physical constants — the peak lies at
+
+> **peak depth ≈ 1.7 × `dz_phys`**   (observed range 1.2 – 1.9 cells)
+
+and `dz_phys = (v / f) · R / (2A)` depends *only* on the assumed velocity, investigation frequency,
+slant range and aperture. **Not on the data.**
 
 ### The mechanism test this now points to — cheap, decisive, and not yet run
 
@@ -189,7 +205,74 @@ required.
 
 This should be run before the revision. It is the natural completion of the argument.
 
-### Caveat
+### Cross-sensor confirmation
 
-E5 was run on **Bingham only**. Repeat on Capella at minimum — a different sensor and processing
-chain — before the invariance is stated as general.
+E5 was repeated on **Capella** (different operator, constellation and ground processor):
+peak **1.62 – 1.80 cells, sd 0.05**, 0/13 detections, 13/13 pinned — statistically identical to
+Bingham's 1.64 – 1.78. **The geometry invariance is confirmed across sensors.**
+
+---
+
+## 10. E6 — the noise test FAILED the hypothesis. This changes the claim.
+
+Bingham, `n_sub = 11`, 300 trials per model, seed 0:
+
+| input | peak median | 5–95 pct | sd | in 1.2–1.9 band | contrast median |
+|---|---|---|---|---|---|
+| white noise | 3.11 | 0.97 – 5.06 | 1.37 | **7%** | 1.39 |
+| AR(1), r = 0.01 | 2.97 | 0.96 – 5.04 | 1.39 | **9%** | 1.42 |
+| **real data** | **1.66** | — | **0.05** (across 66 runs) | 100% | **3.87** |
+
+**Synthetic noise does not reproduce the peak position.** Noise peaks scatter across essentially the
+whole axis (sd 1.37 cells); real data pins at 1.66 with a standard deviation of 0.05 across five
+sites, two sensors, eight sub-aperture counts and thirteen geometries. Real contrast is 3.87 against
+a noise median of ~1.40.
+
+### What must now be retracted
+
+The claim **"the output is the same whether or not there is any input"** is false. Do not write it.
+Real scenes are *not* indistinguishable from noise: they produce a far tighter and far more
+contrasted peak than noise does.
+
+### What survives, and why it is arguably better
+
+Something real, consistent and common to every SAR scene drives the peak to ~1.7 resolution cells.
+The most plausible candidate is **the surface itself** — a dominant common-mode component in the
+residual trajectories, absent from synthetic noise.
+
+That is not a retreat from the paper's thesis; it is a sharper version of it. The claim becomes:
+
+> The method reliably detects something. What it detects is the surface, reported at a fixed shallow
+> depth, and relabelled as subsurface structure. It is not noise, and it is not two kilometres down.
+
+This aligns with the "surface-pinned artifact" language already in the manuscript, and it explains
+why every site returns the same depth: every site has a surface.
+
+**It is also a testable claim, and it has not been tested.** Correlate the peak against
+`surface_brightness` (already implemented in `tomogram.py`) across the five sites. If the peak
+tracks the surface return, the mechanistic account is complete.
+
+### A problem this exposes in what has already been sent to the recommender
+
+The measured **lag-1 autocorrelation of the trajectories entering the inverter is 0.009** —
+effectively zero.
+
+The erratum sent to Dr Di Palma on 29 July justifies replacing the shuffle null on the grounds that
+it "destroys the look-to-look smoothness that 80% spectral overlap guarantees even under pure
+noise." On the detrended residuals actually fed to the inverter, that smoothness is **not present**.
+
+The alignment null may still be the correct choice — it preserves each patch's depth profile and
+randomises only cross-patch agreement, which is a sound argument on its own terms and does not
+depend on autocorrelation. But **the stated justification does not match the measurement**, and that
+justification is now in the editor's inbox in writing. Resolve this before the revision:
+
+- is the smoothness present in the *raw* trajectories and removed by degree-2 detrending?
+- if so, say that precisely;
+- if not, the rationale must be rewritten.
+
+### Immediate follow-up
+
+Because the measured correlation was ~0, the "fair" AR(1) null collapsed to the strict null — E6 did
+not actually test a *smooth* null at all. Sweep the AR coefficient (r = 0.3, 0.5, 0.7, 0.9) and ask
+whether correlated noise alone can place the peak at ~1.7 cells. If it can, look-to-look correlation
+is the mechanism, which ties directly to the leakage result in E4.
