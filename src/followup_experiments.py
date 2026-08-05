@@ -664,6 +664,90 @@ def experiment_increments(slc, n_sub, patch, n_patch, overlap, window, estimator
 
 
 # ===========================================================================
+# E9 — does CONTRAST scale with random-walk LENGTH, in isolation?
+#
+# E8 showed contrast, autocorrelation and n_sub rise together, and that
+# removing the cumsum collapses the effect at every length. External review
+# accepted that as strong circumstantial evidence but noted it is one step
+# short of proof: other n_sub-dependent factors (spectral weighting of the
+# sub-apertures, estimator variance, look SNR) co-vary and were not excluded.
+#
+# E9 removes every one of them. No SAR image, no sub-apertures, no
+# coregistration, no overlap, no window. Just iid Gaussian increments,
+# optionally accumulated, degree-2 detrended, and inverted on the same axis
+# the real pipeline would use at that n_sub.
+#
+#   contrast rises with L for walks but not for increments
+#       -> walk LENGTH alone drives the contrast; the n_sub sensitivity is
+#          the cumulative sum, and sentence 5 of the claim can be stated
+#          causally rather than as "consistent with"
+#   contrast flat for both
+#       -> length is not the driver; the unification must be withdrawn
+# ===========================================================================
+def experiment_walk(lengths, n_patch, n_trials, guard_cells, velocity, f_invest,
+                    range_km, aperture_km, seed=0):
+    from micromotion import detrend as _detrend
+
+    _, dz_phys = metric_depth_axis(np.array([0.0]), velocity, f_invest,
+                                   range_km * 1e3, aperture_km * 1e3)
+    rng = np.random.default_rng(seed)
+
+    print(f"\n{'='*104}")
+    print("E9 — contrast vs random-walk LENGTH, with the SAR pipeline removed entirely")
+    print(f"  n_patch={n_patch}  trials={n_trials}  seed={seed}  dz_phys={dz_phys:.2f} m")
+    print("  iid Gaussian increments only. No image, no sub-apertures, no overlap,")
+    print("  no coregistration, no window. The ONLY variable is series length.")
+    print(f"{'='*104}")
+    print(f"{'length':>8}{'series':>14}{'lag-1':>9}{'contrast med':>14}"
+          f"{'5-95 pct':>18}{'peak cells':>12}{'pinned':>9}")
+    print("-" * 104)
+
+    rows = []
+    for L in lengths:
+        z = np.linspace(0, L * DZ_TARGET / 2, 300)
+        for kind in ("walk (cumsum)", "increments"):
+            cs, pks, lags = [], [], []
+            for _ in range(n_trials):
+                inc = rng.normal(0.0, 1.0, (n_patch, L))
+                inc[:, 0] = 0.0
+                arr = np.cumsum(inc, axis=1) if kind.startswith("walk") else inc
+                lags.append(interlook_autocorr(arr)[0])
+                obs = np.array([_detrend(t, deg=2) for t in arr], dtype=float)
+                T = tomogram_from_observations(obs, z)
+                cs.append(float(contrast(T)))
+                pks.append(peak_depth_m(T, z, dz_phys) / dz_phys)
+            cs, pks = np.array(cs), np.array(pks)
+            rows.append(dict(length=int(L), series=kind, lag1=float(np.mean(lags)),
+                             contrast_median=float(np.median(cs)),
+                             p05=float(np.percentile(cs, 5)),
+                             p95=float(np.percentile(cs, 95)),
+                             peak_median=float(np.median(pks)),
+                             pinned_frac=float(np.mean(pks <= guard_cells))))
+            print(f"{L:>8}{kind:>14}{np.mean(lags):>9.3f}{np.median(cs):>14.2f}"
+                  f"{f'{np.percentile(cs,5):.2f} – {np.percentile(cs,95):.2f}':>18}"
+                  f"{np.median(pks):>12.2f}{100*np.mean(pks <= guard_cells):>8.0f}%")
+        print("-" * 104)
+
+    walks = [r for r in rows if r["series"].startswith("walk")]
+    incs = [r for r in rows if r["series"] == "increments"]
+    w_lo, w_hi = walks[0]["contrast_median"], walks[-1]["contrast_median"]
+    i_lo, i_hi = incs[0]["contrast_median"], incs[-1]["contrast_median"]
+    print(f"\n  walk       : length {walks[0]['length']} -> {walks[-1]['length']}   "
+          f"contrast {w_lo:.2f} -> {w_hi:.2f}   ({w_hi/max(w_lo,1e-9):.1f}x)")
+    print(f"  increments : length {incs[0]['length']} -> {incs[-1]['length']}   "
+          f"contrast {i_lo:.2f} -> {i_hi:.2f}   ({i_hi/max(i_lo,1e-9):.1f}x)")
+    if w_hi / max(w_lo, 1e-9) > 3.0 and i_hi / max(i_lo, 1e-9) < 2.0:
+        print("\n  -> Contrast scales with LENGTH for accumulated series and NOT for their")
+        print("     own increments. Every other n_sub-dependent factor has been removed,")
+        print("     so walk length alone drives it. The unification of the n_sub")
+        print("     sensitivity with the cumulative sum can be stated causally.")
+    else:
+        print("\n  -> Length alone does NOT reproduce the scaling. Another n_sub-dependent")
+        print("     factor is involved and the unification must be withdrawn or qualified.")
+    return rows
+
+
+# ===========================================================================
 # E4 — the leakage experiment
 # ===========================================================================
 def experiment_leakage(slc, n_sub, patch, n_patch, overlap, estimator, windows,
@@ -785,7 +869,9 @@ def main():
     ap.add_argument("--sicd")
     ap.add_argument("--experiment",
                     choices=["nsub", "leakage", "geometry", "noise", "synthetic",
-                             "increments"], default="nsub")
+                             "increments", "walk"], default="nsub")
+    ap.add_argument("--lengths", nargs="*", type=int,
+                    default=[11, 16, 22, 32, 45, 64, 90, 128])
     ap.add_argument("--canvas", type=int, default=512)
     ap.add_argument("--n-trials", type=int, default=300)
     ap.add_argument("--crops", nargs="*", type=int, default=[256, 512, 1024])
@@ -812,6 +898,20 @@ def main():
 
     if args.selftest:
         sys.exit(0 if selftest() else 1)
+
+    # E9 needs no image at all — it removes the SAR pipeline entirely.
+    if args.experiment == "walk":
+        rows = experiment_walk(args.lengths, args.n_patch, args.n_trials,
+                               args.guard_cells, args.velocity,
+                               args.f_investigation, args.range_km,
+                               args.aperture_km)
+        out = args.out or "runs/followup_walk.json"
+        os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
+        json.dump(dict(experiment="walk", n_patch=args.n_patch, rows=rows),
+                  open(out, "w"), indent=1)
+        print(f"\nresults -> {out}")
+        return
+
     if not args.sicd:
         ap.error("need --sicd or --selftest")
 
