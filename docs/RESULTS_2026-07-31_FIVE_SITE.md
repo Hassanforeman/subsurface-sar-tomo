@@ -764,6 +764,14 @@ The even degrees follow a cleaner empirical law:
 of least-squares polynomial removal and the `analytic1d` Hilbert step on a 1/f² spectrum over a
 finite record. That is the remaining algebraic step.
 
+**The 14% shortfall is not a missing term.** External review (31 July) confirms the (d+1)/2
+cycles-per-record rule is a continuum approximation for the effective high-pass frequency of a
+polynomial detrend, known to be inaccurate at low polynomial order and on short records — exactly
+this regime (degree 2, lengths 11–128). The discrepancy shrinking by degree 4 is the approximation's
+usual behaviour. There is no shorter route to 0.856 that avoids the spectral algebra of a
+finite-length, least-squares-detrended, Hilbert-transformed random walk; leaving it empirical is the
+correct choice, not a gap in the argument.
+
 **Consequence for wording.** Do not write that the peak sits at "the lowest surviving mode" as
 though the mode index were derived. The defensible statement is:
 
