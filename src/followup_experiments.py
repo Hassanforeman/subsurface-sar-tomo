@@ -441,6 +441,109 @@ def experiment_noise(slc, n_sub, patch, n_patch, overlap, window, estimator,
 
 
 # ===========================================================================
+# E7 — the PRINCIPLED null: derive the correlation instead of fitting it
+#
+# E6 matched an AR(1) coefficient to the observed lag-1. That is open to the
+# charge of tuning a null until it reproduces the observation -- the exact
+# move this study criticises. E7 removes the fitted parameter entirely.
+#
+# Feed COMPLEX WHITE NOISE -- a synthetic SLC with no scene, no structure,
+# nothing -- through the IDENTICAL pipeline: the same sub-aperture
+# decomposition at the same overlap, the same coregistration, the same
+# degree-2 detrend, the same inversion. The look-to-look correlation then
+# EMERGES from the overlap rather than being supplied.
+#
+# Sweeping overlap turns the mechanism from an assertion into a measurement:
+# if the peak converges on ~1.7 cells and the contrast rises toward the real
+# value as overlap increases, the artifact is produced by spectral overlap
+# and nothing else.
+# ===========================================================================
+def experiment_synthetic(n_sub, patch, n_patch, overlaps, window, estimator,
+                         n_trials, guard_cells, velocity, f_invest, range_km,
+                         aperture_km, canvas, real_peak=None, real_contrast=None,
+                         seed=0):
+    from micromotion import detrend as _detrend
+    from sensitivity_sweep import decompose_subapertures_w, adjacent_trajectory_e
+
+    _, dz_phys = metric_depth_axis(np.array([0.0]), velocity, f_invest,
+                                   range_km * 1e3, aperture_km * 1e3)
+    z = np.linspace(0, n_sub * DZ_TARGET / 2, 300)
+    rng = np.random.default_rng(seed)
+
+    print(f"\n{'='*104}")
+    print(f"E7 — complex white noise through the IDENTICAL pipeline (no scene at all)")
+    print(f"  canvas={canvas}x{canvas} n_sub={n_sub} patch={patch} n_patch={n_patch} "
+          f"window={window} coreg={estimator}")
+    print(f"  dz_phys={dz_phys:.2f} m   trials per overlap={n_trials}   seed={seed}")
+    print(f"  NOTHING is fitted here: the look-to-look correlation emerges from the")
+    print(f"  overlap parameter, it is not supplied.")
+    if real_peak is not None:
+        print(f"  real-data reference: peak={real_peak:.2f} cells  contrast={real_contrast:.2f}")
+    print(f"{'='*104}")
+    print(f"{'overlap':>9}{'raw lag-1':>12}{'peak median':>14}{'5-95 pct':>18}"
+          f"{'sd':>8}{'contrast med':>14}{'pinned':>9}")
+    print("-" * 104)
+
+    rows = []
+    for ov in overlaps:
+        pks, cs, lags = [], [], []
+        for _ in range(n_trials):
+            slc = (rng.normal(0, 1, (canvas, canvas))
+                   + 1j * rng.normal(0, 1, (canvas, canvas))).astype(np.complex128)
+            looks, _ = decompose_subapertures_w(slc, n_sub=n_sub, overlap=ov, axis=1,
+                                                window=window, dtype=np.complex128)
+            row0 = canvas // 2 - patch // 2
+            cols = np.linspace(0, canvas - patch, n_patch).astype(int)
+            raw = []
+            for cc in cols:
+                lp = looks[:, row0:row0 + patch, cc:cc + patch]
+                traj, _q = adjacent_trajectory_e(lp, estimator=estimator,
+                                                 dtype=np.complex128)
+                raw.append(np.asarray(traj, dtype=float))
+            raw = np.array(raw)
+            lags.append(interlook_autocorr(raw)[0])
+            obs = np.array([_detrend(t, deg=2) for t in raw], dtype=float)
+            T = tomogram_from_observations(obs, z)
+            pks.append(peak_depth_m(T, z, dz_phys) / dz_phys)
+            cs.append(float(contrast(T)))
+        pks, cs = np.array(pks), np.array(cs)
+        pinned = float(np.mean(pks <= guard_cells))
+        rows.append(dict(overlap=float(ov), lag1_raw=float(np.mean(lags)),
+                         peak_median=float(np.median(pks)),
+                         p05=float(np.percentile(pks, 5)),
+                         p95=float(np.percentile(pks, 95)),
+                         peak_sd=float(pks.std()),
+                         contrast_median=float(np.median(cs)),
+                         pinned_frac=pinned))
+        print(f"{ov:>9.2f}{np.mean(lags):>12.3f}{np.median(pks):>14.2f}"
+              f"{f'{np.percentile(pks,5):.2f} – {np.percentile(pks,95):.2f}':>18}"
+              f"{pks.std():>8.2f}{np.median(cs):>14.2f}{100*pinned:>8.0f}%")
+
+    print("-" * 104)
+    if real_peak is not None:
+        print(f"{'REAL':>9}{0.431:>12.3f}{real_peak:>14.2f}{'—':>18}{'—':>8}"
+              f"{real_contrast:>14.2f}{'—':>9}")
+        print("-" * 104)
+    hi = [r for r in rows if r["overlap"] >= 0.79]
+    lo = [r for r in rows if r["overlap"] <= 0.01]
+    if hi and lo:
+        print(f"\n  overlap 0.00 -> peak {lo[0]['peak_median']:.2f} cells, "
+              f"contrast {lo[0]['contrast_median']:.2f}")
+        print(f"  overlap 0.80 -> peak {hi[0]['peak_median']:.2f} cells, "
+              f"contrast {hi[0]['contrast_median']:.2f}")
+        if real_peak is not None and abs(hi[0]["peak_median"] - real_peak) < 0.3:
+            print("\n  -> At the overlap the method actually uses, pure noise reproduces the")
+            print("     real peak position WITHOUT ANY FITTED PARAMETER. The artifact is")
+            print("     produced by spectral overlap. E6's conclusion is confirmed on")
+            print("     stronger grounds.")
+        else:
+            print("\n  -> Noise does NOT reproduce the real peak once the correlation is")
+            print("     derived rather than fitted. E6's AR(1) result was an artifact of")
+            print("     the fitting. Section 5 of the Grok brief must be withdrawn.")
+    return rows
+
+
+# ===========================================================================
 # E4 — the leakage experiment
 # ===========================================================================
 def experiment_leakage(slc, n_sub, patch, n_patch, overlap, estimator, windows,
@@ -561,7 +664,9 @@ def main():
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--sicd")
     ap.add_argument("--experiment",
-                    choices=["nsub", "leakage", "geometry", "noise"], default="nsub")
+                    choices=["nsub", "leakage", "geometry", "noise", "synthetic"],
+                    default="nsub")
+    ap.add_argument("--canvas", type=int, default=512)
     ap.add_argument("--n-trials", type=int, default=300)
     ap.add_argument("--crops", nargs="*", type=int, default=[256, 512, 1024])
     ap.add_argument("--patches", nargs="*", type=int, default=[32, 48, 64, 96, 128])
@@ -630,6 +735,42 @@ def main():
 
     print(f"Loading {args.crop}x{args.crop} crop from {label} ({R}x{C})")
     slc = load_crop(args.crop)
+
+    if args.experiment == "synthetic":
+        rp = rc = None
+        if args.sicd:
+            from micromotion import detrend as _dt
+            from sensitivity_sweep import (decompose_subapertures_w as _dec,
+                                           adjacent_trajectory_e as _traj)
+            _, _dz = metric_depth_axis(np.array([0.0]), args.velocity,
+                                       args.f_investigation, args.range_km * 1e3,
+                                       args.aperture_km * 1e3)
+            _z = np.linspace(0, args.n_sub * DZ_TARGET / 2, 300)
+            _lk, _ = _dec(slc, n_sub=args.n_sub, overlap=args.overlap, axis=1,
+                          window=args.window, dtype=np.complex128)
+            _r0 = slc.shape[0] // 2 - args.patch // 2
+            _cs = np.linspace(0, slc.shape[1] - args.patch, args.n_patch).astype(int)
+            _raw = np.array([np.asarray(_traj(_lk[:, _r0:_r0 + args.patch,
+                                                  c:c + args.patch],
+                                              estimator=args.estimator,
+                                              dtype=np.complex128)[0], dtype=float)
+                             for c in _cs])
+            _T = tomogram_from_observations(
+                np.array([_dt(t, deg=2) for t in _raw], dtype=float), _z)
+            rp = peak_depth_m(_T, _z, _dz) / _dz
+            rc = float(contrast(_T))
+        rows = experiment_synthetic(args.n_sub, args.patch, args.n_patch,
+                                    args.overlaps, args.window, args.estimator,
+                                    args.n_trials, args.guard_cells, args.velocity,
+                                    args.f_investigation, args.range_km,
+                                    args.aperture_km, args.canvas, rp, rc)
+        out = args.out or f"runs/followup_synthetic_{label}.json"
+        os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
+        json.dump(dict(label=label, experiment="synthetic", n_sub=args.n_sub,
+                       real_peak_cells=rp, real_contrast=rc, rows=rows),
+                  open(out, "w"), indent=1)
+        print(f"\nresults -> {out}")
+        return
 
     if args.experiment == "noise":
         res = experiment_noise(slc, args.n_sub, args.patch, args.n_patch, args.overlap,
