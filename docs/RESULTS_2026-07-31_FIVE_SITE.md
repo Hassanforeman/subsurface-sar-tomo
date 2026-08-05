@@ -441,3 +441,59 @@ State the empirical findings first — peak invariance, noise equivalence, `n_su
 1/f identity — and present §12 as the mechanistic account with its caveats attached. Acknowledge in
 one or two sentences that the mechanism was revised twice under progressively stronger nulls; that
 history is a strength when disclosed and a liability when discovered.
+
+---
+
+## 13. E8 across sensors and sub-aperture counts — the `n_sub` sensitivity IS the random walk
+
+### 13.1 Cross-sensor (Capella, `n_sub` = 11)
+
+| input | series | raw lag-1 | peak (cells) | contrast | pinned |
+|---|---|---|---|---|---|
+| real | cumsum — as published | +0.488 | 1.69 | **2.75** | PIN |
+| real | increments | −0.129 | 4.76 | 1.31 | clear |
+| white noise | cumsum | +0.505 | 1.71 | **3.60** | 100% |
+| white noise | increments | −0.055 | 2.94 | 1.41 | 18% |
+
+Same pattern on a second operator. Note that Capella's **real** contrast (2.75) is **24% below** the
+pure-noise value (3.60).
+
+### 13.2 Across sub-aperture count (Bingham)
+
+| `n_sub` | lag-1 real / noise | real contrast | **noise contrast** | real / noise |
+|---|---|---|---|---|
+| 11 | 0.43 / 0.51 | 3.87 | 3.60 | 1.07 |
+| 32 | 0.82 / 0.81 | 26.42 | 21.04 | 1.26 |
+| **128** | **0.88 / 0.95** | **128.64** | **274.85** | **0.47** |
+
+Removing the cumulative sum at `n_sub` = 128: real peak moves 1.50 → **52.66 cells**, contrast
+128.64 → 2.49; noise peak 1.71 → 13.70, contrast 274.85 → 1.72; surface-pinning 100% → **0%**.
+
+### 13.3 The two headline findings are one finding
+
+The look-to-look autocorrelation rises with `n_sub` — 0.43 → 0.82 → 0.88 on real data, 0.51 → 0.81
+→ 0.95 on noise — because **a longer random walk is smoother**. Smoother walk → higher contrast.
+
+Therefore the `n_sub` sensitivity documented in §3 (3.87 → 128.64 on Bingham, 2.75 → 272.52 on
+Cairo) is **not a separate quirk**. It is the cumulative sum: raising `n_sub` lengthens the walk,
+which raises its autocorrelation, which inflates the contrast. The undisclosed parameter and the
+artifact mechanism are the same phenomenon.
+
+### 13.4 The decisive numbers
+
+- **At `n_sub` = 128, pure noise yields contrast 274.85 against real data's 128.64.** Data
+  containing nothing produces **more than twice** the apparent structure of a real scene.
+- **Cairo/Capella's real value at `n_sub` = 128 was 272.52. Pure noise gives 274.85** — agreement
+  to within 1%. The most dramatic number in the five-site grid is reproduced, to the percent, by
+  an image with no scene in it.
+- Across `n_sub` = 11, 32, 128 the real/noise contrast ratio is **1.07, 1.26, 0.47** — scattered
+  around unity with no systematic excess in either direction.
+
+### 13.5 Status
+
+The mechanism is now confirmed on **two sensors** and **three sub-aperture counts**, always with the
+matched-length control. §12 is no longer provisional on those axes.
+
+Still outstanding: the **PSF-matched null**. The synthetic SLC is white, whereas real speckle carries
+resolution-cell correlation from the system point-spread function. This is the last identified way
+the null could differ systematically from the data, and it was raised in external review.
