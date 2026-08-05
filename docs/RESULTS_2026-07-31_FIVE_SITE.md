@@ -107,14 +107,8 @@ under a fixed seed. Worth one sentence in the methods.
   **3.2×** across sub-aperture counts (7.52 at `n_sub`=32 against 2.33 at 128), versus 1.4–1.9× at
   the other four. Claiming the fixed window solves the problem would be overstating it. It changes
   no verdict, but it must be reported.
-- **The peak-depth invariance has been measured at one crop and patch geometry only** — 512×512
-  centre crop, 64-pixel patches, 24 patches, 0.8 overlap. It is entirely possible that ~1.2–1.9
-  cells is a property of *that geometry* rather than of the method. **This must be tested before the
-  claim appears in the paper.** Vary crop size, patch size, patch count and overlap:
-  - if the peak holds, the finding is general and very strong;
-  - if it tracks the patch geometry, that is the better result — it identifies the *mechanism*
-    generating the artifact, which nobody has done;
-  - either way it is publishable. Not testing it is the only bad option.
+- ~~The peak-depth invariance has been measured at one crop and patch geometry only.~~
+  **Tested 31 July — see §9. The invariance holds.**
 - **All five scenes are X-band spotlight.** Nothing here speaks to C-band or L-band behaviour.
 - **The alignment null is itself a modelling choice.** It is more conservative than the shuffle
   null, but it is not the only defensible null.
@@ -136,3 +130,66 @@ under a fixed seed. Worth one sentence in the methods.
    changes, but this row has already required one erratum.
 8. State that the analysis was repeated at the patent's own velocity and aperture with identical
    results.
+
+---
+
+## 9. E5 — the peak depth does not depend on the patch geometry either
+
+`src/followup_experiments.py --experiment geometry`, Bingham, `n_sub = 11`, one-at-a-time sweep
+around the baseline (512 crop, 64-px patches, 24 patches, 0.8 overlap):
+
+| varying | crop | patch | n_patch | overlap | C | C/align | peak | **peak cells** | % axis |
+|---|---|---|---|---|---|---|---|---|---|
+| baseline | 512 | 64 | 24 | 0.80 | 3.87 | 2.40 | 3.5 m | **1.66** | 30.1% |
+| patch | 512 | 32 | 24 | 0.80 | 4.24 | 2.06 | 3.8 m | **1.78** | 32.4% |
+| patch | 512 | 48 | 24 | 0.80 | 3.71 | 2.54 | 3.7 m | **1.77** | 32.1% |
+| patch | 512 | 96 | 24 | 0.80 | 3.64 | 2.30 | 3.6 m | **1.71** | 31.1% |
+| patch | 512 | 128 | 24 | 0.80 | 5.14 | 3.36 | 3.6 m | **1.71** | 31.1% |
+| n_patch | 512 | 64 | 12 | 0.80 | 4.42 | 1.90 | 3.5 m | **1.67** | 30.4% |
+| n_patch | 512 | 64 | 48 | 0.80 | 4.61 | 3.41 | 3.7 m | **1.77** | 32.1% |
+| overlap | 512 | 64 | 24 | 0.00 | 3.59 | 2.05 | 3.5 m | **1.67** | 30.4% |
+| overlap | 512 | 64 | 24 | 0.40 | 4.05 | 2.79 | 3.5 m | **1.64** | 29.8% |
+| overlap | 512 | 64 | 24 | 0.60 | 2.38 | 1.58 | 3.6 m | **1.73** | 31.4% |
+| overlap | 512 | 64 | 24 | 0.90 | 7.47 | 4.58 | 3.6 m | **1.69** | 30.8% |
+| crop | 256 | 64 | 24 | 0.80 | 4.87 | 3.40 | 3.7 m | **1.77** | 32.1% |
+| crop | 1024 | 64 | 24 | 0.80 | 2.70 | 1.89 | 3.6 m | **1.69** | 30.8% |
+
+**Peak depth: 1.64 – 1.78 cells. Spread 1.09×. Standard deviation 0.05 cells.**
+**0/13 detections. 13/13 surface-pinned.**
+
+Patch size varied by 4×, patch count by 4×, overlap from none to 0.9, crop area by 16×. The
+contrast itself moved substantially — 2.38 to 7.47, a factor of 3.1 — so the geometry demonstrably
+changes what the pipeline computes. **The peak depth moved by 0.14 of a cell.**
+
+No single factor drives it: patch 1.71–1.78, overlap 1.64–1.73, n_patch 1.67–1.77, crop 1.69–1.77.
+
+### What this establishes
+
+The reported depth is not a property of the scene, the geology, the sensor, the sub-aperture count,
+the depth-calibration constants, or the patch geometry. It survives every knob we can turn. It is
+**a fixed output of the inversion itself.**
+
+Note the `% axis` column: the peak sits at **29.8–32.4% of the depth axis** in every single run. The
+peak is not at a fixed *depth*; it is at a fixed *fraction of whatever axis the method is given* —
+which is precisely why the original 5%-of-axis guard could never catch it, and why the axis-extent
+confound mattered.
+
+### The mechanism test this now points to — cheap, decisive, and not yet run
+
+If the peak is an output of the inversion rather than of the data, then **feeding the inverter pure
+synthetic noise should place the peak at the same ~1.7 cells / ~30% of axis.** No satellite data
+required.
+
+- Same position → the peak is the steering matrix's response to unstructured input. The patent
+  itself describes that matrix as a DFT. This would demonstrate the paper's central thesis
+  directly rather than by inference: on the only feature that carries the depth claim, real data
+  is indistinguishable from noise.
+- Different position → something in the real data *is* influencing the peak, and the invariance
+  argument needs qualifying.
+
+This should be run before the revision. It is the natural completion of the argument.
+
+### Caveat
+
+E5 was run on **Bingham only**. Repeat on Capella at minimum — a different sensor and processing
+chain — before the invariance is stated as general.
