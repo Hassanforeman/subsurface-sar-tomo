@@ -23,12 +23,13 @@ Sites: an open-pit copper mine, a coal-fired power station, a historic hard-rock
 an active volcano, and a dense city centre. Imaged by two unrelated commercial operators with
 different constellations, different ground processors and different product chains.
 
-> ### ⚠️ READ §10 BEFORE USING §2
+> ### ⚠️ READ §11 BEFORE USING §2, §5 OR §10
 >
-> §2 states the invariance correctly but does not explain it. **§10 supplies the mechanism:**
-> correlated noise carrying nothing but the 80% sub-aperture overlap reproduces the peak position,
-> its tightness, and 83% of the contrast. Against a correctly correlated null the real excess is
-> ~20%, not the 2.4× quoted throughout §1–§5. Do not quote §2's ratios without §10's correction.
+> §11 supersedes both. Pure white noise through the identical pipeline reproduces the peak position
+> (1.68 vs 1.66 cells) and the contrast (3.80 vs 3.87) — a **2% residual**, not the 2.4× quoted in
+> §1–§5 nor the 20% in §10. **§10's attribution of the artifact to 80% sub-aperture overlap is
+> withdrawn**: the effect is present at zero overlap. Do not quote any ratio from §1–§10 without
+> §11's correction.
 
 ## 2. Finding A — the reported depth is a property of the pipeline, not the ground
 
@@ -299,3 +300,75 @@ E7: a synthetic-only demonstration — generate a tomogram from correlated noise
 and place the apparent structure at a chosen depth via the investigation frequency (depth ∝ 1/f is
 an identity, not a fit). Requires no satellite data and would be the most legible figure in the
 paper.
+
+---
+
+## 11. E7 — the principled null. Two corrections and a stronger result.
+
+Complex white noise (no scene) through the identical pipeline, 40 trials per overlap, `n_sub` = 11.
+**Nothing fitted.**
+
+| overlap | raw lag-1 | peak median (cells) | 5–95 pct | sd | contrast median | pinned |
+|---|---|---|---|---|---|---|
+| 0.00 | 0.447 | 1.73 | 1.64 – 1.82 | 0.06 | 2.84 | 100% |
+| 0.40 | 0.437 | 1.71 | 1.62 – 1.86 | 0.07 | 2.82 | 100% |
+| 0.60 | 0.470 | 1.71 | 1.60 – 1.92 | 0.18 | 3.05 | 98% |
+| **0.80** | 0.498 | **1.68** | 1.62 – 1.80 | 0.05 | **3.80** | 100% |
+| 0.90 | 0.558 | 1.69 | 1.62 – 1.79 | 0.05 | **5.51** | 100% |
+| **REAL** | 0.431 | **1.66** | — | 0.05 (66 runs) | **3.87** | — |
+
+### 11.1 CORRECTION — "80% overlap manufactures the peak" is WITHDRAWN
+
+Stated in commit `fa577ee`, §10 of this document, and §5.1 of the Grok brief. **It is wrong.**
+
+At overlap **0.00** the trajectories still show lag-1 = 0.447 and the peak still lands at 1.73
+cells. Overlap is not the source of the correlation.
+
+### 11.2 The actual mechanism — the trajectory is a cumulative sum
+
+`adjacent_trajectory_e` in `src/sensitivity_sweep.py` ends:
+
+```python
+    return np.cumsum(inc), coh
+```
+
+The trajectory is the **cumulative sum** of adjacent-look displacement estimates. A cumulative sum
+of independent increments is a **random walk**, which is strongly autocorrelated by construction —
+no overlap required. That fully accounts for lag-1 ≈ 0.45 at zero overlap.
+
+**Hypothesis (not yet tested):** the inverter reads random-walk smoothness as a coherent depth
+signal and places its peak at ~1.7 cells. Overlap does not create this; it *amplifies the contrast*
+by correlating the increments themselves (2.84 → 3.80 → 5.51 as overlap rises 0.0 → 0.8 → 0.9).
+
+**Decisive test (E8, not yet run):** feed the raw increments `inc` to the inverter instead of
+`np.cumsum(inc)`. If the ~1.7-cell peak disappears, the artifact is the cumulative sum. If it
+survives, the hypothesis is wrong.
+
+### 11.3 The residual excess has essentially vanished
+
+| null | noise contrast | real / noise |
+|---|---|---|
+| shuffle (manuscript's original) | ~1.47 | 2.63× |
+| AR(1) fitted (E6) | 3.22 | 1.20× |
+| **derived, overlap 0.8 (E7)** | **3.80** | **1.02×** |
+
+Real data sits **2%** above what pure noise produces through the same pipeline at the same overlap,
+and the peak positions (1.66 vs 1.68) are indistinguishable.
+
+This confirms the prediction from external review that part of the 20% residual was AR(1) misfit
+rather than signal. Each time the null has been specified more correctly, the excess has shrunk.
+
+### 11.4 New finding — noise clears the manuscript's own detection threshold
+
+At **overlap 0.90, pure noise yields contrast 5.51**, exceeding the manuscript's `> 5×` decision
+rule. At a plausible, undisclosed setting the method returns a formal detection on data containing
+nothing whatsoever.
+
+### 11.5 Caveats
+
+- The synthetic SLC is white; real SAR speckle is correlated at the resolution-cell scale by the
+  system PSF. A more faithful null would impose that correlation.
+- One site, one `n_sub`, 40 trials.
+- E8 has not been run. Until it is, §11.2 is a hypothesis supported by the zero-overlap row and the
+  presence of `cumsum`, not a demonstrated mechanism.
+- **This document's mechanism claim has now been wrong twice.** Treat §11.2 as provisional.
