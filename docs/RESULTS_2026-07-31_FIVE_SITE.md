@@ -635,3 +635,94 @@ satellite, no scene, no ground.
 - `contrast` has still not been characterised analytically under strongly autocorrelated inputs.
   E9 measures its behaviour empirically across a 12× range of series lengths, which is weaker than
   a derivation but is no longer merely anecdotal.
+
+---
+
+## 15. E10 and E11 — the last two objections closed
+
+### 15.1 E10 — the PSF-matched null
+
+External review's remaining methodological objection: the synthetic image in E7/E8 was white, whereas
+real SAR speckle is band-limited by the system and therefore correlated at the resolution-cell scale.
+
+E10 builds the synthetic image the physically correct way — complex white noise placed in a centred
+sub-block of the **spectrum**, then inverse transformed. `bw_frac = 1.0` reproduces the white image;
+lower values give longer resolution-cell correlation. The real scene's occupied bandwidth is
+measured rather than assumed.
+
+Bingham, `n_sub` = 11, 25 trials. **Measured real bandwidth (95% energy): azimuth 0.750,
+range 0.744.**
+
+| `bw_frac` | raw lag-1 | peak (cells) | contrast | pinned |
+|---|---|---|---|---|
+| 1.00 (white, = E7) | 0.501 | 1.69 | 3.81 | 100% |
+| **0.80 (nearest real)** | 0.514 | **1.73** | **4.14** | 100% |
+| 0.60 | 0.553 | 1.75 | 4.68 | 100% |
+| 0.40 | 0.536 | 1.73 | 4.97 | 100% |
+| 0.25 | −0.010 | 1.49 | 2.57 | 100% |
+| 0.15 | 0.477 | 1.60 | 2.52 | 100% |
+| **REAL** | 0.431 | **1.66** | **3.87** | — |
+
+**With correctly correlated speckle the peak still matches (1.73 vs 1.66) and the synthetic produces
+7% MORE contrast than the real scene** (4.14 vs 3.87; real/synthetic = 0.93). The white-noise null
+was not flattering the conclusion — if anything it was slightly conservative.
+
+Across `bw_frac` 1.00 → 0.40 the peak holds at 1.69–1.75 with 100% pinning throughout.
+
+**Report honestly:** the 0.25 and 0.15 rows break the monotone pattern (lag-1 falls to −0.01 at
+0.25). Those bandwidths are far below anything a real SAR system produces and are not relevant to
+the comparison at 0.75, but the non-monotonicity should be stated rather than left for a referee to
+notice. Cause not investigated; likely the coregistration estimator behaving differently on very
+smooth images.
+
+### 15.2 E11 — the depth is derived, not merely observed
+
+**The automatic verdict printed by this experiment is imprecise and should not be quoted.** It says
+the peak bin is "largely independent of series length." It is not — bins span 4 to 48 at degree 0.
+The invariant is not the bin index; it is the **depth in resolution cells.**
+
+Pure random walks, no SAR pipeline, 60 trials, 300-bin axis:
+
+| detrend degree | peak (cells) across 8 lengths (11 → 128) | mean bin × length |
+|---|---|---|
+| 0 | 0.86 – 0.90 | 525 |
+| 1 | 1.05 – 1.14 | 659 |
+| **2 — what the pipeline uses** | **1.66 – 1.71** | **1008** |
+| 3 | 1.96 – 2.05 | 1204 |
+| 4 | 2.41 – 2.59 | 1495 |
+
+Two exact regularities:
+
+1. **Peak depth in cells is fixed by the detrend degree alone**, constant to ±0.05 cells across a
+   **12× range** of series lengths.
+2. **bin × length is constant** for a given degree (sd 11–34 on means of 525–1495). Since
+   `peak_cells = bin × L / 598` for a 300-bin axis spanning `L·DZ/2`, that constant *is* the peak
+   depth: 1008 / 598 = **1.685 cells** at degree 2.
+
+**1.685 cells is exactly what every real site, both sensors, all sub-aperture counts, all thirteen
+geometries and every noise run returned** (observed range 1.2–1.9, central value ~1.7).
+
+### 15.3 What this means
+
+The characteristic depth reported by this method is not approximately explained by the artifact. It
+is **arithmetically determined** by two implementation choices:
+
+- taking a **cumulative sum**, which makes the series a random walk with a 1/f² spectrum, and
+- removing a **degree-2 polynomial**, which deletes the constant, linear and quadratic components
+  and leaves the maximum at the lowest surviving mode.
+
+Change the detrend to degree 4 and the reported "structure" moves from 1.7 to 2.5 cells. Change it
+to degree 0 and it moves to 0.88. Nothing about the subsurface enters at any point.
+
+Combined with the exact 1/f proportionality of the metre labelling (§5), the reported depth of a
+feature in this method is a function of: the polynomial order of a detrending step, the number of
+bins on the display axis, and an investigation frequency chosen by the analyst. None of these are
+measurements of the ground.
+
+### 15.4 Status of external review's open items
+
+| Item | Status |
+|---|---|
+| PSF-matched null | **closed** — §15.1; conclusion unchanged and slightly strengthened |
+| Analytic account of `contrast` under random-walk inputs | **closed** — §15.2 gives an exact law for the peak position; the contrast magnitude remains empirical |
+| Acknowledge revision history in the manuscript | outstanding — see §8.3 item 8 |
