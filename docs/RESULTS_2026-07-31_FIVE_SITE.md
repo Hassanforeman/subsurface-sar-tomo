@@ -23,13 +23,19 @@ Sites: an open-pit copper mine, a coal-fired power station, a historic hard-rock
 an active volcano, and a dense city centre. Imaged by two unrelated commercial operators with
 different constellations, different ground processors and different product chains.
 
-> ### ⚠️ READ §11 BEFORE USING §2, §5 OR §10
+> ### ⚠️ §12 IS THE CURRENT POSITION — READ IT BEFORE QUOTING ANYTHING ABOVE
 >
-> §11 supersedes both. Pure white noise through the identical pipeline reproduces the peak position
-> (1.68 vs 1.66 cells) and the contrast (3.80 vs 3.87) — a **2% residual**, not the 2.4× quoted in
-> §1–§5 nor the 20% in §10. **§10's attribution of the artifact to 80% sub-aperture overlap is
-> withdrawn**: the effect is present at zero overlap. Do not quote any ratio from §1–§10 without
-> §11's correction.
+> **Empirical findings (§1–§9, §11) stand.** Pure white noise through the identical pipeline
+> reproduces the peak position (1.71 vs 1.66 cells) and the contrast (3.60 vs 3.87). The real
+> excess over a properly derived null is a few percent, **not** the 2.4× quoted in §1–§5.
+>
+> **Two mechanism claims are withdrawn:** "the inverter produces this from nothing" (§10) and
+> "80% sub-aperture overlap manufactures the peak" (§11.1 — the effect is present at *zero*
+> overlap).
+>
+> **§12 supersedes both**, and unlike them it rests on a direct experimental contrast with a matched
+> control: the trajectory is a running total (`np.cumsum`), which is a random walk, and removing
+> only that step moves the peak off the surface and collapses the contrast.
 
 ## 2. Finding A — the reported depth is a property of the pipeline, not the ground
 
@@ -372,3 +378,66 @@ nothing whatsoever.
 - E8 has not been run. Until it is, §11.2 is a hypothesis supported by the zero-overlap row and the
   presence of `cumsum`, not a demonstrated mechanism.
 - **This document's mechanism claim has now been wrong twice.** Treat §11.2 as provisional.
+
+---
+
+## 12. E8 — the mechanism, demonstrated: the trajectory is a running total
+
+Bingham, `n_sub` = 11, overlap 0.8, 40 noise trials. `inc` and `cumsum(inc)` have identical length,
+so the steering matrix is unchanged and the **only** difference is the running total.
+
+| input | series | raw lag-1 | peak (cells) | contrast | surface-pinned |
+|---|---|---|---|---|---|
+| real | **cumsum — as published** | +0.431 | **1.66** | **3.87** | PIN |
+| real | increments | −0.113 | **2.83** | **1.36** | clear |
+| white noise (median) | **cumsum — as published** | +0.505 | 1.71 | 3.60 | 100% |
+| white noise (median) | increments | −0.055 | 2.94 | 1.41 | 18% |
+
+### 12.1 What is established
+
+`adjacent_trajectory_e` returns `np.cumsum(inc)`: the per-patch trajectory is a **running total of
+adjacent-look displacement estimates**. A running total of noisy increments is a random walk —
+strongly autocorrelated by construction, at any overlap, with or without a scene.
+
+The inverter reads that walk's smoothness as coherent depth structure and places a peak ~1.7
+resolution cells down. Removing only the running total:
+
+- peak moves from 1.66 → 2.83 cells (real) and 1.71 → 2.94 (noise);
+- contrast collapses 3.87 → 1.36 (real) and 3.60 → 1.41 (noise);
+- surface-pinning falls from 100% to 18%.
+
+**Real data and noise are indistinguishable in both arms** — 3.87 vs 3.60 with the cumsum
+(ratio 1.07), 1.36 vs 1.41 without it.
+
+This supersedes both earlier mechanism claims: the inverter alone (withdrawn, §10) and spectral
+overlap (withdrawn, §11.1). Overlap *amplifies* the contrast (§11, 2.84 → 5.51 across 0.0 → 0.9)
+but the running total *creates* the artifact.
+
+### 12.2 What this does NOT establish
+
+**It does not show the method "should" use increments.** Cumulating relative displacements into an
+absolute trajectory is a reasonable thing to do; the increments arm is a diagnostic, not a proposed
+correction. The finding is narrower and sharper:
+
+> The trajectory construction introduces a strong positive autocorrelation that the inversion
+> interprets as coherent subsurface structure. No control in the published method accounts for it,
+> and the resulting peak is reproduced by noise containing no scene.
+
+That is a specific, located, testable defect — not a general assertion that the technique fails.
+
+### 12.3 Caveats
+
+- One site, one `n_sub`, one overlap, 40 trials. Repeat on Capella and at other `n_sub`.
+- The synthetic SLC is white; real speckle carries resolution-cell correlation from the system PSF.
+  A PSF-matched null remains the outstanding methodological gap, flagged in external review.
+- This is the **third** mechanism account in this document. The first two were withdrawn. The
+  difference is that this one rests on a direct experimental contrast with a matched control rather
+  than on inference from invariance. It should still be presented as the leading account, not as
+  settled fact, until it is reproduced on a second site.
+
+### 12.4 For the manuscript
+
+State the empirical findings first — peak invariance, noise equivalence, `n_sub` sensitivity, the
+1/f identity — and present §12 as the mechanistic account with its caveats attached. Acknowledge in
+one or two sentences that the mechanism was revised twice under progressively stronger nulls; that
+history is a strength when disclosed and a liability when discovered.
