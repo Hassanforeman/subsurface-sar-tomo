@@ -345,6 +345,42 @@ correcting calmly if a journalist repeats it.
 
 ---
 
+## [NEW] "So you've proved his images are fake?" — the line you must not cross
+
+**No, and saying otherwise would be the biggest unforced error available to you.**
+
+What the work shows:
+
+- the confident peak appears with **no scene at all** — accumulated noise produces it;
+- its depth label is set by a frequency the analyst picks, not by anything measured;
+- its "N times above noise" figure inflates without limit as an undisclosed setting is raised —
+  at the largest setting tested, **pure noise beats a real scene two to one**;
+- on every quantity that carries the detection claim, real data and noise are indistinguishable.
+
+What the work does **not** show: that the specific published pictures — the shafts, chambers and
+organised deep topography — are nothing but that artifact. Those images have extra processing behind
+them (multi-scene stacking, denoising, thresholding, display choices) that has not been reproduced,
+because the pipeline and data behind them are not public.
+
+**The correct answer:**
+
+> I haven't reproduced his pictures, and I'm not claiming to — I don't have his processing chain or
+> his data. What I've shown is narrower and, I think, more important: the *statistics* that make
+> those pictures look like discoveries can be produced from noise. The confident peak, the depth
+> label, the impressive multiplier — all of it appears when you feed the method random numbers. So
+> the images may show something real, but this method can't be what tells us that, because it
+> produces the same signatures when there's nothing there.
+
+**If pressed — "but couldn't the images just be the artifact too?"**
+
+> Possibly. I'd want to test it rather than assert it. You'd have to show that the extra steps —
+> the stacking, the denoising — can turn this artifact into that kind of organised structure. That
+> experiment hasn't been done, by me or anyone. Until it has, I'll stick to what I can demonstrate.
+
+That answer is stronger than an overclaim, because everything in it survives being checked.
+
+---
+
 ## Traps to avoid (say these wrong and it backfires)
 
 - Don't say "there's nothing under Giza." (You didn't show that.)
