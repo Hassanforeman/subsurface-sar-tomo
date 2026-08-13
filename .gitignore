@@ -20,3 +20,7 @@ runs/
 **/.DS_Store
 # Private submission correspondence (cover letters, plans) — keep out of public repo
 paper/submission/
+
+# Private working documents — strategy, correspondence drafts, third-party assessments.
+# Never commit these.
+docs/private/
