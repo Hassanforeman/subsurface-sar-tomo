@@ -24,3 +24,14 @@ paper/submission/
 # Private working documents — strategy, correspondence drafts, third-party assessments.
 # Never commit these.
 docs/private/
+
+# Internal working files — kept locally, never published.
+HANDOFF.md
+docs/MEDIA_QA_PREP.md
+docs/COMMERCIAL_ASSESSMENT.md
+docs/DATA_AND_OFFERING_MAP.md
+docs/PCI_RECOMMENDER_NOTE.md
+docs/BIONDI_PODCAST_*.md
+docs/HANDOFF_*.md
+docs/reply_*.md
+docs/GROK_*.md
