@@ -98,18 +98,20 @@ P("<b>Abstract.</b> In 2022&ndash;2025, F. Biondi and C. Malanga reported that D
   "transform, and removing a degree-2 polynomial leaves it near 1.7 cells. Accumulated Gaussian noise "
   "with <b>no SAR pipeline at all</b> reproduces both the fixed depth and the contrast scaling; at "
   "128 sub-apertures an input containing nothing returns more contrast than a real scene "
-  "(274.85 against 128.64). <b>Fourth, a contrast figure of the kind the published work reports is "
-  "not a safe statistic:</b> on 200 blocks of an input containing no scene, a three-tap per-patch "
-  "smoother that transfers no information between patches drives <b>98%</b> of them past the "
-  "5&times; contrast-to-null threshold used here, and the authors&rsquo; own denoising step drives "
-  "10% past it, from 0% unfiltered. None escapes the surface-pinning guard, so no false detection "
-  "results &mdash; but that means the verdicts in this paper are carried by the depth criterion "
-  "rather than the contrast ratio, and that the published tomograms, which report a confidence "
-  "figure with neither a matched null nor a depth check, rest on the criterion that fails. "
+  "(274.85 against 128.64). <b>Fourth, neither of this paper&rsquo;s own decision criteria "
+  "survives undisclosed preprocessing:</b> on an input containing no scene, a low-pass filter "
+  "applied to each patch independently drives 80% of blocks past the 5&times; contrast threshold, "
+  "a high-pass filter moves 100% of them out past the surface guard, and a four-tap kernel found "
+  "by direct search does <b>both at once</b>, reporting <b>36% of empty blocks as detections "
+  "under the full rule</b>. A survey of 137 operators found none &mdash; only optimisation did. "
+  "The results here are unaffected, because no such filter is applied and the chain is published; "
+  "but it follows that a confidence figure attached to a tomogram is uninterpretable unless the "
+  "whole preprocessing chain is disclosed, which is an argument against this paper&rsquo;s "
+  "statistics as much as anyone&rsquo;s. "
   "Fifth, planting a displacement signature in the image before processing "
   "gives a detection floor of 0.2 pixels, 8.4&times; the pipeline&rsquo;s own noise, below which a "
   "scene containing a genuine reflector reports <i>lower</i> confidence than an empty one. I state "
-  "plainly what I have not shown: three attempts to reproduce the appearance of the published 3-D "
+  "plainly what I have not shown: four attempts to reproduce the appearance of the published 3-D "
   "figures from empty volumes all failed, so I do not claim those images are this artifact. This is a "
   "critique of method and mathematics, not of intent.", absst)
 S(2)
@@ -292,11 +294,12 @@ P("<b>Two changes from earlier versions of this table, both of which strengthen 
   "2%, and at 128 sub-apertures noise <i>exceeds</i> real data. The ratios printed in versions 1&ndash;4 "
   "(2.8&times;, 3.3&times;, 4.1&times;) should not be quoted as detection margins. The binary "
   "verdicts &mdash; no detection at any site &mdash; are unchanged, and are now measured against the "
-  "harsher standard. <b>The alignment null has a limitation of its own</b>, established in "
-  "&sect;5.5: because it preserves each patch&rsquo;s depth profile and randomises only alignment, "
-  "it is blind to per-patch filtering, and an ordinary smoother drives the ratio past 5&times; on "
-  "data containing nothing. The contrast ratio is therefore not by itself a detection statistic in "
-  "this paper either; the absolute surface-pinning guard is what carries the verdicts.")
+  "harsher standard. <b>Both criteria have a limitation established in &sect;5.5</b>: on an input "
+  "containing no scene, filters applied to each patch independently can drive the ratio past "
+  "5&times;, move the peak out past the surface guard, or &mdash; for one kernel found by direct "
+  "search &mdash; do both at once. The ratios and verdicts reported here stand because no such "
+  "filter is applied and the chain is published in full, but they are conditional on that chain "
+  "rather than robust to arbitrary preprocessing.")
 
 P("<b>Corrections to individual rows.</b> The Bingham Canyon row read &ldquo;front-end only / no "
   "signal&rdquo; in versions 1&ndash;4; that is wrong, and the site produces a full surface-pinned "
@@ -474,83 +477,90 @@ P("Two candidate explanations were tested and both failed: coregistration qualit
   "necessary</b> for the surface-pinning at the site in this paper&rsquo;s title. The published "
   "operator remains surface-pinned at Giza with no detection.")
 
-P("5.5 The contrast criterion is not robust to ordinary filtering, and the depth guard is what "
-  "carries the verdicts", h2)
+P("5.5 Neither decision criterion survives undisclosed per-patch filtering", h2)
 P("Every verdict in this paper rests on two criteria applied together: <b>(a)</b> contrast above "
   "five times the alignment null, and <b>(b)</b> a peak within two resolution cells of the surface. "
-  "Criterion (a) is the kind of confidence figure the published work reports. Criterion (b) is this "
-  "paper&rsquo;s addition. This subsection tests how much each is worth, and the answer is "
-  "uncomfortable for (a).")
+  "Criterion (a) is the kind of confidence figure the published work reports; criterion (b) is this "
+  "paper&rsquo;s addition. This subsection reports that <b>neither is safe</b>, and what does and "
+  "does not follow from that.")
 P("The alignment null preserves each patch&rsquo;s depth profile exactly and randomises only whether "
-  "patches <i>agree</i> on a depth (&sect;3.4). It is therefore invariant to <i>where</i> each patch "
-  "peaks. Any operation that sharpens each patch&rsquo;s own profile &mdash; transferring no "
-  "information whatever between patches &mdash; raises the numerator and leaves the denominator "
-  "alone. That is not a hypothetical: it is what ordinary smoothing does.")
+  "patches <i>agree</i> on a depth (&sect;3.4), so it is invariant to <i>where</i> each patch peaks. "
+  "The inversion is a discrete-time Fourier transform (&sect;5.2), so reported depth in cells <i>is</i> "
+  "a frequency. Those two facts together make the criteria attackable in opposite directions by "
+  "filters acting on each patch <b>independently</b>, transferring no information between patches.")
 
-P("The test uses an input containing <b>no scene</b> &mdash; band-limited complex noise, no satellite "
-  "data &mdash; tiled through the identical pipeline and drawn into 200 independent 24-patch blocks, "
-  "the analysis geometry used for every site in Table 2. Each block is scored under four "
-  "preprocessing arms.")
+P("The tests below use an input containing <b>no scene</b> &mdash; band-limited complex noise, no "
+  "satellite data &mdash; tiled through the identical pipeline and drawn into independent 24-patch "
+  "blocks, the analysis geometry used for every site in Table 2.")
 
-tbl = [["Preprocessing arm, 200 blocks, no scene in the input", "Ratio", "Clears 5&times;",
-        "Peak (cells)", "Pinned", "<b>False detections</b>"],
-       ["None &mdash; the pipeline as run everywhere else here", "2.38", "0%", "1.73", "100%", "<b>0%</b>"],
-       ["The authors&rsquo; own low-rank denoising step", "3.53", "10%", "1.71", "100%", "<b>0%</b>"],
-       ["<b>A three-tap [1,2,1]/4 per-patch smoother</b>", "<b>7.70</b>", "<b>98%</b>", "1.67", "100%", "<b>0%</b>"],
-       ["Per-patch rescale (depth-neutral control)", "2.22", "0%", "1.73", "100%", "<b>0%</b>"]]
+tbl = [["Per-patch operator, empty input", "Ratio", "Peak (cells)", "Clears 5&times;", "Unpinned", "<b>False detections</b>"],
+       ["None &mdash; the pipeline as run everywhere in this paper", "2.43", "1.73", "0%", "0%", "<b>0%</b>"],
+       ["The authors&rsquo; low-rank denoising step", "3.62", "1.71", "10%", "0%", "<b>0%</b>"],
+       ["<b>Low-pass</b> [1,2,1]/4 &mdash; defeats (a)", "5.83", "1.60", "<b>80%</b>", "0%", "<b>0%</b>"],
+       ["<b>High-pass</b> [1,&minus;2,1]/4 &mdash; defeats (b)", "1.29", "<b>4.71</b>", "0%", "<b>100%</b>", "<b>0%</b>"],
+       ["<b>Searched kernel [+0.226, &minus;0.278, +0.329, &minus;0.167]</b>",
+        "4.67", "<b>4.89</b>", "<b>36%</b>", "<b>100%</b>", "<b>36%</b>"]]
 tbl = [[Paragraph(c, ParagraphStyle("tc5", parent=body, fontSize=8.5, leading=10, spaceAfter=0))
         for c in row] for row in tbl]
-t = Table(tbl, colWidths=[2.35*inch, 0.55*inch, 0.72*inch, 0.72*inch, 0.55*inch, 0.85*inch])
+t = Table(tbl, colWidths=[2.5*inch, 0.6*inch, 0.85*inch, 0.75*inch, 0.7*inch, 0.85*inch])
 t.repeatRows = 1
 t.setStyle(TableStyle([
     ("FONTNAME", (0,0), (-1,0), "Times-Bold"), ("FONTSIZE", (0,0), (-1,-1), 8.5),
     ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#e8e8e8")),
+    ("BACKGROUND", (0,5), (-1,5), colors.HexColor("#f4f4f4")),
     ("GRID", (0,0), (-1,-1), 0.4, colors.HexColor("#888888")),
     ("VALIGN", (0,0), (-1,-1), "MIDDLE"),
     ("TOPPADDING", (0,0), (-1,-1), 2.5), ("BOTTOMPADDING", (0,0), (-1,-1), 2.5)]))
 story.append(t)
-P("Table 4. The two decision criteria tested separately on data containing nothing. The smoother acts "
-  "on each patch <i>independently</i> and is about as innocuous a preprocessing step as exists; it "
-  "clears this paper&rsquo;s contrast rule on 98% of empty blocks. The depth-neutral rescale control "
-  "moves the ratio not at all, which locates the effect in the shaping of each patch&rsquo;s depth "
-  "profile rather than in amplitude. Repeated on strictly non-overlapping tiles from a "
-  "1536&times;1536 canvas the figures are 2.51 / 3.76 / 7.69 / 2.31 and 0% / 9% / 100% / 0%.", cap)
+P("Table 4. Per-patch operators against this paper&rsquo;s own decision rule, on an input containing "
+  "no scene. 200 blocks per row, 64 null permutations, guard at 2.0 cells. A low-pass filter defeats "
+  "criterion (a); a high-pass filter defeats criterion (b); <b>a kernel found by direct search "
+  "defeats both at once, reporting 36% of empty blocks as detections under the full rule.</b>", cap)
 
-fig("decision_robustness.png",
-    "Figure 7. <b>Left:</b> the contrast criterion. Each point is one 24-patch block of an input with "
-    "no scene; the bar is the median. A three-tap per-patch smoother lifts almost every block past "
-    "the 5&times; threshold. <b>Right:</b> the depth criterion, same blocks. All four arms remain "
-    "pinned inside the two-cell guard, so no arm produces a false detection under the full rule.",
-    width=6.3*inch)
+P("<b>The two criteria are in tension, which is why a survey missed this.</b> Because depth in cells "
+  "is a frequency, moving the peak out past the guard requires shifting spectral energy upward, and "
+  "high-frequency content in accumulated noise is patch-specific &mdash; so patches stop agreeing and "
+  "the ratio collapses. Conversely, raising the ratio requires concentrating energy in the "
+  "low-frequency mode patches <i>share</i>, which pins the peak harder. Across 137 hand-chosen and "
+  "randomly drawn operators the median ratio and median peak depth correlate at <b>&minus;0.407</b>, "
+  "and <b>none</b> produced a false detection. Only a direct optimisation against the joint objective "
+  "&mdash; 4,000 screened kernels followed by hill-climbing &mdash; found the region where both are "
+  "satisfied. <b>That a broad survey found nothing is therefore not evidence of safety</b>, and is "
+  "reported here because this paper very nearly drew that conclusion.")
 
-P("<b>The consequence for this paper.</b> Criterion (a) is not a safe detection statistic on its own. "
-  "It can be driven past threshold on empty data by a filter that adds no information, and the "
-  "alignment null &mdash; the more conservative of the two nulls this paper uses &mdash; cannot see "
-  "it. What prevents a false detection in all 800 block-scorings above is criterion (b): the peak "
-  "never leaves 1.67&ndash;1.73 cells, and the two-cell guard catches every one. <b>The verdicts in "
-  "Table 2 and Table 3 are carried by the depth guard, not by the contrast ratio</b>, and the ratios "
-  "quoted there should be read as descriptive rather than as the evidence. This is a limitation of "
-  "the method used here and it is reported as one.")
-P("<b>The consequence for the work under examination is larger.</b> The published tomograms are "
-  "presented with a confidence figure and <i>neither</i> control &mdash; no matched null and no depth "
-  "check &mdash; after a denoising chain that is nowhere documented. A contrast figure obtained "
-  "downstream of any smoothing step is close to uninformative, and this experiment puts a number on "
-  "how close: 98% of blocks containing nothing at all clear a 5&times; rule after three taps.")
-P("The authors&rsquo; own denoising step is the middle row, and it behaves the same way in kind but "
-  "less strongly: applied to each block it removes a median <b>47.9%</b> of the matrix by norm and "
-  "raises the leading component from 39.7% to 52.9% of the variance, lifting the ratio in every "
-  "block and past threshold in 10% of them. <b>Nothing here shows the published figures were "
-  "produced this way.</b> It shows that a documented and undisclosed-in-setting step is enough to "
-  "move an empty result across a threshold of the kind the published work relies on.")
+P("A more conservative null hardens the rule but does not repair it. Scoring against the "
+  "<b>95th percentile</b> of the alignment null rather than its median takes the low-pass filter from "
+  "80% of empty blocks above threshold to 8%, and the searched kernel from 36% false detections to "
+  "<b>4%</b>. Four percent of blocks containing nothing is still not zero.")
 
-P("A related observation, reported for completeness rather than as evidence: forcing the retained "
-  "rank down concentrates the depths the patches report &mdash; 79 to 80 distinct depth bins of 300 "
-  "at rank 3 against 155 to 209 untruncated, and at rank 1 every patch returns the same depth, which "
-  "is an algebraic identity rather than a finding. This is not specific to SAR or to this method: "
-  "pure synthetic random walks with no image, no sub-apertures and no pipeline of any kind reproduce "
-  "the sweep to within a few bins in 300 at every rank (1, 19, 78, 141, 208 against 1, 19, 80, 145, "
-  "209). It is a property of accumulate-and-detrend and so extends &sect;5.3 rather than adding an "
-  "independent line of evidence.")
+P("<b>What follows, and what does not.</b> The results reported in this paper are unaffected: no "
+  "per-patch filter of any kind is applied anywhere in this pipeline, the processing chain is fully "
+  "specified, and every setting is published and re-runnable. Tables 2 and 3 stand <i>for the "
+  "disclosed chain</i>. What cannot be claimed &mdash; and was claimed in an earlier draft of this "
+  "section &mdash; is that the depth guard makes the rule robust. It does not.")
+P("The general conclusion is the one that matters, and it cuts against this paper as much as against "
+  "the work it examines: <b>a confidence figure attached to a tomogram is uninterpretable unless the "
+  "entire preprocessing chain is disclosed.</b> Four taps applied to each patch independently, adding "
+  "no information whatever, are enough to manufacture detections from an empty input under both "
+  "criteria simultaneously. No decision procedure of this form can be validated against an "
+  "undocumented pipeline &mdash; not this paper&rsquo;s, and not any other&rsquo;s. That is the "
+  "strongest available argument for disclosure, and it is why the sub-aperture count, sub-band "
+  "overlap, window taper, denoising parameter and rendering settings of the published work are "
+  "requested in &sect;9 as a precondition for evaluating it rather than as a courtesy.")
+
+P("Two limitations of this experiment are stated plainly. It uses <b>synthetic input only</b>; real "
+  "scenes carry surface texture and residual phase that may interact with these operators differently, "
+  "and no real-scene arm has been run. And the operator family searched is <b>linear, per-patch and "
+  "finite-impulse-response of length at most five</b> &mdash; no claim is made about the behaviour of "
+  "nonlinear or longer operators, which may be worse.")
+
+P("Separately, and reported for completeness rather than as evidence: forcing the retained rank of "
+  "the patch-by-look matrix down concentrates the depths patches report &mdash; 79 to 80 distinct "
+  "depth bins of 300 at rank 3 against 155 to 209 untruncated, and at rank 1 every patch returns the "
+  "same depth, which is an algebraic identity. Pure synthetic random walks with no image, no "
+  "sub-apertures and no pipeline of any kind reproduce the sweep to within a few bins in 300 at every "
+  "rank (1, 19, 78, 141, 208 against 1, 19, 80, 145, 209), so it is a property of "
+  "accumulate-and-detrend and extends &sect;5.3 rather than adding independent evidence.")
 
 P("6. How large a real signal would have to be", h1)
 P("A control that injects a signal into the trajectory <i>after</i> accumulation and detrending "
@@ -593,13 +603,23 @@ P("Converting 0.2 px into physical ground motion is <b>not</b> a multiplication 
 
 P("7. What could not be reproduced", h1)
 P("The public impact of this work is visual: renderings in which shaft-like and chamber-like forms "
-  "appear beneath the plateau. Three attempts were made to reproduce that <i>appearance</i> from "
+  "appear beneath the plateau. Four attempts were made to reproduce that <i>appearance</i> from "
   "volumes containing no scene at all &mdash; a voxel scatter and an isosurface rendering at 11 "
   "sub-apertures, and an isosurface at 128. They produce, respectively, vertical needles at a "
   "single depth, discrete solid bodies in a shallow slab, and a continuous planar sheet spanning "
-  "the whole site. <b>None resembles the published figures.</b> No shafts, no vertical extent, no spirals, no "
-  "architecture. Parameter tuning was stopped at that point because continuing would have been "
-  "fitting.")
+  "the whole site. None resembles the published figures: no shafts, no vertical extent, no spirals, "
+  "no architecture. <b>A fourth treatment, added after those three, does change this picture and "
+  "is reported here unresolved.</b> Subtracting the depth profile common to every tile &mdash; the "
+  "natural operation for seeing past a surface return, and one an analyst would plausibly apply "
+  "&mdash; produces discrete, vertically elongated bodies spread over 60% of the depth axis, with "
+  "a median vertical run of 36 bins in 300, from a volume built entirely from random numbers. "
+  "<b>Whether those resemble the published figures is at present an aesthetic judgement, and this "
+  "paper declines to make it.</b> Deciding it requires a shape statistic and a comparison protocol "
+  "fixed in advance of looking at the published figures again; candidates are median vertical run "
+  "length, connected-component count above a depth-dependent isosurface, and energy fraction above "
+  "a fixed relative threshold after common-mode subtraction. Until that is pre-registered and run, "
+  "the negative claim in this section is <b>provisional and may require revision</b>. Parameter "
+  "tuning was stopped at that point because continuing would have been fitting.")
 fig("volume_noise_iso.png",
     "Figure 8. Three-dimensional isosurface rendering of a volume built from band-limited complex "
     "noise &mdash; no satellite data, no scene, no ground &mdash; through the identical pipeline, at "
@@ -716,11 +736,12 @@ P("The constant that fixes the artifact depth at 1.69 rather than the textbook 1
   "autocorrelated inputs; its behaviour is measured across a twelvefold range of series lengths, "
   "which is weaker than a derivation. The Giza increments anomaly of &sect;5.4 has no explanation. "
   "Two further Giza acquisitions have been obtained and not yet analysed, so the pre-registered "
-  "within-site repeatability test is untested. The robustness result of &sect;5.5 was obtained on "
-  "synthetic input only, and no upper bound is offered on how far an adversarially chosen filter "
-  "could push the contrast ratio; a filter-invariant replacement for criterion (a) is not "
-  "proposed here and is the most useful thing a reader could contribute. All sites are X-band "
-  "spotlight; nothing here bears on "
+  "within-site repeatability test is untested. The &sect;5.5 attack was obtained on "
+  "synthetic input only and searched only linear per-patch filters of length at most five; longer "
+  "or nonlinear operators are not characterised and may be worse. <b>No filter-invariant "
+  "replacement for either criterion is proposed here, and finding one is the single most useful "
+  "thing a reader could contribute.</b> The &sect;7 imagery question is open and its negative claim "
+  "provisional. All sites are X-band spotlight; nothing here bears on "
   "C-band or L-band. And this preprint has not been peer reviewed.")
 
 P("11. Conclusion", h1)
@@ -740,12 +761,15 @@ P("The reported depth in metres is exactly proportional to an investigation freq
   "at 128 sub-apertures an input containing nothing returns more contrast than a real scene. Planting "
   "a signal in the image before processing shows that below 8.4 times the pipeline&rsquo;s own noise "
   "a scene containing a real reflector reports <i>lower</i> confidence than an empty one.")
-P("I do not claim the published three-dimensional imagery is nothing but this artifact; three "
-  "attempts to reproduce its appearance from empty volumes failed, and that failure is reported in "
-  "&sect;7. Nor do I offer the contrast ratios here as detection margins: &sect;5.5 shows that "
-  "statistic can be driven past threshold on empty data by a filter that carries no information, "
-  "so it is the surface-pinning guard that is doing the work. "
-  "I do not claim that accumulating displacements is the wrong operation, nor that nothing "
+P("I do not claim the published three-dimensional imagery is nothing but this artifact. Four "
+  "attempts to reproduce its appearance from empty volumes did not settle the question, and "
+  "&sect;7 reports the fourth as unresolved rather than closed. Nor do I offer the statistics "
+  "here as detection margins: &sect;5.5 shows that both of this paper&rsquo;s decision criteria "
+  "can be defeated on empty data by filters that carry no information, one kernel defeating both "
+  "at once. The verdicts stand for the chain actually run and published, and are conditional on "
+  "it. That conditionality is general, and it is the reason the undisclosed settings of the work "
+  "examined here matter: a confidence figure cannot be evaluated against a pipeline nobody can "
+  "see. I do not claim that accumulating displacements is the wrong operation, nor that nothing "
   "lies beneath any of these sites. The measurement front end is real and remains valuable for "
   "surface-deformation monitoring. What fails reproduction and controls is the deep inference, and "
   "the specific defect is located, testable, and reproducible from the repository in minutes.")
