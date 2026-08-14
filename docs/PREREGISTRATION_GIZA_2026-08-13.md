@@ -72,3 +72,63 @@ about that comparison is made here, because the number does not yet exist.**
 ## Result
 
 *To be appended after the run. This section is deliberately empty at commit time.*
+
+---
+
+# RESULT — appended 13 August 2026, after the run
+
+Scene: `giza_2023-02-07_UMBRA-05_SICD.nitf` (240 MB, UMBRA-05, 7 Feb 2023).
+512x512 centre crop of a 5674x5351 scene. `dz_phys` = 2.11 m.
+Raw output: `runs/followup_nsub_giza_2023-02-07_UMBRA-05_SICD.nitf.json`.
+
+| `n_sub` | native C | fixed-window C | shuffle null | alignment null | C/align | peak (m) | **peak (cells)** | guard |
+|---|---|---|---|---|---|---|---|---|
+| 11 | 6.06 | 6.06 | 1.48 | 1.65 | 3.67 | 3.7 | **1.75** | PIN |
+| 16 | 4.69 | 3.27 | 1.42 | 1.52 | 2.15 | 3.6 | **1.71** | PIN |
+| 22 | 8.56 | 4.16 | 1.47 | 1.72 | 2.42 | 3.5 | **1.66** | PIN |
+| 32 | 23.65 | 6.26 | 1.47 | 1.82 | 3.43 | 3.5 | **1.66** | PIN |
+| 45 | 37.95 | 4.37 | 1.45 | 1.72 | 2.54 | 3.5 | **1.66** | PIN |
+| 64 | 6.99 | 3.82 | 2.24 | 2.77 | 1.38 | 3.2 | **1.52** | PIN |
+| 90 | 17.19 | 4.27 | 2.41 | 2.84 | 1.51 | 3.2 | **1.52** | PIN |
+| 128 | 108.90 | 3.29 | 1.57 | 1.80 | 1.82 | 3.6 | **1.71** | PIN |
+
+## Scored against the predictions
+
+| Prediction | Result | |
+|---|---|---|
+| Peak depth 1.6–1.8 cells | **1.52 – 1.75** | **partial miss** — 6/8 inside, the `n_sub` 64 and 90 rows sit at 1.52, below the predicted floor. All 8 remain inside the manuscript's 1.2–1.9 band |
+| Surface-pinned at every count | **8/8** | hit |
+| Detections above 5x | **0/8** | hit |
+| Contrast at `n_sub` = 11, order 3–5 | **6.06** | **miss, high** — higher than any of the five previous sites at this setting |
+| Contrast at `n_sub` = 128, order 10^2 and at or below ~275 | **108.90** | hit |
+| Fixed-window spread comparable to other sites | **1.9x** (3.27–6.26) | hit — identical to Komati and Bingham |
+| Native spread | **23.2x** (4.69–108.90) | inside the 8.9–98.9x range of the other five |
+
+**None of the four falsification conditions was met.** The peak did not leave the
+band, it did not survive the guard, nothing cleared 5x, and the behaviour matches
+five proxy sites on two other continents.
+
+## The two misses, stated plainly
+
+**1. Giza returns the highest raw contrast of any site tested at `n_sub` = 11.**
+6.06, against Komati 2.76, Cairo 2.75, Butte 3.33, Bingham 3.87 and Vesuvius 4.11.
+Its alignment-referenced ratio, 3.67, is also the highest recorded. This is the one
+number in the run that a defender of the method could reasonably seize on, and it
+must be reported rather than buried. It does **not** clear the manuscript's 5x rule
+against either null, and the peak it produces is 1.75 cells down and surface-pinned
+— the same artifact, slightly louder.
+
+**2. The peak sits at 1.52 cells at `n_sub` 64 and 90**, below the predicted 1.6
+floor. Both rows also carry unusually high nulls (shuffle 2.24 and 2.41 against
+~1.45 elsewhere), which is what drags C/align down to 1.38–1.51. Not investigated.
+
+## What this establishes
+
+The method returns the same surface-pinned peak, at the same depth in resolution
+cells, over the Giza plateau as it does over a copper mine in Utah, a coal-fired
+power station in South Africa, a hard-rock mining district in Montana, an active
+volcano in Italy and a city centre in Egypt. Zero detections in eight runs.
+
+The manuscript's central claim — that the reported depth is a property of the
+processing chain and not of the ground — survives its most important test, on the
+one site the original claim is actually about.

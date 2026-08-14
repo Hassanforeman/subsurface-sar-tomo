@@ -1,6 +1,6 @@
 # Subsurface SAR Doppler Tomography — Controlled Reproduction & Refutation
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21065674.svg)](https://doi.org/10.5281/zenodo.21065674)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21065675.svg)](https://doi.org/10.5281/zenodo.21065675)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 An independent, **controls-first reproduction** of the single-pass SAR Doppler
@@ -20,7 +20,7 @@ What the controls show, step by step:
 - The reported depths follow from a physically impossible **~22 kHz** investigation
   frequency and are an arbitrary **relabelling of the depth axis**, not a measurement.
 - A faithful reproduction on **Butte, MT** (a densely mapped mining district) yields a
-  confident **1720× "detection"** that the guards expose as a **surface-pinned artifact**
+  confident high-contrast **"detection"** that the guards expose as a **surface-pinned artifact**
   matching none of the documented workings.
 - **Five sites across two independent sensors** (Umbra ×4, Capella ×1) — including the
   authors' own **Vesuvius** — are statistically indistinguishable from their nulls, while

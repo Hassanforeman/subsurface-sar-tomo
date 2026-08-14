@@ -648,18 +648,42 @@ def experiment_increments(slc, n_sub, patch, n_patch, overlap, window, estimator
               f"{100*np.mean(pks <= guard_cells):>8.0f}%")
 
     print("-" * 104)
-    n_walk = [r for r in rows if r["input"] == "white noise"
-              and r["series"].startswith("cumsum")][0]
-    n_inc = [r for r in rows if r["input"] == "white noise"
-             and r["series"] == "increments"][0]
-    if n_inc["peak_median"] > n_walk["peak_median"] + 0.5 or n_inc["pinned_frac"] < 0.5:
-        print("\n  -> Removing the cumulative sum MOVES the peak away from the surface.")
-        print("     The running total generates the artifact. The cumsum hypothesis")
-        print("     in section 11.2 is supported.")
-    else:
-        print("\n  -> The peak SURVIVES without the cumulative sum. The cumsum hypothesis")
-        print("     in section 11.2 is WRONG and must be withdrawn. The artifact")
-        print("     originates elsewhere in the chain.")
+
+    # CORRECTED 14 Aug 2026. The previous verdict read only the WHITE NOISE rows
+    # and announced a conclusion about the run as a whole. On the Giza scene the
+    # noise arm unpins while the REAL arm does not (1.75 -> 1.88 cells, still
+    # pinned), so the old message printed a statement its own data contradicted.
+    # Third printer in this repository found to do this; all now read the row.
+    def _row(inp, ser):
+        m = [r for r in rows if r["input"] == inp
+             and (r["series"].startswith("cumsum") if ser == "cumsum"
+                  else r["series"] == "increments")]
+        return m[0] if m else None
+
+    for inp, tag in (("real", "REAL DATA"), ("white noise", "WHITE NOISE")):
+        w, i = _row(inp, "cumsum"), _row(inp, "increments")
+        if w is None or i is None:
+            continue
+        moved = i["peak_median"] - w["peak_median"]
+        unpinned = i["pinned_frac"] < 0.5
+        print(f"\n  {tag}: removing the cumulative sum moves the peak "
+              f"{w['peak_median']:.2f} -> {i['peak_median']:.2f} cells "
+              f"({moved:+.2f}), contrast {w['contrast_median']:.2f} -> "
+              f"{i['contrast_median']:.2f}, pinned {100*w['pinned_frac']:.0f}% -> "
+              f"{100*i['pinned_frac']:.0f}%.")
+        if moved > 0.5 and unpinned:
+            print(f"     -> UNPINS. Consistent with the running total generating "
+                  f"the artifact on this arm.")
+        elif i["contrast_median"] < w["contrast_median"] * 0.6:
+            print(f"     -> Contrast collapses but the peak STAYS PINNED. The "
+                  f"running total accounts for the contrast on this arm but is "
+                  f"NOT shown to be necessary for the pinning. Report as an open "
+                  f"item; do not describe this run as unpinning.")
+        else:
+            print(f"     -> Neither the peak nor the contrast responds. The cumsum "
+                  f"account is not supported on this arm.")
+    print("\n  Read the two arms separately. A conclusion drawn from the noise arm "
+          "alone\n  does not license a statement about the real scene.")
     return rows
 
 
@@ -932,10 +956,14 @@ def experiment_detrend(lengths, degrees, n_patch, n_trials, velocity, f_invest,
               for d in degrees]
     monotone = all(b2 >= b1 - 1e-9 for b1, b2 in zip(by_deg, by_deg[1:]))
     if monotone and by_deg[-1] > by_deg[0] + 1:
-        print("\n  -> The peak bin ADVANCES with detrend degree and is largely independent")
-        print("     of series length, exactly as a 1/f^2 spectrum truncated at the lowest")
-        print("     surviving mode predicts. The fixed shallow peak has an analytic")
-        print("     explanation, not merely an empirical one.")
+        print("\n  -> The peak bin ADVANCES with detrend degree.")
+        print("     CORRECTED 14 Aug 2026: an earlier version of this message said the")
+        print("     peak BIN is 'largely independent of series length'. That is FALSE —")
+        print("     bins span 4 to 48 at degree 0. The invariant is the peak DEPTH IN")
+        print("     RESOLUTION CELLS (bin x length / 598), not the bin index.")
+        print("     This is an EMPIRICAL law. The algebra from a degree-d detrend of a")
+        print("     1/f^2 series to the observed 1.69 +/- 0.02 cells is NOT closed; the")
+        print("     constant 0.856 is undetermined. Do not report it as derived.")
     else:
         print("\n  -> The peak bin does NOT advance cleanly with degree. The 1/f^2 account")
         print("     is not supported; treat the fixed peak as an empirical result only.")
