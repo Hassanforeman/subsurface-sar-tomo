@@ -45,13 +45,20 @@ from tomogram import (DZ_TARGET, steering, analytic1d, tomogram_from_observation
 
 
 def fir(M, k):
-    """Apply FIR kernel k along the look axis of each patch, independently."""
+    """Apply FIR kernel k along the look axis of each patch, independently.
+
+    CENTRED, with edge padding, so that a symmetric kernel introduces no delay.
+    An earlier version padded (L-1) on both sides and slid, which delayed the
+    output by (L-1)//2 samples. On an 11-sample record that is not a negligible
+    difference and it made two nominally identical [1,2,1]/4 arms disagree
+    (median ratio 5.97 vs 7.70). Fixed, and every result re-run under this
+    convention."""
     k = np.asarray(k, float)
-    p = len(k) - 1
-    P = np.pad(M, ((0, 0), (p, p)), mode="edge")
+    L = len(k)
+    P = np.pad(M, ((0, 0), ((L - 1) // 2, L // 2)), mode="edge")
     out = np.empty_like(M)
     for i in range(M.shape[1]):
-        out[:, i] = (P[:, i:i + len(k)] * k[::-1]).sum(axis=1)
+        out[:, i] = (P[:, i:i + L] * k[::-1]).sum(axis=1)
     return out
 
 

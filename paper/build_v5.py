@@ -100,10 +100,11 @@ P("<b>Abstract.</b> In 2022&ndash;2025, F. Biondi and C. Malanga reported that D
   "128 sub-apertures an input containing nothing returns more contrast than a real scene "
   "(274.85 against 128.64). <b>Fourth, neither of this paper&rsquo;s own decision criteria "
   "survives undisclosed preprocessing:</b> on an input containing no scene, a low-pass filter "
-  "applied to each patch independently drives 80% of blocks past the 5&times; contrast threshold, "
-  "a high-pass filter moves 100% of them out past the surface guard, and a four-tap kernel found "
-  "by direct search does <b>both at once</b>, reporting <b>36% of empty blocks as detections "
-  "under the full rule</b>. A survey of 137 operators found none &mdash; only optimisation did. "
+  "applied to each patch independently drives 97% of blocks past the 5&times; contrast threshold, "
+  "a high-pass filter moves 100% of them out past the surface guard, and a five-tap kernel found "
+  "by direct search does <b>both at once, reporting every one of 200 empty blocks as a detection "
+  "under the full rule</b> &mdash; 98% of them even against a 95th-percentile null. A survey of "
+  "137 operators found one marginal case at 2%; only optimisation exposed the failure. "
   "The results here are unaffected, because no such filter is applied and the chain is published; "
   "but it follows that a confidence figure attached to a tomogram is uninterpretable unless the "
   "whole preprocessing chain is disclosed, which is an argument against this paper&rsquo;s "
@@ -494,12 +495,12 @@ P("The tests below use an input containing <b>no scene</b> &mdash; band-limited 
   "blocks, the analysis geometry used for every site in Table 2.")
 
 tbl = [["Per-patch operator, empty input", "Ratio", "Peak (cells)", "Clears 5&times;", "Unpinned", "<b>False detections</b>"],
-       ["None &mdash; the pipeline as run everywhere in this paper", "2.43", "1.73", "0%", "0%", "<b>0%</b>"],
-       ["The authors&rsquo; low-rank denoising step", "3.62", "1.71", "10%", "0%", "<b>0%</b>"],
-       ["<b>Low-pass</b> [1,2,1]/4 &mdash; defeats (a)", "5.83", "1.60", "<b>80%</b>", "0%", "<b>0%</b>"],
-       ["<b>High-pass</b> [1,&minus;2,1]/4 &mdash; defeats (b)", "1.29", "<b>4.71</b>", "0%", "<b>100%</b>", "<b>0%</b>"],
-       ["<b>Searched kernel [+0.226, &minus;0.278, +0.329, &minus;0.167]</b>",
-        "4.67", "<b>4.89</b>", "<b>36%</b>", "<b>100%</b>", "<b>36%</b>"]]
+       ["None &mdash; the pipeline as run everywhere in this paper", "2.45", "1.73", "0%", "0%", "<b>0%</b>"],
+       ["The authors&rsquo; low-rank denoising step", "3.53", "1.71", "10%", "0%", "<b>0%</b>"],
+       ["<b>Low-pass</b> [1,2,1]/4 &mdash; defeats (a) only", "7.71", "1.67", "<b>97%</b>", "0%", "<b>0%</b>"],
+       ["<b>High-pass</b> [1,&minus;2,1]/4 &mdash; defeats (b) only", "1.28", "<b>4.21</b>", "0%", "<b>100%</b>", "<b>0%</b>"],
+       ["<b>Searched kernel [&minus;0.169, +0.159, &minus;0.312, +0.182, &minus;0.178]</b>",
+        "<b>12.52</b>", "<b>4.97</b>", "<b>100%</b>", "<b>100%</b>", "<b>100%</b>"]]
 tbl = [[Paragraph(c, ParagraphStyle("tc5", parent=body, fontSize=8.5, leading=10, spaceAfter=0))
         for c in row] for row in tbl]
 t = Table(tbl, colWidths=[2.5*inch, 0.6*inch, 0.85*inch, 0.75*inch, 0.7*inch, 0.85*inch])
@@ -513,26 +514,27 @@ t.setStyle(TableStyle([
     ("TOPPADDING", (0,0), (-1,-1), 2.5), ("BOTTOMPADDING", (0,0), (-1,-1), 2.5)]))
 story.append(t)
 P("Table 4. Per-patch operators against this paper&rsquo;s own decision rule, on an input containing "
-  "no scene. 200 blocks per row, 64 null permutations, guard at 2.0 cells. A low-pass filter defeats "
-  "criterion (a); a high-pass filter defeats criterion (b); <b>a kernel found by direct search "
-  "defeats both at once, reporting 36% of empty blocks as detections under the full rule.</b>", cap)
+  "no scene. 200 blocks per row, 64 null permutations, guard at 2.0 cells, independent seed. A "
+  "low-pass filter defeats criterion (a) while pinning the peak harder; a high-pass filter defeats "
+  "criterion (b) while the ratio collapses; <b>a five-tap kernel found by direct search defeats "
+  "both at once, reporting every one of 200 empty blocks as a detection under the full rule.</b>", cap)
 
-P("<b>The two criteria are in tension, which is why a survey missed this.</b> Because depth in cells "
-  "is a frequency, moving the peak out past the guard requires shifting spectral energy upward, and "
-  "high-frequency content in accumulated noise is patch-specific &mdash; so patches stop agreeing and "
-  "the ratio collapses. Conversely, raising the ratio requires concentrating energy in the "
+P("<b>The two criteria are in tension, which is why a survey nearly missed this.</b> Because depth "
+  "in cells is a frequency, moving the peak past the guard requires shifting spectral energy upward, "
+  "and high-frequency content in accumulated noise is patch-specific &mdash; so patches stop agreeing "
+  "and the ratio collapses. Conversely, raising the ratio requires concentrating energy in the "
   "low-frequency mode patches <i>share</i>, which pins the peak harder. Across 137 hand-chosen and "
-  "randomly drawn operators the median ratio and median peak depth correlate at <b>&minus;0.407</b>, "
-  "and <b>none</b> produced a false detection. Only a direct optimisation against the joint objective "
-  "&mdash; 4,000 screened kernels followed by hill-climbing &mdash; found the region where both are "
-  "satisfied. <b>That a broad survey found nothing is therefore not evidence of safety</b>, and is "
-  "reported here because this paper very nearly drew that conclusion.")
-
-P("A more conservative null hardens the rule but does not repair it. Scoring against the "
-  "<b>95th percentile</b> of the alignment null rather than its median takes the low-pass filter from "
-  "80% of empty blocks above threshold to 8%, and the searched kernel from 36% false detections to "
-  "<b>4%</b>. Four percent of blocks containing nothing is still not zero.")
-
+  "randomly drawn operators the median ratio and median peak depth correlate at <b>&minus;0.379</b>; "
+  "the 17 operators that clear 5&times; have mean peak depth 1.58 cells against 2.19 for the 120 that "
+  "do not. <b>The survey found exactly one operator producing any false detection, at 2%</b>, which "
+  "reads as noise. Only a direct optimisation against the joint objective &mdash; 4,000 screened "
+  "kernels followed by hill-climbing &mdash; found the region where the rule fails completely. "
+  "<b>A broad survey returning nothing is therefore not evidence of safety</b>, and this paper very "
+  "nearly drew that conclusion from one.")
+P("A more conservative null does not repair it. Scoring against the <b>95th percentile</b> of the "
+  "alignment null rather than its median takes the low-pass filter from 97% of empty blocks above "
+  "threshold down to 8%, but leaves the searched kernel at <b>98% false detections</b>. Hardening the "
+  "threshold does not help against an operator selected to beat it.")
 P("<b>What follows, and what does not.</b> The results reported in this paper are unaffected: no "
   "per-patch filter of any kind is applied anywhere in this pipeline, the processing chain is fully "
   "specified, and every setting is published and re-runnable. Tables 2 and 3 stand <i>for the "
@@ -551,9 +553,15 @@ P("The general conclusion is the one that matters, and it cuts against this pape
 P("Two limitations of this experiment are stated plainly. It uses <b>synthetic input only</b>; real "
   "scenes carry surface texture and residual phase that may interact with these operators differently, "
   "and no real-scene arm has been run. And the operator family searched is <b>linear, per-patch and "
-  "finite-impulse-response of length at most five</b> &mdash; no claim is made about the behaviour of "
-  "nonlinear or longer operators, which may be worse.")
-
+  "finite-impulse-response of length at most five</b> &mdash; no claim is made about nonlinear or "
+  "longer operators, which may be worse.")
+P("<b>Correction.</b> The first version of this experiment applied its filters with an off-centre "
+  "edge-padding convention that delayed the output by one sample on an eleven-sample record. Two "
+  "nominally identical [1,2,1]/4 arms consequently disagreed (median ratio 5.97 against 7.70). The "
+  "convention was corrected to a centred one, every arm re-run, and the numbers above are the "
+  "corrected values. The correction made the result <i>stronger</i> &mdash; the searched kernel moved "
+  "from 36% false detections to 100% &mdash; which is recorded here because it would have been "
+  "convenient not to check.")
 P("Separately, and reported for completeness rather than as evidence: forcing the retained rank of "
   "the patch-by-look matrix down concentrates the depths patches report &mdash; 79 to 80 distinct "
   "depth bins of 300 at rank 3 against 155 to 209 untruncated, and at rank 1 every patch returns the "
