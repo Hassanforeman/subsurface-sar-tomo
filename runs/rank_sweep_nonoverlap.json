@@ -1,0 +1,110 @@
+{
+ "label": "noise_c1536",
+ "source": "noise",
+ "n_sub": 11,
+ "patch": 64,
+ "stride": 64,
+ "singular_value_energy": [
+  0.3701905971595539,
+  0.20569946897028235,
+  0.12198690073361089,
+  0.09588399619401908,
+  0.06709976423489601,
+  0.05140640672716115,
+  0.044569696522674826,
+  0.04316316945780177,
+  3.616145637021424e-30,
+  4.430312466482106e-31,
+  1.015891146158529e-31
+ ],
+ "arms": [
+  {
+   "arm": "no low-rank step (published pipeline as run here)",
+   "kept_variance": null,
+   "n_tiles": 576,
+   "peak_median": 1.9682274247491638,
+   "peak_p05": 1.5267558528428093,
+   "peak_p95": 4.4515050167224075,
+   "peak_std": 0.9255981086073128,
+   "n_distinct_depths": 155,
+   "frac_at_median": 0.012152777777777778
+  },
+  {
+   "arm": "truncated to rank 1",
+   "kept_variance": 0.3701905971595539,
+   "n_tiles": 576,
+   "peak_median": 1.5819397993311035,
+   "peak_p05": 1.5819397993311035,
+   "peak_p95": 1.5819397993311035,
+   "peak_std": 2.220446049250313e-16,
+   "n_distinct_depths": 1,
+   "frac_at_median": 1.0
+  },
+  {
+   "arm": "truncated to rank 2",
+   "kept_variance": 0.5758900661298363,
+   "n_tiles": 576,
+   "peak_median": 1.6923076923076923,
+   "peak_p05": 1.5819397993311035,
+   "peak_p95": 1.9130434782608696,
+   "peak_std": 0.11820554787106644,
+   "n_distinct_depths": 19,
+   "frac_at_median": 0.041666666666666664
+  },
+  {
+   "arm": "truncated to rank 3",
+   "kept_variance": 0.6978769668634471,
+   "n_tiles": 576,
+   "peak_median": 1.857859531772575,
+   "peak_p05": 1.5083612040133778,
+   "peak_p95": 2.7591973244147154,
+   "peak_std": 0.37478527589678395,
+   "n_distinct_depths": 79,
+   "frac_at_median": 0.03298611111111111
+  },
+  {
+   "arm": "truncated to rank 5",
+   "kept_variance": 0.8608607272923623,
+   "n_tiles": 576,
+   "peak_median": 1.931438127090301,
+   "peak_p05": 1.5267558528428093,
+   "peak_p95": 3.4214046822742477,
+   "peak_std": 0.6305731144894967,
+   "n_distinct_depths": 121,
+   "frac_at_median": 0.015625
+  },
+  {
+   "arm": "truncated to rank 8",
+   "kept_variance": 1.0,
+   "n_tiles": 576,
+   "peak_median": 1.9682274247491638,
+   "peak_p05": 1.5267558528428093,
+   "peak_p95": 4.4515050167224075,
+   "peak_std": 0.9255981086073128,
+   "n_distinct_depths": 155,
+   "frac_at_median": 0.012152777777777778
+  },
+  {
+   "arm": "truncated to rank 11",
+   "kept_variance": 1.0,
+   "n_tiles": 576,
+   "peak_median": 1.9682274247491638,
+   "peak_p05": 1.5267558528428093,
+   "peak_p95": 4.4515050167224075,
+   "peak_std": 0.9255981086073128,
+   "n_distinct_depths": 155,
+   "frac_at_median": 0.012152777777777778
+  },
+  {
+   "arm": "LRSD default (effective rank 8 of 11)",
+   "kept_variance": null,
+   "n_tiles": 576,
+   "peak_median": 1.8394648829431435,
+   "peak_p05": 1.5451505016722407,
+   "peak_p95": 3.2834448160535112,
+   "peak_std": 0.64829876739234,
+   "n_distinct_depths": 114,
+   "frac_at_median": 0.034722222222222224
+  }
+ ]
+}

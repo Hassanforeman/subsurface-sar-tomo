@@ -25,7 +25,7 @@ TITLE = ("No Reproducible Evidence for Deep Subsurface Structures Beneath the Gi
          "A Controlled Reproduction of Single-Source SAR Doppler Micro-Motion Tomography")
 AUTHOR = "Hassan Foreman"
 AFFIL = "Independent researcher"
-DATE = "August 2026 — preprint v5 (Giza plateau added; mechanism identified; nulls re-based; see §10)"
+DATE = "August 2026 — preprint v5 (Giza plateau added; mechanism identified; decision statistic stress-tested; nulls re-based; see §10)"
 
 ss = getSampleStyleSheet()
 body = ParagraphStyle("body", parent=ss["BodyText"], fontName="Times-Roman",
@@ -98,7 +98,15 @@ P("<b>Abstract.</b> In 2022&ndash;2025, F. Biondi and C. Malanga reported that D
   "transform, and removing a degree-2 polynomial leaves it near 1.7 cells. Accumulated Gaussian noise "
   "with <b>no SAR pipeline at all</b> reproduces both the fixed depth and the contrast scaling; at "
   "128 sub-apertures an input containing nothing returns more contrast than a real scene "
-  "(274.85 against 128.64). Fourth, planting a displacement signature in the image before processing "
+  "(274.85 against 128.64). <b>Fourth, a contrast figure of the kind the published work reports is "
+  "not a safe statistic:</b> on 200 blocks of an input containing no scene, a three-tap per-patch "
+  "smoother that transfers no information between patches drives <b>98%</b> of them past the "
+  "5&times; contrast-to-null threshold used here, and the authors&rsquo; own denoising step drives "
+  "10% past it, from 0% unfiltered. None escapes the surface-pinning guard, so no false detection "
+  "results &mdash; but that means the verdicts in this paper are carried by the depth criterion "
+  "rather than the contrast ratio, and that the published tomograms, which report a confidence "
+  "figure with neither a matched null nor a depth check, rest on the criterion that fails. "
+  "Fifth, planting a displacement signature in the image before processing "
   "gives a detection floor of 0.2 pixels, 8.4&times; the pipeline&rsquo;s own noise, below which a "
   "scene containing a genuine reflector reports <i>lower</i> confidence than an empty one. I state "
   "plainly what I have not shown: three attempts to reproduce the appearance of the published 3-D "
@@ -284,7 +292,11 @@ P("<b>Two changes from earlier versions of this table, both of which strengthen 
   "2%, and at 128 sub-apertures noise <i>exceeds</i> real data. The ratios printed in versions 1&ndash;4 "
   "(2.8&times;, 3.3&times;, 4.1&times;) should not be quoted as detection margins. The binary "
   "verdicts &mdash; no detection at any site &mdash; are unchanged, and are now measured against the "
-  "harsher standard.")
+  "harsher standard. <b>The alignment null has a limitation of its own</b>, established in "
+  "&sect;5.5: because it preserves each patch&rsquo;s depth profile and randomises only alignment, "
+  "it is blind to per-patch filtering, and an ordinary smoother drives the ratio past 5&times; on "
+  "data containing nothing. The contrast ratio is therefore not by itself a detection statistic in "
+  "this paper either; the absolute surface-pinning guard is what carries the verdicts.")
 
 P("<b>Corrections to individual rows.</b> The Bingham Canyon row read &ldquo;front-end only / no "
   "signal&rdquo; in versions 1&ndash;4; that is wrong, and the site produces a full surface-pinned "
@@ -379,7 +391,7 @@ P("<b>Giza returns the highest raw contrast of the six sites, and it is still no
   "of that excess is a window-taper choice: under Blackman the same scene gives 4.69.")
 
 fig("tomogram_giza_2023-02-07_UMBRA-05_SICD.nitf.png",
-    "Figure 4. Giza plateau, 11 sub-apertures. <b>Top left:</b> the real tomogram. <b>Top right:</b> "
+    "Figure 5. Giza plateau, 11 sub-apertures. <b>Top left:</b> the real tomogram. <b>Top right:</b> "
     "the same data with look order shuffled &mdash; pure noise. The two are visually "
     "indistinguishable. <b>Bottom left:</b> the positive control, a synthetic reflector injected at "
     "relative depth 20, which produces a <i>continuous horizontal band across every patch at one "
@@ -393,7 +405,7 @@ P("A natural objection to the figures in this paper is that they are cross-secti
   "like for like. To close that gap the pipeline was run in plan view over the entire 5674&times;5351 "
   "array &mdash; 462 tiles covering the plateau, the pyramid field and Giza city.")
 fig("planview_giza_2023-02-07_UMBRA-05.png",
-    "Figure 5. Plan view over the whole Giza scene, 462 tiles. <b>Top left:</b> surface brightness &mdash; "
+    "Figure 6. Plan view over the whole Giza scene, 462 tiles. <b>Top left:</b> surface brightness &mdash; "
     "the plateau, the city and the linear features are plainly visible; the front end sees Giza "
     "perfectly well. <b>Top centre and right:</b> tomogram power at the artifact depth and at a "
     "deeper slice. Both are salt-and-pepper with no morphology whatsoever. Correlation between "
@@ -462,6 +474,84 @@ P("Two candidate explanations were tested and both failed: coregistration qualit
   "necessary</b> for the surface-pinning at the site in this paper&rsquo;s title. The published "
   "operator remains surface-pinned at Giza with no detection.")
 
+P("5.5 The contrast criterion is not robust to ordinary filtering, and the depth guard is what "
+  "carries the verdicts", h2)
+P("Every verdict in this paper rests on two criteria applied together: <b>(a)</b> contrast above "
+  "five times the alignment null, and <b>(b)</b> a peak within two resolution cells of the surface. "
+  "Criterion (a) is the kind of confidence figure the published work reports. Criterion (b) is this "
+  "paper&rsquo;s addition. This subsection tests how much each is worth, and the answer is "
+  "uncomfortable for (a).")
+P("The alignment null preserves each patch&rsquo;s depth profile exactly and randomises only whether "
+  "patches <i>agree</i> on a depth (&sect;3.4). It is therefore invariant to <i>where</i> each patch "
+  "peaks. Any operation that sharpens each patch&rsquo;s own profile &mdash; transferring no "
+  "information whatever between patches &mdash; raises the numerator and leaves the denominator "
+  "alone. That is not a hypothetical: it is what ordinary smoothing does.")
+
+P("The test uses an input containing <b>no scene</b> &mdash; band-limited complex noise, no satellite "
+  "data &mdash; tiled through the identical pipeline and drawn into 200 independent 24-patch blocks, "
+  "the analysis geometry used for every site in Table 2. Each block is scored under four "
+  "preprocessing arms.")
+
+tbl = [["Preprocessing arm, 200 blocks, no scene in the input", "Ratio", "Clears 5&times;",
+        "Peak (cells)", "Pinned", "<b>False detections</b>"],
+       ["None &mdash; the pipeline as run everywhere else here", "2.38", "0%", "1.73", "100%", "<b>0%</b>"],
+       ["The authors&rsquo; own low-rank denoising step", "3.53", "10%", "1.71", "100%", "<b>0%</b>"],
+       ["<b>A three-tap [1,2,1]/4 per-patch smoother</b>", "<b>7.70</b>", "<b>98%</b>", "1.67", "100%", "<b>0%</b>"],
+       ["Per-patch rescale (depth-neutral control)", "2.22", "0%", "1.73", "100%", "<b>0%</b>"]]
+tbl = [[Paragraph(c, ParagraphStyle("tc5", parent=body, fontSize=8.5, leading=10, spaceAfter=0))
+        for c in row] for row in tbl]
+t = Table(tbl, colWidths=[2.35*inch, 0.55*inch, 0.72*inch, 0.72*inch, 0.55*inch, 0.85*inch])
+t.repeatRows = 1
+t.setStyle(TableStyle([
+    ("FONTNAME", (0,0), (-1,0), "Times-Bold"), ("FONTSIZE", (0,0), (-1,-1), 8.5),
+    ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#e8e8e8")),
+    ("GRID", (0,0), (-1,-1), 0.4, colors.HexColor("#888888")),
+    ("VALIGN", (0,0), (-1,-1), "MIDDLE"),
+    ("TOPPADDING", (0,0), (-1,-1), 2.5), ("BOTTOMPADDING", (0,0), (-1,-1), 2.5)]))
+story.append(t)
+P("Table 4. The two decision criteria tested separately on data containing nothing. The smoother acts "
+  "on each patch <i>independently</i> and is about as innocuous a preprocessing step as exists; it "
+  "clears this paper&rsquo;s contrast rule on 98% of empty blocks. The depth-neutral rescale control "
+  "moves the ratio not at all, which locates the effect in the shaping of each patch&rsquo;s depth "
+  "profile rather than in amplitude. Repeated on strictly non-overlapping tiles from a "
+  "1536&times;1536 canvas the figures are 2.51 / 3.76 / 7.69 / 2.31 and 0% / 9% / 100% / 0%.", cap)
+
+fig("decision_robustness.png",
+    "Figure 7. <b>Left:</b> the contrast criterion. Each point is one 24-patch block of an input with "
+    "no scene; the bar is the median. A three-tap per-patch smoother lifts almost every block past "
+    "the 5&times; threshold. <b>Right:</b> the depth criterion, same blocks. All four arms remain "
+    "pinned inside the two-cell guard, so no arm produces a false detection under the full rule.",
+    width=6.3*inch)
+
+P("<b>The consequence for this paper.</b> Criterion (a) is not a safe detection statistic on its own. "
+  "It can be driven past threshold on empty data by a filter that adds no information, and the "
+  "alignment null &mdash; the more conservative of the two nulls this paper uses &mdash; cannot see "
+  "it. What prevents a false detection in all 800 block-scorings above is criterion (b): the peak "
+  "never leaves 1.67&ndash;1.73 cells, and the two-cell guard catches every one. <b>The verdicts in "
+  "Table 2 and Table 3 are carried by the depth guard, not by the contrast ratio</b>, and the ratios "
+  "quoted there should be read as descriptive rather than as the evidence. This is a limitation of "
+  "the method used here and it is reported as one.")
+P("<b>The consequence for the work under examination is larger.</b> The published tomograms are "
+  "presented with a confidence figure and <i>neither</i> control &mdash; no matched null and no depth "
+  "check &mdash; after a denoising chain that is nowhere documented. A contrast figure obtained "
+  "downstream of any smoothing step is close to uninformative, and this experiment puts a number on "
+  "how close: 98% of blocks containing nothing at all clear a 5&times; rule after three taps.")
+P("The authors&rsquo; own denoising step is the middle row, and it behaves the same way in kind but "
+  "less strongly: applied to each block it removes a median <b>47.9%</b> of the matrix by norm and "
+  "raises the leading component from 39.7% to 52.9% of the variance, lifting the ratio in every "
+  "block and past threshold in 10% of them. <b>Nothing here shows the published figures were "
+  "produced this way.</b> It shows that a documented and undisclosed-in-setting step is enough to "
+  "move an empty result across a threshold of the kind the published work relies on.")
+
+P("A related observation, reported for completeness rather than as evidence: forcing the retained "
+  "rank down concentrates the depths the patches report &mdash; 79 to 80 distinct depth bins of 300 "
+  "at rank 3 against 155 to 209 untruncated, and at rank 1 every patch returns the same depth, which "
+  "is an algebraic identity rather than a finding. This is not specific to SAR or to this method: "
+  "pure synthetic random walks with no image, no sub-apertures and no pipeline of any kind reproduce "
+  "the sweep to within a few bins in 300 at every rank (1, 19, 78, 141, 208 against 1, 19, 80, 145, "
+  "209). It is a property of accumulate-and-detrend and so extends &sect;5.3 rather than adding an "
+  "independent line of evidence.")
+
 P("6. How large a real signal would have to be", h1)
 P("A control that injects a signal into the trajectory <i>after</i> accumulation and detrending "
   "demonstrates only that the inverter can recover a tone written in its own coordinates. A stronger "
@@ -485,7 +575,7 @@ t.setStyle(TableStyle([
     ("VALIGN", (0,0), (-1,-1), "MIDDLE"),
     ("TOPPADDING", (0,0), (-1,-1), 2.5), ("BOTTOMPADDING", (0,0), (-1,-1), 2.5)]))
 story.append(t)
-P("Table 4. A reflector planted at 3.30 cells in the Giza scene before processing. The "
+P("Table 5. A reflector planted at 3.30 cells in the Giza scene before processing. The "
   "pipeline&rsquo;s own unplanted trajectory RMS is 0.02372 px, and amplitudes are given as multiples "
   "of it. The detection floor is 0.2 px, 8.4&times; the noise.", cap)
 P("<b>Below the floor the statistic runs backwards.</b> A scene containing a genuine reflector at "
@@ -505,13 +595,13 @@ P("7. What could not be reproduced", h1)
 P("The public impact of this work is visual: renderings in which shaft-like and chamber-like forms "
   "appear beneath the plateau. Three attempts were made to reproduce that <i>appearance</i> from "
   "volumes containing no scene at all &mdash; a voxel scatter and an isosurface rendering at 11 "
-  "sub-apertures, and an isosurface at 128. They produce, respectively, vertical needles at a single "
-  "depth, discrete solid bodies in a shallow slab, and a continuous planar sheet spanning the whole "
-  "site. <b>None resembles the published figures.</b> No shafts, no vertical extent, no spirals, no "
+  "sub-apertures, and an isosurface at 128. They produce, respectively, vertical needles at a "
+  "single depth, discrete solid bodies in a shallow slab, and a continuous planar sheet spanning "
+  "the whole site. <b>None resembles the published figures.</b> No shafts, no vertical extent, no spirals, no "
   "architecture. Parameter tuning was stopped at that point because continuing would have been "
   "fitting.")
 fig("volume_noise_iso.png",
-    "Figure 6. Three-dimensional isosurface rendering of a volume built from band-limited complex "
+    "Figure 8. Three-dimensional isosurface rendering of a volume built from band-limited complex "
     "noise &mdash; no satellite data, no scene, no ground &mdash; through the identical pipeline, at "
     "three thresholds. Discrete solid bodies in a shallow slab. This is what the artifact looks like "
     "rendered in three dimensions, and it is <i>not</i> what the published figures look like.",
@@ -626,7 +716,11 @@ P("The constant that fixes the artifact depth at 1.69 rather than the textbook 1
   "autocorrelated inputs; its behaviour is measured across a twelvefold range of series lengths, "
   "which is weaker than a derivation. The Giza increments anomaly of &sect;5.4 has no explanation. "
   "Two further Giza acquisitions have been obtained and not yet analysed, so the pre-registered "
-  "within-site repeatability test is untested. All sites are X-band spotlight; nothing here bears on "
+  "within-site repeatability test is untested. The robustness result of &sect;5.5 was obtained on "
+  "synthetic input only, and no upper bound is offered on how far an adversarially chosen filter "
+  "could push the contrast ratio; a filter-invariant replacement for criterion (a) is not "
+  "proposed here and is the most useful thing a reader could contribute. All sites are X-band "
+  "spotlight; nothing here bears on "
   "C-band or L-band. And this preprint has not been peer reviewed.")
 
 P("11. Conclusion", h1)
@@ -648,7 +742,10 @@ P("The reported depth in metres is exactly proportional to an investigation freq
   "a scene containing a real reflector reports <i>lower</i> confidence than an empty one.")
 P("I do not claim the published three-dimensional imagery is nothing but this artifact; three "
   "attempts to reproduce its appearance from empty volumes failed, and that failure is reported in "
-  "&sect;7. I do not claim that accumulating displacements is the wrong operation, nor that nothing "
+  "&sect;7. Nor do I offer the contrast ratios here as detection margins: &sect;5.5 shows that "
+  "statistic can be driven past threshold on empty data by a filter that carries no information, "
+  "so it is the surface-pinning guard that is doing the work. "
+  "I do not claim that accumulating displacements is the wrong operation, nor that nothing "
   "lies beneath any of these sites. The measurement front end is real and remains valuable for "
   "surface-deformation monitoring. What fails reproduction and controls is the deep inference, and "
   "the specific defect is located, testable, and reproducible from the repository in minutes.")

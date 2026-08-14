@@ -47,6 +47,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from micromotion import detrend
 from tomogram import DZ_TARGET, steering, analytic1d, metric_depth_axis
 from sensitivity_sweep import decompose_subapertures_w, adjacent_trajectory_e
+from micromotion import lrsd_denoise
 
 
 def bandlimited_slc(canvas, bw_frac, rng):
@@ -64,23 +65,63 @@ def bandlimited_slc(canvas, bw_frac, rng):
     return (img / (np.abs(img).std() + 1e-30)).astype(np.complex128)
 
 
-def build_volume(looks, patch, stride, A, nz_keep):
+def build_volume(looks, patch, stride, A, nz_keep, use_lrsd=False, rank=0):
+    """Collect every tile's trajectory first, so the LRSD step (if requested)
+    can act across tiles exactly as `tomogram.py` applies it across patches:
+
+        obs, _ = lrsd_denoise(obs)      # obs is (n_patch, n_look)
+
+    lrsd_denoise returns the LOW-RANK component. Low rank across the patch axis
+    means "keep only what many patches share". Applied to independent per-tile
+    random walks, the truncated SVD keeps the dominant shared mode and gives it
+    to EVERY tile, so every tile then inverts to the same depth. That converts
+    independent noise into a spatially coherent structure by construction.
+    This is a documented step of the published method and was absent from the
+    first three rendering attempts."""
     H, W = looks.shape[1], looks.shape[2]
     rows = list(range(0, H - patch + 1, stride))
     cols = list(range(0, W - patch + 1, stride))
-    vol = np.zeros((len(rows), len(cols), nz_keep), dtype=float)
+    trajs = np.zeros((len(rows) * len(cols), A.shape[0]), dtype=float)
     t0 = time.time()
+    k = 0
     for i, r in enumerate(rows):
         for j, c in enumerate(cols):
             tile = looks[:, r:r + patch, c:c + patch]
-            traj = np.asarray(adjacent_trajectory_e(tile, dtype=np.complex128)[0],
-                              dtype=float)
-            prof = np.abs(A.conj().T @ analytic1d(detrend(traj, deg=2))) ** 2
-            vol[i, j] = prof[:nz_keep]
+            trajs[k] = np.asarray(adjacent_trajectory_e(tile, dtype=np.complex128)[0],
+                                  dtype=float)
+            k += 1
         el = time.time() - t0
         frac = (i + 1) / len(rows)
         print(f"  row {i+1}/{len(rows)}  {el:.0f}s, ~{el/frac - el:.0f}s left",
               flush=True)
+
+    obs = np.array([detrend(t, deg=2) for t in trajs], dtype=float)
+    if rank:
+        # Explicit truncated-SVD low-rank projection across the tile axis.
+        # LRSD's own regularisation parameter is not disclosed in any published
+        # source, and at its library default it barely truncates (rank 8 of 11
+        # on this data). This sweeps the parameter directly: keep only the `rank`
+        # strongest components SHARED ACROSS TILES and discard the rest.
+        U, sv, Vt = np.linalg.svd(obs, full_matrices=False)
+        kept = float((sv[:rank]**2).sum() / (sv**2).sum())
+        obs = (U[:, :rank] * sv[:rank]) @ Vt[:rank]
+        print(f"  truncated to rank {rank}: {100*kept:.1f}% of the variance retained",
+              flush=True)
+    if use_lrsd:
+        print("  applying LRSD across tiles (keeping the low-rank component) ...",
+              flush=True)
+        t1 = time.time()
+        obs, sparse = lrsd_denoise(obs)
+        rank = int(np.linalg.matrix_rank(obs, tol=1e-8))
+        print(f"    done in {time.time()-t1:.0f}s; low-rank component has rank {rank} "
+              f"of {min(obs.shape)}", flush=True)
+
+    vol = np.zeros((len(rows), len(cols), nz_keep), dtype=float)
+    k = 0
+    for i in range(len(rows)):
+        for j in range(len(cols)):
+            vol[i, j] = (np.abs(A.conj().T @ analytic1d(obs[k])) ** 2)[:nz_keep]
+            k += 1
     return vol, rows, cols
 
 
@@ -206,6 +247,10 @@ def main():
     ap.add_argument("--n-sub", type=int, default=11)
     ap.add_argument("--overlap", type=float, default=0.8)
     ap.add_argument("--window", default="hann")
+    ap.add_argument("--rank", type=int, default=0,
+                    help="truncate to this many shared components across tiles (0 = off)")
+    ap.add_argument("--lrsd", action="store_true",
+                    help="apply LRSD across tiles, as the published method does")
     ap.add_argument("--iso", action="store_true",
                     help="solid isosurface rendering instead of voxel scatter")
     ap.add_argument("--smooth", type=float, default=1.2,
@@ -253,7 +298,8 @@ def main():
     del img
     print(f"  done in {time.time()-t0:.0f}s; looks {looks.shape}")
 
-    vol, rows, cols = build_volume(looks, args.patch, args.stride, A, args.nz_keep)
+    vol, rows, cols = build_volume(looks, args.patch, args.stride, A, args.nz_keep,
+                               use_lrsd=args.lrsd, rank=args.rank)
     print(f"volume {vol.shape}  (north x east x depth)")
 
     out = args.out or f"runs/volume_{label}.png"

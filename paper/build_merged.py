@@ -25,7 +25,7 @@ TITLE = ("No Reproducible Evidence for Deep Subsurface Structures Beneath the Gi
          "A Controlled Reproduction of Single-Source SAR Doppler Micro-Motion Tomography")
 AUTHOR = "Hassan Foreman"
 AFFIL = "Independent researcher"
-DATE = "July 2026 — preprint v3 (merged reproduction + refutation; see Changes in v3, §3.4)"
+DATE = "August 2026 — preprint v4 (two withdrawals; see Changes in v4, §3.4)"
 
 ss = getSampleStyleSheet()
 body = ParagraphStyle("body", parent=ss["BodyText"], fontName="Times-Roman",
@@ -212,8 +212,13 @@ P("I ran the authors&rsquo; recipe (256 Doppler sub-apertures, multichromatic an
   "denoising, 22 kHz) over Butte, Montana &mdash; the most densely mapped underground mining "
   "district on Earth, whose West Camp workings (Travona, Emma, Ophir, Anselmo) are documented as "
   "100-ft-spaced levels from near surface to ~457 m, with a water table / mine pool at ~160 m. The "
-  "result (Figure 3) is a striking band at <b>1720&times; the null contrast</b> &mdash; it "
-  "<i>passes</i> a naive contrast-vs-null test as a detection. Yet the entire feature is pinned at "
+  "result (Figure 3) is a striking high-contrast band that <i>passes</i> a naive "
+  "contrast-vs-null test as a detection. <b>The numerical contrast at this setting is not "
+  "reported here.</b> It is a native, unfixed-window peak-to-median statistic evaluated on a "
+  "depth axis whose extent grows with the sub-aperture count while the bin count stays fixed, "
+  "so it is not comparable across settings and inflates without bound as that count is raised; "
+  "see the withdrawal note in &sect;3.4. What matters is the qualitative outcome, which does not "
+  "depend on the number: the entire feature is pinned at "
   "the surface (~4 m; 87% of all energy in the shallowest 5% of the axis), aligns with <i>none</i> "
   "of the documented levels or the 160 m water table, and only appears when the sub-aperture count "
   "is driven high. It is a surface/low-frequency residual concentrated by the high-order DFT. My "
@@ -224,7 +229,7 @@ P("I ran the authors&rsquo; recipe (256 Doppler sub-apertures, multichromatic an
   "(Section 3.4); at the authors&rsquo; settings the only confident feature is a surface artifact "
   "aligned with none of them.")
 fig("repro_2024-03-07-04-48-26_UMBRA-04_SICD.nitf.png",
-    "Figure 3. Reproduction on Butte, MT. Left: real tomogram (1720&times; null) &mdash; a confident "
+    "Figure 3. Reproduction on Butte, MT. Left: real tomogram &mdash; a confident "
     "band pinned at the surface. Centre: shuffled null. Right: documented workings (100-ft levels to "
     "457 m; water table ~160 m). The &lsquo;detection&rsquo; matches nothing real.", width=6.3*inch)
 
@@ -271,6 +276,25 @@ P("<b>Changes in v3 (July 2026).</b> The Komati Power Station row of Table 2 rea
   "conclusion in this paper changes. The error was found while stress-testing the pipeline against "
   "an external methodological objection; that work is documented in "
   "<font face=\"Courier\">docs/SENSITIVITY_RESPONSE_BIONDI.md</font> in the repository.", body)
+
+P("<b>Changes in v4 (August 2026) &mdash; two withdrawals.</b> <b>(i)</b> Earlier versions of this "
+  "preprint quoted the Butte reproduction as a &lsquo;1720&times;&rsquo; detection in the abstract, "
+  "&sect;3.3 and the conclusion. That figure is <b>withdrawn</b>. It is a native, unfixed-window "
+  "peak-to-median contrast computed at 256 Doppler sub-apertures; because the depth axis is built as "
+  "<font face=\"Courier\">linspace(0, n_sub&middot;&Delta;z/2, 300)</font>, its extent grows with the "
+  "sub-aperture count while the bin count stays fixed, so the statistic is not comparable across "
+  "settings. I withdrew an earlier &lsquo;194&times;&rsquo; claim on exactly this ground and failed to "
+  "carry the correction through to this figure. The qualitative result &mdash; a confident, "
+  "surface-pinned feature matching no documented working &mdash; is unchanged. <b>(ii)</b> Earlier "
+  "versions concluded that the Giza &lsquo;shafts,&rsquo; &lsquo;spirals&rsquo; and "
+  "&lsquo;chambers&rsquo; <i>are</i> the rendered geometry of this artifact. That sentence is "
+  "<b>withdrawn</b>. Three attempts to reproduce the appearance of the published three-dimensional "
+  "figures from volumes containing no scene at all produced none of the reported architectural "
+  "forms. The claim is therefore not supported by anything I have shown. What is supported is "
+  "narrower: the source documents no part of its visualisation pipeline &mdash; no renderer, "
+  "isosurface, threshold, dynamic range, colour scale or stacking count &mdash; so those figures are "
+  "not reproducible even in principle. Further corrections, including the look-order null used in "
+  "Table 2, are in preparation and have been reported to the recommender.", body)
 
 P("<b>Outstanding verification.</b> The Cairo (Capella) row has not been re-verified against the "
   "sub-aperture count stated above, because that scene is not held in the local archive. It is "
@@ -363,13 +387,15 @@ P("Reproduced faithfully from the authors&rsquo; own method and patent &mdash; w
   "it does produce are reproducible as artifacts. Its &lsquo;steering "
   "matrix&rsquo; is a DFT that returns structure from any input; its reported depths are set by a "
   "physically impossible 22 kHz frequency and are an arbitrary axis relabelling; a faithful run "
-  "produces a confident 1720&times; &lsquo;detection&rsquo; that is a surface-pinned artifact "
+  "produces a confident &lsquo;detection&rsquo; that is a surface-pinned artifact "
   "matching no known structure; and every real site across two independent sensors (Umbra and "
   "Capella), including the authors&rsquo; own Vesuvius, is "
   "indistinguishable from its null; and stacking five acquisitions of a known-empty site reinforces "
   "that surface-pinned artifact rather than revealing structure, so the appeal to &lsquo;200+ "
-  "scans&rsquo; supplies consistency, not corroboration. The Giza &lsquo;shafts,&rsquo; &lsquo;spirals,&rsquo; and "
-  "&lsquo;chambers&rsquo; are the rendered geometry of such artifacts, interpreted as architecture. "
+  "scans&rsquo; supplies consistency, not corroboration. I do <i>not</i> claim that the published "
+  "three-dimensional imagery is nothing but this artifact: those figures involve stacking, "
+  "denoising and display choices that are not documented in the source and that I have not been "
+  "able to reproduce (&sect;3.4). "
   "The measurement front-end is real and remains valuable for surface-deformation monitoring; only "
   "the deep-subsurface claim fails reproduction and controls. I frame this as a reproducibility "
   "result, openly testable, and welcome the decisive ground-truth experiment.")
@@ -379,9 +405,7 @@ P("All scenes are free Umbra Open Data and Capella Open Data (CC-BY 4.0); the ex
   "identifiers and acquisition parameters are listed in the repository. The full reproduction "
   "pipeline, the controls, the stress tests (including the frequency-relabelling and surface-pinning "
   "demonstrations), and the scripts that regenerate every figure in this paper are openly available at "
-  "https://github.com/Hassanforeman/subsurface-sar-tomo (archived at Zenodo, DOI 10.5281/zenodo.21671687, "
-  "release v1.1.0, which is the exact code state that produces the results reported here; the concept DOI "
-  "10.5281/zenodo.21065674 always resolves to the most recent release), with "
+  "https://github.com/Hassanforeman/subsurface-sar-tomo (archived at Zenodo, DOI 10.5281/zenodo.21065675), with "
   "the code under an MIT licence. Every analysis stage carries a synthetic self-test, so the pipeline "
   "can be validated against known truth before it is trusted on real data; a reader can reproduce the "
   "nulls, the artifact, the frequency-relabelling, and the stacking result from the scene IDs and the "

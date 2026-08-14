@@ -1,0 +1,62 @@
+{
+ "n_block": 200,
+ "n_patch": 24,
+ "n_perm": 64,
+ "source": "runs/obs_noise_c768_p64_s12_n11.npy",
+ "guard_cells": 2.0,
+ "arms": {
+  "none": {
+   "median": {
+    "contrast": 3.782602810061376,
+    "align": 1.5196109997151883,
+    "ratio": 2.381140990078784,
+    "peak_cells": 1.7290969899665551
+   },
+   "frac_above_5x": 0.0,
+   "frac_pinned": 1.0,
+   "frac_false_detection": 0.0
+  },
+  "LRSD default": {
+   "median": {
+    "contrast": 5.8093240250624225,
+    "align": 1.606639345957702,
+    "ratio": 3.5279221518581814,
+    "peak_cells": 1.7107023411371238
+   },
+   "frac_above_5x": 0.105,
+   "frac_pinned": 1.0,
+   "frac_false_detection": 0.0
+  },
+  "[1,2,1]/4 smoother": {
+   "median": {
+    "contrast": 13.71471204863578,
+    "align": 1.7456389413859907,
+    "ratio": 7.700404053269405,
+    "peak_cells": 1.673913043478261
+   },
+   "frac_above_5x": 0.975,
+   "frac_pinned": 1.0,
+   "frac_false_detection": 0.0
+  },
+  "per-patch rescale": {
+   "median": {
+    "contrast": 3.711694747295658,
+    "align": 1.635024193927717,
+    "ratio": 2.2228881924270847,
+    "peak_cells": 1.7290969899665551
+   },
+   "frac_above_5x": 0.0,
+   "frac_pinned": 1.0,
+   "frac_false_detection": 0.0
+  }
+ },
+ "lrsd_block_level": {
+  "removed_median": 0.4791170871204865,
+  "removed_min": 0.3688626753373133,
+  "removed_max": 0.5769245313387237,
+  "leading_before": 0.3966135314550925,
+  "leading_after": 0.5285665838378535,
+  "rank_median": 8.0,
+  "frac_rank_below_8": 0.44
+ }
+}
