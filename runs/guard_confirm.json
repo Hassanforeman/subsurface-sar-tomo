@@ -1,0 +1,65 @@
+{
+ "n_block": 200,
+ "n_patch": 24,
+ "n_perm": 64,
+ "seed": 4242,
+ "guard_cells": 2.0,
+ "source": "runs/obs_noise_c768_p64_s12_n11.npy",
+ "arms": [
+  {
+   "arm": "none",
+   "ratio_med": 2.450727828249539,
+   "ratio_p95": 1.7848337903808895,
+   "peak": 1.7290969899665551,
+   "clears5_med": 0.0,
+   "clears5_p95": 0.0,
+   "unpinned": 0.0,
+   "false_med": 0.0,
+   "false_p95": 0.0
+  },
+  {
+   "arm": "LRSD default",
+   "ratio_med": 3.4875339920640687,
+   "ratio_p95": 2.467296936955048,
+   "peak": 1.7107023411371238,
+   "clears5_med": 0.09,
+   "clears5_p95": 0.0,
+   "unpinned": 0.005,
+   "false_med": 0.0,
+   "false_p95": 0.0
+  },
+  {
+   "arm": "low-pass [1,2,1]/4",
+   "ratio_med": 7.708617761250372,
+   "ratio_p95": 5.003850491291699,
+   "peak": 1.673913043478261,
+   "clears5_med": 0.97,
+   "clears5_p95": 0.5,
+   "unpinned": 0.0,
+   "false_med": 0.0,
+   "false_p95": 0.0
+  },
+  {
+   "arm": "high-pass [1,-2,1]/4",
+   "ratio_med": 1.283700493053046,
+   "ratio_p95": 0.9885132113738468,
+   "peak": 4.212374581939799,
+   "clears5_med": 0.0,
+   "clears5_p95": 0.0,
+   "unpinned": 1.0,
+   "false_med": 0.0,
+   "false_p95": 0.0
+  },
+  {
+   "arm": "searched kernel",
+   "ratio_med": 12.521594066089568,
+   "ratio_p95": 8.223586964934348,
+   "peak": 4.966555183946488,
+   "clears5_med": 1.0,
+   "clears5_p95": 0.975,
+   "unpinned": 1.0,
+   "false_med": 1.0,
+   "false_p95": 0.975
+  }
+ ]
+}

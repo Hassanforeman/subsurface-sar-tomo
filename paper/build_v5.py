@@ -112,8 +112,9 @@ P("<b>Abstract.</b> In 2022&ndash;2025, F. Biondi and C. Malanga reported that D
   "Fifth, planting a displacement signature in the image before processing "
   "gives a detection floor of 0.2 pixels, 8.4&times; the pipeline&rsquo;s own noise, below which a "
   "scene containing a genuine reflector reports <i>lower</i> confidence than an empty one. I state "
-  "plainly what I have not shown: four attempts to reproduce the appearance of the published 3-D "
-  "figures from empty volumes all failed, so I do not claim those images are this artifact. This is a "
+  "plainly what I have not shown: of four attempts to reproduce the appearance of the published 3-D "
+  "figures from empty volumes, three failed outright and the fourth is unresolved (&sect;7), so I do "
+  "not claim those images are this artifact. This is a "
   "critique of method and mathematics, not of intent.", absst)
 S(2)
 P("<b>Keywords:</b> synthetic aperture radar; Doppler tomography; micro-motion; reproducibility; "
@@ -232,7 +233,7 @@ P("I ran the authors&rsquo; recipe (256 Doppler sub-apertures, multichromatic an
   "reported here.</b> It is a native, unfixed-window peak-to-median statistic evaluated on a "
   "depth axis whose extent grows with the sub-aperture count while the bin count stays fixed, "
   "so it is not comparable across settings and inflates without bound as that count is raised; "
-  "see the withdrawal note in &sect;3.4. What matters is the qualitative outcome, which does not "
+  "see the withdrawal note in &sect;10.1. What matters is the qualitative outcome, which does not "
   "depend on the number: the entire feature is pinned at "
   "the surface (~4 m; 87% of all energy in the shallowest 5% of the axis), aligns with <i>none</i> "
   "of the documented levels or the 160 m water table, and only appears when the sub-aperture count "
@@ -279,7 +280,7 @@ P("Table 2. Six free single-pass X-band sites across two independent sensors. <i
   "peak-to-median statistic at the pipeline default of 11 Doppler sub-apertures (512&times;512 centre "
   "crop, 64-pixel patches, 24 patches, 0.8 sub-band overlap, Hann taper, float64). <i>Peak depth</i> "
   "and <i>Pinned</i> span the full eight-point sub-aperture ladder (11 to 128) at each site; "
-  "<i>Pinned</i> uses the absolute two-cell guard of &sect;2. <i>Detections</i> counts runs exceeding "
+  "<i>Pinned</i> uses the absolute two-cell guard defined in &sect;5.5. <i>Detections</i> counts runs exceeding "
   "the 5&times; decision rule. <b>48 runs, 0 detections, every run surface-pinned.</b> Expressed in "
   "resolution cells the peak occupies 1.2&ndash;1.9 throughout.", cap)
 
@@ -363,7 +364,14 @@ P("4.1 Predictions were published before the data were processed", h2)
 P("To remove any suspicion that the analysis was tuned until it agreed with the other five sites, "
   "eight numerical predictions and four falsification conditions were committed to the public "
   "repository (commit <font face=\"Courier\">e4476d7</font>) while the scene was still downloading. "
-  "They are reproduced here <i>with their misses</i>.")
+  "They are reproduced here <i>with their misses</i>. The pre-registration nominated "
+  "acquisition <font face=\"Courier\">2023-03-08-07-57-53_UMBRA-04</font> as primary and listed "
+  "<font face=\"Courier\">2023-02-07-07-58-27_UMBRA-05</font> as the first of two within-site "
+  "repeats. <b>The scene analysed here is that first repeat, not the nominated primary.</b> The "
+  "substitution is recorded because it matters: the predictions were fixed before any Giza scene was "
+  "processed and the pre-registration text was never edited &mdash; the result section was appended "
+  "at a later commit &mdash; but a reader checking the two documents against each other would "
+  "otherwise find a discrepancy unexplained.")
 tbl = [["Prediction", "Result", "Outcome"],
        ["Peak depth 1.6 - 1.8 cells", "1.52 - 1.75", "<b>partial miss</b>"],
        ["Surface-pinned at every count", "8/8", "hit"],
@@ -439,7 +447,8 @@ P("The steering matrix builds <font face=\"Courier\">Kz[j] = j &middot; 2&pi;/(L
   "&Delta;z)</font> and the inverter computes <font face=\"Courier\">|A&#7448; &middot; "
   "analytic(r)|&sup2;</font>. That inner product is a discrete-time Fourier transform of the analytic "
   "residual, evaluated on the depth grid; direct evaluation agrees with the reference implementation "
-  "to one part in 10&sup1;&sup3;. The reported depth in resolution cells is therefore the peak of "
+  "to one part in 10&sup1;&#8309;, measured over 80 trials at four sub-aperture counts "
+  "(<font face=\"Courier\">src/verify_claims.py</font>). The reported depth in resolution cells is therefore the peak of "
   "that transform in cycles per record. <b>This is a coordinate identity, not a recovery theorem.</b> "
   "It explains why a fixed feature occupies a fixed fraction of an axis whose extent is proportional "
   "to the number of looks, with no assumption about the ground.")
@@ -496,7 +505,7 @@ P("The tests below use an input containing <b>no scene</b> &mdash; band-limited 
 
 tbl = [["Per-patch operator, empty input", "Ratio", "Peak (cells)", "Clears 5&times;", "Unpinned", "<b>False detections</b>"],
        ["None &mdash; the pipeline as run everywhere in this paper", "2.45", "1.73", "0%", "0%", "<b>0%</b>"],
-       ["The authors&rsquo; low-rank denoising step", "3.53", "1.71", "10%", "0%", "<b>0%</b>"],
+       ["The authors&rsquo; low-rank denoising step", "3.49", "1.71", "9%", "0%", "<b>0%</b>"],
        ["<b>Low-pass</b> [1,2,1]/4 &mdash; defeats (a) only", "7.71", "1.67", "<b>97%</b>", "0%", "<b>0%</b>"],
        ["<b>High-pass</b> [1,&minus;2,1]/4 &mdash; defeats (b) only", "1.28", "<b>4.21</b>", "0%", "<b>100%</b>", "<b>0%</b>"],
        ["<b>Searched kernel [&minus;0.169, +0.159, &minus;0.312, +0.182, &minus;0.178]</b>",
@@ -514,10 +523,17 @@ t.setStyle(TableStyle([
     ("TOPPADDING", (0,0), (-1,-1), 2.5), ("BOTTOMPADDING", (0,0), (-1,-1), 2.5)]))
 story.append(t)
 P("Table 4. Per-patch operators against this paper&rsquo;s own decision rule, on an input containing "
-  "no scene. 200 blocks per row, 64 null permutations, guard at 2.0 cells, independent seed. A "
+  "no scene. All rows from one run: 200 blocks of 24 patches, 64 null permutations, guard 2.0 cells, "
+  "seed 4242 (<font face=\"Courier\">src/guard_confirm.py</font>). A "
   "low-pass filter defeats criterion (a) while pinning the peak harder; a high-pass filter defeats "
   "criterion (b) while the ratio collapses; <b>a five-tap kernel found by direct search defeats "
   "both at once, reporting every one of 200 empty blocks as a detection under the full rule.</b>", cap)
+
+fig("guard_confirm.png",
+    "Figure 7. Both decision criteria on an input containing no scene. <b>Left:</b> the contrast "
+    "rule &mdash; a low-pass filter clears it, a high-pass filter does not. <b>Right:</b> the depth "
+    "guard &mdash; the high-pass filter escapes it, the low-pass filter does not. The outlined bar "
+    "is the kernel found by direct search, which clears both in 200 of 200 blocks.", width=6.3*inch)
 
 P("<b>The two criteria are in tension, which is why a survey nearly missed this.</b> Because depth "
   "in cells is a frequency, moving the peak past the guard requires shifting spectral energy upward, "
@@ -533,7 +549,7 @@ P("<b>The two criteria are in tension, which is why a survey nearly missed this.
   "nearly drew that conclusion from one.")
 P("A more conservative null does not repair it. Scoring against the <b>95th percentile</b> of the "
   "alignment null rather than its median takes the low-pass filter from 97% of empty blocks above "
-  "threshold down to 8%, but leaves the searched kernel at <b>98% false detections</b>. Hardening the "
+  "threshold to 50%, and leaves the searched kernel at <b>98% false detections</b>. Hardening the "
   "threshold does not help against an operator selected to beat it.")
 P("<b>What follows, and what does not.</b> The results reported in this paper are unaffected: no "
   "per-patch filter of any kind is applied anywhere in this pipeline, the processing chain is fully "
@@ -690,7 +706,7 @@ P("A limitation follows directly from this design. This study evaluates the publ
 
 # ------------------------------------------------------------------ 6
 P("10. Revision history, corrections and withdrawals", h1)
-P("This preprint has been revised five times, and three of those revisions corrected errors in it. "
+P("This preprint has been revised four times, and three of those revisions corrected errors in it. "
   "That history is set out in full here rather than left for a reader to reconstruct. Disclosed, it "
   "is a record of process; discovered, it would be a liability.")
 
@@ -701,7 +717,7 @@ P("<b>The Komati row (v3, July 2026).</b> The row read &ldquo;50&times; / 10&tim
   "correction <i>increases</i> the margin, because 50/10 is a ratio of exactly 5.0 and sat precisely "
   "on this paper&rsquo;s own decision rule. The error was found while stress-testing against an "
   "external methodological objection, and was reported to the recommender unprompted. The corrected "
-  "ratio was then stated as 2.15 from rounded inputs; unrounded it is 1.99.")
+  "ratio was then stated as 2.15 from rounded inputs; the recorded value is 2.05.")
 P("<b>The 1720&times; figure (v4, August 2026).</b> Versions 1&ndash;3 quoted the Butte reproduction "
   "as a &ldquo;1720&times; detection&rdquo; in the abstract, &sect;3.3 and the conclusion. "
   "<b>Withdrawn.</b> It is a native, unfixed-window peak-to-median contrast computed at 256 "
@@ -847,7 +863,7 @@ for i, r in enumerate(refs, 1):
     P("[%d] %s" % (i, r), ref)
 
 rule()
-P("<i>Preprint, June 2026. Author: Hassan Foreman. A critique of method and mathematics, openly "
+P("<i>Preprint, August 2026. Author: Hassan Foreman. A critique of method and mathematics, openly "
   "reproducible and falsifiable; not an allegation of intent.</i>", cap)
 
 doc = SimpleDocTemplate(OUT, pagesize=letter, leftMargin=0.85*inch, rightMargin=0.85*inch,

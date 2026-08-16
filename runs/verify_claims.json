@@ -1,0 +1,35 @@
+{
+ "dtft_identity_worst_relative_error": 1.2106610511203579e-15,
+ "pure_walk_rank_sweep": [
+  {
+   "rank": 1,
+   "variance_kept": 0.32685631450365793,
+   "n_distinct_depths": 1,
+   "median_cells": 1.5451505016722407
+  },
+  {
+   "rank": 2,
+   "variance_kept": 0.531098103950578,
+   "n_distinct_depths": 19,
+   "median_cells": 1.673913043478261
+  },
+  {
+   "rank": 3,
+   "variance_kept": 0.6536717176285606,
+   "n_distinct_depths": 78,
+   "median_cells": 1.8210702341137122
+  },
+  {
+   "rank": 5,
+   "variance_kept": 0.823337233983959,
+   "n_distinct_depths": 141,
+   "median_cells": 1.894648829431438
+  },
+  {
+   "rank": 8,
+   "variance_kept": 1.0,
+   "n_distinct_depths": 208,
+   "median_cells": 2.0785953177257523
+  }
+ ]
+}
