@@ -1,0 +1,98 @@
+{
+ "raw": {
+  "vrun": 34.0,
+  "elong": 27.0,
+  "ncomp": 54,
+  "span": 0.4033333333333333,
+  "n_vox": 2700,
+  "architecture_like": true
+ },
+ "log": {
+  "vrun": 34.0,
+  "elong": 27.0,
+  "ncomp": 54,
+  "span": 0.4033333333333333,
+  "n_vox": 2700,
+  "architecture_like": true
+ },
+ "gamma 0.2": {
+  "vrun": 34.0,
+  "elong": 27.0,
+  "ncomp": 54,
+  "span": 0.4033333333333333,
+  "n_vox": 2700,
+  "architecture_like": true
+ },
+ "depth gain z^2": {
+  "vrun": 24.0,
+  "elong": 22.0,
+  "ncomp": 93,
+  "span": 0.7533333333333333,
+  "n_vox": 2700,
+  "architecture_like": true
+ },
+ "depth gain z^4": {
+  "vrun": 28.0,
+  "elong": 21.0,
+  "ncomp": 73,
+  "span": 0.32666666666666666,
+  "n_vox": 2700,
+  "architecture_like": true
+ },
+ "tile whiten": {
+  "vrun": 3.0,
+  "elong": 2.0,
+  "ncomp": 793,
+  "span": 0.7033333333333334,
+  "n_vox": 2700,
+  "architecture_like": false
+ },
+ "common-mode removed": {
+  "vrun": 36.0,
+  "elong": 29.0,
+  "ncomp": 54,
+  "span": 0.6,
+  "n_vox": 2700,
+  "architecture_like": true
+ },
+ "z-blur": {
+  "vrun": 28.0,
+  "elong": 16.75,
+  "ncomp": 21,
+  "span": 0.2633333333333333,
+  "n_vox": 2700,
+  "architecture_like": true
+ },
+ "whiten + log": {
+  "vrun": 3.0,
+  "elong": 2.0,
+  "ncomp": 793,
+  "span": 0.7033333333333334,
+  "n_vox": 2700,
+  "architecture_like": false
+ },
+ "common-mode + gain z^2": {
+  "vrun": 26.0,
+  "elong": 25.0,
+  "ncomp": 88,
+  "span": 0.7633333333333333,
+  "n_vox": 2700,
+  "architecture_like": true
+ },
+ "common-mode + whiten + log": {
+  "vrun": 3.0,
+  "elong": 3.0,
+  "ncomp": 768,
+  "span": 0.9866666666666667,
+  "n_vox": 2700,
+  "architecture_like": false
+ },
+ "gain z^4 + z-blur + gamma": {
+  "vrun": 24.0,
+  "elong": 12.0,
+  "ncomp": 31,
+  "span": 0.2866666666666667,
+  "n_vox": 2700,
+  "architecture_like": true
+ }
+}

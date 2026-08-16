@@ -1,0 +1,70 @@
+{
+ "raw": {
+  "empty": {
+   "vrun": 34.0,
+   "elong": 27.0,
+   "ncomp": 54,
+   "span": 0.4033333333333333,
+   "n_vox": 2700
+  },
+  "planted": {
+   "vrun": 139.5,
+   "elong": 84.0,
+   "ncomp": 4,
+   "span": 0.7966666666666666,
+   "n_vox": 2700
+  },
+  "separates": true
+ },
+ "common-mode removed": {
+  "empty": {
+   "vrun": 36.0,
+   "elong": 29.0,
+   "ncomp": 54,
+   "span": 0.6,
+   "n_vox": 2700
+  },
+  "planted": {
+   "vrun": 159.0,
+   "elong": 84.0,
+   "ncomp": 4,
+   "span": 0.7966666666666666,
+   "n_vox": 2700
+  },
+  "separates": true
+ },
+ "depth gain z^2": {
+  "empty": {
+   "vrun": 24.0,
+   "elong": 22.0,
+   "ncomp": 93,
+   "span": 0.7533333333333333,
+   "n_vox": 2700
+  },
+  "planted": {
+   "vrun": 125.0,
+   "elong": 34.0,
+   "ncomp": 13,
+   "span": 0.7566666666666667,
+   "n_vox": 2700
+  },
+  "separates": true
+ },
+ "z-blur": {
+  "empty": {
+   "vrun": 28.0,
+   "elong": 16.75,
+   "ncomp": 21,
+   "span": 0.2633333333333333,
+   "n_vox": 2700
+  },
+  "planted": {
+   "vrun": 153.0,
+   "elong": 65.0,
+   "ncomp": 3,
+   "span": 0.76,
+   "n_vox": 2700
+  },
+  "separates": true
+ }
+}

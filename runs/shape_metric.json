@@ -1,0 +1,237 @@
+{
+ "pct": 99.0,
+ "volume": "runs/vol_noise_c768_p64_s24_n11.npy",
+ "n_shaft": 4,
+ "amp": 6.0,
+ "rule": "vrun_ratio > 1.5 OR ncomp_ratio > 2.0, against a pipeline-matched empty volume under the identical treatment",
+ "treatments": {
+  "raw": {
+   "empty": {
+    "vrun": 34.0,
+    "elong": 27.0,
+    "ncomp": 54,
+    "span": 0.4033333333333333,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 139.5,
+    "elong": 84.0,
+    "ncomp": 4,
+    "span": 0.7966666666666666,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 4.102941176349914,
+   "ncomp_ratio": 13.499999996625,
+   "separates": true
+  },
+  "log": {
+   "empty": {
+    "vrun": 34.0,
+    "elong": 27.0,
+    "ncomp": 54,
+    "span": 0.4033333333333333,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 139.5,
+    "elong": 84.0,
+    "ncomp": 4,
+    "span": 0.7966666666666666,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 4.102941176349914,
+   "ncomp_ratio": 13.499999996625,
+   "separates": true
+  },
+  "gamma 0.2": {
+   "empty": {
+    "vrun": 34.0,
+    "elong": 27.0,
+    "ncomp": 54,
+    "span": 0.4033333333333333,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 139.5,
+    "elong": 84.0,
+    "ncomp": 4,
+    "span": 0.7966666666666666,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 4.102941176349914,
+   "ncomp_ratio": 13.499999996625,
+   "separates": true
+  },
+  "depth gain z^2": {
+   "empty": {
+    "vrun": 24.0,
+    "elong": 22.0,
+    "ncomp": 93,
+    "span": 0.7533333333333333,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 125.0,
+    "elong": 34.0,
+    "ncomp": 13,
+    "span": 0.7566666666666667,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 5.208333333116319,
+   "ncomp_ratio": 7.153846153295858,
+   "separates": true
+  },
+  "depth gain z^4": {
+   "empty": {
+    "vrun": 28.0,
+    "elong": 21.0,
+    "ncomp": 73,
+    "span": 0.32666666666666666,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 28.0,
+    "elong": 23.0,
+    "ncomp": 42,
+    "span": 0.57,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 0.9999999999642857,
+   "ncomp_ratio": 1.738095238053855,
+   "separates": false
+  },
+  "tile whiten": {
+   "empty": {
+    "vrun": 3.0,
+    "elong": 2.0,
+    "ncomp": 793,
+    "span": 0.7033333333333334,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 3.0,
+    "elong": 3.0,
+    "ncomp": 793,
+    "span": 0.7033333333333334,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 0.9999999996666666,
+   "ncomp_ratio": 0.999999999998739,
+   "separates": false
+  },
+  "common-mode removed": {
+   "empty": {
+    "vrun": 36.0,
+    "elong": 29.0,
+    "ncomp": 54,
+    "span": 0.6,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 159.0,
+    "elong": 84.0,
+    "ncomp": 4,
+    "span": 0.7966666666666666,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 4.416666666543982,
+   "ncomp_ratio": 13.499999996625,
+   "separates": true
+  },
+  "z-blur": {
+   "empty": {
+    "vrun": 28.0,
+    "elong": 16.75,
+    "ncomp": 21,
+    "span": 0.2633333333333333,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 153.0,
+    "elong": 65.0,
+    "ncomp": 3,
+    "span": 0.76,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 5.464285714090561,
+   "ncomp_ratio": 6.9999999976666665,
+   "separates": true
+  },
+  "whiten + log": {
+   "empty": {
+    "vrun": 3.0,
+    "elong": 2.0,
+    "ncomp": 793,
+    "span": 0.7033333333333334,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 3.0,
+    "elong": 3.0,
+    "ncomp": 793,
+    "span": 0.7033333333333334,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 0.9999999996666666,
+   "ncomp_ratio": 0.999999999998739,
+   "separates": false
+  },
+  "common-mode + gain z^2": {
+   "empty": {
+    "vrun": 26.0,
+    "elong": 25.0,
+    "ncomp": 88,
+    "span": 0.7633333333333333,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 137.0,
+    "elong": 36.0,
+    "ncomp": 9,
+    "span": 0.7633333333333333,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 5.269230769028106,
+   "ncomp_ratio": 9.777777776691359,
+   "separates": true
+  },
+  "common-mode + whiten + log": {
+   "empty": {
+    "vrun": 3.0,
+    "elong": 3.0,
+    "ncomp": 768,
+    "span": 0.9866666666666667,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 4.0,
+    "elong": 4.0,
+    "ncomp": 672,
+    "span": 0.9866666666666667,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 1.3333333328888888,
+   "ncomp_ratio": 1.1428571428554422,
+   "separates": false
+  },
+  "gain z^4 + z-blur + gamma": {
+   "empty": {
+    "vrun": 24.0,
+    "elong": 12.0,
+    "ncomp": 31,
+    "span": 0.2866666666666667,
+    "n_vox": 2700
+   },
+   "planted": {
+    "vrun": 62.0,
+    "elong": 24.25,
+    "ncomp": 3,
+    "span": 0.4766666666666667,
+    "n_vox": 2700
+   },
+   "vrun_ratio": 2.5833333332256943,
+   "ncomp_ratio": 10.33333332988889,
+   "separates": true
+  }
+ }
+}
