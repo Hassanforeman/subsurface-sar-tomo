@@ -368,10 +368,14 @@ P("To remove any suspicion that the analysis was tuned until it agreed with the 
   "acquisition <font face=\"Courier\">2023-03-08-07-57-53_UMBRA-04</font> as primary and listed "
   "<font face=\"Courier\">2023-02-07-07-58-27_UMBRA-05</font> as the first of two within-site "
   "repeats. <b>The scene analysed here is that first repeat, not the nominated primary.</b> The "
-  "substitution is recorded because it matters: the predictions were fixed before any Giza scene was "
-  "processed and the pre-registration text was never edited &mdash; the result section was appended "
-  "at a later commit &mdash; but a reader checking the two documents against each other would "
-  "otherwise find a discrepancy unexplained.")
+  "reason is mundane and is recorded because the discrepancy would otherwise look unexplained: the "
+  "predictions were committed <i>while the data were still downloading</i>, and the nominated "
+  "primary is a <b>1.70 GB</b> product against <b>240 MB</b> for the repeat, so the repeat "
+  "completed first and was analysed first. Both were subsequently downloaded. The pre-registration "
+  "text was never edited &mdash; its result section was left deliberately empty at commit "
+  "<font face=\"Courier\">e4476d7</font> and appended at <font face=\"Courier\">f6c1a90</font> "
+  "&mdash; so the predictions were fixed before <i>any</i> Giza scene had finished arriving, which "
+  "is a stronger condition than the protocol required.")
 tbl = [["Prediction", "Result", "Outcome"],
        ["Peak depth 1.6 - 1.8 cells", "1.52 - 1.75", "<b>partial miss</b>"],
        ["Surface-pinned at every count", "8/8", "hit"],
