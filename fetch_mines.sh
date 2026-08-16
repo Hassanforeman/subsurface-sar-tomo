@@ -17,6 +17,7 @@ BUCKET="s3://umbra-open-data-catalog/sar-data/tasks"
 
 TASKS=(
   "Diavik Diamond Mine, Canada"
+  "Kalgoorlie Super Pit, Australia"
   "Greenbushes Mine, Australia"
   "Silver Peak Mine, Nevada, United States"
   "Thacker Pass Lithium Mine, Nevada, United States"

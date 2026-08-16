@@ -27,9 +27,24 @@ Umbra's open-data catalogue contains 80 tasks. Five are mines:
 | `Bingham Copper Mine` | open pit + underground | already in the paper |
 | `Butte, MT` (via existing scenes) | documented underground district | already in the paper |
 | `Diavik Diamond Mine, Canada` | open pit **+ underground** | the strongest new positive-truth case |
+| `Kalgoorlie Super Pit, Australia` | **very large open pit + underground, gold** | see below |
 | `Greenbushes Mine, Australia` | open pit, hard-rock lithium | large excavated void, little underground |
 | `Silver Peak Mine, Nevada` | **brine ponds, no underground workings** | **negative control** |
 | `Thacker Pass Lithium Mine, Nevada` | shallow open pit | shallow-void case |
+
+**Kalgoorlie is included for a specific reason.** A public claim has been made that this
+class of method can estimate in-place gold tonnage and grade from orbit, to a stated
+precision, over an unidentified mine. Kalgoorlie is one of the largest gold operations on
+Earth, its resources and reserves are reported publicly under the JORC Code, and free
+X-band data covers it. It is therefore the natural place to test whether a radar product
+carries any information about gold at all &mdash; and, unlike the site in that claim, it can
+be checked by anyone.
+
+**No resource estimate will be produced from radar here, and none should be.** JORC,
+NI 43-101, SAMREC and PERC all require drilling, assays, QA/QC and a Competent Person.
+The prediction below is only that the method returns the same surface-pinned artifact at
+Kalgoorlie as everywhere else, which is a statement about the method, not about the ore
+body.
 
 Silver Peak matters most methodologically: it is a lithium **brine** operation —
 evaporation ponds, no deep excavated void. A method that reports subsurface structure
@@ -46,14 +61,17 @@ For every new site, at the default setting (11 sub-apertures, 512×512 centre cr
 4. Peak depth in metres will scale as **1/f** exactly, as at every other site.
 5. **Diavik will not differ from Silver Peak** in any of the above, despite one having
    documented underground workings and the other having none.
+6. **Kalgoorlie will not differ from Silver Peak either**, despite one being a very large
+   gold operation with published JORC resources and the other a brine field.
 
-Prediction 5 is the point of the exercise. If the method worked, those two sites
-should not look the same.
+Predictions 5 and 6 are the point of the exercise. If the method worked, a diamond mine
+with underground workings, a major gold operation, and a brine field with no excavated
+void should not all look the same.
 
 ### A.3 What would falsify this
 
 - Any site clearing 5× the alignment null **and** escaping the two-cell guard.
-- Diavik separating from Silver Peak on any decision statistic.
+- Diavik or Kalgoorlie separating from Silver Peak on any decision statistic.
 - A peak aligning with a documented working level to within the depth resolution.
 
 Any of these is a positive result for the method and will be reported as one.
