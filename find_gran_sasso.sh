@@ -1,75 +1,57 @@
 #!/usr/bin/env bash
-# find_gran_sasso.sh — is there free X-band spotlight coverage over Gran Sasso / LNGS?
+# find_gran_sasso.sh  (v2 — v1 was broken; see BUG below)
 #
-# WHY: HarmonicSAR published a tomographic "reconstruction" of Laboratori Nazionali del
-# Gran Sasso (LNGS) at 1.4 km depth. LNGS is three excavated halls, each roughly
-# 100 x 20 x 18 m, under ~1400 m of rock, with a layout published by INFN. That makes it
-# the best ground-truth target for a deep-void claim that exists anywhere.
+# Searches the Umbra open-data catalogue by COORDINATE for scenes over the Gran
+# Sasso massif (Laboratori Nazionali del Gran Sasso, INFN).
 #
-# This script finds out whether we can run our own pipeline over the same place.
+# BUG IN v1, FIXED HERE
+# ---------------------
+# v1 parsed `aws s3 ls --recursive` output with `awk '{print $4}'`, which stops at
+# the first space. Most Umbra task names contain spaces ("ad hoc/Pyramids of
+# Giza/"), so nearly every key was truncated to "sar-data/tasks/ad" and every
+# subsequent download failed silently into /dev/null. The run reported 0 hits
+# because it was reading nothing, not because there was nothing there.
 #
-# Needs: aws cli. No credentials required - these buckets are public.
-#   sudo apt install awscli     (or)     brew install awscli
+# v1 was also pathologically slow: one `aws s3 cp` per file, 8,375 times,
+# sequentially. v2 pulls every JSON in one parallel `aws s3 sync` and searches
+# locally. Minutes instead of hours.
 #
 # Run:  bash find_gran_sasso.sh
-
 set -u
-OUT="gran_sasso_search"
-mkdir -p "$OUT"
+OUT="$HOME/gran_sasso_search"; mkdir -p "$OUT/json"
+BUCKET="umbra-open-data-catalog"
 
-# LNGS underground labs sit near 42.4275 N, 13.5147 E.
-# Box below covers the whole Gran Sasso massif with margin.
-LAT_MIN=42.30; LAT_MAX=42.60
-LON_MIN=13.30; LON_MAX=13.75
+# LNGS underground halls sit near 42.4275 N, 13.5147 E.
+LAT_MIN=42.30; LAT_MAX=42.60; LON_MIN=13.30; LON_MAX=13.75
 
-echo "==============================================================="
-echo " STEP 1  Umbra - list every open-data task name"
-echo "==============================================================="
-aws s3 ls --no-sign-request "s3://umbra-open-data-catalog/sar-data/tasks/" \
-  > "$OUT/umbra_tasks.txt" 2>&1
-n=$(grep -c PRE "$OUT/umbra_tasks.txt" 2>/dev/null || echo 0)
-echo "  $n tasks found -> $OUT/umbra_tasks.txt"
+echo "== STEP 1: full key listing (space-safe) =="
+aws s3api list-objects-v2 --no-sign-request --bucket "$BUCKET" \
+    --prefix "sar-data/tasks/" --output text --query 'Contents[].Key' \
+  | tr '\t' '\n' | sed '/^$/d' > "$OUT/all_keys.txt"
+echo "   $(wc -l < "$OUT/all_keys.txt") objects"
+echo "   $(grep -ci '\.json$' "$OUT/all_keys.txt") JSON metadata files"
 echo
-echo "  Names containing anything Italian or mountain-related:"
-grep -iE "italy|italia|gran ?sasso|aquila|abruzzo|apennin|teramo|assergi|campo imperatore|volcano|mountain|tunnel|mine" \
-  "$OUT/umbra_tasks.txt" | sed 's/^/    /' || echo "    (none by name - this proves nothing, see step 2)"
+echo "   sub-tasks under 'ad hoc' (where the Giza scene was filed):"
+grep -i 'ad hoc/' "$OUT/all_keys.txt" | sed 's|.*ad hoc/||' | cut -d/ -f1 \
+  | sort -u | sed 's/^/      /'
 
 echo
-echo "==============================================================="
-echo " STEP 2  Umbra - search by COORDINATES, not by name"
-echo "==============================================================="
-echo "  Task names are arbitrary, so this reads every scene's STAC metadata"
-echo "  and keeps anything inside the Gran Sasso box."
-echo "  This downloads only small JSON files, but there are a lot of them."
-echo "  Expect 10-30 minutes. Leave it running."
+echo "== STEP 2: bulk-download every JSON in parallel (minutes, not hours) =="
+aws s3 sync --no-sign-request --only-show-errors \
+    "s3://$BUCKET/sar-data/tasks/" "$OUT/json" \
+    --exclude "*" --include "*.json"
+echo "   $(find "$OUT/json" -name '*.json' | wc -l) files on disk"
+
 echo
-
-aws s3 ls --no-sign-request --recursive "s3://umbra-open-data-catalog/sar-data/tasks/" \
-  | grep -iE "\.json$" | awk '{print $4}' > "$OUT/umbra_json_keys.txt" 2>/dev/null
-echo "  $(wc -l < "$OUT/umbra_json_keys.txt") metadata files to check"
-
-: > "$OUT/umbra_hits.txt"
-i=0
-while read -r key; do
-  i=$((i+1))
-  [ $((i % 250)) -eq 0 ] && echo "    ...$i checked, $(wc -l < "$OUT/umbra_hits.txt") hits so far"
-  body=$(aws s3 cp --no-sign-request "s3://umbra-open-data-catalog/$key" - 2>/dev/null | head -c 200000)
-  [ -z "$body" ] && continue
-  python3 - "$key" "$LAT_MIN" "$LAT_MAX" "$LON_MIN" "$LON_MAX" <<'PYEOF' >> "$OUT/umbra_hits.txt" 2>/dev/null
-import sys, json, re
-key, la1, la2, lo1, lo2 = sys.argv[1], *map(float, sys.argv[2:6])
-raw = sys.stdin.read()
-try:
-    d = json.loads(raw)
-except Exception:
-    sys.exit()
+echo "== STEP 3: coordinate search =="
+python3 - "$OUT" "$LAT_MIN" "$LAT_MAX" "$LON_MIN" "$LON_MAX" <<'PYEOF'
+import sys, os, json
+root, la1, la2, lo1, lo2 = sys.argv[1], *map(float, sys.argv[2:6])
 def coords(o):
     if isinstance(o, dict):
         for k, v in o.items():
-            if k in ("bbox",) and isinstance(v, list) and len(v) >= 4:
+            if k == "bbox" and isinstance(v, list) and len(v) >= 4:
                 yield (v[1], v[0]); yield (v[3], v[2])
-            if k.lower() in ("lat", "latitude") and isinstance(v, (int, float)):
-                yield (v, None)
             yield from coords(v)
     elif isinstance(o, list):
         for v in o:
@@ -77,42 +59,27 @@ def coords(o):
                     and all(isinstance(x, (int, float)) for x in v)):
                 yield (v[1], v[0])
             yield from coords(v)
-for la, lo in coords(d):
-    if lo is None:
-        continue
-    if la1 <= la <= la2 and lo1 <= lo <= lo2:
-        print(f"{key}\t{la:.4f}\t{lo:.4f}")
-        break
+hits, n = [], 0
+for dirpath, _, files in os.walk(os.path.join(root, "json")):
+    for f in files:
+        if not f.endswith(".json"): continue
+        n += 1
+        p = os.path.join(dirpath, f)
+        try:
+            d = json.load(open(p))
+        except Exception:
+            continue
+        for la, lo in coords(d):
+            if la1 <= la <= la2 and lo1 <= lo <= lo2:
+                hits.append(f"{os.path.relpath(p, root)}\t{la:.4f}\t{lo:.4f}")
+                break
+open(os.path.join(root, "HITS.txt"), "w").write("\n".join(hits) + ("\n" if hits else ""))
+print(f"   searched {n} files")
+print(f"   {len(hits)} scenes inside the Gran Sasso box")
+for h in hits[:40]: print("      " + h)
 PYEOF
-done < "$OUT/umbra_json_keys.txt"
 
 echo
-echo "  UMBRA HITS: $(wc -l < "$OUT/umbra_hits.txt")"
-sort -u "$OUT/umbra_hits.txt" | sed 's/^/    /'
-
-echo
-echo "==============================================================="
-echo " STEP 3  Capella - same coordinate search"
-echo "==============================================================="
-aws s3 ls --no-sign-request "s3://capella-open-data/data/" > "$OUT/capella_top.txt" 2>&1
-head -20 "$OUT/capella_top.txt" | sed 's/^/    /'
-echo "    (full listing in $OUT/capella_top.txt)"
-
-echo
-echo "==============================================================="
-echo " WHAT TO DO WITH THE RESULT"
-echo "==============================================================="
-cat <<'NOTE'
-  If there are hits:
-    Send me $OUT/umbra_hits.txt. We pre-register predictions FIRST, push them,
-    and only then process. Same protocol as Giza.
-
-  If there are none:
-    That is itself worth saying publicly, and politely: the site cannot be
-    independently checked with free data, so the reconstruction cannot be
-    reproduced by anyone. Which raises the obvious question of which sensor
-    and which scene HarmonicSAR used.
-
-  Either way, ASK HIM for the scene ID. It costs him nothing to give and it is
-  the single thing that makes the claim checkable.
-NOTE
+echo "Result saved to $OUT/HITS.txt"
+echo "If it is empty, no free Umbra scene covers Gran Sasso — which is itself the"
+echo "finding: the published LNGS reconstruction cannot be independently checked."
