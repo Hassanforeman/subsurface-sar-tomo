@@ -65,9 +65,14 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 ## 3. What is ACTUALLY OPEN (the only place new work should start)
 
 **Runnable now (no new data):**
-- [ ] Apply the four verdict-printer / wording fixes from the Grok v5 review (abstract "mechanism
-      identified" → §5.4 wording; §3.3 shaft sentence; §3.5 shuffle-ratio quotes; §8 "shuffled nulls";
-      delete "quality-weighted"; Table 3 pre-registration scoring incl. E8 + the now-HIT repeatability).
+- [x] DONE 2 Sep: 8 verified accuracy fixes applied to build_v5.py + PDF rebuilt (16pp, 8 figs):
+      "mechanism identified"→"sufficient generating mechanism demonstrated" (abstract+conclusion, +§5.4
+      caveat); "quality-weighted" removed (3×, false of code); §3.3 shaft→"surface-pinned band"; §3.5
+      117.8×/96.7× shuffle-null quotes dropped; §8 "shuffled nulls"→alignment/pipeline-noise; "exactly
+      as disclosed"→"as disclosed". For Hassan's review; NOT submitted.
+- [ ] BIGGER revision (needs Hassan's direction): fold in today's new results (Giza repeatability HIT;
+      MUSIC/Capon; exact depth constant 1.680; velocity/grid sweep); re-score Table 3 (add E8 split,
+      mark repeatability HIT not "untested", drop "none of four falsification conditions met").
 
 **Needs data fetched on Hassan's Mac (sandbox is 403-blocked from the S3 buckets):**
 - [ ] Volcano breadth (Merapi scenes listed; download → run). IN PROGRESS.
@@ -86,6 +91,11 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - The Cowork sandbox mounts it but starts WITHOUT sarpy/scipy → `pip install sarpy scipy` each session
   (~35 MB; ~1 clean shot). Sandbox + cloud container are BOTH 403-blocked from Umbra/Capella S3 —
   new scenes must be fetched on the Mac, then the mounted pipeline runs on them.
+- GOTCHA: `runs/` is gitignored and its figure PNGs are GONE except what today's runs regenerate.
+  The 8 paper figures survive ONLY inside the committed v5 PDF. To rebuild the paper, first restore
+  figures: `git show HEAD:paper/Giza_..._v5.pdf > /tmp/o.pdf` then extract page-order images to
+  `runs/` (see the 2 Sep session; Figs 2/3/4 = Butte/Bingham data are gone and can ONLY be recovered
+  this way). Otherwise build_v5.py silently drops missing figures.
 - Working style: one terminal command at a time; honesty over hype; be the honest counterweight to
   Grok's optimism (Hassan's explicit preference).
 

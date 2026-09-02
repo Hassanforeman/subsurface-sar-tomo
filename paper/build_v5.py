@@ -92,7 +92,7 @@ P("<b>Abstract.</b> In 2022&ndash;2025, F. Biondi and C. Malanga reported that D
   "<b>48 runs, 0 detections, peak confined to 1.2&ndash;1.9 resolution cells</b> across six sites, "
   "two sensors, eight sub-aperture counts and thirteen patch geometries. On the Giza plateau itself &mdash; "
   "run against predictions published before the data were processed &mdash; 8/8 runs are surface-pinned "
-  "with 0/8 detections. Third, I identify the mechanism: the per-patch trajectory is a running total "
+  "with 0/8 detections. Third, a sufficient generating mechanism is demonstrated: the per-patch trajectory is a running total "
   "of adjacent-look displacement estimates, which has the spectrum of a random walk; the inversion is "
   "a discrete-time Fourier transform, so the reported depth in resolution cells is the peak of that "
   "transform, and removing a degree-2 polynomial leaves it near 1.7 cells. Accumulated Gaussian noise "
@@ -149,8 +149,8 @@ P("I address each below. My standard throughout is the one the original work doe
 
 # ------------------------------------------------------------------ 2
 P("2. Reproduction methodology", h1)
-P("I reimplemented the pipeline exactly as disclosed: Doppler sub-aperture decomposition; "
-  "adjacent-pair, quality-weighted, detrended sub-pixel tracking; an analytic-signal step that "
+P("I reimplemented the pipeline as disclosed: Doppler sub-aperture decomposition; "
+  "adjacent-pair, detrended sub-pixel tracking; an analytic-signal step that "
   "removes the known ±z mirror-symmetry ghost; multichromatic (range sub-band) analysis and "
   "low-rank+sparse denoising as the authors describe; and a depth focus by discrete Fourier "
   "transform. To this I added the controls the original omits: a look-order-shuffle <b>null</b>; "
@@ -158,7 +158,7 @@ P("I reimplemented the pipeline exactly as disclosed: Doppler sub-aperture decom
   "damped variant); a <b>surface-leakage</b> correlation; a <b>near-surface</b> guard; and a "
   "<b>sub-aperture-count stability</b> test. Every stage passes a synthetic self-test against "
   "known truth (Figure 1); quantitatively, the sub-aperture shift estimator validates to 0.02 px, the "
-  "adjacent-pair, quality-weighted micro-motion estimator recovers an injected residual to 0.07 px, and "
+  "adjacent-pair micro-motion estimator recovers an injected residual to 0.07 px, and "
   "the end-to-end inversion recovers an injected layer at roughly 27&times; the null level &mdash; so a "
   "genuine signal of that character would be surfaced. Data are free X-band spotlight scenes from two "
   "independent sensors, Umbra and Capella &mdash; the same data class the 2025 work used.")
@@ -177,7 +177,7 @@ maptbl = [["Disclosed step (patent Fig. 0.5)", "This reproduction"],
           ["Doppler sub-apertures (master/slave) + range sub-bands (blocks 3-6)",
            "subaperture.decompose_subapertures; multichromatic_subapertures (MCA)"],
           ["Pixel-tracking between sub-apertures (block 7)",
-           "micromotion.adjacent_trajectory (adjacent-pair, quality-weighted) + detrend; optional lrsd_denoise"],
+           "micromotion.adjacent_trajectory (adjacent-pair) + detrend; optional lrsd_denoise"],
           ["Raw tomographic complex vectors (block 8)", "per-patch detrended residual trajectories"],
           ["Steering matrix = DFT depth focus (block 9)",
            "tomogram.steering (DFT basis) + invert_patch (DFT power spectrum)"],
@@ -239,7 +239,7 @@ P("I ran the authors&rsquo; recipe (256 Doppler sub-apertures, multichromatic an
   "of the documented levels or the 160 m water table, and only appears when the sub-aperture count "
   "is driven high. It is a surface/low-frequency residual concentrated by the high-order DFT. My "
   "near-surface and stability guards flag it as an artifact; the authors&rsquo; pipeline, lacking "
-  "them, would report it as a discovery. This is, in microcosm, how a &lsquo;shaft&rsquo; is "
+  "them, would report it as a discovery. This is, in microcosm, how a confident, surface-pinned band is "
   "produced. Butte therefore serves as the closest available known-target benchmark within the "
   "free-data regime: at honest settings the method recovers nothing matching the documented workings "
   "(Section 3.4); at the authors&rsquo; settings the only confident feature is a surface artifact "
@@ -325,8 +325,8 @@ P("Agreement across many acquisitions and sensors is offered as independent conf
 P("I demonstrate this directly on real data. I stacked five same-geometry Umbra passes of Bingham "
   "Canyon &mdash; a bare open-pit mine of exposed rock containing no subsurface void &mdash; acquired "
   "on five different dates, i.e. precisely the multi-acquisition strategy offered as confirmation. "
-  "Each single pass already yields a high-contrast peak (mean 117.8&times; its per-scene null); "
-  "stacking the five preserves it at 96.7&times; against a stacked null of 1.5&times;, and the "
+  "Each single pass already yields a high-contrast surface-pinned peak; stacking the five "
+  "preserves it rather than revealing any depth structure, and the "
   "per-scene profiles agree closely (Figure 4). Yet the reinforced, consistent feature sits at ~3 m "
   "depth (2% of the axis, with 36% of its energy in the shallowest 5%) &mdash; pinned at the surface, "
   "over ground known to contain no such structure. The stack manufactures agreement, not evidence: a "
@@ -683,7 +683,7 @@ P("The natural objection to a null is that the depth axis is uncalibrated: with 
   "only maps the relative depth index to metres &mdash; a monotonic relabelling of the z-axis, exactly "
   "the operation Section 3.2 shows the investigation frequency already performs &mdash; and cannot "
   "create above-null contrast where none exists. The real tomograms are indistinguishable from their "
-  "shuffled nulls across the <i>entire</i> depth axis, so rescaling that axis leaves the contrast-vs-null "
+  "alignment and pipeline-noise nulls across the <i>entire</i> depth axis, so rescaling that axis leaves the contrast-vs-null "
   "unchanged: there is no signal at any depth to relocate.")
 P("The legitimate version is <b>search-grid coverage</b>: if the inversion&rsquo;s depth grid does not "
   "span the depths where a true reflector would sit (because the assumed velocity is wrong), a signal "
@@ -795,7 +795,7 @@ P("The reported depth in metres is exactly proportional to an investigation freq
   "independent sensors, eight sub-aperture counts and thirteen patch geometries &mdash; 48 runs "
   "&mdash; the method returns the same surface-pinned feature at 1.2 to 1.9 resolution cells and not "
   "one detection. That includes the Giza plateau itself, run against predictions published before the "
-  "data were processed, and the authors&rsquo; own Vesuvius. The mechanism is identified: the "
+  "data were processed, and the authors&rsquo; own Vesuvius. A sufficient generating mechanism is demonstrated (its necessity at the title site is open, §5.4): the "
   "trajectory is a running total, which has the spectrum of a random walk; the inversion is a Fourier "
   "transform, so the reported depth is a frequency; and a degree-2 detrend fixes that frequency near "
   "1.7 cells. Accumulated Gaussian noise with no SAR pipeline at all reproduces both signatures, and "
