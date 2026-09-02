@@ -1,5 +1,9 @@
 # Technical Bible — Subsurface SAR Doppler Tomography
 
+> **For current project STATUS and the settled-vs-open ledgers, read `docs/STATE.md` first.**
+> This bible holds the technical reference; STATE.md holds what is done, open, and superseded.
+
+
 *The complete working reference for this project. Read it before touching data.*
 *Version 1.5. Every quantitative claim is traceable to the References at the end.*
 
