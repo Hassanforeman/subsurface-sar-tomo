@@ -34,6 +34,12 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - **Window taper:** moves the number, never the verdict; 0 detections under any taper on any Giza
   scene; Hann is not universally loudest. → RESULTS_HARDENING_2026-09-02.md; SENSITIVITY §4/§4c.
 - **Config objections (coregistrator, float32/64, Hamming) don't change the outcome.** → SENSITIVITY §2–§3.
+- **Depth constant derived exactly** (not just measured): peak = argmax of a parameter-free matrix
+  quadratic form; deg-2 value = 1.680 cells (0.869/2.474 at deg 0/4), pipeline reproduces to MC error.
+  No single clean constant — the 0.856·(d/2+1) law is only approximate. → RESULTS_DEPTH_CONSTANT_2026-09-02.md.
+- **Super-resolution inverters (Capon, MUSIC) also surface-pin** (real Giza: Bartlett 1.75, Capon 1.99,
+  MUSIC 1.75 cells) — the artifact is upstream of the inverter; "you used a weak inverter" is refuted.
+  → RESULTS_INVERTERS_2026-09-02.md.
 - **Five sites + Giza, two sensors: 0 detections, all surface-pinned, peak 1.2–1.9 cells.** → FIVE_SITE §1; paper Table 2.
 - **Giza within-site repeatability (pre-registered): HIT** — 3 scenes agree to 0.10 cells, all null.
   → RESULTS_GIZA_REPEATS_2026-09-02.md.
@@ -59,10 +65,6 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 ## 3. What is ACTUALLY OPEN (the only place new work should start)
 
 **Runnable now (no new data):**
-- [ ] MUSIC/Capon robustness — does a super-resolution inverter also surface-pin? Preempts the
-      "you used a weak inverter" rebuttal. `tomo_demo.py` has both. NEVER RUN.
-- [ ] 0.856 prefactor in closed form (spectral algebra of detrend-projection + Hilbert on 1/f²).
-      Hard; optional; a genuine theory win if it lands.
 - [ ] Apply the four verdict-printer / wording fixes from the Grok v5 review (abstract "mechanism
       identified" → §5.4 wording; §3.3 shaft sentence; §3.5 shuffle-ratio quotes; §8 "shuffled nulls";
       delete "quality-weighted"; Table 3 pre-registration scoring incl. E8 + the now-HIT repeatability).

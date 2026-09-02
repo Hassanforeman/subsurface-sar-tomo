@@ -5,7 +5,7 @@
 
 
 *The complete working reference for this project. Read it before touching data.*
-*Version 1.5. Every quantitative claim is traceable to the References at the end.*
+*Version 1.6. Every quantitative claim is traceable to the References at the end.*
 
 ---
 
@@ -450,6 +450,17 @@ Run after an adversarial (Grok) review of v5. Full detail in
 sandboxes start without them (`pip install sarpy scipy`, ~1 wheel of 35 MB). The sandboxes
 CANNOT reach the Umbra/Capella S3 buckets (proxy 403) — new scenes must be fetched on the
 user's own machine into `data/`, after which the mounted pipeline runs on them.
+
+## 8.7 Depth constant derived; inverter robustness (2 Sep 2026, later)
+
+- **Super-resolution inverters also surface-pin.** Feeding real Giza trajectories to Bartlett/Capon/
+  MUSIC all peak at 1.75–1.99 cells; the artifact is upstream of the inverter, refuting 'you used a
+  weak inverter.' → RESULTS_INVERTERS_2026-09-02.md, src/robustness_inverters.py.
+- **The depth constant is now derived exactly.** It is the argmax of a parameter-free matrix quadratic
+  form (expected tomogram of a degree-d-detrended random walk); deg-2 = 1.680 cells (0.869/2.474 at
+  deg 0/4), reproduced by the 24-patch pipeline to Monte-Carlo error. No single clean constant exists
+  (the 0.856·(d/2+1) law is approximate; prefactor drifts 0.870→0.840→0.825). Removes the earlier
+  'measured not derived' caveat. → RESULTS_DEPTH_CONSTANT_2026-09-02.md, src/derive_depth_constant.py.
 
 ## 9. Glossary
 - **SLC / SICD** — Single-Look Complex image (amplitude + phase), slant-plane.
