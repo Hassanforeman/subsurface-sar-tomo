@@ -1,7 +1,7 @@
 # Technical Bible — Subsurface SAR Doppler Tomography
 
 *The complete working reference for this project. Read it before touching data.*
-*Version 1.4. Every quantitative claim is traceable to the References at the end.*
+*Version 1.5. Every quantitative claim is traceable to the References at the end.*
 
 ---
 
@@ -411,6 +411,41 @@ pre-registered Giza repeats): `docs/REVIEW_INDEPENDENT_2026-09-02.md`.
 Note: parts of §8/§8.2 above predate v5's re-based nulls and withdrawn ratios (27×, 50×,
 1720× era numbers). Where this document and paper v5 disagree, **v5 is canonical**; a full
 bible refresh against v5 is pending.
+
+## 8.6 New tests, 2 September 2026 (Giza repeats, hardening, velocity/grid, a bug)
+
+Run after an adversarial (Grok) review of v5. Full detail in
+`docs/RESULTS_GIZA_REPEATS_2026-09-02.md`, `RESULTS_HARDENING_2026-09-02.md`,
+`RESULTS_VELOCITY_GRID_2026-09-02.md`.
+
+- **Within-site repeatability (pre-registered, was untested) — HIT.** All three free Umbra
+  Giza scenes (7 Feb U05, 8 Feb U04, 8 Mar U04 = the pre-registered primary / Pomposi scene)
+  are 8/8 pinned, 0/8 detections. Cumsum peak depth 1.75 / 1.67 / 1.77 cells — agree to
+  0.10 cells, matching the pre-registered prediction. Falsification condition iv not triggered.
+- **§5.4 increments anomaly is reproducible, not a one-off.** Removing the cumulative sum
+  keeps the peak pinned on 2 of 3 scenes (7 Feb 1.88, 8 Mar 1.95; 8 Feb clears at 3.83).
+  So accumulation is sufficient (empty walks pin) but NOT shown necessary at Giza — the v5
+  §5.4 wording is right; abstract/conclusion "mechanism identified" is too strong.
+- **Four-taper grid (all 3 scenes): 0 detections under any taper** (max C/align 3.67). Hann
+  is not universally loudest (rect wins 8 Feb, Hamming 8 Mar) — defuses the taper-cherry-pick
+  attack. Do not use Blackman 4.69 to explain away the 6.06 miss.
+- **Planted floor vs the paper's own 5x rule:** the 0.2 px plant is recovered by peak-DEPTH
+  but does not clear 5x-of-align-null until 0.5 px. The method's detection channel is
+  depth-of-peak, not the contrast statistic.
+- **Velocity/grid sweep (`src/sweep_velocity_grid.py`):** velocity only relabels the axis
+  (T invariant). Over-extending the depth grid past the Nyquist half-range manufactures a
+  17-29x aliased "detection" on real data, but it aliases known planted reflectors too and
+  its peak depth jumps across n_sub (spread 90 cells vs 0.25 on the correct grid). The
+  n_sub-stability guard catches it; the near-surface guard and the alignment-null ratio do
+  NOT. §8 should be tightened accordingly and the stability guard added to the velocity note.
+- **Bug fixed:** `experiment_increments` verdict-printer crashed with KeyError('peak_median')
+  on every real scene (real rows use peak_cells/contrast; noise rows use *_median). Patched
+  to read either schema. This is a 4th verdict-printer defect for the §10.3 list.
+
+**Environment note:** the analysis pipeline needs `sarpy` + `scipy`; the cloud/device
+sandboxes start without them (`pip install sarpy scipy`, ~1 wheel of 35 MB). The sandboxes
+CANNOT reach the Umbra/Capella S3 buckets (proxy 403) — new scenes must be fetched on the
+user's own machine into `data/`, after which the mounted pipeline runs on them.
 
 ## 9. Glossary
 - **SLC / SICD** — Single-Look Complex image (amplitude + phase), slant-plane.

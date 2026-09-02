@@ -660,21 +660,29 @@ def experiment_increments(slc, n_sub, patch, n_patch, overlap, window, estimator
                   else r["series"] == "increments")]
         return m[0] if m else None
 
+    def _peak(r):
+        return r.get("peak_cells", r.get("peak_median"))
+    def _contrast(r):
+        return r.get("contrast", r.get("contrast_median"))
+    def _pinned(r):
+        if "pinned_frac" in r:
+            return r["pinned_frac"]
+        return 1.0 if _peak(r) <= guard_cells else 0.0
     for inp, tag in (("real", "REAL DATA"), ("white noise", "WHITE NOISE")):
         w, i = _row(inp, "cumsum"), _row(inp, "increments")
         if w is None or i is None:
             continue
-        moved = i["peak_median"] - w["peak_median"]
-        unpinned = i["pinned_frac"] < 0.5
+        moved = _peak(i) - _peak(w)
+        unpinned = _pinned(i) < 0.5
         print(f"\n  {tag}: removing the cumulative sum moves the peak "
-              f"{w['peak_median']:.2f} -> {i['peak_median']:.2f} cells "
-              f"({moved:+.2f}), contrast {w['contrast_median']:.2f} -> "
-              f"{i['contrast_median']:.2f}, pinned {100*w['pinned_frac']:.0f}% -> "
-              f"{100*i['pinned_frac']:.0f}%.")
+              f"{_peak(w):.2f} -> {_peak(i):.2f} cells "
+              f"({moved:+.2f}), contrast {_contrast(w):.2f} -> "
+              f"{_contrast(i):.2f}, pinned {100*_pinned(w):.0f}% -> "
+              f"{100*_pinned(i):.0f}%.")
         if moved > 0.5 and unpinned:
             print(f"     -> UNPINS. Consistent with the running total generating "
                   f"the artifact on this arm.")
-        elif i["contrast_median"] < w["contrast_median"] * 0.6:
+        elif _contrast(i) < _contrast(w) * 0.6:
             print(f"     -> Contrast collapses but the peak STAYS PINNED. The "
                   f"running total accounts for the contrast on this arm but is "
                   f"NOT shown to be necessary for the pinning. Report as an open "
