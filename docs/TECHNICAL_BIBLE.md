@@ -1,7 +1,7 @@
 # Technical Bible — Subsurface SAR Doppler Tomography
 
 *The complete working reference for this project. Read it before touching data.*
-*Version 1.3. Every quantitative claim is traceable to the References at the end.*
+*Version 1.4. Every quantitative claim is traceable to the References at the end.*
 
 ---
 
@@ -392,6 +392,25 @@ precursors retired/relabeled, no duplicates). Private submission working notes (
 `paper/submission/cover_letter.md`, `submission_plan.md`, `pci_recommenders.md`, `PROJECT_LINKS.xlsx`.
 
 ---
+
+## 8.4 Independent review of v5 (2026-09-02)
+
+A full independent review of preprint v5 was run (fresh model session, no shared code):
+the mechanism claim of §5 was reimplemented from scratch from the paper's prose alone and
+**confirmed** — deg-2 detrended random walks peak at 1.66–1.73 cells at every n_sub 11–128
+(paper: 1.69 ± 0.02), contrast grows 72.3× from 11→128 looks (paper: 72.9×), increments
+stay flat, and pure noise at the default setting returns pooled contrast 3.28 — inside the
+real-site range of Table 2. All pipeline self-tests (subaperture, micromotion, stack,
+tomogram A–G, verify_claims) PASS as of this date. The Remote Sensing retraction
+(rs18162679, 10 Aug 2026) is verified real via MDPI and Retraction Watch (31 Aug 2026);
+Retraction Watch does not mention this project. **Verdict: the science is sound.**
+Full review, referee-question prep and recommended wording fixes (notably §3.1's
+"any input" phrasing, the provenance of the degree-2 detrend, and the still-unrun
+pre-registered Giza repeats): `docs/REVIEW_INDEPENDENT_2026-09-02.md`.
+
+Note: parts of §8/§8.2 above predate v5's re-based nulls and withdrawn ratios (27×, 50×,
+1720× era numbers). Where this document and paper v5 disagree, **v5 is canonical**; a full
+bible refresh against v5 is pending.
 
 ## 9. Glossary
 - **SLC / SICD** — Single-Look Complex image (amplitude + phase), slant-plane.
