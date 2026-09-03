@@ -69,7 +69,36 @@ recognizable Sphinx face / chambers are supplied by fitting/associating that vol
 high-detail 3D model and by AI "confirmation," then rendered. The measurement cannot carry the
 detail; the model and the renderer can. That is exactly the contradiction Hassan identified.
 
-## 5. Titanic claim — UNVERIFIED (open)
+## 5. Titanic claim — VERIFIED, and it is the clearest example of the mechanism
+
+Source: Biondi's X post @Filippobiondi_1/status/2088558729146830895 (15 Aug 2026, ~23K views),
+tags #HarmonicSAR #Titanic #BlindTest #MDPI. Text: "While the optical cameras go dark in the black
+water, the geometry of the hull keeps emerging with surgical precision ... Facts and data speak."
+
+**The image is a two-layer composite and his own caption admits it.** Layer 1 (background): the
+"HarmonicSAR Detection & Imaging" field — smooth purple/blue/red/orange BLOBS with no hull, no
+railings, no structure, exactly the low-resolution mush our resolution math predicts. Layer 2
+(centre inset, dashed border, rotated): a sharp grayscale PHOTOGRAPH of the wreck. The on-image
+label reads verbatim: **"In-situ Photo Overlay (tilted for alignment)."**
+
+So the "hull emerging with surgical precision" is a real seabed photograph composited onto the blob
+field and rotated to align. All recognizable detail is the photo's; the radar layer contributes only
+colour blobs. This is the same move as the 2022 paper's "tomography -> 3D model" pairing (§4), made
+even more explicit: an actual photo overlay rather than a CAD mesh, with the compositing labelled on
+the figure itself. It is the plainest demonstration in the whole project that the detail enters
+downstream, not from the radar.
+
+Two further, independent reasons the Titanic frame is physically hollow:
+- **No signal is possible.** X-band skin depth in seawater is ~2.5 mm (src/... computed); the wreck
+  is under ~3800 m = ~1.5 million skin depths. Satellite microwave radar returns exactly zero from
+  that hull, so the blob field cannot be a measurement of the Titanic - it is decorative.
+- **The photo proves a camera, not the method.** "Optical cameras go dark ... the hull keeps
+  emerging" is backwards: the only reason a hull is visible is the optical photograph pasted in.
+- **"#BlindTest" is the tell.** Overlaying the known answer (a photo of the wreck) onto the output
+  is not a blind test; it is tracing.
+
+## 5b. Titanic claim — provenance
+
 
 Two web searches found no documented case of Biondi applying his SAR/micro-motion method to the
 Titanic. The prominent 2026 Titanic 3D imagery is the unrelated Magellan/Atlantic Productions sonar

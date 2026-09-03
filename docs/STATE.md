@@ -83,8 +83,10 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       corrected — (ii) split, (iv) tested-not-triggered; dropped "none of four met"); §10.4 pruned.
       For Hassan's review; NOT submitted. Remaining paper polish is Hassan's editorial call.
 
-- [ ] Titanic claim: UNVERIFIED — no Biondi Titanic source found; need a link/date from Hassan to analyse
-      (if it exists, same resolution logic + microwave SAR does not penetrate 3.8 km of seawater).
+- [x] Titanic claim VERIFIED (X post 15 Aug 2026): the frame is a labelled "In-situ Photo Overlay" — a real
+      seabed PHOTO composited on the HarmonicSAR blob field. Detail is the photo's; radar layer is blobs.
+      X-band skin depth in seawater ~2.5 mm vs 3800 m depth = no possible signal. Clearest example of the
+      draping mechanism. → BIONDI_IMAGERY_ANALYSIS_2026-09-03.md §5.
 - [ ] Optional: pixel-measure a published "face" figure to count real voxels vs facial-feature Nyquist need.
 **Needs data fetched on Hassan's Mac (sandbox is 403-blocked from the S3 buckets):**
 - [ ] Volcano breadth (Merapi scenes listed; download → run). IN PROGRESS.
