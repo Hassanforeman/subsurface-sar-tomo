@@ -92,7 +92,7 @@ P("<b>Abstract.</b> In 2022&ndash;2025, F. Biondi and C. Malanga reported that D
   "<b>48 runs, 0 detections, peak confined to 1.2&ndash;1.9 resolution cells</b> across six sites, "
   "two sensors, eight sub-aperture counts and thirteen patch geometries. On the Giza plateau itself &mdash; "
   "run against predictions published before the data were processed &mdash; 8/8 runs are surface-pinned "
-  "with 0/8 detections. Third, a sufficient generating mechanism is demonstrated: the per-patch trajectory is a running total "
+  "with 0/8 detections, and three independent acquisitions agree to 0.1 cells. Third, a sufficient generating mechanism is demonstrated: the per-patch trajectory is a running total "
   "of adjacent-look displacement estimates, which has the spectrum of a random walk; the inversion is "
   "a discrete-time Fourier transform, so the reported depth in resolution cells is the peak of that "
   "transform, and removing a degree-2 polynomial leaves it near 1.7 cells. Accumulated Gaussian noise "
@@ -205,7 +205,10 @@ P("The patent states, verbatim, that &lsquo;the steering matrix A(K_Z, z) repres
   "crux: a DFT returns a structured, peaked spectrum from <i>any</i> input vector &mdash; signal, "
   "noise, or a residual processing trend alike. A confident-looking tomogram is thus the expected "
   "output of the method <i>whether or not</i> anything lies beneath the surface. It is not, by "
-  "itself, evidence of structure.")
+  "itself, evidence of structure. Nor does a more powerful inverter change this: feeding the identical "
+  "trajectories to Capon (MVDR) and MUSIC surface-pins at the same depth as the plain transform "
+  "(Bartlett 1.75, Capon 1.99, MUSIC 1.75 cells on the Giza scene), so the artifact is generated "
+  "upstream of the inversion &mdash; super-resolution sharpens it, it does not remove it.")
 
 P("3.2 The 22 kHz investigation frequency is unphysical, and depth is therefore a free parameter "
   "(addresses C3, C4)", h2)
@@ -382,7 +385,9 @@ tbl = [["Prediction", "Result", "Outcome"],
        ["Detections above 5x", "0/8", "hit"],
        ["Contrast at n_sub = 11, order 3 - 5", "<b>6.06</b>", "<b>miss, high</b>"],
        ["Contrast at 128, order 10^2, at or below ~275", "108.90", "hit"],
-       ["Fixed-window spread like other sites", "1.9x", "hit"]]
+       ["Fixed-window spread like other sites", "1.9x", "hit"],
+       ["E8: de-accumulation moves peak off surface", "1.75 to 1.88, still pinned; C 6.06 to 1.86", "<b>split</b>"],
+       ["3 acquisitions agree to ~0.1 cells", "1.75 / 1.67 / 1.77", "hit"]]
 tbl = [[Paragraph(c, ParagraphStyle("tc2", parent=body, fontSize=8.5, leading=10, spaceAfter=0))
         for c in row] for row in tbl]
 t = Table(tbl, colWidths=[3.0*inch, 1.5*inch, 1.3*inch])
@@ -393,11 +398,14 @@ t.setStyle(TableStyle([
     ("VALIGN", (0,0), (-1,-1), "MIDDLE"),
     ("TOPPADDING", (0,0), (-1,-1), 2.5), ("BOTTOMPADDING", (0,0), (-1,-1), 2.5)]))
 story.append(t)
-P("Table 3. The Giza run scored against predictions published before the data were processed. Two of "
-  "six missed. <b>None of the four pre-registered falsification conditions was met</b>, but the "
-  "misses are reported rather than absorbed: at 64 and 90 sub-apertures the peak sits at 1.52 cells, "
-  "below the predicted floor, and the contrast at the default setting is the highest of any site in "
-  "this study.", cap)
+P("Table 3. The Giza run scored against the pre-registered predictions. Of eight predictions, five hit, "
+  "two missed (peak depth a partial miss) and one (E8) split; the three-acquisition repeatability test, "
+  "previously open, is now met (peaks agree to 0.10 cells). Of the four falsification conditions, (i) "
+  "band-exit and (iii) 5&times; clearance were not met, (iv) cross-acquisition disagreement was tested and "
+  "not triggered, and (ii) split &mdash; after de-accumulation the peak stayed inside the guard (which "
+  "would trigger it) while the contrast collapsed (which would not). The misses are reported rather than "
+  "absorbed: at 64 and 90 sub-apertures the peak sits at 1.52 cells, below the predicted floor, and the "
+  "default contrast is the highest of any site here.", cap)
 
 P("<b>Giza returns the highest raw contrast of the six sites, and it is still not a detection.</b> "
   "6.06 against Komati 2.76, Cairo 2.75, Butte 3.33, Bingham 3.87 and Vesuvius 4.11. Its "
@@ -462,9 +470,13 @@ P("Removing a degree-2 polynomial from a series with the spectrum of a random wa
   "a position fixed by the polynomial order. On pure synthetic walks &mdash; no image, no "
   "sub-apertures, no overlap, no coregistration &mdash; the peak sits at <b>1.69 &plusmn; 0.02 "
   "resolution cells at every series length from 11 to 128</b>, a twelvefold range, and moves to 0.88 "
-  "cells at degree 0 and 2.5 cells at degree 4. Real sites land in a 1.2&ndash;1.9 band. <b>The "
-  "algebra that yields 1.69 rather than the textbook 1.5 predicted by a polynomial high-pass rule of "
-  "thumb is not closed</b>, and is reported here as an open problem rather than a derivation.")
+  "cells at degree 0 and 2.5 cells at degree 4. Real sites land in a 1.2&ndash;1.9 band. <b>This "
+  "constant is now derived exactly.</b> Because the inversion is a discrete Fourier transform, the "
+  "reported depth equals the peak of the <i>expected</i> tomogram of a degree-2-detrended random walk "
+  "&mdash; a closed, parameter-free matrix quadratic form whose peak is <b>1.68 resolution cells</b> "
+  "(0.87 and 2.47 at degrees 0 and 4), reproduced by the 24-patch pipeline to within Monte-Carlo error. "
+  "The textbook 1.5 is 11% low, a known small-record artefact of the polynomial-detrend high-pass "
+  "approximation; there is no single clean prefactor, as the per-degree value drifts.")
 P("The same construction reproduces the second signature of the method. Contrast rises "
   "<b>72.9&times;</b> as the accumulated series lengthens from 11 to 128 samples, while the "
   "increments of the same series stay flat at 1.1&times;. Pushed through the full SAR pipeline, an "
@@ -691,7 +703,12 @@ P("The legitimate version is <b>search-grid coverage</b>: if the inversion&rsquo
   "of the assumed seismic velocity by &plusmn;20&ndash;50% with the depth grid widened accordingly, "
   "re-running the null and positive-control diagnostics at each setting; the null is robust only if no "
   "plausible velocity produces an above-null, leakage-clean band. This is the more rigorous form of the "
-  "velocity check and the one to report in a journal version. The calibration argument above already "
+  "velocity check, and it has now been run: velocity &plusmn;50% with the depth grid widened 4&times; on "
+  "all three Giza scenes produces no above-null band; over-extending the grid past the transform&rsquo;s "
+  "Nyquist half-range manufactures only an <i>alias</i> that corrupts a known planted reflector identically "
+  "and whose depth jumps across sub-aperture count (spread 90 cells versus 0.25 on the correct grid), so "
+  "the sub-aperture-count stability guard &mdash; not the near-surface guard or the alignment null &mdash; "
+  "is what flags it. The calibration argument above already "
   "shows that no relabelling can rescue the current verdict &mdash; only a genuine above-null feature "
   "could, and there is none to relocate &mdash; so the sweep tests grid coverage rather than the "
   "conclusion.")
@@ -772,12 +789,11 @@ P("Three automated verdict messages in the research code printed conclusions the
   "its console output was, in three places, written to state the preferred answer.")
 
 P("10.4 What remains open", h2)
-P("The constant that fixes the artifact depth at 1.69 rather than the textbook 1.5 cells is not "
-  "derived. The contrast statistic has not been characterised analytically under strongly "
+P("The contrast statistic has not been characterised analytically under strongly "
   "autocorrelated inputs; its behaviour is measured across a twelvefold range of series lengths, "
   "which is weaker than a derivation. The Giza increments anomaly of &sect;5.4 has no explanation. "
-  "Two further Giza acquisitions have been obtained and not yet analysed, so the pre-registered "
-  "within-site repeatability test is untested. The &sect;5.5 attack was obtained on "
+  "The three Giza acquisitions have all been analysed and the pre-registered within-site "
+  "repeatability test is met (peaks agree to 0.10 cells). The &sect;5.5 attack was obtained on "
   "synthetic input only and searched only linear per-patch filters of length at most five; longer "
   "or nonlinear operators are not characterised and may be worse. <b>No filter-invariant "
   "replacement for either criterion is proposed here, and finding one is the single most useful "

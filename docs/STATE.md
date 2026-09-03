@@ -5,7 +5,7 @@ Rule: if any other document disagrees with this one about *status*, THIS FILE WI
 *detail*, follow the pointer this file gives. When you close or open a question, edit the
 ledgers below in the same session — that is how we stop doing double work.
 
-*Last updated: 2026-09-02.*
+*Last updated: 2026-09-02 (evening: paper v5 revised with today's results).*
 
 *How to keep this file and supersede docs correctly: `docs/DOCUMENTATION_RULES.md`. Entry point for new sessions: `/CLAUDE.md`.*
 
@@ -70,9 +70,11 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       caveat); "quality-weighted" removed (3×, false of code); §3.3 shaft→"surface-pinned band"; §3.5
       117.8×/96.7× shuffle-null quotes dropped; §8 "shuffled nulls"→alignment/pipeline-noise; "exactly
       as disclosed"→"as disclosed". For Hassan's review; NOT submitted.
-- [ ] BIGGER revision (needs Hassan's direction): fold in today's new results (Giza repeatability HIT;
-      MUSIC/Capon; exact depth constant 1.680; velocity/grid sweep); re-score Table 3 (add E8 split,
-      mark repeatability HIT not "untested", drop "none of four falsification conditions met").
+- [x] DONE 2 Sep: folded today's results into paper v5 (build_v5.py + PDF, 16pp/8figs): repeatability
+      clause in abstract; MUSIC/Capon in §3.1; depth constant derived (1.68) in §5.3; velocity/grid
+      sweep result in §8; Table 3 re-scored (E8 split + repeatability HIT rows; falsification conditions
+      corrected — (ii) split, (iv) tested-not-triggered; dropped "none of four met"); §10.4 pruned.
+      For Hassan's review; NOT submitted. Remaining paper polish is Hassan's editorial call.
 
 **Needs data fetched on Hassan's Mac (sandbox is 403-blocked from the S3 buckets):**
 - [ ] Volcano breadth (Merapi scenes listed; download → run). IN PROGRESS.

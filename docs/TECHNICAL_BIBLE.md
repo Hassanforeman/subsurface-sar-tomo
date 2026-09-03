@@ -5,7 +5,7 @@
 
 
 *The complete working reference for this project. Read it before touching data.*
-*Version 1.6. Every quantitative claim is traceable to the References at the end.*
+*Version 1.7. Every quantitative claim is traceable to the References at the end.*
 
 ---
 
@@ -461,6 +461,15 @@ user's own machine into `data/`, after which the mounted pipeline runs on them.
   deg 0/4), reproduced by the 24-patch pipeline to Monte-Carlo error. No single clean constant exists
   (the 0.856·(d/2+1) law is approximate; prefactor drifts 0.870→0.840→0.825). Removes the earlier
   'measured not derived' caveat. → RESULTS_DEPTH_CONSTANT_2026-09-02.md, src/derive_depth_constant.py.
+
+## 8.8 Paper v5 revised with today's results (2 Sep 2026, evening)
+
+build_v5.py + PDF rebuilt (16pp, all 8 figures; figures restored from the git PDF per the §8.6/STATE
+gotcha). Changes: abstract repeatability clause; MUSIC/Capon robustness in §3.1; depth constant stated
+as derived (1.68 cells) in §5.3; velocity/grid-sweep result in §8 (grid over-extension aliases, caught
+by n_sub-stability); Table 3 re-scored honestly (E8 split + repeatability-HIT rows, falsification
+conditions (ii) split / (iv) tested-not-triggered, 'none of four met' removed); §10.4 pruned of the two
+now-closed items. Plus the 8 earlier accuracy fixes. For review, not submitted. → paper/build_v5.py.
 
 ## 9. Glossary
 - **SLC / SICD** — Single-Look Complex image (amplitude + phase), slant-plane.
