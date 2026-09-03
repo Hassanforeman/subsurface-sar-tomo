@@ -62,6 +62,13 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   June footer, scene-ID disclosure); the rest valid. → ADVERSARIAL_REVIEW_v5_20260902.md (user upload).
 - Independent from-scratch confirmation of the mechanism, 2 Sep. → REVIEW_INDEPENDENT_2026-09-02.md.
 
+- **The end-product detail cannot come from the data** (3 Sep): a recognizable Sphinx face with a
+  0.6 m cobra at 500-1200 m is 1-3 orders of magnitude finer than the method's own resolution (honest
+  voxel 150-460 m tall / ~170 m wide via Fresnel; even 22 kHz best case ~2x12 m). The 2022 paper
+  pairs a pre-made 3D MODEL with the blobby tomogram ("Tags association from tomography to 3D model");
+  the 2nd-Sphinx pipeline compiles a "3D mesh" + AI. Detail enters downstream, not from radar.
+  → BIONDI_IMAGERY_ANALYSIS_2026-09-03.md, src/resolution_vs_feature.py.
+
 ## 3. What is ACTUALLY OPEN (the only place new work should start)
 
 **Runnable now (no new data):**
@@ -76,6 +83,9 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       corrected — (ii) split, (iv) tested-not-triggered; dropped "none of four met"); §10.4 pruned.
       For Hassan's review; NOT submitted. Remaining paper polish is Hassan's editorial call.
 
+- [ ] Titanic claim: UNVERIFIED — no Biondi Titanic source found; need a link/date from Hassan to analyse
+      (if it exists, same resolution logic + microwave SAR does not penetrate 3.8 km of seawater).
+- [ ] Optional: pixel-measure a published "face" figure to count real voxels vs facial-feature Nyquist need.
 **Needs data fetched on Hassan's Mac (sandbox is 403-blocked from the S3 buckets):**
 - [ ] Volcano breadth (Merapi scenes listed; download → run). IN PROGRESS.
 - [ ] Butte rect-window anomaly (5.07 vs alignment null) + the "monotonic sites = the structured
