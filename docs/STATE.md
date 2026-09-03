@@ -115,7 +115,7 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 
 ## 5. Doc map (what's current vs superseded)
 
-- **CURRENT:** this file, TECHNICAL_BIBLE.md (v1.5), paper v5 PDF, the three RESULTS_*_2026-09-02.md,
+- **CURRENT:** this file, HOW_BIONDI_DOES_IT.md (the consolidated mechanism account), TECHNICAL_BIBLE.md (v1.5), paper v5 PDF, the three RESULTS_*_2026-09-02.md,
   REVIEW_INDEPENDENT_2026-09-02.md, FIVE_SITE, SENSITIVITY_RESPONSE_BIONDI.md.
 - **STALE — do not use for status:** docs/private/HANDOFF.md (dated ~1 Jul: says "Bingham in flight /
   paper done" — both superseded by v5 + Giza + retraction). Kept for history only.
