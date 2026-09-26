@@ -183,3 +183,13 @@ because a metric chosen after seeing the target is not a metric.
 ### C.5 Result
 
 *To be appended after the run. Deliberately empty at commit time.*
+
+**Appended 26 Sep 2026 (step 1).** Unspecified analysis choices were fixed in
+`src/shape_metric_giza.py`, committed and pushed as `ec411e3` before any Giza volume was built.
+Centre-crop results under the rule above, with an in-data planted-shaft positive control:
+02-07 U05 **0/8** (control 8/8); 02-08 U04 **4/8** (control 8/8); 03-08 U04 (pre-registered
+primary scene) **0/8** (control 8/8). Aggregation fixed in the script: architecture-like iff >= 5/8.
+**Step 1 is negative on all three scenes.** The 02-08 crop is a near-miss driven mainly by the
+component-count arm, not vertical extent; it is reported in full, with secondary checks (15 crops,
+five null seeds, spectrally matched null), in `docs/RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md`.
+Output: `runs/shape_metric_giza.json`. Step 2 (published figures) is now permitted.

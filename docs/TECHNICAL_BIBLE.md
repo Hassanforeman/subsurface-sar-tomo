@@ -5,7 +5,7 @@
 
 
 *The complete working reference for this project. Read it before touching data.*
-*Version 1.7. Every quantitative claim is traceable to the References at the end.*
+*Version 1.8. Every quantitative claim is traceable to the References at the end.*
 
 ---
 
@@ -470,6 +470,19 @@ as derived (1.68 cells) in §5.3; velocity/grid-sweep result in §8 (grid over-e
 by n_sub-stability); Table 3 re-scored honestly (E8 split + repeatability-HIT rows, falsification
 conditions (ii) split / (iv) tested-not-triggered, 'none of four met' removed); §10.4 pruned of the two
 now-closed items. Plus the 8 earlier accuracy fixes. For review, not submitted. → paper/build_v5.py.
+
+## 8.9 §7 shape metric on the real Giza volumes — pre-registered step 1 (26 Sep 2026)
+
+The pre-registered matched-null shape rule (prereg Part C) was applied to real Giza volumes for the
+first time; unspecified choices were committed first (`ec411e3`). Centre crops: 02-07 U05 0/8,
+02-08 U04 4/8, 03-08 U04 (prereg primary) 0/8; planted-shaft positive control 8/8 on every scene.
+Threshold is 5/8, so **none is architecture-like — step 1 is negative.** Across 15 crops, 0 reach the
+threshold. The 02-08 near-miss fires mainly on the component-count arm (fewer, larger bodies) with
+no real vertical-extent gain, at about a quarter of the planted-shaft margins, and does not recur in
+that scene's off-centre crops. Candidate cause, untested: surface content, which the empty-speckle
+null lacks. Durable design note: **a pipeline-matched empty null controls for the pipeline but not for
+"a scene exists", so this rule also responds to surface texture** — keep that in mind when reading
+any count below threshold. → RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md; src/shape_metric_giza.py.
 
 ## 9. Glossary
 - **SLC / SICD** — Single-Look Complex image (amplitude + phase), slant-plane.

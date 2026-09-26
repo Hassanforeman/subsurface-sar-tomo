@@ -1,0 +1,634 @@
+{
+ "prereg": "docs/PREREGISTRATION_MINES_AND_GRANSASSO.md Part C",
+ "script": "src/shape_metric_giza.py",
+ "git": "ec411e3",
+ "pct": 99.0,
+ "params": {
+  "canvas": 768,
+  "patch": 64,
+  "stride": 24,
+  "n_sub": 11,
+  "overlap": 0.8,
+  "window": "hann",
+  "null_bw": 0.8,
+  "null_seed": 0
+ },
+ "included": [
+  "raw",
+  "log",
+  "gamma 0.2",
+  "depth gain z^2",
+  "common-mode removed",
+  "z-blur",
+  "common-mode + gain z^2",
+  "gain z^4 + z-blur + gamma"
+ ],
+ "excluded": [
+  "common-mode + whiten + log",
+  "depth gain z^4",
+  "tile whiten",
+  "whiten + log"
+ ],
+ "majority": 5,
+ "primary": {
+  "giza_2023-02-07_UMBRA-05": {
+   "crop_origin": [
+    2453,
+    2291
+   ],
+   "shape": [
+    5674,
+    5351
+   ],
+   "fires": 0,
+   "positive_control_fires": 8,
+   "verdict": "NOT architecture-like",
+   "treatments": {
+    "raw": {
+     "real": {
+      "vrun": 31.5,
+      "elong": 27.5,
+      "ncomp": 59,
+      "span": 0.7633333333333333,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 34.0,
+      "elong": 27.0,
+      "ncomp": 54,
+      "span": 0.4033333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 0.9264705882080451,
+     "ncomp_ratio": 0.9152542372726229,
+     "architecture_like": false
+    },
+    "log": {
+     "real": {
+      "vrun": 31.5,
+      "elong": 27.5,
+      "ncomp": 59,
+      "span": 0.7633333333333333,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 34.0,
+      "elong": 27.0,
+      "ncomp": 54,
+      "span": 0.4033333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 0.9264705882080451,
+     "ncomp_ratio": 0.9152542372726229,
+     "architecture_like": false
+    },
+    "gamma 0.2": {
+     "real": {
+      "vrun": 31.5,
+      "elong": 27.5,
+      "ncomp": 59,
+      "span": 0.7633333333333333,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 34.0,
+      "elong": 27.0,
+      "ncomp": 54,
+      "span": 0.4033333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 0.9264705882080451,
+     "ncomp_ratio": 0.9152542372726229,
+     "architecture_like": false
+    },
+    "depth gain z^2": {
+     "real": {
+      "vrun": 31.5,
+      "elong": 24.5,
+      "ncomp": 54,
+      "span": 0.6933333333333334,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 24.0,
+      "elong": 22.0,
+      "ncomp": 93,
+      "span": 0.7533333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.3124999999453124,
+     "ncomp_ratio": 1.7222222221903294,
+     "architecture_like": false
+    },
+    "common-mode removed": {
+     "real": {
+      "vrun": 36.0,
+      "elong": 29.0,
+      "ncomp": 59,
+      "span": 0.8,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 36.0,
+      "elong": 29.0,
+      "ncomp": 54,
+      "span": 0.6,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 0.9999999999722223,
+     "ncomp_ratio": 0.9152542372726229,
+     "architecture_like": false
+    },
+    "z-blur": {
+     "real": {
+      "vrun": 28.0,
+      "elong": 16.0,
+      "ncomp": 31,
+      "span": 0.63,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 28.0,
+      "elong": 16.75,
+      "ncomp": 21,
+      "span": 0.2633333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 0.9999999999642857,
+     "ncomp_ratio": 0.6774193548168574,
+     "architecture_like": false
+    },
+    "common-mode + gain z^2": {
+     "real": {
+      "vrun": 33.0,
+      "elong": 24.0,
+      "ncomp": 52,
+      "span": 0.7066666666666667,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 26.0,
+      "elong": 25.0,
+      "ncomp": 88,
+      "span": 0.7633333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.2692307691819527,
+     "ncomp_ratio": 1.692307692275148,
+     "architecture_like": false
+    },
+    "gain z^4 + z-blur + gamma": {
+     "real": {
+      "vrun": 34.0,
+      "elong": 16.0,
+      "ncomp": 22,
+      "span": 0.4033333333333333,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 24.0,
+      "elong": 12.0,
+      "ncomp": 31,
+      "span": 0.2866666666666667,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.4166666666076388,
+     "ncomp_ratio": 1.4090909090268595,
+     "architecture_like": false
+    }
+   }
+  },
+  "giza_2023-02-08_UMBRA-04": {
+   "crop_origin": [
+    2446,
+    2405
+   ],
+   "shape": [
+    5661,
+    5578
+   ],
+   "fires": 4,
+   "positive_control_fires": 8,
+   "verdict": "NOT architecture-like",
+   "treatments": {
+    "raw": {
+     "real": {
+      "vrun": 36.0,
+      "elong": 26.0,
+      "ncomp": 38,
+      "span": 0.88,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 34.0,
+      "elong": 27.0,
+      "ncomp": 54,
+      "span": 0.4033333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.058823529380623,
+     "ncomp_ratio": 1.4210526315415515,
+     "architecture_like": false
+    },
+    "log": {
+     "real": {
+      "vrun": 36.0,
+      "elong": 26.0,
+      "ncomp": 38,
+      "span": 0.88,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 34.0,
+      "elong": 27.0,
+      "ncomp": 54,
+      "span": 0.4033333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.058823529380623,
+     "ncomp_ratio": 1.4210526315415515,
+     "architecture_like": false
+    },
+    "gamma 0.2": {
+     "real": {
+      "vrun": 36.0,
+      "elong": 26.0,
+      "ncomp": 38,
+      "span": 0.88,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 34.0,
+      "elong": 27.0,
+      "ncomp": 54,
+      "span": 0.4033333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.058823529380623,
+     "ncomp_ratio": 1.4210526315415515,
+     "architecture_like": false
+    },
+    "depth gain z^2": {
+     "real": {
+      "vrun": 33.0,
+      "elong": 26.0,
+      "ncomp": 35,
+      "span": 0.7933333333333333,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 24.0,
+      "elong": 22.0,
+      "ncomp": 93,
+      "span": 0.7533333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.3749999999427083,
+     "ncomp_ratio": 2.657142857066939,
+     "architecture_like": true
+    },
+    "common-mode removed": {
+     "real": {
+      "vrun": 41.0,
+      "elong": 27.0,
+      "ncomp": 35,
+      "span": 0.8866666666666667,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 36.0,
+      "elong": 29.0,
+      "ncomp": 54,
+      "span": 0.6,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.1388888888572533,
+     "ncomp_ratio": 1.5428571428130613,
+     "architecture_like": false
+    },
+    "z-blur": {
+     "real": {
+      "vrun": 50.5,
+      "elong": 17.083333333333336,
+      "ncomp": 10,
+      "span": 0.86,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 28.0,
+      "elong": 16.75,
+      "ncomp": 21,
+      "span": 0.2633333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.8035714285070152,
+     "ncomp_ratio": 2.09999999979,
+     "architecture_like": true
+    },
+    "common-mode + gain z^2": {
+     "real": {
+      "vrun": 33.0,
+      "elong": 27.5,
+      "ncomp": 35,
+      "span": 0.8033333333333333,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 26.0,
+      "elong": 25.0,
+      "ncomp": 88,
+      "span": 0.7633333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.2692307691819527,
+     "ncomp_ratio": 2.514285714213878,
+     "architecture_like": true
+    },
+    "gain z^4 + z-blur + gamma": {
+     "real": {
+      "vrun": 34.0,
+      "elong": 15.5,
+      "ncomp": 9,
+      "span": 0.49333333333333335,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 24.0,
+      "elong": 12.0,
+      "ncomp": 31,
+      "span": 0.2866666666666667,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.4166666666076388,
+     "ncomp_ratio": 3.4444444440617286,
+     "architecture_like": true
+    }
+   }
+  },
+  "giza_2023-03-08_UMBRA-04": {
+   "crop_origin": [
+    4867,
+    9752
+   ],
+   "shape": [
+    10502,
+    20272
+   ],
+   "fires": 0,
+   "positive_control_fires": 8,
+   "verdict": "NOT architecture-like",
+   "treatments": {
+    "raw": {
+     "real": {
+      "vrun": 30.0,
+      "elong": 28.0,
+      "ncomp": 70,
+      "span": 0.5766666666666667,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 34.0,
+      "elong": 27.0,
+      "ncomp": 54,
+      "span": 0.4033333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 0.8823529411505191,
+     "ncomp_ratio": 0.771428571417551,
+     "architecture_like": false
+    },
+    "log": {
+     "real": {
+      "vrun": 30.0,
+      "elong": 28.0,
+      "ncomp": 70,
+      "span": 0.5766666666666667,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 34.0,
+      "elong": 27.0,
+      "ncomp": 54,
+      "span": 0.4033333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 0.8823529411505191,
+     "ncomp_ratio": 0.771428571417551,
+     "architecture_like": false
+    },
+    "gamma 0.2": {
+     "real": {
+      "vrun": 30.0,
+      "elong": 28.0,
+      "ncomp": 70,
+      "span": 0.5766666666666667,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 34.0,
+      "elong": 27.0,
+      "ncomp": 54,
+      "span": 0.4033333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 0.8823529411505191,
+     "ncomp_ratio": 0.771428571417551,
+     "architecture_like": false
+    },
+    "depth gain z^2": {
+     "real": {
+      "vrun": 28.0,
+      "elong": 27.0,
+      "ncomp": 77,
+      "span": 0.7133333333333334,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 24.0,
+      "elong": 22.0,
+      "ncomp": 93,
+      "span": 0.7533333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.1666666666180556,
+     "ncomp_ratio": 1.2077922077765222,
+     "architecture_like": false
+    },
+    "common-mode removed": {
+     "real": {
+      "vrun": 30.5,
+      "elong": 30.0,
+      "ncomp": 73,
+      "span": 0.8166666666666667,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 36.0,
+      "elong": 29.0,
+      "ncomp": 54,
+      "span": 0.6,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 0.8472222221986884,
+     "ncomp_ratio": 0.739726027387127,
+     "architecture_like": false
+    },
+    "z-blur": {
+     "real": {
+      "vrun": 26.0,
+      "elong": 15.125,
+      "ncomp": 26,
+      "span": 0.3566666666666667,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 28.0,
+      "elong": 16.75,
+      "ncomp": 21,
+      "span": 0.2633333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 0.9285714285382654,
+     "ncomp_ratio": 0.8076923076612426,
+     "architecture_like": false
+    },
+    "common-mode + gain z^2": {
+     "real": {
+      "vrun": 30.0,
+      "elong": 29.0,
+      "ncomp": 74,
+      "span": 0.7233333333333334,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 26.0,
+      "elong": 25.0,
+      "ncomp": 88,
+      "span": 0.7633333333333333,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.1538461538017752,
+     "ncomp_ratio": 1.189189189173119,
+     "architecture_like": false
+    },
+    "gain z^4 + z-blur + gamma": {
+     "real": {
+      "vrun": 30.0,
+      "elong": 14.0,
+      "ncomp": 21,
+      "span": 0.2966666666666667,
+      "n_vox": 2700
+     },
+     "null": {
+      "vrun": 24.0,
+      "elong": 12.0,
+      "ncomp": 31,
+      "span": 0.2866666666666667,
+      "n_vox": 2700
+     },
+     "vrun_ratio": 1.2499999999479168,
+     "ncomp_ratio": 1.4761904761201814,
+     "architecture_like": false
+    }
+   }
+  }
+ },
+ "secondary": {
+  "giza_2023-02-07_UMBRA-05": {
+   "null_seeds": {
+    "0": 0,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   },
+   "spectral_null": {
+    "bw": 0.7994791666666667,
+    "fires": 0,
+    "positive_control_fires": 8
+   },
+   "offcentre": {
+    "917,755": {
+     "fires": 0,
+     "positive_control_fires": 8
+    },
+    "917,3827": {
+     "fires": 4,
+     "positive_control_fires": 8
+    },
+    "3989,755": {
+     "fires": 1,
+     "positive_control_fires": 8
+    },
+    "3989,3827": {
+     "fires": 0,
+     "positive_control_fires": 8
+    }
+   }
+  },
+  "giza_2023-02-08_UMBRA-04": {
+   "null_seeds": {
+    "0": 4,
+    "1": 4,
+    "2": 4,
+    "3": 4,
+    "4": 4
+   },
+   "spectral_null": {
+    "bw": 0.7805989583333333,
+    "fires": 4,
+    "positive_control_fires": 8
+   },
+   "offcentre": {
+    "910,869": {
+     "fires": 0,
+     "positive_control_fires": 8
+    },
+    "910,3941": {
+     "fires": 0,
+     "positive_control_fires": 8
+    },
+    "3982,869": {
+     "fires": 0,
+     "positive_control_fires": 8
+    },
+    "3982,3941": {
+     "fires": 0,
+     "positive_control_fires": 8
+    }
+   }
+  },
+  "giza_2023-03-08_UMBRA-04": {
+   "null_seeds": {
+    "0": 0,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   },
+   "spectral_null": {
+    "bw": 0.8046875,
+    "fires": 0,
+    "positive_control_fires": 8
+   },
+   "offcentre": {
+    "3331,8216": {
+     "fires": 0,
+     "positive_control_fires": 8
+    },
+    "3331,11288": {
+     "fires": 0,
+     "positive_control_fires": 8
+    },
+    "6403,8216": {
+     "fires": 0,
+     "positive_control_fires": 8
+    },
+    "6403,11288": {
+     "fires": 2,
+     "positive_control_fires": 8
+    }
+   }
+  }
+ }
+}

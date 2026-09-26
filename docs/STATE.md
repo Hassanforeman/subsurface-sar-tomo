@@ -5,7 +5,7 @@ Rule: if any other document disagrees with this one about *status*, THIS FILE WI
 *detail*, follow the pointer this file gives. When you close or open a question, edit the
 ledgers below in the same session — that is how we stop doing double work.
 
-*Last updated: 2026-09-02 (evening: paper v5 revised with today's results).*
+*Last updated: 2026-09-26 (PCI 2nd reviewer secured; retraction aftermath logged; §7 shape metric step 1 run on real Giza — negative, one near-miss disclosed).*
 
 *How to keep this file and supersede docs correctly: `docs/DOCUMENTATION_RULES.md`. Entry point for new sessions: `/CLAUDE.md`.*
 
@@ -54,6 +54,11 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - **Pomposi (Zenodo Apr 2026):** independent, same conclusion, different route; cite at revision; his
   code bugs told privately only. → COMPARISON_POMPOSI_2026-08-13.md.
 - **Commercial idea:** parked, honest "probably not". → COMMERCIAL_ASSESSMENT.md.
+- **§7 shape metric, pre-registered step 1 (26 Sep): NEGATIVE.** Real Giza centre crops vs matched
+  empty volume, 8 treatments: 02-07 0/8, 02-08 4/8 (near-miss), 03-08 [prereg primary] 0/8; planted-
+  shaft control 8/8 on every scene. 0 of 15 crops reach the 5/8 threshold. Choices committed first
+  (`ec411e3`). Paper §7's "provisional" can be updated. → RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md;
+  src/shape_metric_giza.py; runs/shape_metric_giza.json.
 
 ## 2. Adversarial reviews already answered (don't re-litigate)
 
@@ -88,6 +93,13 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       X-band skin depth in seawater ~2.5 mm vs 3800 m depth = no possible signal. Clearest example of the
       draping mechanism. → BIONDI_IMAGERY_ANALYSIS_2026-09-03.md §5.
 - [ ] Optional: pixel-measure a published "face" figure to count real voxels vs facial-feature Nyquist need.
+      NOW PERMITTED as prereg C.4 step 2 (step 1 done 26 Sep). Measure tomogram-magnitude panel vs
+      CAD-model panel separately in the 2022 paper's open-access figures 34-50. [runnable]
+- [ ] Shape-metric near-miss (02-08 centre crop 4/8, mostly component-count arm, no vertical-extent
+      gain): test the "surface content, not depth" explanation with a surface-matched null or a
+      co-location test vs surface brightness. Secondary; cannot change the step-1 verdict. [needs-data:
+      run on Mac] → RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md §3.
+- [ ] Paper: update §7 "provisional" wording + add step-1 result (at revision, per reviewer reports). [external]
 **Needs data fetched on Hassan's Mac (sandbox is 403-blocked from the S3 buckets):**
 - [ ] Volcano breadth (Merapi scenes listed; download → run). IN PROGRESS.
 - [ ] Butte rect-window anomaly (5.07 vs alignment null) + the "monotonic sites = the structured
@@ -95,7 +107,15 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - [ ] E12 on a real SICD → floor in metres via (R/V)·v_LOS (deliberately not done; referee-bait if rushed).
 
 **External / administrative — CONFIRM CURRENT STATUS (I can't see these):**
-- [ ] PCI Archaeology: did a recommender pick it up? Was the Di Palma letter (PCI_LETTER_v2_2026-08-14.md) sent?
+- [x] PCI Archaeology (ArticleID #1130): recommender is Dr Francesca Di Palma; the errata letter
+      (PCI_LETTER_v2_2026-08-14.md) WAS sent 14 Aug. One review was done by 14 Aug; a second reviewer
+      was secured (Queffelec, 25 Sep 2026). Status: waiting on reviewer 2. Next action: none until
+      reports arrive — then revise v4/v5 per reports + the errata list.
+- [x] Retraction aftermath (checked 26 Sep): Biondi publicly contests the retraction and demands the
+      journal specify the errors (the notice is non-specific) — our preprint is the specific,
+      reproducible version. Team continues promoting the "Second Sphinx" via presentations, now citing
+      AI facial-recognition "88-96% match" — see BIONDI_IMAGERY_ANALYSIS_2026-09-03.md (detail comes
+      from model/AI downstream, not radar). Sources: Retraction Watch 31 Aug 2026; MDPI rs18162679.
 - [ ] Line-numbered PDF if a reviewer asks.
 - [ ] Email Pomposi (ally).
 
@@ -115,7 +135,7 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 
 ## 5. Doc map (what's current vs superseded)
 
-- **CURRENT:** this file, HOW_BIONDI_DOES_IT.md (the consolidated mechanism account), TECHNICAL_BIBLE.md (v1.5), paper v5 PDF, the three RESULTS_*_2026-09-02.md,
+- **CURRENT:** this file, RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md, HOW_BIONDI_DOES_IT.md (the consolidated mechanism account), TECHNICAL_BIBLE.md (v1.5), paper v5 PDF, the three RESULTS_*_2026-09-02.md,
   REVIEW_INDEPENDENT_2026-09-02.md, FIVE_SITE, SENSITIVITY_RESPONSE_BIONDI.md.
 - **STALE — do not use for status:** docs/private/HANDOFF.md (dated ~1 Jul: says "Bingham in flight /
   paper done" — both superseded by v5 + Giza + retraction). Kept for history only.
