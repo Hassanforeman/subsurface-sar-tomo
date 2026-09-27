@@ -514,6 +514,13 @@ NOT predicted by registration quality, backscatter brightness or texture (|ρ| �
 volume); a displacement-planted control is recovered 4/4. The 02-08 near-miss blobs are as squat as noise.
 → RESULTS_STREAKS_2026-09-27.md.
 
+## 8.13 Known voids and look coherence — test G, Q2, Q3 (27 Sep 2026)
+
+Surveyed 5–30 m mastaba shafts in the Giza cemeteries do not change the output vs bare plateau (d −0.10,
+−0.03; control detected) — NULL, matching ejhong R13. The paper's Kz ladder on Umbra is uniform to 2e-5
+(a DFT), depth scale = free λs. Non-overlapping looks match only at the speckle floor, so tracked
+increments are filter-bank-carried registration noise. → RESULTS_KNOWN_VOIDS / RESULTS_KZ_LADDER.
+
 ## 9. Glossary
 - **SLC / SICD** — Single-Look Complex image (amplitude + phase), slant-plane.
 - **CPHD** — Compensated Phase History Data (pre-image; ideal for sub-aperture work).

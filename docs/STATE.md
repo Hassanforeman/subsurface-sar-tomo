@@ -5,7 +5,7 @@ Rule: if any other document disagrees with this one about *status*, THIS FILE WI
 *detail*, follow the pointer this file gives. When you close or open a question, edit the
 ledgers below in the same session — that is how we stop doing double work.
 
-*Last updated: 2026-09-27 (Q2: paper's Kz ladder on Umbra is a DFT to 2e-5, depth scale free; test G known-voids pre-registered. Test F: streaks NOT surface-linked — our hypothesis rejected; near-miss MIXED. 2026 press-image audit: 3-D Sphinx built from 2-D heat-maps + template + GAN/face tools + chatbots, per their own slides; journal-version replication of step 2: images identical, no axes added, 15/16 again; C.4 step 2: the 2022 paper's paired figures measured — geometry is the model's; tomogram panels unscaled, 4/16 overlaid on known drawings. Previous: 26 Sep §7 step 1 negative).*
+*Last updated: 2026-09-27 (test G: known cemetery shafts NOT distinguished from bare plateau — NULL, control detected; Q3 looks decorrelate to speckle floor. Q2: paper's Kz ladder on Umbra is a DFT to 2e-5, depth scale free; test G known-voids pre-registered. Test F: streaks NOT surface-linked — our hypothesis rejected; near-miss MIXED. 2026 press-image audit: 3-D Sphinx built from 2-D heat-maps + template + GAN/face tools + chatbots, per their own slides; journal-version replication of step 2: images identical, no axes added, 15/16 again; C.4 step 2: the 2022 paper's paired figures measured — geometry is the model's; tomogram panels unscaled, 4/16 overlaid on known drawings. Previous: 26 Sep §7 step 1 negative).*
 
 *How to keep this file and supersede docs correctly: `docs/DOCUMENTATION_RULES.md`. Entry point for new sessions: `/CLAUDE.md`.*
 
@@ -87,6 +87,14 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   Sphinx form (est. length 73.0 m); percentages are model outputs; heat-maps hand-stretched onto photos
   (handles visible); Giza 3-D scene = identical primitives in a modeller. X1 hit, X2 hit, X3 partial.
   → RESULTS_PRESS_IMAGES_2026-09-27.md; src/press_image_audit.py; runs/press_image_audit.json.
+- **Test G (27 Sep, prereg `4a4a57d`, amendments `0bc7d7d`): known voids NOT distinguished — NULL.**
+  Hundreds of surveyed 5-30 m mastaba shafts (W+E cemeteries) vs bare plateau, brightness-matched:
+  d = −0.10 (02-07), −0.03 (03-08), both below the plateau-vs-plateau spread; displacement-planted control
+  detected everywhere (|d| 1.9-2.0). Secondary 02-08 +0.30 vs −0.28 plateau spread (excluded by rule).
+  Agrees with ejhong R13 on independent data. Q3: adjacent looks match ~0.6 (≈ pure-speckle filter-bank
+  overlap 0.56), non-overlapping looks at the speckle floor (0.06-0.18) → increments are registration
+  noise, measured. 02-08 SICD geolocation is off ~500 m (earlier centre-crop tests unaffected).
+  → RESULTS_KNOWN_VOIDS_2026-09-27.md; src/known_voids_umbra.py; runs/known_voids_umbra.json.
 - **Q2 (27 Sep, descriptive): the paper's Kz steering on our Umbra geometry is a DFT to 5 decimals**
   (CV of ΔKz 2e-6–2e-5); depth repeat = (λs·r·sinθ)/(2ΔB⊥) = 292 / 240 / 71 m per metre of the unmeasured
   λs, different per scene. Closes the "orbit curvature ≠ DFT" caveat. → RESULTS_KZ_LADDER_2026-09-27.md;
@@ -134,8 +142,8 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - [ ] Optional, not started: the same measurement on a 2025/2026 Giza or "Second Sphinx" figure (a
       different, later pipeline). DONE 27 Sep (descriptive) — see §1. Next: step (a) below.
 - [x] DONE 27 Sep: test F (streaks vs surface) + near-miss split — see §1.
-- [ ] Test G (Q1 known voids + Q3 coherence) PRE-REGISTERED: PREREGISTRATION_KNOWN_VOIDS_2026-09-27.md;
-      src/known_voids_umbra.py (selftest passed). Mac: --placement first, then run. Q2 DONE (§1).
+- [x] DONE 27 Sep: test G (Q1 known voids: NULL) + Q3 coherence + Q2 — see §1. Remaining from ejhong list:
+      Q4 surface spacing → apparent depth (check peak-depth variance first).
 - [ ] (was) NEW from ejhong comparison: Q1 known-void cemetery test on our Umbra scenes
       (feasible: cemeteries inside all 3 footprints); Q2 Umbra Kz ambiguity depth; Q3 coherence vs look
       separation; Q4 surface spacing → apparent depth (follow-up to rejected test F). → COMPARISON_EJHONG §6.

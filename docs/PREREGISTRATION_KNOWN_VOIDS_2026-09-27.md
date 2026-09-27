@@ -80,3 +80,13 @@ Amendments (the G.3 rule — "shift ≤ 300 m" — did not anticipate these, so 
 3. Tiles with mean |SLC| < 1% of their crop's median (image-edge no-data) are excluded.
 A second `--placement` run must show the corrected 02-08 cemetery boxes on mastaba rows; if not, 02-08
 is dropped entirely. All other G.2–G.6 choices unchanged.
+
+**Second placement check (after commit `0bc7d7d`, still no tomogram):** corrected 02-08 W and E boxes now
+land on mastaba rows matching 02-07 — correction ACCEPTED; 02-08 stays SECONDARY. 02-08's P2 box lies
+largely outside the image edge, so its tile count may fall below 20 (→ INCONCLUSIVE for that secondary
+scene, by the existing rule).
+
+**Result (appended 27 Sep 2026, run at `0bc7d7d`).** d(centroid) cemetery − plateau: 02-07 −0.10 (plateau
+halves +0.12), 03-08 −0.03 (−0.14) → both NULL; control detected in all scenes (−1.86, −2.03; secondary
+−1.50). **Overall: NULL.** Secondary 02-08: +0.30 vs plateau halves −0.28, 61 matched tiles → DIFFERS but
+excluded by rule. → `docs/RESULTS_KNOWN_VOIDS_2026-09-27.md`; `runs/known_voids_umbra.json`.
