@@ -143,9 +143,9 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       different, later pipeline). DONE 27 Sep (descriptive) — see §1. Next: step (a) below.
 - [x] DONE 27 Sep: test F (streaks vs surface) + near-miss split — see §1.
 - [x] DONE 27 Sep: test G (Q1 known voids: NULL) + Q3 coherence + Q2 — see §1.
-- [ ] NEXT (from Grok round 3, docs/private/GROK_TRIAGE_ROUND3_2026-09-27.md): pre-register H = the increments
-      anomaly (prewhiten / look-order shuffle of increments on the 2 pinned Giza scenes; prediction: overlap-
-      correlated increments pin the peak without cumsum). Also owed: complex coherence + estimator peak height
+- [ ] Test H (increments anomaly: look-order-shuffle null) PRE-REGISTERED: PREREGISTRATION_INCREMENTS_2026-09-27.md;
+      src/increments_order_null.py (selftest passed). Existing E8 JSON already shows increments lag-1 ≈ 0
+      (Grok's 'smooth increments' idea fails) and white-noise increments pin 31% → P(2 of 3) ≈ 0.23. Run on Mac. Also owed: complex coherence + estimator peak height
       for R3; H1 spacing vs ALIAS location (not primary peak); H3 noise-face pass-rate methods note (low prio).
 - [ ] Note: BiondiProtocol README changed on 27 Sep (now v1.7 package "for Ed", 5% overlap gate, per-pair B⊥);
       our earlier "CHAT-GPT" quote is from the prior README — cite with date or drop.
