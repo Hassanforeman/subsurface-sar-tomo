@@ -49,7 +49,15 @@ speckle (~0.56); looks that share no spectrum match at the speckle floor (0.06�
 increment is carried by the filter-bank overlap, not by a coherent scene seen across the aperture; the
 accumulated trajectory is accumulated registration noise. This measures, rather than infers, the step in
 our mechanism (answers Grok B2 / ejhong R9 for the single-SLC method). Note: match_score is magnitude
-correlation, not complex interferometric coherence.
+correlation, not complex interferometric coherence; a complex-coherence / estimator-peak check on the same
+pairs is still owed. **Caveat:** this does not close the mechanism end-to-end — on 2 of 3 Giza scenes the
+peak stays pinned even without accumulation (STATE §1, increments anomaly); overlap-correlated increments
+are the leading explanation and are tested next (pre-registration H).
+
+**Limitations (stated after Grok round 3):** 02-07's null is low-power (91 matched tiles; plateau halves
+differ by 0.12) — 03-08 (469 tiles, d −0.03) carries the result. Tiles (64 px ≈ 13–50 m, by scene) are much larger than a
+shaft (1–2 m), so this tests fields of shafts, not single shafts; a shaft-centred, alias-checked version
+needs metre-level shaft coordinates and is future work.
 
 ## 4. Side finding
 02-08's SICD geolocation is off by ~500 m (both cemetery boxes landed on roads; corrected by amplitude

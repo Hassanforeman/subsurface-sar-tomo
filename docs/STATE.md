@@ -142,8 +142,13 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - [ ] Optional, not started: the same measurement on a 2025/2026 Giza or "Second Sphinx" figure (a
       different, later pipeline). DONE 27 Sep (descriptive) — see §1. Next: step (a) below.
 - [x] DONE 27 Sep: test F (streaks vs surface) + near-miss split — see §1.
-- [x] DONE 27 Sep: test G (Q1 known voids: NULL) + Q3 coherence + Q2 — see §1. Remaining from ejhong list:
-      Q4 surface spacing → apparent depth (check peak-depth variance first).
+- [x] DONE 27 Sep: test G (Q1 known voids: NULL) + Q3 coherence + Q2 — see §1.
+- [ ] NEXT (from Grok round 3, docs/private/GROK_TRIAGE_ROUND3_2026-09-27.md): pre-register H = the increments
+      anomaly (prewhiten / look-order shuffle of increments on the 2 pinned Giza scenes; prediction: overlap-
+      correlated increments pin the peak without cumsum). Also owed: complex coherence + estimator peak height
+      for R3; H1 spacing vs ALIAS location (not primary peak); H3 noise-face pass-rate methods note (low prio).
+- [ ] Note: BiondiProtocol README changed on 27 Sep (now v1.7 package "for Ed", 5% overlap gate, per-pair B⊥);
+      our earlier "CHAT-GPT" quote is from the prior README — cite with date or drop.
 - [ ] (was) NEW from ejhong comparison: Q1 known-void cemetery test on our Umbra scenes
       (feasible: cemeteries inside all 3 footprints); Q2 Umbra Kz ambiguity depth; Q3 coherence vs look
       separation; Q4 surface spacing → apparent depth (follow-up to rejected test F). → COMPARISON_EJHONG §6.
