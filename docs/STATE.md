@@ -112,8 +112,8 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - [x] DONE 27 Sep: prereg C.4 step 2 on the 2022 paper's 16 paired figures — see §1.
 - [ ] Optional, not started: the same measurement on a 2025/2026 Giza or "Second Sphinx" figure (a
       different, later pipeline). DONE 27 Sep (descriptive) — see §1. Next: step (a) below.
-- [ ] NEXT (a): pre-register "vertical streaks are surface-driven" (streak = patch with elevated whole
-      spectrum; predicts co-location with surface-trajectory energy), merged with the near-miss item below.
+- [ ] NEXT (a): "vertical streaks are surface-driven" + 02-08 near-miss split — PRE-REGISTERED
+      (PREREGISTRATION_STREAKS_2026-09-27.md; src/streak_surface.py; selftest passed). Run on Mac.
 - [ ] Shape-metric near-miss (02-08 centre crop 4/8, mostly component-count arm, no vertical-extent
       gain; off-centre crops of 02-08 are all 0/8; 02-08 is the steepest look, incidence 29.4 deg vs
       36.8/35.3 for the other two, same side/azimuth). Framing: "two clean nulls + one unexplained
