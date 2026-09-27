@@ -85,7 +85,7 @@ screenshots on the page are timestamped the same night), **not** evidence about 
   Grok and Gemini outputs as validation. A language/vision model asked about sphinx-annotated maps
   will produce confident sphinx numbers. That is not evidence either way about the ground.
 
-## 5. Hypothesis for the next pre-registered test (feeds STATE item "shafts are surface-driven")
+## 5. Hypothesis for the next pre-registered test — TESTED AND REJECTED (see RESULTS_STREAKS_2026-09-27.md) (feeds STATE item "shafts are surface-driven")
 The raw 2026 product is the same 2-D range x depth heat-map, and its most prominent features are
 vertical streaks (61; 07/08; 17). [H] A vertical streak is a patch whose whole detrended spectrum is
 elevated — a surface property — so streaks should co-locate with surface-trajectory energy. This is

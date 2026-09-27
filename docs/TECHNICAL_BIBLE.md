@@ -507,6 +507,13 @@ template, face-proportion grids, and — per their own pipeline slide — a Ther
 DeepFace/MediaPipe landmarks and ArcFace/Eigenface, in slides framed as dialogue with Grok/Gemini.
 Confidence percentages are those tools' outputs. → RESULTS_PRESS_IMAGES_2026-09-27.md.
 
+## 8.12 Streaks vs surface — pre-registered test F (27 Sep 2026)
+
+A tomogram column equals its tile's detrended-trajectory energy (ρ = 1.00). At Giza, streak strength is
+NOT predicted by registration quality, backscatter brightness or texture (|ρ| ≤ 0.15, like the empty-noise
+volume); a displacement-planted control is recovered 4/4. The 02-08 near-miss blobs are as squat as noise.
+→ RESULTS_STREAKS_2026-09-27.md.
+
 ## 9. Glossary
 - **SLC / SICD** — Single-Look Complex image (amplitude + phase), slant-plane.
 - **CPHD** — Compensated Phase History Data (pre-image; ideal for sub-aperture work).

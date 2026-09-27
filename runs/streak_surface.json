@@ -1,0 +1,145 @@
+{
+ "prereg": "docs/PREREGISTRATION_STREAKS_2026-09-27.md",
+ "script": "src/streak_surface.py",
+ "git": "603ca70",
+ "rho": 0.3,
+ "plant": {
+  "n": 4,
+  "seed": 11,
+  "amp_px": 0.5,
+  "cycles": 2,
+  "top": 0.1
+ },
+ "scenes": {
+  "giza_2023-02-07_UMBRA-05": {
+   "rho_SQ": -0.023294300363333784,
+   "rho_SM": -0.017334638684739116,
+   "rho_SK": -0.016171641364166295,
+   "rho_SE_identity": 0.9995079664707405,
+   "rho_FM": 0.3156477806351201,
+   "rho_FQ": 0.2529386991012746,
+   "surface_linked": false,
+   "N1": 0.3156477806351201,
+   "control": {
+    "tiles": [
+     [
+      5,
+      5
+     ],
+     [
+      17,
+      17
+     ],
+     [
+      20,
+      2
+     ],
+     [
+      22,
+      14
+     ]
+    ],
+    "amp_px": 0.5,
+    "hits": 4,
+    "passed": true
+   },
+   "elong_median": 26.0,
+   "elong_median_painted_shafts": 74.0,
+   "verdict": "NOT LINKED"
+  },
+  "giza_2023-02-08_UMBRA-04": {
+   "rho_SQ": 0.14528654973648117,
+   "rho_SM": 0.045419661011927175,
+   "rho_SK": 0.1568277491700607,
+   "rho_SE_identity": 0.9993700403745355,
+   "rho_FM": 0.14101140042559723,
+   "rho_FQ": -0.13144610466597284,
+   "surface_linked": false,
+   "N1": 0.14101140042559723,
+   "control": {
+    "tiles": [
+     [
+      5,
+      5
+     ],
+     [
+      17,
+      17
+     ],
+     [
+      20,
+      2
+     ],
+     [
+      22,
+      14
+     ]
+    ],
+    "amp_px": 0.5,
+    "hits": 4,
+    "passed": true
+   },
+   "elong_median": 26.0,
+   "elong_median_painted_shafts": 77.5,
+   "verdict": "NOT LINKED"
+  },
+  "giza_2023-03-08_UMBRA-04": {
+   "rho_SQ": -0.12257302375270422,
+   "rho_SM": -0.1424733940000749,
+   "rho_SK": -0.13483017468745845,
+   "rho_SE_identity": 0.9995142051615702,
+   "rho_FM": 0.22443224415503393,
+   "rho_FQ": 0.12671502063582796,
+   "surface_linked": false,
+   "N1": 0.22443224415503393,
+   "control": {
+    "tiles": [
+     [
+      5,
+      5
+     ],
+     [
+      17,
+      17
+     ],
+     [
+      20,
+      2
+     ],
+     [
+      22,
+      14
+     ]
+    ],
+    "amp_px": 0.5,
+    "hits": 4,
+    "passed": true
+   },
+   "elong_median": 28.0,
+   "elong_median_painted_shafts": 82.0,
+   "verdict": "NOT LINKED"
+  }
+ },
+ "null": {
+  "rho_SQ": 0.013471868483788252,
+  "rho_SM": -0.020657671593833242,
+  "rho_SK": 0.05297058391430113,
+  "rho_SE_identity": 0.99947096230983,
+  "rho_FM": -0.05600191275956308,
+  "rho_FQ": -0.07848829442999312,
+  "surface_linked": false,
+  "N1": 0.07848829442999312,
+  "elong_median": 26.0
+ },
+ "overall": "H-surface REJECTED",
+ "near_miss": {
+  "N1": 0.14101140042559723,
+  "N2": 26.0,
+  "N2_others": [
+   26.0,
+   28.0
+  ],
+  "N2_painted": 77.5,
+  "verdict": "MIXED"
+ }
+}

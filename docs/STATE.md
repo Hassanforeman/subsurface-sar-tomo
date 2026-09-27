@@ -5,7 +5,7 @@ Rule: if any other document disagrees with this one about *status*, THIS FILE WI
 *detail*, follow the pointer this file gives. When you close or open a question, edit the
 ledgers below in the same session — that is how we stop doing double work.
 
-*Last updated: 2026-09-27 (2026 press-image audit: 3-D Sphinx built from 2-D heat-maps + template + GAN/face tools + chatbots, per their own slides; journal-version replication of step 2: images identical, no axes added, 15/16 again; C.4 step 2: the 2022 paper's paired figures measured — geometry is the model's; tomogram panels unscaled, 4/16 overlaid on known drawings. Previous: 26 Sep §7 step 1 negative).*
+*Last updated: 2026-09-27 (test F: streaks NOT surface-linked — our hypothesis rejected; near-miss MIXED. 2026 press-image audit: 3-D Sphinx built from 2-D heat-maps + template + GAN/face tools + chatbots, per their own slides; journal-version replication of step 2: images identical, no axes added, 15/16 again; C.4 step 2: the 2022 paper's paired figures measured — geometry is the model's; tomogram panels unscaled, 4/16 overlaid on known drawings. Previous: 26 Sep §7 step 1 negative).*
 
 *How to keep this file and supersede docs correctly: `docs/DOCUMENTATION_RULES.md`. Entry point for new sessions: `/CLAUDE.md`.*
 
@@ -76,6 +76,12 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   Sphinx form (est. length 73.0 m); percentages are model outputs; heat-maps hand-stretched onto photos
   (handles visible); Giza 3-D scene = identical primitives in a modeller. X1 hit, X2 hit, X3 partial.
   → RESULTS_PRESS_IMAGES_2026-09-27.md; src/press_image_audit.py; runs/press_image_audit.json.
+- **Test F (27 Sep, prereg `603ca70`): vertical streaks are NOT surface-linked — H-surface REJECTED.**
+  Streak strength vs registration quality / brightness: |ρ| ≤ 0.15 in all 3 scenes (null ~0); identity
+  ρ(S, trajectory energy) = 1.00; displacement-planted control 4/4 everywhere. Do not describe streaks as
+  "surface-driven". 02-08 near-miss split: MIXED (N1 0.14; blob elongation 26 = empty-noise 26, painted
+  shafts 74-82) — not surface-correlated, not shaft-shaped; stays reported, not explained.
+  → RESULTS_STREAKS_2026-09-27.md; src/streak_surface.py; runs/streak_surface.json.
 
 ## 2. Adversarial reviews already answered (don't re-litigate)
 
@@ -112,9 +118,10 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - [x] DONE 27 Sep: prereg C.4 step 2 on the 2022 paper's 16 paired figures — see §1.
 - [ ] Optional, not started: the same measurement on a 2025/2026 Giza or "Second Sphinx" figure (a
       different, later pipeline). DONE 27 Sep (descriptive) — see §1. Next: step (a) below.
-- [ ] NEXT (a): "vertical streaks are surface-driven" + 02-08 near-miss split — PRE-REGISTERED
-      (PREREGISTRATION_STREAKS_2026-09-27.md; src/streak_surface.py; selftest passed). Run on Mac.
-- [ ] Shape-metric near-miss (02-08 centre crop 4/8, mostly component-count arm, no vertical-extent
+- [x] DONE 27 Sep: test F (streaks vs surface) + near-miss split — see §1.
+- [ ] Candidate (not pre-registered yet): real-crop streak statistics vs matched empty-noise nulls
+      (RESULTS_STREAKS §4). [sandbox-ok once volumes cached / Mac]
+- [x] TESTED 27 Sep (test F: MIXED, see §1). Original item: Shape-metric near-miss (02-08 centre crop 4/8, mostly component-count arm, no vertical-extent
       gain; off-centre crops of 02-08 are all 0/8; 02-08 is the steepest look, incidence 29.4 deg vs
       36.8/35.3 for the other two, same side/azimuth). Framing: "two clean nulls + one unexplained
       near-miss" until tested: test the "surface content, not depth" explanation with a surface-matched null or a

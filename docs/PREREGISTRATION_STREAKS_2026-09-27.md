@@ -53,3 +53,8 @@ changed after the run; failures are reported as failures.
 
 ## F.7 Result
 *To be appended after the run. Deliberately empty at commit time.*
+
+**Appended 27 Sep 2026** (run at `603ca70`). ρ(S,Q)/ρ(S,M): 02-07 −0.02/−0.02, 02-08 +0.15/+0.05,
+03-08 −0.12/−0.14; null +0.01/−0.02; identity ρ(S,E) = 1.00; displacement control 4/4 in all scenes.
+**H-surface REJECTED.** Near-miss: N1 0.14, N2 26.0 vs 26.0/28.0 (null 26.0; painted 74-82) → **MIXED**.
+→ `docs/RESULTS_STREAKS_2026-09-27.md`; `runs/streak_surface.json`.
