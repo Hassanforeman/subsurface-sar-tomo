@@ -53,6 +53,17 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   makes the peak", "the images are the rendered artifact", shuffle-null ratios (2.8/3.3/4.1×). → paper §10.
 - **Pomposi (Zenodo Apr 2026):** independent, same conclusion, different route; cite at revision; his
   code bugs told privately only. → COMPARISON_POMPOSI_2026-08-13.md.
+- **ejhong/sar — "SAR Depth, Tested" (GitHub + site ejhong.github.io/sar; after 10 Aug 2026; NOT peer-
+  reviewed; correction 27 Sep: first logged as synthetic-only from the README — the site runs REAL data):**
+  independent reimplementation on two ICEYE Spotlight Dwell scenes (Giza 2025-08-27, Sacsayhuamán
+  2025-08-22). Same conclusion as ours, different formulation (interferometric-style Kz steering, not the
+  patent DFT). Useful to us: (1) known-voids positive control — hundreds of surveyed 5-30 m burial shafts
+  in the Giza cemeteries vs bare plateau: no signal (+0.031 brightness-matched); (2) analytic resolution
+  bound s² ≥ δaz·L·Vs → ≥ 27-52 m; (3) seismic-array cross-correlation test: injected wave 0.49, real 0.004;
+  (4) split-aperture halves give different depths; (5) depth axis periodic by construction (27.4 m at
+  Khafre in their bank); (6) the public "BiondiProtocol/Replication-and-Verification" v1.7 code quantises
+  registration to integer pixels. Cite at revision. Full comparison + new questions Q1-Q7 →
+  COMPARISON_EJHONG_2026-09-27.md. Their raw ICEYE data are NOT public (not in ICEYE open catalogue).
 - **Commercial idea:** parked, honest "probably not". → COMMERCIAL_ASSESSMENT.md.
 - **§7 shape metric, pre-registered step 1 (26 Sep): NEGATIVE.** Real Giza centre crops vs matched
   empty volume, 8 treatments: 02-07 0/8, 02-08 4/8 (near-miss), 03-08 [prereg primary] 0/8; planted-
@@ -119,6 +130,11 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - [ ] Optional, not started: the same measurement on a 2025/2026 Giza or "Second Sphinx" figure (a
       different, later pipeline). DONE 27 Sep (descriptive) — see §1. Next: step (a) below.
 - [x] DONE 27 Sep: test F (streaks vs surface) + near-miss split — see §1.
+- [ ] NEW from ejhong comparison (each needs a prereg): Q1 known-void cemetery test on our Umbra scenes
+      (feasible: cemeteries inside all 3 footprints); Q2 Umbra Kz ambiguity depth; Q3 coherence vs look
+      separation; Q4 surface spacing → apparent depth (follow-up to rejected test F). → COMPARISON_EJHONG §6.
+- [ ] Soften HOW_BIONDI Step 1 ("front end stands"): real for strong motion; ambient microseism is below
+      the measured single-pass floor (ejhong R4). [writing]
 - [ ] Candidate (not pre-registered yet): real-crop streak statistics vs matched empty-noise nulls
       (RESULTS_STREAKS §4). [sandbox-ok once volumes cached / Mac]
 - [x] TESTED 27 Sep (test F: MIXED, see §1). Original item: Shape-metric near-miss (02-08 centre crop 4/8, mostly component-count arm, no vertical-extent
@@ -144,6 +160,10 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       reproducible version. Team continues promoting the "Second Sphinx" via presentations, now citing
       AI facial-recognition "88-96% match" — see BIONDI_IMAGERY_ANALYSIS_2026-09-03.md (detail comes
       from model/AI downstream, not radar). Sources: Retraction Watch 31 Aug 2026; MDPI rs18162679.
+      Re-checked 27 Sep: errors still not itemised publicly; RW adds that Conyers, asked to review in 2022,
+      declined to recommend without a reviewer who understood the equations; public critiques target
+      penetration, not the micro-motion mechanism (our paper's niche). Verified in arXiv v1 intro: an
+      irrelevant cold-fusion-in-lithium citation [24]. No public Zebker result; no September Biondi rebuttal found.
 - [ ] Line-numbered PDF if a reviewer asks.
 - [ ] Email Pomposi (ally).
 
