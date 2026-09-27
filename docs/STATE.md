@@ -5,7 +5,7 @@ Rule: if any other document disagrees with this one about *status*, THIS FILE WI
 *detail*, follow the pointer this file gives. When you close or open a question, edit the
 ledgers below in the same session — that is how we stop doing double work.
 
-*Last updated: 2026-09-27 (test G: known cemetery shafts NOT distinguished from bare plateau — NULL, control detected; Q3 looks decorrelate to speckle floor. Q2: paper's Kz ladder on Umbra is a DFT to 2e-5, depth scale free; test G known-voids pre-registered. Test F: streaks NOT surface-linked — our hypothesis rejected; near-miss MIXED. 2026 press-image audit: 3-D Sphinx built from 2-D heat-maps + template + GAN/face tools + chatbots, per their own slides; journal-version replication of step 2: images identical, no axes added, 15/16 again; C.4 step 2: the 2022 paper's paired figures measured — geometry is the model's; tomogram panels unscaled, 4/16 overlaid on known drawings. Previous: 26 Sep §7 step 1 negative).*
+*Last updated: 2026-09-27 (test H: increments anomaly NOT order-driven — not anomalous vs shuffle null (10th/12th pct), weak surface-ward lean remains. Test G: known cemetery shafts NOT distinguished from bare plateau — NULL, control detected; Q3 looks decorrelate to speckle floor. Q2: paper's Kz ladder on Umbra is a DFT to 2e-5, depth scale free; test G known-voids pre-registered. Test F: streaks NOT surface-linked — our hypothesis rejected; near-miss MIXED. 2026 press-image audit: 3-D Sphinx built from 2-D heat-maps + template + GAN/face tools + chatbots, per their own slides; journal-version replication of step 2: images identical, no axes added, 15/16 again; C.4 step 2: the 2022 paper's paired figures measured — geometry is the model's; tomogram panels unscaled, 4/16 overlaid on known drawings. Previous: 26 Sep §7 step 1 negative).*
 
 *How to keep this file and supersede docs correctly: `docs/DOCUMENTATION_RULES.md`. Entry point for new sessions: `/CLAUDE.md`.*
 
@@ -46,6 +46,10 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - **§5.4 increments anomaly is real & reproducible** (peak stays pinned on 2 of 3 Giza scenes after
   de-accumulation) → accumulation sufficient but not shown necessary at Giza; "mechanism identified"
   in abstract/conclusion is too strong. → RESULTS_GIZA_REPEATS §3.
+  **Test H (27 Sep, prereg `f2f5a3a`): NOT ANOMALOUS** vs each scene's look-order-shuffle null (10.3 / 55.8 /
+  12.0 percentile; α 0.05); increments not serially correlated (lag-1 ≤ 0.10). Not an order effect. Residual:
+  weak surface-ward lean of the increment VALUES on 2 scenes (P(≥2 pinned | null) ≈ 0.05); open, small.
+  → RESULTS_INCREMENTS_2026-09-27.md.
 - **Planted-signal floor:** ~0.2 px; below it the statistic is uninformative-to-backwards; the plant
   is found by DEPTH, and doesn't clear the 5× contrast rule until 0.5 px; metres conversion refused
   (needs (R/V)·v_LOS). → RESULTS_HARDENING §2; FIVE_SITE/E12.
@@ -143,9 +147,7 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       different, later pipeline). DONE 27 Sep (descriptive) — see §1. Next: step (a) below.
 - [x] DONE 27 Sep: test F (streaks vs surface) + near-miss split — see §1.
 - [x] DONE 27 Sep: test G (Q1 known voids: NULL) + Q3 coherence + Q2 — see §1.
-- [ ] Test H (increments anomaly: look-order-shuffle null) PRE-REGISTERED: PREREGISTRATION_INCREMENTS_2026-09-27.md;
-      src/increments_order_null.py (selftest passed). Existing E8 JSON already shows increments lag-1 ≈ 0
-      (Grok's 'smooth increments' idea fails) and white-noise increments pin 31% → P(2 of 3) ≈ 0.23. Run on Mac. Also owed: complex coherence + estimator peak height
+- [x] DONE 27 Sep: test H — NOT ANOMALOUS (see §1). Paper §5.4 caveat wording → RESULTS_INCREMENTS §3. Also owed: complex coherence + estimator peak height
       for R3; H1 spacing vs ALIAS location (not primary peak); H3 noise-face pass-rate methods note (low prio).
 - [ ] Note: BiondiProtocol README changed on 27 Sep (now v1.7 package "for Ed", 5% overlap gate, per-pair B⊥);
       our earlier "CHAT-GPT" quote is from the prior README — cite with date or drop.

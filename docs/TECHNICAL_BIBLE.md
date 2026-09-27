@@ -521,6 +521,13 @@ Surveyed 5–30 m mastaba shafts in the Giza cemeteries do not change the output
 (a DFT), depth scale = free λs. Non-overlapping looks match only at the speckle floor, so tracked
 increments are filter-bank-carried registration noise. → RESULTS_KNOWN_VOIDS / RESULTS_KZ_LADDER.
 
+## 8.14 Increments anomaly — test H (27 Sep 2026)
+
+De-accumulated peaks (1.88, 1.95 cells on 02-07, 03-08) are not below their per-scene look-order-shuffle
+nulls (10th, 12th percentile) and the increments are not serially correlated (lag-1 ≤ 0.10): the residual
+pinning is not an order effect. A weak surface-ward lean remains, unexplained and small.
+→ RESULTS_INCREMENTS_2026-09-27.md.
+
 ## 9. Glossary
 - **SLC / SICD** — Single-Look Complex image (amplitude + phase), slant-plane.
 - **CPHD** — Compensated Phase History Data (pre-image; ideal for sub-aperture work).

@@ -1,0 +1,50 @@
+{
+ "prereg": "docs/PREREGISTRATION_INCREMENTS_2026-09-27.md",
+ "script": "src/increments_order_null.py",
+ "git": "f2f5a3a",
+ "dz_phys": 2.1103896103896105,
+ "n_shuffles": 1000,
+ "alpha": 0.05,
+ "scenes": {
+  "giza_2023-02-07_UMBRA-05": {
+   "peak_cumsum": 1.7474916387959867,
+   "contrast_cumsum": 6.062785620158038,
+   "peak_inc": 1.8762541806020068,
+   "contrast_inc": 1.8587492134409378,
+   "inc_pinned": true,
+   "lag1_inc": 0.10104177324284085,
+   "null_median": 3.770903010033445,
+   "null_p05": 1.8210702341137122,
+   "null_pinned_frac": 0.138,
+   "percentile_of_observed": 0.103,
+   "anomalous": false
+  },
+  "giza_2023-02-08_UMBRA-04": {
+   "peak_cumsum": 1.673913043478261,
+   "contrast_cumsum": 3.8717046314410597,
+   "peak_inc": 3.8260869565217392,
+   "contrast_inc": 1.4260362616275413,
+   "inc_pinned": false,
+   "lag1_inc": -0.13241615416295782,
+   "null_median": 3.6973244147157187,
+   "null_p05": 1.7842809364548493,
+   "null_pinned_frac": 0.156,
+   "percentile_of_observed": 0.558,
+   "anomalous": false
+  },
+  "giza_2023-03-08_UMBRA-04": {
+   "peak_cumsum": 1.765886287625418,
+   "contrast_cumsum": 3.862594587907867,
+   "peak_inc": 1.9498327759197323,
+   "contrast_inc": 1.620361191359426,
+   "inc_pinned": true,
+   "lag1_inc": 0.014586450164204012,
+   "null_median": 3.71571906354515,
+   "null_p05": 1.8210702341137122,
+   "null_pinned_frac": 0.128,
+   "percentile_of_observed": 0.12,
+   "anomalous": false
+  }
+ },
+ "overall": "NOT ANOMALOUS (consistent with the order-shuffle null)"
+}

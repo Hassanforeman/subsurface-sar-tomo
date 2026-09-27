@@ -46,3 +46,8 @@ Test F, G and the C.4 verdicts; all three scenes remain nulls for detection eith
 
 ## H.7 Result
 *To be appended after the run. Deliberately empty at commit time.*
+
+**Result (appended 27 Sep 2026, run at `f2f5a3a`).** Observed percentiles in the order-shuffle null: 02-07
+10.3%, 02-08 55.8%, 03-08 12.0% → 0 of 3 below 5% → **NOT ANOMALOUS**. Increments lag-1 +0.10/−0.13/+0.02.
+Note against our own H.2: the per-scene nulls pin only 13–16% (not 31%), so P(≥2 of 3 pinned) ≈ 0.05, and
+both pinned scenes lean surface-ward. → `docs/RESULTS_INCREMENTS_2026-09-27.md`; `runs/increments_order_null.json`.
