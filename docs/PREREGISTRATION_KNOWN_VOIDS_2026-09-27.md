@@ -62,3 +62,21 @@ decorrelation-limited (Grok B2 / ejhong R9).
 
 ## G.7 Placement record and result
 *To be appended. Deliberately empty at commit time.*
+
+**Placement record (27 Sep 2026, amplitude only — no tomogram had been built; recorded and committed
+before the main run).** First `--placement` run (runs/known_voids_placement_*.png):
+- 02-07 and 03-08: W and E cemetery boxes land on rows of mastabas — PASS. P2 lands on open desert with
+  dunes/tracks — PASS. **P1 FAILS** in both: it contains a built compound with a road.
+- **02-08 FAILS as a scene:** both cemetery boxes land on roads/highway. Its SICD geolocation disagrees
+  with 02-07 by ~500 m: registering 02-08 amplitude to 02-07 over the pyramid area gives correlation 0.50
+  at the offset vs −0.02 at zero (city NE 0.17, E cemetery 0.45 at the same offset).
+
+Amendments (the G.3 rule — "shift ≤ 300 m" — did not anticipate these, so they are stated here):
+1. **P1 is dropped** rather than relocated by judgment. The only control is P2; the plateau-vs-plateau
+   reference d_PP becomes P2's northern half vs its southern half (split at the median tile latitude).
+2. **02-08 becomes SECONDARY:** run with a fixed pixel correction (+576 rows, −420 cols, from the
+   amplitude registration above) and reported, but **not in the verdict**. The verdict uses 02-07 and
+   03-08 only: KNOWN VOIDS DETECTED iff both DIFFER with the same sign; NULL iff both are NULL; else MIXED.
+3. Tiles with mean |SLC| < 1% of their crop's median (image-edge no-data) are excluded.
+A second `--placement` run must show the corrected 02-08 cemetery boxes on mastaba rows; if not, 02-08
+is dropped entirely. All other G.2–G.6 choices unchanged.
