@@ -1,0 +1,530 @@
+{
+ "layout": "reference/figure_layout.json",
+ "pdf": "data/biondi2022/biondi_malanga_2022_arxiv_2208.00811.pdf",
+ "pdf_sha256": "906b9c64e2537a24d8e473a9dbce00c2a866a8e4dd98d6e6042cd0575c53d35c",
+ "crop_rule": "(fixed from a layout-only look at Figs 34 and 35, before any statistic was computed):\n  1. Luminance < 235 marks \"ink\"; rows/columns that are >= 97% white are background.\n  2. Split point = the whitest column in the central 35-65% of the width (the gutter between panels).\n  3. For each half: keep the longest contiguous run of ink rows (drops the title strip above and the\n     \"(a)\"/\"(b)\" labels below), then trim white columns at both ends.\n  4. Inset 1.5% on every side to remove frame lines.\n  In-panel annotations (tag circles/numbers in (a), yellow arrows/\"Tag N\" text in (b)) cannot be\n  cropped out and are LEFT IN. A secondary run masks them (see figure_information measure --mask).",
+ "pairs": {
+  "Fig34": {
+   "a": {
+    "f_c": 0.294126862492574,
+    "r_px": 3.3998934729236012,
+    "N": 49269.263781414775
+   },
+   "b": {
+    "f_c": 0.1445742724517064,
+    "r_px": 6.9168599851266075,
+    "N": 15437.634349334267
+   },
+   "N_ratio": 3.191503482108285,
+   "E_a": 0.13885101203301145,
+   "E_b": 0.04999990720044584,
+   "E_ratio": 2.7770253947945998,
+   "P1_hit": true,
+   "P2_hit": false,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    663,
+    859
+   ],
+   "shape_b": [
+    663,
+    1114
+   ]
+  },
+  "Fig35": {
+   "a": {
+    "f_c": 0.08556059695373153,
+    "r_px": 11.687622990063621,
+    "N": 32383.76866110263
+   },
+   "b": {
+    "f_c": 0.02405511293256348,
+    "r_px": 41.57120371055489,
+    "N": 3328.4900882795746
+   },
+   "N_ratio": 9.729266965563088,
+   "E_a": 0.1999553651159331,
+   "E_b": 0.04991650875212004,
+   "E_ratio": 4.005796280923606,
+   "P1_hit": true,
+   "P2_hit": false,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1810,
+    2444
+   ],
+   "shape_b": [
+    1810,
+    3178
+   ]
+  },
+  "Fig36": {
+   "a": {
+    "f_c": 0.12901276710125617,
+    "r_px": 7.751170852843937,
+    "N": 54861.35756677726
+   },
+   "b": {
+    "f_c": 0.025247433783652955,
+    "r_px": 39.60798584795076,
+    "N": 2917.8300347134973
+   },
+   "N_ratio": 18.80210872946344,
+   "E_a": 0.2528386994333379,
+   "E_b": 0.04999809570133711,
+   "E_ratio": 5.056966588161001,
+   "P1_hit": true,
+   "P2_hit": true,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1674,
+    1969
+   ],
+   "shape_b": [
+    1670,
+    2741
+   ]
+  },
+  "Fig37": {
+   "a": {
+    "f_c": 0.10691783872205522,
+    "r_px": 9.352976191368878,
+    "N": 42514.609879809635
+   },
+   "b": {
+    "f_c": 0.020206890119583956,
+    "r_px": 49.488070360259336,
+    "N": 1509.749964976165
+   },
+   "N_ratio": 28.160033691725125,
+   "E_a": 0.2615460603885477,
+   "E_b": 0.049976784575037625,
+   "E_ratio": 5.233351097164914,
+   "P1_hit": true,
+   "P2_hit": true,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1617,
+    2300
+   ],
+   "shape_b": [
+    1609,
+    2298
+   ]
+  },
+  "Fig38": {
+   "a": {
+    "f_c": 0.13129819162888262,
+    "r_px": 7.616251127254846,
+    "N": 53915.33499761148
+   },
+   "b": {
+    "f_c": 0.022912229080506108,
+    "r_px": 43.64481502372929,
+    "N": 2648.0107943592093
+   },
+   "N_ratio": 20.360693057770717,
+   "E_a": 0.2839769060382763,
+   "E_b": 0.049914233932692606,
+   "E_ratio": 5.689297093514608,
+   "P1_hit": true,
+   "P2_hit": true,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1758,
+    1779
+   ],
+   "shape_b": [
+    1749,
+    2884
+   ]
+  },
+  "Fig39": {
+   "a": {
+    "f_c": 0.1498725206324408,
+    "r_px": 6.672337235539522,
+    "N": 70426.91085190715
+   },
+   "b": {
+    "f_c": 0.05692037908435655,
+    "r_px": 17.56840021247909,
+    "N": 13515.00326701807
+   },
+   "N_ratio": 5.211016931366679,
+   "E_a": 0.1806684336538821,
+   "E_b": 0.04999910516218019,
+   "E_ratio": 3.6134333418139146,
+   "P1_hit": true,
+   "P2_hit": false,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1666,
+    1882
+   ],
+   "shape_b": [
+    1654,
+    2522
+   ]
+  },
+  "Fig40": {
+   "a": {
+    "f_c": 0.1099750099273942,
+    "r_px": 9.092974855471281,
+    "N": 31505.82907564038
+   },
+   "b": {
+    "f_c": 0.020432247797236826,
+    "r_px": 48.942241202421,
+    "N": 2084.195897775082
+   },
+   "N_ratio": 15.116539241476026,
+   "E_a": 0.3349353857296572,
+   "E_b": 0.04999161247295431,
+   "E_ratio": 6.699831614970586,
+   "P1_hit": true,
+   "P2_hit": true,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1609,
+    1619
+   ],
+   "shape_b": [
+    1612,
+    3097
+   ]
+  },
+  "Fig42": {
+   "a": {
+    "f_c": 0.12878892295490724,
+    "r_px": 7.764642929346721,
+    "N": 46360.173222565696
+   },
+   "b": {
+    "f_c": 0.022952622952015528,
+    "r_px": 43.56800536873663,
+    "N": 1772.1479452054793
+   },
+   "N_ratio": 26.160441823151658,
+   "E_a": 0.3025708491597274,
+   "E_b": 0.04972103457191604,
+   "E_ratio": 6.085369135312173,
+   "P1_hit": true,
+   "P2_hit": true,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1440,
+    1941
+   ],
+   "shape_b": [
+    1440,
+    2336
+   ]
+  },
+  "Fig43": {
+   "a": {
+    "f_c": 0.10782223984211181,
+    "r_px": 9.274524453065878,
+    "N": 46208.66880652282
+   },
+   "b": {
+    "f_c": 0.05668226729069163,
+    "r_px": 17.642201834862384,
+    "N": 10008.95475819033
+   },
+   "N_ratio": 4.616732708149196,
+   "E_a": 0.10075387349816006,
+   "E_b": 0.049986702313126186,
+   "E_ratio": 2.01561352991479,
+   "P1_hit": true,
+   "P2_hit": false,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1633,
+    2434
+   ],
+   "shape_b": [
+    1620,
+    1923
+   ]
+  },
+  "Fig44": {
+   "a": {
+    "f_c": 0.060438964263438706,
+    "r_px": 16.545617751509504,
+    "N": 16158.594876135292
+   },
+   "b": {
+    "f_c": 0.016139434289769394,
+    "r_px": 61.960040361135135,
+    "N": 1159.8322349612029
+   },
+   "N_ratio": 13.931838061627772,
+   "E_a": 0.23426805060532885,
+   "E_b": 0.04996647479056596,
+   "E_ratio": 4.688504674129231,
+   "P1_hit": true,
+   "P2_hit": false,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1668,
+    2652
+   ],
+   "shape_b": [
+    1634,
+    2725
+   ]
+  },
+  "Fig45": {
+   "a": {
+    "f_c": 0.05129590586093517,
+    "r_px": 19.494733219275467,
+    "N": 11458.086059196468
+   },
+   "b": {
+    "f_c": 0.016329864122670675,
+    "r_px": 61.23749668019005,
+    "N": 1186.9277881724076
+   },
+   "N_ratio": 9.653566268626378,
+   "E_a": 0.17709500993605293,
+   "E_b": 0.04987610340942125,
+   "E_ratio": 3.5506985877048467,
+   "P1_hit": true,
+   "P2_hit": false,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1642,
+    2652
+   ],
+   "shape_b": [
+    1634,
+    2724
+   ]
+  },
+  "Fig46": {
+   "a": {
+    "f_c": 0.14621301513990742,
+    "r_px": 6.839336423252924,
+    "N": 67143.34067631367
+   },
+   "b": {
+    "f_c": 0.003826530612244898,
+    "r_px": 261.3333333333333,
+    "N": 69.3826530612245
+   },
+   "N_ratio": 967.7251836574364,
+   "E_a": 0.7019326082949809,
+   "E_b": 0.049407297124718634,
+   "E_ratio": 14.207063513778044,
+   "P1_hit": true,
+   "P2_hit": true,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1561,
+    2012
+   ],
+   "shape_b": [
+    1568,
+    3022
+   ]
+  },
+  "Fig47": {
+   "a": {
+    "f_c": 0.14136428895113853,
+    "r_px": 7.073922328047377,
+    "N": 16489.084370758195
+   },
+   "b": {
+    "f_c": 0.08751940954427112,
+    "r_px": 11.42603686664678,
+    "N": 4206.06538643648
+   },
+   "N_ratio": 3.920310992770443,
+   "E_a": 0.08675953474568275,
+   "E_b": 0.049997589080859606,
+   "E_ratio": 1.7352743670373616,
+   "P1_hit": true,
+   "P2_hit": false,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    764,
+    1080
+   ],
+   "shape_b": [
+    768,
+    715
+   ]
+  },
+  "Fig48": {
+   "a": {
+    "f_c": 0.14621301513990742,
+    "r_px": 6.839336423252924,
+    "N": 67143.34067631367
+   },
+   "b": {
+    "f_c": 0.05559367155373736,
+    "r_px": 17.987658883680506,
+    "N": 9658.115550698572
+   },
+   "N_ratio": 6.952012566411797,
+   "E_a": 0.16027999950236604,
+   "E_b": 0.049961440106670744,
+   "E_ratio": 3.2080740499104587,
+   "P1_hit": true,
+   "P2_hit": false,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    1561,
+    2012
+   ],
+   "shape_b": [
+    1547,
+    2020
+   ]
+  },
+  "Fig49": {
+   "a": {
+    "f_c": 0.29297638922668795,
+    "r_px": 3.4132443322122406,
+    "N": 73152.16071646484
+   },
+   "b": {
+    "f_c": 0.5053537463746355,
+    "r_px": 1.9788118860776522,
+    "N": 172819.82997739065
+   },
+   "N_ratio": 0.42328568848861303,
+   "E_a": 0.004301193518578626,
+   "E_b": 0.04999979941968665,
+   "E_ratio": 0.0860242154668544,
+   "P1_hit": false,
+   "P2_hit": false,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    848,
+    1005
+   ],
+   "shape_b": [
+    618,
+    1095
+   ]
+  },
+  "Fig50": {
+   "a": {
+    "f_c": 0.17839195979899497,
+    "r_px": 5.605633802816902,
+    "N": 21329.25628140703
+   },
+   "b": {
+    "f_c": 0.08910735949939201,
+    "r_px": 11.222417605212767,
+    "N": 7650.148279154731
+   },
+   "N_ratio": 2.7880840348579112,
+   "E_a": 0.13813774628743608,
+   "E_b": 0.0499925107963291,
+   "E_ratio": 2.7631688044277904,
+   "P1_hit": true,
+   "P2_hit": false,
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   },
+   "shape_a": [
+    842,
+    796
+   ],
+   "shape_b": [
+    840,
+    1147
+   ]
+  }
+ },
+ "summary": {
+  "n_pairs": 16,
+  "P1_hits": 15,
+  "P2_hits": 6,
+  "P1_majority": true,
+  "P2_majority": false,
+  "P2_status": "NOT USED: S3 failed its positive control (D.4a); descriptive only",
+  "median_N_ratio": 9.691416617094733,
+  "P1b_hit": true
+ }
+}

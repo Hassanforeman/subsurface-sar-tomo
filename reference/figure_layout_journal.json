@@ -1,0 +1,519 @@
+{
+ "pdf": "MDPI journal images g039-g056 (fetch_journal_figures.sh)",
+ "pdf_sha256": null,
+ "crop_rule": "(fixed from a layout-only look at Figs 34 and 35, before any statistic was computed):\n  1. Luminance < 235 marks \"ink\"; rows/columns that are >= 97% white are background.\n  2. Split point = the whitest column in the central 35-65% of the width (the gutter between panels).\n  3. For each half: keep the longest contiguous run of ink rows (drops the title strip above and the\n     \"(a)\"/\"(b)\" labels below), then trim white columns at both ends.\n  4. Inset 1.5% on every side to remove frame lines.\n  In-panel annotations (tag circles/numbers in (a), yellow arrows/\"Tag N\" text in (b)) cannot be\n  cropped out and are LEFT IN. A secondary run masks them (see figure_information measure --mask).",
+ "pairs": [
+  {
+   "id": "J39",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g039.png",
+    "box": [
+     66,
+     80,
+     1541,
+     1226
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g039.png",
+    "box": [
+     1613,
+     83,
+     3526,
+     1229
+    ]
+   },
+   "split_col": 1563,
+   "image_size": [
+    3585,
+    1388
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J40",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g040.png",
+    "box": [
+     59,
+     91,
+     1534,
+     1269
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g040.png",
+    "box": [
+     1613,
+     91,
+     3531,
+     1269
+    ]
+   },
+   "split_col": 1556,
+   "image_size": [
+    3585,
+    1412
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J41",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g041.png",
+    "box": [
+     60,
+     85,
+     1471,
+     1249
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g041.png",
+    "box": [
+     1562,
+     93,
+     3525,
+     1256
+    ]
+   },
+   "split_col": 1492,
+   "image_size": [
+    3592,
+    1412
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J42",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g042.png",
+    "box": [
+     68,
+     87,
+     1739,
+     1278
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g042.png",
+    "box": [
+     1850,
+     93,
+     3520,
+     1278
+    ]
+   },
+   "split_col": 1764,
+   "image_size": [
+    3574,
+    1433
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J43",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g043.png",
+    "box": [
+     64,
+     86,
+     1361,
+     1289
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g043.png",
+    "box": [
+     1442,
+     90,
+     3545,
+     1287
+    ]
+   },
+   "split_col": 1381,
+   "image_size": [
+    3602,
+    1444
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J44",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g044.png",
+    "box": [
+     60,
+     96,
+     1505,
+     1261
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g044.png",
+    "box": [
+     1586,
+     104,
+     3524,
+     1261
+    ]
+   },
+   "split_col": 1527,
+   "image_size": [
+    3578,
+    1419
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J45",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g045.png",
+    "box": [
+     56,
+     98,
+     1207,
+     1225
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g045.png",
+    "box": [
+     1320,
+     102,
+     3520,
+     1231
+    ]
+   },
+   "split_col": 1254,
+   "image_size": [
+    3585,
+    1402
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J46",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g046.png",
+    "box": [
+     65,
+     115,
+     1600,
+     1252
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g046.png",
+    "box": [
+     1684,
+     115,
+     3533,
+     1252
+    ]
+   },
+   "split_col": 1623,
+   "image_size": [
+    3592,
+    1419
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J47",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g047.png",
+    "box": [
+     80,
+     101,
+     1966,
+     1265
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g047.png",
+    "box": [
+     2036,
+     109,
+     3525,
+     1263
+    ]
+   },
+   "split_col": 1995,
+   "image_size": [
+    3571,
+    1430
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J49",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g049.png",
+    "box": [
+     74,
+     96,
+     1730,
+     1261
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g049.png",
+    "box": [
+     1851,
+     104,
+     3553,
+     1248
+    ]
+   },
+   "split_col": 1755,
+   "image_size": [
+    3606,
+    1402
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J50",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g050.png",
+    "box": [
+     77,
+     94,
+     1733,
+     1242
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g050.png",
+    "box": [
+     1854,
+     103,
+     3556,
+     1246
+    ]
+   },
+   "split_col": 1758,
+   "image_size": [
+    3602,
+    1405
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J51",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g051.png",
+    "box": [
+     69,
+     99,
+     1414,
+     1234
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g051.png",
+    "box": [
+     1491,
+     97,
+     3510,
+     1237
+    ]
+   },
+   "split_col": 1434,
+   "image_size": [
+    3567,
+    1402
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J52",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g052.png",
+    "box": [
+     52,
+     53,
+     2090,
+     1287
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g052.png",
+    "box": [
+     2173,
+     53,
+     3525,
+     1293
+    ]
+   },
+   "split_col": 2121,
+   "image_size": [
+    3581,
+    1458
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J54",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g054.png",
+    "box": [
+     74,
+     93,
+     1763,
+     1216
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g054.png",
+    "box": [
+     1854,
+     111,
+     3551,
+     1222
+    ]
+   },
+   "split_col": 1789,
+   "image_size": [
+    3615,
+    1402
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J55",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g055.png",
+    "box": [
+     72,
+     101,
+     1638,
+     1353
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g055.png",
+    "box": [
+     1744,
+     207,
+     3446,
+     1117
+    ]
+   },
+   "split_col": 1662,
+   "image_size": [
+    3583,
+    1405
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "J56",
+   "a": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g056.png",
+    "box": [
+     62,
+     105,
+     1452,
+     1237
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/journal/remotesensing-14-05231-g056.png",
+    "box": [
+     1526,
+     114,
+     3530,
+     1240
+    ]
+   },
+   "split_col": 1473,
+   "image_size": [
+    3593,
+    1392
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  }
+ ]
+}

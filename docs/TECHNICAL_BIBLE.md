@@ -5,7 +5,7 @@
 
 
 *The complete working reference for this project. Read it before touching data.*
-*Version 1.8. Every quantitative claim is traceable to the References at the end.*
+*Version 1.9. Every quantitative claim is traceable to the References at the end.*
 
 ---
 
@@ -483,6 +483,21 @@ that scene's off-centre crops. Candidate cause, untested: surface content, which
 null lacks. Durable design note: **a pipeline-matched empty null controls for the pipeline but not for
 "a scene exists", so this rule also responds to surface texture** — keep that in mind when reading
 any count below threshold. → RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md; src/shape_metric_giza.py.
+
+## 8.10 The 2022 paper's paired figures — pre-registered C.4 step 2 (27 Sep 2026)
+
+Measured all 16 "Tags association from tomography to 3D model" pairs (arXiv:2208.00811, Figs 34-40,
+42-50) with a statistic and predictions committed before the paper was obtained (`936e4ce`). The model
+panel carries more independent spatial detail than the tomogram panel in 15/16 pairs (median 9.7x;
+5.7x after erasing annotations equally on both sides; tomogram ~3.4x coarser in linear resolution).
+The only exception, Fig 49, is a heat-map laid over an engraving whose hatching supplies the detail.
+Durable facts, from direct inspection: **the 2022 tomography is 2-D colour-mapped slices with no axes or
+scale — there is no rendered volume**; all 3-D geometry on the page is the CAD model; the link is
+hand-placed tags; 4/16 tomogram panels are overlays on pre-existing drawings/photos of the known interior.
+The statistic's first version failed its own control and was withdrawn before the data (recorded).
+Journal version (MDPI images): the 16 pair images are identical to arXiv v1; no axes were added; the only
+axis-labelled tomograms (J48, J53) are in pixels while the CAD is dimensioned in metres.
+→ RESULTS_FIGURES_2026-09-27.md; src/figure_information.py, figure_layout.py, figure_information_secondary.py.
 
 ## 9. Glossary
 - **SLC / SICD** — Single-Look Complex image (amplitude + phase), slant-plane.

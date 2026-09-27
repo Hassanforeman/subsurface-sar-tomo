@@ -53,6 +53,10 @@ cannot be in the data. It is supplied downstream, by one of:
 - **3D-model association** — his 2022 paper pairs the tomogram with a pre-made CAD model, captioned
   verbatim "Tags association from tomography to 3D model. (a): 3D model of Khnum-Khufu.
   (b): Tomographic reconstruction (magnitude)." The geometry is the model's. **[E]**
+  *Measured 27 Sep 2026 (pre-registered):* across all 16 such pairs the model panel carries ~10x the
+  independent detail of the tomogram panel (15/16); every tomogram panel is an unscaled 2-D heat-map
+  (no volume is rendered anywhere), the link is hand-placed tags, and 4/16 tomogram panels are
+  overlays on pre-existing drawings/photos of the known interior. → RESULTS_FIGURES_2026-09-27.md **[E]**
 - **Photo overlay** — his 2026 Titanic frame is labelled on the image itself "In-situ Photo Overlay
   (tilted for alignment)": a real seabed photograph composited onto the blob field. The hull is the
   photo's; the radar layer is colour mush. **[E]**

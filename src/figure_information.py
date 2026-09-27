@@ -210,7 +210,7 @@ def load_panel(fn, box):
     return luminance(a)
 
 
-def measure(layout_path):
+def measure(layout_path, out="runs/figure_information.json"):
     L = json.load(open(layout_path))
     res = dict(layout=layout_path, pdf=L.get("pdf"), pdf_sha256=L.get("pdf_sha256"),
                crop_rule=L.get("crop_rule"), pairs={})
@@ -237,8 +237,8 @@ def measure(layout_path):
     print(f"P1b median N(a)/N(b) = {med:.2f} (bar >= 4)  -> {'hit' if med >= 4 else 'miss'}")
     print(f"\nP1 (N(a) > N(b)) in {p1}/{n} pairs  [primary]")
     print(f"P2 not used (S3 failed its control); E_a >= 5 E_b in {p2}/{n} pairs, descriptive only")
-    json.dump(res, open("runs/figure_information.json", "w"), indent=1)
-    print("-> runs/figure_information.json")
+    json.dump(res, open(out, "w"), indent=1)
+    print(f"-> {out}")
 
 
 if __name__ == "__main__":
@@ -247,12 +247,13 @@ if __name__ == "__main__":
     ap.add_argument("--extract")
     ap.add_argument("--out", default="data/biondi2022/images")
     ap.add_argument("--measure")
+    ap.add_argument("--result", default="runs/figure_information.json")
     a = ap.parse_args()
     if a.controls:
         sys.exit(0 if controls() else 1)
     elif a.extract:
         extract(a.extract, a.out)
     elif a.measure:
-        measure(a.measure)
+        measure(a.measure, a.result)
     else:
         ap.print_help()

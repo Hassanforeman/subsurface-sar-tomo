@@ -1,0 +1,519 @@
+{
+ "pdf": "data/biondi2022/biondi_malanga_2022_arxiv_2208.00811.pdf",
+ "pdf_sha256": "906b9c64e2537a24d8e473a9dbce00c2a866a8e4dd98d6e6042cd0575c53d35c",
+ "crop_rule": "(fixed from a layout-only look at Figs 34 and 35, before any statistic was computed):\n  1. Luminance < 235 marks \"ink\"; rows/columns that are >= 97% white are background.\n  2. Split point = the whitest column in the central 35-65% of the width (the gutter between panels).\n  3. For each half: keep the longest contiguous run of ink rows (drops the title strip above and the\n     \"(a)\"/\"(b)\" labels below), then trim white columns at both ends.\n  4. Inset 1.5% on every side to remove frame lines.\n  In-panel annotations (tag circles/numbers in (a), yellow arrows/\"Tag N\" text in (b)) cannot be\n  cropped out and are LEFT IN. A secondary run masks them (see figure_information measure --mask).",
+ "pairs": [
+  {
+   "id": "Fig34",
+   "a": {
+    "file": "data/biondi2022/images/p022_00_Im34.jpg",
+    "box": [
+     19,
+     66,
+     878,
+     729
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p022_00_Im34.jpg",
+    "box": [
+     920,
+     68,
+     2034,
+     731
+    ]
+   },
+   "split_col": 891,
+   "image_size": [
+    2088,
+    828
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig35",
+   "a": {
+    "file": "data/biondi2022/images/p022_01_Im35.jpg",
+    "box": [
+     41,
+     135,
+     2485,
+     1945
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p022_01_Im35.jpg",
+    "box": [
+     2617,
+     135,
+     5795,
+     1945
+    ]
+   },
+   "split_col": 2522,
+   "image_size": [
+    5876,
+    2176
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig36",
+   "a": {
+    "file": "data/biondi2022/images/p023_00_Im36.jpg",
+    "box": [
+     30,
+     143,
+     1999,
+     1817
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p023_00_Im36.jpg",
+    "box": [
+     2127,
+     156,
+     4868,
+     1826
+    ]
+   },
+   "split_col": 2029,
+   "image_size": [
+    4948,
+    2036
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig37",
+   "a": {
+    "file": "data/biondi2022/images/p023_01_Im37.jpg",
+    "box": [
+     36,
+     96,
+     2336,
+     1713
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p023_01_Im37.jpg",
+    "box": [
+     2491,
+     104,
+     4789,
+     1713
+    ]
+   },
+   "split_col": 2371,
+   "image_size": [
+    4880,
+    1924
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig38",
+   "a": {
+    "file": "data/biondi2022/images/p024_00_Im38.jpg",
+    "box": [
+     35,
+     103,
+     1814,
+     1861
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p024_00_Im38.jpg",
+    "box": [
+     1925,
+     109,
+     4809,
+     1858
+    ]
+   },
+   "split_col": 1841,
+   "image_size": [
+    4860,
+    2073
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig39",
+   "a": {
+    "file": "data/biondi2022/images/p024_01_Im39.jpg",
+    "box": [
+     51,
+     145,
+     1933,
+     1811
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p024_01_Im39.jpg",
+    "box": [
+     2040,
+     157,
+     4562,
+     1811
+    ]
+   },
+   "split_col": 1962,
+   "image_size": [
+    4616,
+    2028
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig40",
+   "a": {
+    "file": "data/biondi2022/images/p024_02_Im40.jpg",
+    "box": [
+     46,
+     186,
+     1665,
+     1795
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p024_02_Im40.jpg",
+    "box": [
+     1826,
+     192,
+     4923,
+     1804
+    ]
+   },
+   "split_col": 1747,
+   "image_size": [
+    4992,
+    2024
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig42",
+   "a": {
+    "file": "data/biondi2022/images/p025_01_Im42.jpg",
+    "box": [
+     29,
+     130,
+     1970,
+     1570
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p025_01_Im42.jpg",
+    "box": [
+     2076,
+     130,
+     4412,
+     1570
+    ]
+   },
+   "split_col": 1999,
+   "image_size": [
+    4480,
+    1796
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig43",
+   "a": {
+    "file": "data/biondi2022/images/p025_02_Im43.jpg",
+    "box": [
+     53,
+     125,
+     2487,
+     1758
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p025_02_Im43.jpg",
+    "box": [
+     2576,
+     136,
+     4499,
+     1756
+    ]
+   },
+   "split_col": 2524,
+   "image_size": [
+    4572,
+    1992
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig44",
+   "a": {
+    "file": "data/biondi2022/images/p026_00_Im44.jpg",
+    "box": [
+     40,
+     154,
+     2692,
+     1822
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p026_00_Im44.jpg",
+    "box": [
+     2887,
+     167,
+     5612,
+     1801
+    ]
+   },
+   "split_col": 2732,
+   "image_size": [
+    5676,
+    2028
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig45",
+   "a": {
+    "file": "data/biondi2022/images/p026_01_Im45.jpg",
+    "box": [
+     40,
+     154,
+     2692,
+     1796
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p026_01_Im45.jpg",
+    "box": [
+     2887,
+     167,
+     5611,
+     1801
+    ]
+   },
+   "split_col": 2732,
+   "image_size": [
+    5676,
+    2028
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig46",
+   "a": {
+    "file": "data/biondi2022/images/p027_00_Im46.jpg",
+    "box": [
+     31,
+     185,
+     2043,
+     1746
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p027_00_Im46.jpg",
+    "box": [
+     2159,
+     182,
+     5181,
+     1750
+    ]
+   },
+   "split_col": 2074,
+   "image_size": [
+    5304,
+    1952
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig47",
+   "a": {
+    "file": "data/biondi2022/images/p027_01_Im47.jpg",
+    "box": [
+     17,
+     12,
+     1097,
+     776
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p027_01_Im47.jpg",
+    "box": [
+     1141,
+     12,
+     1856,
+     780
+    ]
+   },
+   "split_col": 1113,
+   "image_size": [
+    1888,
+    904
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig48",
+   "a": {
+    "file": "data/biondi2022/images/p028_00_Im48.jpg",
+    "box": [
+     31,
+     185,
+     2043,
+     1746
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p028_00_Im48.jpg",
+    "box": [
+     2152,
+     209,
+     4172,
+     1756
+    ]
+   },
+   "split_col": 2074,
+   "image_size": [
+    4220,
+    1972
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig49",
+   "a": {
+    "file": "data/biondi2022/images/p029_00_Im49.jpg",
+    "box": [
+     16,
+     62,
+     1021,
+     910
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p029_00_Im49.jpg",
+    "box": [
+     1085,
+     133,
+     2180,
+     751
+    ]
+   },
+   "split_col": 1036,
+   "image_size": [
+    2280,
+    960
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  },
+  {
+   "id": "Fig50",
+   "a": {
+    "file": "data/biondi2022/images/p029_01_Im50.jpg",
+    "box": [
+     13,
+     106,
+     809,
+     948
+    ]
+   },
+   "b": {
+    "file": "data/biondi2022/images/p029_01_Im50.jpg",
+    "box": [
+     851,
+     111,
+     1998,
+     951
+    ]
+   },
+   "split_col": 821,
+   "image_size": [
+    2036,
+    1068
+   ],
+   "desc": {
+    "b_render": "2-D colour-mapped magnitude image (jet), no axes/scale",
+    "a_render": "3-D perspective CAD model with numbered tags",
+    "shared_camera": false,
+    "b_metric_scale": false
+   }
+  }
+ ]
+}

@@ -104,3 +104,16 @@ derivable from the displayed tomogram.
 ## D.8 Result
 
 *To be appended after the run. Deliberately empty at commit time.*
+
+**Appended 27 Sep 2026.** Source: arXiv:2208.00811 (journal PDF blocked; D.2 fallback), SHA-256
+906b9c64…d35c. 16 pairs (Figs 34-40, 42-50). **P1 HIT 15/16; P1b HIT (median 9.69x); P2 not used
+(D.4a); P3 untestable — no tomogram panel has axes or a scale.** The single P1 miss (Fig 49) is a
+heat-map composited over an engraving whose hatching carries the detail. Robust to equal median
+filtering (15/16, 5.7x) and to removing panel area (tomogram 3.35x coarser). Descriptive: 4/16
+tomogram panels are overlays on pre-existing drawings/photographs of the known interior; no panel is
+a rendered volume. Full account: `docs/RESULTS_FIGURES_2026-09-27.md`.
+
+**Journal-version addendum (27 Sep 2026).** The pre-registered source (journal) was obtained as images
+after the fallback run. The 16 pair images are identical to arXiv v1 (r = 1.00 per panel); the
+identical rule gives P1 15/16, P1b 10.47x. No axes were added. → RESULTS_FIGURES §6;
+`runs/figure_information_journal.json`.

@@ -5,7 +5,7 @@ Rule: if any other document disagrees with this one about *status*, THIS FILE WI
 *detail*, follow the pointer this file gives. When you close or open a question, edit the
 ledgers below in the same session — that is how we stop doing double work.
 
-*Last updated: 2026-09-26 (PCI 2nd reviewer secured; retraction aftermath logged; §7 shape metric step 1 run on real Giza — negative, one near-miss disclosed).*
+*Last updated: 2026-09-27 (journal-version replication of step 2: images identical, no axes added, 15/16 again; C.4 step 2: the 2022 paper's paired figures measured — geometry is the model's; tomogram panels unscaled, 4/16 overlaid on known drawings. Previous: 26 Sep §7 step 1 negative).*
 
 *How to keep this file and supersede docs correctly: `docs/DOCUMENTATION_RULES.md`. Entry point for new sessions: `/CLAUDE.md`.*
 
@@ -59,6 +59,16 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   shaft control 8/8 on every scene. 0 of 15 crops reach the 5/8 threshold. Choices committed first
   (`ec411e3`). Paper §7's "provisional" can be updated. → RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md;
   src/shape_metric_giza.py; runs/shape_metric_giza.json.
+- **2022 figures, pre-registered C.4 step 2 (27 Sep): the displayed geometry is the CAD model's.**
+  16 "tags association" pairs: model panel carries more independent detail than the tomogram panel in
+  15/16 (median 9.7x; robust: 5.7x after equal median filter, tomogram 3.35x coarser). Only miss (Fig 49)
+  is a heat-map over an engraving. Descriptive: NO tomogram panel has axes/scale (so P3 untestable and
+  the tag association is uncheckable); the tomography is 2-D jet slices, never a rendered volume;
+  4/16 tomogram panels are overlays on pre-existing interior drawings/photos. Weak-by-design test —
+  the descriptive findings matter more. **Journal version checked:** the 16 pair images are identical to
+  arXiv v1 (r = 1.00); no axes added despite the 2022 reviewer's demand; replication 15/16, 10.5x. Only
+  tomograms with axes (J48, J53) are in PIXELS; the CAD is dimensioned in metres. J53 = a 5th overlay.
+  → RESULTS_FIGURES_2026-09-27.md §6; src/figure_information*.py.
 
 ## 2. Adversarial reviews already answered (don't re-litigate)
 
@@ -92,11 +102,13 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       seabed PHOTO composited on the HarmonicSAR blob field. Detail is the photo's; radar layer is blobs.
       X-band skin depth in seawater ~2.5 mm vs 3800 m depth = no possible signal. Clearest example of the
       draping mechanism. → BIONDI_IMAGERY_ANALYSIS_2026-09-03.md §5.
-- [ ] Optional: pixel-measure a published "face" figure to count real voxels vs facial-feature Nyquist need.
-      NOW PERMITTED as prereg C.4 step 2 (step 1 done 26 Sep). Measure tomogram-magnitude panel vs
-      CAD-model panel separately in the 2022 paper's open-access figures 34-50. [runnable]
+- [x] DONE 27 Sep: prereg C.4 step 2 on the 2022 paper's 16 paired figures — see §1.
+- [ ] Optional, not started: the same measurement on a 2025/2026 Giza or "Second Sphinx" figure (a
+      different, later pipeline; step 2 says nothing about it). Needs a source image. [needs-data]
 - [ ] Shape-metric near-miss (02-08 centre crop 4/8, mostly component-count arm, no vertical-extent
-      gain): test the "surface content, not depth" explanation with a surface-matched null or a
+      gain; off-centre crops of 02-08 are all 0/8; 02-08 is the steepest look, incidence 29.4 deg vs
+      36.8/35.3 for the other two, same side/azimuth). Framing: "two clean nulls + one unexplained
+      near-miss" until tested: test the "surface content, not depth" explanation with a surface-matched null or a
       co-location test vs surface brightness. Secondary; cannot change the step-1 verdict. [needs-data:
       run on Mac] → RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md §3.
 - [ ] Paper: update §7 "provisional" wording + add step-1 result (at revision, per reviewer reports). [external]
@@ -135,7 +147,7 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 
 ## 5. Doc map (what's current vs superseded)
 
-- **CURRENT:** this file, RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md, HOW_BIONDI_DOES_IT.md (the consolidated mechanism account), TECHNICAL_BIBLE.md (v1.5), paper v5 PDF, the three RESULTS_*_2026-09-02.md,
+- **CURRENT:** this file, RESULTS_FIGURES_2026-09-27.md, RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md, HOW_BIONDI_DOES_IT.md (the consolidated mechanism account), TECHNICAL_BIBLE.md (v1.5), paper v5 PDF, the three RESULTS_*_2026-09-02.md,
   REVIEW_INDEPENDENT_2026-09-02.md, FIVE_SITE, SENSITIVITY_RESPONSE_BIONDI.md.
 - **STALE — do not use for status:** docs/private/HANDOFF.md (dated ~1 Jul: says "Bingham in flight /
   paper done" — both superseded by v5 + Giza + retraction). Kept for history only.
