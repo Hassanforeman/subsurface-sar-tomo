@@ -168,7 +168,11 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       near-miss" until tested: test the "surface content, not depth" explanation with a surface-matched null or a
       co-location test vs surface brightness. Secondary; cannot change the step-1 verdict. [needs-data:
       run on Mac] → RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md §3.
-- [ ] Paper: update §7 "provisional" wording + add step-1 result (at revision, per reviewer reports). [external]
+- [ ] Paper v6 DRAFT written 27 Sep: paper/PAPER_v6_DRAFT_2026-09-27.md (markdown; folds in F/G/H, Q2/Q3, shape
+      metric, figure + press audits, ejhong/Pomposi; §7 'provisional' superseded). Next: Grok review, then reviewer
+      reports, then port to build_v6.py/PDF. [writing]
+      Grok referee pass applied 27 Sep (docs/private/GROK_PAPER_REVIEW_v6_2026-09-27.md). Open TODOs in draft:
+      exact per-site alignment ratios (needs non-Giza scenes), podcast citation [8], v5 tables/figures to port.
 **Needs data fetched on Hassan's Mac (sandbox is 403-blocked from the S3 buckets):**
 - [ ] Volcano breadth (Merapi scenes listed; download → run). IN PROGRESS.
 - [ ] Butte rect-window anomaly (5.07 vs alignment null) + the "monotonic sites = the structured
