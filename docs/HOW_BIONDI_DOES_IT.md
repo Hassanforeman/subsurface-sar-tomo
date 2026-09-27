@@ -15,7 +15,14 @@ evidence grade on every link. A critique of method and mathematics, not an alleg
 A single staring-spotlight SAR scene is split into Doppler sub-apertures; sub-pixel co-registration
 between them recovers a sub-millimetre map of how the **surface** moved during the ~seconds-long
 collect. This is Biondi's genuine, peer-reviewed capability (ships, bridges, the Mosul Dam). Nothing
-penetrates the ground; the surface vibration is the only measurement. This part stands.
+penetrates the ground; the surface vibration is the only measurement. **This part stands — for strong
+motion only** (qualified 27 Sep 2026): it works where a structure is driven hard and coherently
+(turbines, traffic, engines; published single-pass bridge figures ~1000 µm/s) and where stiff concrete/
+metal scatterers stay coherent. Ambient natural ground motion (~0.1–10 µm/s) is below the measured
+single-pass floor (~77 µm/s, ejhong R4), and in a dwell the looks decorrelate within ~1 s (ejhong R9).
+Giza is quarried limestone on limestone bedrock with no strong driving source, so it sits in the
+ambient regime. Even where the front end works, it measures the vibrating surface itself; it does not
+image what lies beneath. → COMPARISON_EJHONG_2026-09-27.md §3.
 
 ### Step 2 — The trajectory is a running total → a random walk **[E]**
 Per patch, adjacent-look displacements are accumulated (`np.cumsum`). A running total of noisy

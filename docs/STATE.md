@@ -133,8 +133,8 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - [ ] NEW from ejhong comparison (each needs a prereg): Q1 known-void cemetery test on our Umbra scenes
       (feasible: cemeteries inside all 3 footprints); Q2 Umbra Kz ambiguity depth; Q3 coherence vs look
       separation; Q4 surface spacing → apparent depth (follow-up to rejected test F). → COMPARISON_EJHONG §6.
-- [ ] Soften HOW_BIONDI Step 1 ("front end stands"): real for strong motion; ambient microseism is below
-      the measured single-pass floor (ejhong R4). [writing]
+- [x] DONE 27 Sep: HOW_BIONDI Step 1 qualified (strong driven motion only; ambient below floor). Paper v5
+      wording on the "legitimate front end" should get the same qualifier at revision. [external]
 - [ ] Candidate (not pre-registered yet): real-crop streak statistics vs matched empty-noise nulls
       (RESULTS_STREAKS §4). [sandbox-ok once volumes cached / Mac]
 - [x] TESTED 27 Sep (test F: MIXED, see §1). Original item: Shape-metric near-miss (02-08 centre crop 4/8, mostly component-count arm, no vertical-extent
