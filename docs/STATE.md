@@ -104,7 +104,9 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       draping mechanism. → BIONDI_IMAGERY_ANALYSIS_2026-09-03.md §5.
 - [x] DONE 27 Sep: prereg C.4 step 2 on the 2022 paper's 16 paired figures — see §1.
 - [ ] Optional, not started: the same measurement on a 2025/2026 Giza or "Second Sphinx" figure (a
-      different, later pipeline; step 2 says nothing about it). Needs a source image. [needs-data]
+      different, later pipeline; step 2 says nothing about it). Source found 27 Sep: ~55 press-conference
+      images published on archaeologicalrescue.org/secondsphinx/ "with permission". Descriptive first
+      (axes? colour bar? voxel size? threshold?). [needs-data: download on Mac]
 - [ ] Shape-metric near-miss (02-08 centre crop 4/8, mostly component-count arm, no vertical-extent
       gain; off-centre crops of 02-08 are all 0/8; 02-08 is the steepest look, incidence 29.4 deg vs
       36.8/35.3 for the other two, same side/azimuth). Framing: "two clean nulls + one unexplained
