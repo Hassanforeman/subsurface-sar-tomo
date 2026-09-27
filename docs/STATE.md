@@ -133,6 +133,10 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - [ ] NEW from ejhong comparison (each needs a prereg): Q1 known-void cemetery test on our Umbra scenes
       (feasible: cemeteries inside all 3 footprints); Q2 Umbra Kz ambiguity depth; Q3 coherence vs look
       separation; Q4 surface spacing → apparent depth (follow-up to rejected test F). → COMPARISON_EJHONG §6.
+      Grok round (27 Sep) triaged → docs/private/GROK_TRIAGE_EJHONG_2026-09-27.md (design notes for Q1-Q4;
+      Grok wrongly said the BiondiProtocol repo doesn't exist — we fetched it).
+- [ ] Outreach to ejhong (draft: docs/private/OUTREACH_EJHONG_DRAFT.md; propose cross-check on open Umbra
+      data, ask for ICEYE product IDs, ask citation). Hassan to send. [external]
 - [x] DONE 27 Sep: HOW_BIONDI Step 1 qualified (strong driven motion only; ambient below floor). Paper v5
       wording on the "legitimate front end" should get the same qualifier at revision. [external]
 - [ ] Candidate (not pre-registered yet): real-crop streak statistics vs matched empty-noise nulls
