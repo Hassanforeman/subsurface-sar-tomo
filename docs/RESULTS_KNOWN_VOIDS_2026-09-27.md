@@ -51,8 +51,10 @@ accumulated trajectory is accumulated registration noise. This measures, rather 
 our mechanism (answers Grok B2 / ejhong R9 for the single-SLC method). Note: match_score is magnitude
 correlation, not complex interferometric coherence; a complex-coherence / estimator-peak check on the same
 pairs is still owed. **Caveat:** this does not close the mechanism end-to-end — on 2 of 3 Giza scenes the
-peak stays pinned even without accumulation (STATE §1, increments anomaly); overlap-correlated increments
-are the leading explanation and are tested next (pre-registration H).
+peak stays pinned even without accumulation (STATE §1, increments anomaly). Test H (RESULTS_INCREMENTS)
+found this is not an order effect and not significant against a shuffle null, and that the increments are
+not serially correlated — the "overlap-correlated increments" explanation above was wrong; a weak
+surface-ward lean remains open.
 
 **Limitations (stated after Grok round 3):** 02-07's null is low-power (91 matched tiles; plateau halves
 differ by 0.12) — 03-08 (469 tiles, d −0.03) carries the result. Tiles (64 px ≈ 13–50 m, by scene) are much larger than a
