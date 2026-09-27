@@ -5,7 +5,7 @@ Rule: if any other document disagrees with this one about *status*, THIS FILE WI
 *detail*, follow the pointer this file gives. When you close or open a question, edit the
 ledgers below in the same session — that is how we stop doing double work.
 
-*Last updated: 2026-09-27 (journal-version replication of step 2: images identical, no axes added, 15/16 again; C.4 step 2: the 2022 paper's paired figures measured — geometry is the model's; tomogram panels unscaled, 4/16 overlaid on known drawings. Previous: 26 Sep §7 step 1 negative).*
+*Last updated: 2026-09-27 (2026 press-image audit: 3-D Sphinx built from 2-D heat-maps + template + GAN/face tools + chatbots, per their own slides; journal-version replication of step 2: images identical, no axes added, 15/16 again; C.4 step 2: the 2022 paper's paired figures measured — geometry is the model's; tomogram panels unscaled, 4/16 overlaid on known drawings. Previous: 26 Sep §7 step 1 negative).*
 
 *How to keep this file and supersede docs correctly: `docs/DOCUMENTATION_RULES.md`. Entry point for new sessions: `/CLAUDE.md`.*
 
@@ -69,6 +69,13 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   arXiv v1 (r = 1.00); no axes added despite the 2022 reviewer's demand; replication 15/16, 10.5x. Only
   tomograms with axes (J48, J53) are in PIXELS; the CAD is dimensioned in metres. J53 = a 5th overlay.
   → RESULTS_FIGURES_2026-09-27.md §6; src/figure_information*.py.
+- **2026 Second Sphinx press images, pre-registered descriptive audit (27 Sep, prereg `7cca12e`).** 58
+  slides. Input = four unscaled 2-D jet heat-maps (views 101/102/103 + top). Their own pipeline slide
+  lists a Thermal-to-Visible GAN (Pix2Pix/CycleGAN), DeepFace/MediaPipe landmarks, ArcFace/Eigenface,
+  golden-ratio canon grids, in slides titled as dialogue with Grok/Gemini; renders carry the known Great
+  Sphinx form (est. length 73.0 m); percentages are model outputs; heat-maps hand-stretched onto photos
+  (handles visible); Giza 3-D scene = identical primitives in a modeller. X1 hit, X2 hit, X3 partial.
+  → RESULTS_PRESS_IMAGES_2026-09-27.md; src/press_image_audit.py; runs/press_image_audit.json.
 
 ## 2. Adversarial reviews already answered (don't re-litigate)
 
@@ -104,9 +111,9 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       draping mechanism. → BIONDI_IMAGERY_ANALYSIS_2026-09-03.md §5.
 - [x] DONE 27 Sep: prereg C.4 step 2 on the 2022 paper's 16 paired figures — see §1.
 - [ ] Optional, not started: the same measurement on a 2025/2026 Giza or "Second Sphinx" figure (a
-      different, later pipeline; step 2 says nothing about it). Source found 27 Sep: ~55 press-conference
-      images published on archaeologicalrescue.org/secondsphinx/ "with permission". Descriptive first
-      (axes? colour bar? voxel size? threshold?). [needs-data: download on Mac]
+      different, later pipeline). DONE 27 Sep (descriptive) — see §1. Next: step (a) below.
+- [ ] NEXT (a): pre-register "vertical streaks are surface-driven" (streak = patch with elevated whole
+      spectrum; predicts co-location with surface-trajectory energy), merged with the near-miss item below.
 - [ ] Shape-metric near-miss (02-08 centre crop 4/8, mostly component-count arm, no vertical-extent
       gain; off-centre crops of 02-08 are all 0/8; 02-08 is the steepest look, incidence 29.4 deg vs
       36.8/35.3 for the other two, same side/azimuth). Framing: "two clean nulls + one unexplained

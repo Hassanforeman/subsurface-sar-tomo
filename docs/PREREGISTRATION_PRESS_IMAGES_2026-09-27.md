@@ -40,3 +40,10 @@ says so. EXIF absence proves nothing (WordPress strips it on resize).
 
 ## E.5 Result
 *To be appended after the audit. Deliberately empty at commit time.*
+
+**Appended 27 Sep 2026.** 58 images audited. X1 HIT (no threshold/iso-level stated anywhere); X2 HIT
+(78-1/79: navigation control, grid floor, identical primitives); X3 PARTIAL (Second Sphinx lines are
+unscaled 2022-format heat-maps; the Great Sphinx figure 07/08 has a metric depth axis 0 to -1200 m).
+Key descriptive result: the deck itself lists a Thermal-to-Visible GAN, face-landmark and face-
+embedding tools and chatbot dialogue (Grok, Gemini) in the pipeline; the 3-D renders carry the known
+Great Sphinx's form. → `docs/RESULTS_PRESS_IMAGES_2026-09-27.md`; `runs/press_image_audit.json`.

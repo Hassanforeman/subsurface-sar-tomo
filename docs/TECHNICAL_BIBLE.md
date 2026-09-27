@@ -499,6 +499,14 @@ Journal version (MDPI images): the 16 pair images are identical to arXiv v1; no 
 axis-labelled tomograms (J48, J53) are in pixels while the CAD is dimensioned in metres.
 → RESULTS_FIGURES_2026-09-27.md; src/figure_information.py, figure_layout.py, figure_information_secondary.py.
 
+## 8.11 The 2026 Second Sphinx press images — pre-registered descriptive audit (27 Sep 2026)
+
+58 slides (archaeologicalrescue.org, with Biondi's permission). The measured product is unchanged from
+2022: unscaled 2-D jet heat-maps (four views). The 3-D sphinx is produced downstream: known-sphinx
+template, face-proportion grids, and — per their own pipeline slide — a Thermal-to-Visible GAN,
+DeepFace/MediaPipe landmarks and ArcFace/Eigenface, in slides framed as dialogue with Grok/Gemini.
+Confidence percentages are those tools' outputs. → RESULTS_PRESS_IMAGES_2026-09-27.md.
+
 ## 9. Glossary
 - **SLC / SICD** — Single-Look Complex image (amplitude + phase), slant-plane.
 - **CPHD** — Compensated Phase History Data (pre-image; ideal for sub-aperture work).

@@ -60,7 +60,11 @@ cannot be in the data. It is supplied downstream, by one of:
 - **Photo overlay** — his 2026 Titanic frame is labelled on the image itself "In-situ Photo Overlay
   (tilted for alignment)": a real seabed photograph composited onto the blob field. The hull is the
   photo's; the radar layer is colour mush. **[E]**
-- **AI + rendering** — "AI used as a secondary source"; isosurface/threshold/colour choices. We
+- **AI + rendering** — "AI used as a secondary source"; isosurface/threshold/colour choices.
+  *Audited 27 Sep 2026 (pre-registered):* the 2026 Second Sphinx deck's own pipeline slide lists a
+  Thermal-to-Visible GAN (Pix2Pix/CycleGAN), face-landmark and face-embedding tools and golden-ratio
+  canon grids, presented as dialogue with Grok/Gemini; the input is four unscaled 2-D heat-maps and the
+  renders carry the known Great Sphinx's form. → RESULTS_PRESS_IMAGES_2026-09-27.md **[E for 2026]** We
   showed rendering an EMPTY noise volume produces discrete "solid bodies" and vertical shaft-like
   runs from nothing. **[E that rendering manufactures shapes; H that it made his specific images]**
 
