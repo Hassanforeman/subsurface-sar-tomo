@@ -175,7 +175,7 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       per-site alignment ratios: Giza 3.67, Bingham 2.40, Butte 1.53, Komati ≤2.41 recorded; Vesuvius + Cairo NOT recorded
       and non-Giza scenes are NOT on disk (checked 29 Sep; data/ holds only Giza) — re-fetch via src/fetch_umbra.py to
       regenerate. Butte rect 5.07 now disclosed in §5.1. Podcast citation [8]; v5 tables/figures to port.
-- [ ] ejhong outreach: checked 29 Sep — the issue does NOT exist on github.com/ejhong/sar (0 issues). Not sent yet.
+- [x] ejhong outreach POSTED 29 Sep: github.com/ejhong/sar/issues/1 (open, renders correctly). Awaiting reply. [external]
 **Needs data fetched on Hassan's Mac (sandbox is 403-blocked from the S3 buckets):**
 - [ ] Volcano breadth (Merapi scenes listed; download → run). IN PROGRESS.
 - [ ] Butte rect-window anomaly (5.07 vs alignment null) + the "monotonic sites = the structured
