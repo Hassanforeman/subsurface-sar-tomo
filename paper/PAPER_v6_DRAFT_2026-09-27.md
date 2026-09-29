@@ -163,13 +163,15 @@ The residual is not fully resolved:
 | Site | Sensor | Decision ratio vs alignment null (n_sub 11) | Raw contrast (Hann; reference only) | Detections (of 8) |
 |---|---|---|---|---|
 | Giza 02-07 | Umbra | **3.67** | 6.06 | 0 |
-| Bingham Canyon | Umbra | < 3.87 † | 3.87 | 0 |
-| Butte | Umbra | < 3.33 † | 3.33 | 0 |
-| Komati | Umbra | < 2.76 † | 2.76 | 0 |
+| Bingham Canyon | Umbra | 2.40 | 3.87 | 0 |
+| Butte | Umbra | 1.53 | 3.33 | 0 |
+| Komati | Umbra | ≤ 2.41 (range over n_sub 1.01–2.41) | 2.76 | 0 |
 | Cairo | Capella | < 2.75 † | 2.75 | 0 |
 | Vesuvius | Umbra | < 4.11 † | 4.11 | 0 |
 
-† The alignment-null contrast is ≥ 1 by construction (a peak is never below the median), so the ratio cannot exceed the raw contrast; every non-Giza site is below 5 on raw contrast alone. [TODO before deposit: regenerate the exact per-site ratios from the scenes.]
+Recorded ratios: Giza, docs/PREREGISTRATION_GIZA_2026-08-13.md; Bingham, RESULTS_2026-07-31_FIVE_SITE §5; Butte (Hann), SENSITIVITY_RESPONSE_BIONDI E4; Komati, ibid. E3 (range across n_sub; the n_sub-11 value is not separately recorded). † Vesuvius and Cairo ratios are not recorded; the alignment-null contrast is ≥ 1 by construction (a peak is never below the median), so each ratio cannot exceed its raw contrast, which is below 5. [TODO before deposit: regenerate all six at n_sub 11 from the scenes — non-Giza scenes are not currently on disk.]
+
+**The one configuration that crosses 5×.** Under a rectangular (untapered) window, Butte gives 5.07 against the alignment null. The excess tracks inter-look leakage almost exactly (lag-1 autocorrelation of the trajectories +0.244 rectangular, −0.010 Hann, −0.103 Blackman; r = +0.977 between lag-1 and the ratio) and is absent under every taper that suppresses leakage; it does not survive multiple-comparison correction across the configurations tried. It is reported, not counted as a detection, and its mechanism is stated (SENSITIVITY_RESPONSE_BIONDI E4).
 
 **Giza returns the highest raw contrast (6.06) and is still not a detection: its decision ratio is 3.67.** Roughly a third of that excess is the undisclosed window taper alone: the same scene gives 6.06 with Hann, 5.03 rectangular, 4.69 Blackman and 4.52 Hamming.
 
