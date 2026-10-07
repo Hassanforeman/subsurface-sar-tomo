@@ -1,0 +1,21 @@
+{
+ "label": "2023-11-15-19-47-28_UMBRA-05_SICD.nitf",
+ "experiment": "nsub",
+ "rows": [
+  {
+   "n_sub": 11,
+   "c_native": 4.112748995922742,
+   "c_fixed": 4.112748995922742,
+   "shuf_med": 1.4572063426891377,
+   "align_med": 1.4427027810279909,
+   "ratio_shuffle": 2.8223518354512698,
+   "ratio_align": 2.8507250765742422,
+   "peak_m": 3.493788819875776,
+   "old_pinned": false,
+   "old_peak_frac": 0.3010033444816054,
+   "new_pinned": true,
+   "quality": 0.7183129617442644,
+   "verdict": "surface-pinned artifact"
+  }
+ ]
+}
