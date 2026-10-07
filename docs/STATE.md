@@ -182,6 +182,15 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       PREREGISTRATION_GIZA; HOW_BIONDI Step 1 fixed; REVIEW_INDEPENDENT retitled. kz_ladder now reports
       along/cross-track (cross-track 1.05/0.77/16.0 m vs Pomposi ~0.6 m). Owed: common-reference variant;
       complex coherence; non-Giza run files; Table 1/Fig 1 port; Reisner citation check.
+- [ ] **Test I (common-reference tracking) PRE-REGISTERED 7 Oct, NOT YET RUN.** Prereg:
+      docs/PREREGISTRATION_COMMON_REFERENCE_2026-10-07.md; script src/common_reference.py (selftest PASS, sandbox).
+      Run on Mac: `python3.13 src/common_reference.py` → runs/common_reference.json. Design-phase synthetic facts
+      (disclosed in prereg): speckle is untrackable across the aperture (|look| corr ~0 beyond 2 looks); pipeline
+      phasecorr fails the CR control even on point scatterers (2/24), NCC passes (22/24); CR pinning is not
+      diagnostic alone (motion-free scenes pin 0/100/38% at strengths 5/15/30; planted real shifts pin 100%) —
+      any low-order error covariance gives a shallow argmax. Readings: A (pin without accumulation?) and
+      B (scene-wide common shift beyond motion-free null?). [sandbox-ok selftest / Mac for real run]
+      Sandbox note: no pip access this session → scipy.fft shim at /tmp/shim (`from numpy.fft import *`).
 - [ ] Paper v6 DRAFT written 27 Sep: paper/PAPER_v6_DRAFT_2026-09-27.md (markdown; folds in F/G/H, Q2/Q3, shape
       metric, figure + press audits, ejhong/Pomposi; §7 'provisional' superseded). Next: Grok review, then reviewer
       reports, then port to build_v6.py/PDF. [writing]
