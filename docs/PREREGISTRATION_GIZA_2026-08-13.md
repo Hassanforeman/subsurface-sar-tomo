@@ -132,3 +132,13 @@ volcano in Italy and a city centre in Egypt. Zero detections in eight runs.
 The manuscript's central claim — that the reported depth is a property of the
 processing chain and not of the ground — survives its most important test, on the
 one site the original claim is actually about.
+
+---
+**Correction appended 7 Oct 2026 (after an adversarial panel review).** Two statements in the result above are
+wrong and are withdrawn, not edited in place: (1) "None of the four falsification conditions was met" —
+condition "a peak that survives removal of the cumulative sum" WAS met on 02-07 (1.75 → 1.88 cells, within the
+guard) and later on the pre-registered primary 03-08 (1.77 → 1.95); see RESULTS_GIZA_REPEATS §3 and
+RESULTS_INCREMENTS_2026-09-27.md. (2) The pre-registered "E5 geometry sweep" prediction was never run on Giza;
+the "fixed-window spread" row scored in the table was not a pre-registered prediction and should not have been
+scored in its place. Also: the primary scene (03-08) was not the one analysed first; this is a protocol
+deviation, not a strengthening (commit 5787d57's wording is withdrawn). Paper v6.1 Table 5 lists all deviations.

@@ -68,13 +68,22 @@ def ladder(path):
         B.append(np.linalg.norm(dp) * np.sign(d @ along))
     B = np.array(B); dB = np.diff(B)
     geom = r * np.sin(theta)
+    # Decompose the platform displacement over the processed aperture (added 7 Oct 2026, panel review 1c):
+    # along-track, true cross-track (perpendicular to both LOS and velocity) and along-LOS components.
+    # The paper's single-pass "B_perp" above is the LOS-perpendicular displacement, dominated by along-track
+    # motion; the true cross-track baseline is the quantity Pomposi (2026) reports (~0.6 m).
+    vel = pos((t0 + t1) / 2 + 1e-3) - pos((t0 + t1) / 2 - 1e-3); vel /= np.linalg.norm(vel)
+    ncr = np.cross(los, vel); ncr /= np.linalg.norm(ncr)
+    ts = np.linspace(t0, t1, 201); dd = np.array([pos(t) - pc for t in ts])
+    spans = dict(along_track_span_m=float(np.ptp(dd @ vel)), cross_track_span_m=float(np.ptp(dd @ ncr)),
+                 los_span_m=float(np.ptp(dd @ los)))
     return dict(t_proc_s=T, subaperture_s=w, centre_spacing_s=float(cen[1] - cen[0]),
                 lambda_em_m=lam, slant_range_m=float(r), incidence_deg=float(90 - num("GrazeAng", x)),
                 bperp_span_m=float(B.max() - B.min()), dBperp_mean_m=float(dB.mean()),
                 dKz_cv=float(dB.std() / dB.mean()),
                 repeat_m_per_m_of_lambda_s=float(geom / (2 * dB.mean())),
                 unambiguous_m_per_m_of_lambda_s=float(geom / (4 * dB.mean())),
-                repeat_m_if_lambda_s_equals_em=float(lam * geom / (2 * dB.mean())))
+                repeat_m_if_lambda_s_equals_em=float(lam * geom / (2 * dB.mean())), **spans)
 
 
 def main():
@@ -84,7 +93,8 @@ def main():
         out[name] = ladder(p)
         d = out[name]
         print(f"{name}: T {d['t_proc_s']:.2f}s  Bperp span {d['bperp_span_m']:.0f} m  CV(dKz) {d['dKz_cv']:.1e}  "
-              f"repeat {d['repeat_m_per_m_of_lambda_s']:.1f} m per m of lambda_s")
+              f"repeat {d['repeat_m_per_m_of_lambda_s']:.1f} m per m of lambda_s  | along {d['along_track_span_m']:.0f} m, "
+              f"cross-track {d['cross_track_span_m']:.2f} m")
     os.makedirs("runs", exist_ok=True)
     json.dump(dict(script="src/kz_ladder_umbra.py", bank=dict(n_sub=NSUB, overlap=OVERLAP), scenes=out),
               open("runs/kz_ladder_umbra.json", "w"), indent=1)

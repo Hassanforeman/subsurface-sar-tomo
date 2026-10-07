@@ -17,7 +17,10 @@
    "dKz_cv": 3.7538451288993107e-06,
    "repeat_m_per_m_of_lambda_s": 292.18772393598607,
    "unambiguous_m_per_m_of_lambda_s": 146.09386196799304,
-   "repeat_m_if_lambda_s_equals_em": 9.124562260043257
+   "repeat_m_if_lambda_s_equals_em": 9.124562260043257,
+   "along_track_span_m": 9766.09082160539,
+   "cross_track_span_m": 1.0514506009086617,
+   "los_span_m": 162.31713517236233
   },
   "giza_2023-02-08_UMBRA-04": {
    "t_proc_s": 1.1819957428431793,
@@ -31,7 +34,10 @@
    "dKz_cv": 2.2099895026985335e-06,
    "repeat_m_per_m_of_lambda_s": 240.14458627411165,
    "unambiguous_m_per_m_of_lambda_s": 120.07229313705582,
-   "repeat_m_if_lambda_s_equals_em": 7.499337259327057
+   "repeat_m_if_lambda_s_equals_em": 7.499337259327057,
+   "along_track_span_m": 9088.798671601018,
+   "cross_track_span_m": 0.7676901909117124,
+   "los_span_m": 84.80962290152996
   },
   "giza_2023-03-08_UMBRA-04": {
    "t_proc_s": 5.040509365309975,
@@ -45,7 +51,10 @@
    "dKz_cv": 2.3481316377095818e-05,
    "repeat_m_per_m_of_lambda_s": 71.11098103039063,
    "unambiguous_m_per_m_of_lambda_s": 35.55549051519532,
-   "repeat_m_if_lambda_s_equals_em": 2.220687249094401
+   "repeat_m_if_lambda_s_equals_em": 2.220687249094401,
+   "along_track_span_m": 38688.839671077236,
+   "cross_track_span_m": 15.986902959432832,
+   "los_span_m": 990.4318831058483
   }
  }
 }

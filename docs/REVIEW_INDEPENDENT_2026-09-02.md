@@ -1,4 +1,7 @@
-# Independent review of preprint v5 — 2 September 2026
+# AI-assisted self-review of preprint v5 — 2 September 2026
+
+> **Note added 7 Oct 2026:** despite the original title ("Independent review"), this was an AI-assisted
+> session (Claude), not an independent human review. Retitled to avoid misleading readers; content unchanged.
 
 *Scope: full re-read of `paper/Giza_SAR_Doppler_Reproduction_and_Refutation_v5.pdf`, the
 project record (technical bible, results docs, preregistrations, erratum), a from-scratch

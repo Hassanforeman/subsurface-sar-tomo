@@ -18,10 +18,10 @@ collect. This is Biondi's genuine, peer-reviewed capability (ships, bridges, the
 penetrates the ground; the surface vibration is the only measurement. **This part stands — for strong
 motion only** (qualified 27 Sep 2026): it works where a structure is driven hard and coherently
 (turbines, traffic, engines; published single-pass bridge figures ~1000 µm/s) and where stiff concrete/
-metal scatterers stay coherent. Ambient natural ground motion (~0.1–10 µm/s) is below the measured
-single-pass floor (~77 µm/s, ejhong R4), and in a dwell the looks decorrelate within ~1 s (ejhong R9).
-Giza is quarried limestone on limestone bedrock with no strong driving source, so it sits in the
-ambient regime. Even where the front end works, it measures the vibrating surface itself; it does not
+metal scatterers stay coherent. Whether single-pass tracking can resolve ambient natural ground motion
+(~0.1–10 µm/s) at Giza is not established. (Correction 7 Oct 2026: an earlier version cited ejhong's
+77 µm/s floor and ~1 s coherence curve; ejhong withdrew/reinterpreted both on 28 Sep 2026.) Giza is
+quarried limestone on limestone bedrock with no strong driving source. Even where the front end works, it measures the vibrating surface itself; it does not
 image what lies beneath. → COMPARISON_EJHONG_2026-09-27.md §3.
 
 ### Step 2 — The trajectory is a running total → a random walk **[E]**

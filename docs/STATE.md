@@ -69,7 +69,9 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   registration to integer pixels. Cite at revision. Full comparison + new questions Q1-Q7 →
   COMPARISON_EJHONG_2026-09-27.md. Their raw ICEYE data are NOT public (not in ICEYE open catalogue).
 - **Commercial idea:** parked, honest "probably not". → COMMERCIAL_ASSESSMENT.md.
-- **§7 shape metric, pre-registered step 1 (26 Sep): NEGATIVE.** Real Giza centre crops vs matched
+- **§7 shape metric, pre-registered step 1 (26 Sep): NEGATIVE by the 5/8 rule — BUT (7 Oct) raw/log/gamma are
+  identical treatments, so on 6 distinct treatments 02-08 = 4/6 (majority). Report as unexplained positive of a flawed
+  statistic, not a null.** Real Giza centre crops vs matched
   empty volume, 8 treatments: 02-07 0/8, 02-08 4/8 (near-miss), 03-08 [prereg primary] 0/8; planted-
   shaft control 8/8 on every scene. 0 of 15 crops reach the 5/8 threshold. Choices committed first
   (`ec411e3`). Paper §7's "provisional" can be updated. → RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md;
@@ -99,7 +101,9 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   overlap 0.56), non-overlapping looks at the speckle floor (0.06-0.18) → increments are registration
   noise, measured. 02-08 SICD geolocation is off ~500 m (earlier centre-crop tests unaffected).
   → RESULTS_KNOWN_VOIDS_2026-09-27.md; src/known_voids_umbra.py; runs/known_voids_umbra.json.
-- **Q2 (27 Sep, descriptive): the paper's Kz steering on our Umbra geometry is a DFT to 5 decimals**
+- **Q2 (27 Sep, descriptive): the paper's single-pass Kz ladder on our Umbra geometry is near-uniform (CV 2e-6–2e-5;
+  a geometric identity for near-linear motion) → DFT.** (7 Oct: 'B⊥' here = LOS-perp displacement, mostly along-track;
+  true cross-track 1.05/0.77/16 m, consistent with Pomposi ~0.6 m.)
   (CV of ΔKz 2e-6–2e-5); depth repeat = (λs·r·sinθ)/(2ΔB⊥) = 292 / 240 / 71 m per metre of the unmeasured
   λs, different per scene. Closes the "orbit curvature ≠ DFT" caveat. → RESULTS_KZ_LADDER_2026-09-27.md;
   src/kz_ladder_umbra.py; runs/kz_ladder_umbra.json.
@@ -168,6 +172,16 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       near-miss" until tested: test the "surface content, not depth" explanation with a surface-matched null or a
       co-location test vs surface brightness. Secondary; cannot change the step-1 verdict. [needs-data:
       run on Mac] → RESULTS_SHAPE_METRIC_GIZA_2026-09-26.md §3.
+- [ ] **7 Oct: hostile-panel review (Grok) → v6 NOT READY, major revision.** Verified: shape metric has 3
+      identical treatments (02-08 = 4/6 distinct); prereg falsification (ii) met on 2/3 Giza scenes (was
+      mis-scored); E5 never run; ejhong R4/R9/R7/array test withdrawn 28 Sep (we cite them); §3.1 DFT sentence
+      false; AI disclosure omits Claude; podcast quote trimmed + unverified. Triage + plan:
+      docs/private/TRIAGE_HOSTILE_PANEL_2026-10-07.md. Decisions (Hassan): did NOT contact MDPI; leave git history +
+      disclose; keep one paper; cut podcast quote. → paper v6.1 written in place (PAPER_v6_DRAFT_2026-09-27.md,
+      deviations Table 5, scoped mechanism, shape 4/6, power, AI/COI/fair-dealing fixed). Corrections appended to
+      PREREGISTRATION_GIZA; HOW_BIONDI Step 1 fixed; REVIEW_INDEPENDENT retitled. kz_ladder now reports
+      along/cross-track (cross-track 1.05/0.77/16.0 m vs Pomposi ~0.6 m). Owed: common-reference variant;
+      complex coherence; non-Giza run files; Table 1/Fig 1 port; Reisner citation check.
 - [ ] Paper v6 DRAFT written 27 Sep: paper/PAPER_v6_DRAFT_2026-09-27.md (markdown; folds in F/G/H, Q2/Q3, shape
       metric, figure + press audits, ejhong/Pomposi; §7 'provisional' superseded). Next: Grok review, then reviewer
       reports, then port to build_v6.py/PDF. [writing]
