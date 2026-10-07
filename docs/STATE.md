@@ -182,7 +182,12 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       PREREGISTRATION_GIZA; HOW_BIONDI Step 1 fixed; REVIEW_INDEPENDENT retitled. kz_ladder now reports
       along/cross-track (cross-track 1.05/0.77/16.0 m vs Pomposi ~0.6 m). Owed: common-reference variant;
       complex coherence; non-Giza run files; Table 1/Fig 1 port; Reisner citation check.
-- [ ] **Test I (common-reference tracking) PRE-REGISTERED 7 Oct, NOT YET RUN.** Prereg:
+- [x] **Test I RUN 7 Oct (Mac, at 1474fd7): NOT TRACKABLE.** 0/24 patches pass the planted-shift control on
+      all 3 Giza scenes (both estimators); CR error 0.06–0.2 px beside the reference, 0.4–18 px beyond (speckle
+      signature). Mechanisms not separable on these data; paper §4.2 + limitations updated; scope note stands.
+      Interpretation: on these scenes a full-aperture trajectory can only be built by chaining adjacent steps.
+      → docs/RESULTS_COMMON_REFERENCE_2026-10-07.md; runs/common_reference.json. Do not re-run as is.
+      (Original entry follows.) Prereg:
       docs/PREREGISTRATION_COMMON_REFERENCE_2026-10-07.md; script src/common_reference.py (selftest PASS, sandbox).
       Run on Mac: `python3.13 src/common_reference.py` → runs/common_reference.json. Design-phase synthetic facts
       (disclosed in prereg): speckle is untrackable across the aperture (|look| corr ~0 beyond 2 looks); pipeline
