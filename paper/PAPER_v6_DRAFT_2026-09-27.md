@@ -156,12 +156,12 @@ A later pre-registered test (H) asked whether the residual reflects the *order* 
 |---|---|---|---|---|
 | Giza 02-07 | Umbra | **3.67** | 6.06 | 0 |
 | Bingham Canyon | Umbra | 2.40 § | 3.87 | 0 |
-| Butte | Umbra | 1.53 | 3.33 | 0 |
+| Butte | Umbra | 1.53 § | 3.33 | 0 |
 | Komati | Umbra | 1.88 § | 2.76 | 0 |
 | Cairo | Capella | 1.76 † | 2.75 | 0 |
 | Vesuvius | Umbra | 2.85 ‡ | 4.11 | 0 |
 
-Sources: Giza, docs/PREREGISTRATION_GIZA_2026-08-13.md; Bingham, docs/RESULTS_2026-07-31_FIVE_SITE.md §5; Butte, docs/SENSITIVITY_RESPONSE_BIONDI.md E4; Komati, ibid. E3. ‡ Re-run 7 Oct 2026 from a fresh download (runs/followup_nsub_2023-11-15-19-47-28_UMBRA-05_SICD.nitf.json); it reproduces the July raw contrast exactly (4.11), peak 1.66 cells, surface-pinned. † Re-run 11 Oct 2026 from a fresh download (runs/followup_nsub_CAPELLA_C13_SP_SICD_HH_20241123062737_20241123062813.ntf.json); it reproduces the July raw contrast exactly (2.75); alignment null 1.57; peak 3.6 m = 1.71 cells, surface-pinned. § Re-run 11 Oct 2026 from fresh downloads (runs/followup_nsub_2024-01-12-04-09-18_UMBRA-05_SICD.nitf.json; runs/followup_nsub_2023-08-13-07-03-04_UMBRA-05_SICD.nitf.json); both reproduce the July raw contrasts exactly (3.87, 2.76); Bingham's ratio reproduces 2.40; Komati's n_sub-11 ratio is 1.88 (previously reported only as a range over n_sub, 1.01–2.41); both surface-pinned (peaks 3.5 m and 3.7 m, 1.66 and 1.75 cells). **Reproducibility gap:** for Butte the per-run file is not in the repository and the scene is not currently on disk; the counts for n_sub > 11 at those sites rest on the July results document. [TODO: regenerate and commit.]
+Sources: Giza, docs/PREREGISTRATION_GIZA_2026-08-13.md; Bingham, docs/RESULTS_2026-07-31_FIVE_SITE.md §5; Butte, docs/SENSITIVITY_RESPONSE_BIONDI.md E4; Komati, ibid. E3. ‡ Re-run 7 Oct 2026 from a fresh download (runs/followup_nsub_2023-11-15-19-47-28_UMBRA-05_SICD.nitf.json); it reproduces the July raw contrast exactly (4.11), peak 1.66 cells, surface-pinned. † Re-run 11 Oct 2026 from a fresh download (runs/followup_nsub_CAPELLA_C13_SP_SICD_HH_20241123062737_20241123062813.ntf.json); it reproduces the July raw contrast exactly (2.75); alignment null 1.57; peak 3.6 m = 1.71 cells, surface-pinned. § Re-run 11 Oct 2026 from fresh downloads (runs/followup_nsub_2024-01-12-04-09-18_UMBRA-05_SICD.nitf.json; runs/followup_nsub_2023-08-13-07-03-04_UMBRA-05_SICD.nitf.json; runs/followup_nsub_2024-03-07-04-48-26_UMBRA-04_SICD.nitf.json); all three reproduce the July raw contrasts exactly (3.87, 2.76, 3.33); Bingham's and Butte's ratios reproduce 2.40 and 1.53; Komati's n_sub-11 ratio is 1.88 (previously reported only as a range over n_sub, 1.01–2.41); all surface-pinned (peaks 3.5, 3.7, 3.9 m = 1.66, 1.75, 1.85 cells). **Remaining gap:** the "runs clearing rule (of 8)" column for the non-Giza sites (n_sub 16–128) rests on the July results document; only the n_sub-11 runs were regenerated.
 
 **The one configuration that crosses 5×.** Under a rectangular (untapered) window, Butte gives 5.07 against the alignment null. The excess tracks inter-look leakage (lag-1 of the trajectories +0.244 rectangular, −0.010 Hann, −0.103 Blackman; r = +0.977 between lag-1 and the ratio across windows) and is absent under every taper that suppresses leakage. The same leakage link does not appear at Giza (r = −0.059). It is reported and not counted as a detection; its explanation is specific to Butte.
 
@@ -260,6 +260,12 @@ v6 added tests F, G, H, the shape-metric application, the K_z and look-similarit
 - a podcast quotation is removed (unverified machine transcript; it had been trimmed);
 - the AI-use, conflict-of-interest and copyright statements are corrected.
 
+**v6.1, continued (7–11 Oct 2026):**
+- pre-registered test I (common-reference tracking) was run: not trackable on Giza, so the two tracking routes could not be compared (§4.2);
+- all six Table 3 sites were re-run at n_sub 11 from fresh downloads and their run files committed; raw contrasts reproduce the July values exactly; Komati's ratio is now given at n_sub 11 (1.88) rather than as a range, and Cairo's (1.76) replaces an upper bound;
+- Table 1 and Figure 1 were ported from v5 (Figure 1's caption corrected: it is the 256-look Butte run, not 11 looks);
+- the MDPI review-report quotation was re-verified and cited [16]; the shaft-depth citation was corrected [14, 15]; the dispersion/resonance paragraph gained references [17]–[21].
+
 ## 11. Limitations and open items
 - All sites are X-band spotlight; nothing here bears on C- or L-band.
 - The mechanism is shown for adjacent-pair accumulation only. A pre-registered common-reference variant was attempted but the Giza scenes cannot be registered across the aperture with this filter bank (0/24 patches on all three scenes), so the two routes could not be compared on these data. The residual near-surface peak after de-accumulation on two Giza scenes is unexplained.
@@ -267,7 +273,7 @@ v6 added tests F, G, H, the shape-metric application, the K_z and look-similarit
 - Test G tests fields of shafts at tile scale, with approximate post-hoc power and unmatched surface roughness; a shaft-centred, alias-checked test with surveyed coordinates is future work.
 - The shape statistic's treatment set was flawed (§5.4).
 - Mines and Gran Sasso pre-registrations were not run.
-- The Butte run file is not in the repository (Bingham, Komati, Vesuvius and Cairo were re-run and committed in October 2026) [TODO].
+- All six Table 3 sites now have their n_sub-11 run file in the repository (non-Giza sites re-run 7–11 Oct 2026). Values for n_sub > 11 at the non-Giza sites still rest on the July results document.
 - Whether surface scatterer spacing sets apparent depth on real data is untested.
 - The decision-rule attack (§6) is on synthetic input with linear per-patch filters of length ≤ 5.
 - The authors' undisclosed settings may differ from any bank tested here; the conclusions concern the method as reconstructed from its published description.
@@ -319,4 +325,4 @@ Reconstructed from its paper and patent and run on free data, single-pass SAR Do
 | Streaks vs surface; near-miss (§5.4–5.5) | src/streak_surface.py | runs/streak_surface.json | docs/PREREGISTRATION_STREAKS_2026-09-27.md |
 | 2022 figures (§7.1) | src/figure_information*.py, src/figure_layout.py | runs/figure_information*.json | docs/PREREGISTRATION_FIGURES_2026-09-27.md |
 | 2026 slides (§7.2) | src/press_image_audit.py | runs/press_image_audit.json | docs/PREREGISTRATION_PRESS_IMAGES_2026-09-27.md |
-| Six-site table (§5.1) | src/followup_experiments.py | Giza: runs/followup_nsub_giza_*.json; Vesuvius, Cairo: runs/followup_nsub_2023-11-15-19-47-28_UMBRA-05_SICD.nitf.json, runs/followup_nsub_CAPELLA_C13_SP_SICD_HH_20241123062737_20241123062813.ntf.json; Bingham, Komati: runs/followup_nsub_2024-01-12-04-09-18_UMBRA-05_SICD.nitf.json, runs/followup_nsub_2023-08-13-07-03-04_UMBRA-05_SICD.nitf.json; Butte: [TODO] | context only (pre-dates Giza pre-registrations) |
+| Six-site table (§5.1) | src/followup_experiments.py | Giza: runs/followup_nsub_giza_*.json; Vesuvius, Cairo: runs/followup_nsub_2023-11-15-19-47-28_UMBRA-05_SICD.nitf.json, runs/followup_nsub_CAPELLA_C13_SP_SICD_HH_20241123062737_20241123062813.ntf.json; Bingham, Komati: runs/followup_nsub_2024-01-12-04-09-18_UMBRA-05_SICD.nitf.json, runs/followup_nsub_2023-08-13-07-03-04_UMBRA-05_SICD.nitf.json; Butte: runs/followup_nsub_2024-03-07-04-48-26_UMBRA-04_SICD.nitf.json | context only (pre-dates Giza pre-registrations) |
