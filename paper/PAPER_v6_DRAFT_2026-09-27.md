@@ -120,7 +120,7 @@ The patent synthesises depth at f ≈ 22 kHz. Ambient ground motion is overwhelm
 
 The method as disclosed therefore provides no way to check the metre values reported for Giza.
 
-**Could dispersion or resonance supply a depth scale?** Established passive-seismic depth methods (surface-wave dispersion inversion, HVSR, modal analysis) need broadband records of minutes or longer, multiple stations or frequencies, and a measured velocity model. A single SAR pass supplies seconds of record at one look geometry and no velocity information; none of these routes is available to it. [TODO: one-paragraph expansion with references.]
+**Could dispersion or resonance supply a depth scale?** Established passive-seismic methods do obtain depth from ambient vibration, but each needs something a single SAR pass does not supply. Surface-wave methods (spatial autocorrelation [17]; multichannel analysis of surface waves [18]; ambient-noise interferometry [19]) measure phase velocity as a function of frequency across an array of sensors, then invert that dispersion curve for a velocity–depth profile; depth sensitivity comes from wavelength, so the frequency axis must be measured, not assumed. The H/V spectral-ratio method [20] gives a resonance frequency, which becomes a depth only with an independently known shear-wave velocity, and recording guidelines call for several minutes or more of data, longer for lower frequencies [21]. A single SAR pass records one to five seconds at one look geometry: its frequency resolution is of order 1/T (about 0.2–1 Hz), it has no array of independent sensors at known spacing, and it supplies no velocity. None of these routes is available to it, and the patent's fixed 22 kHz and assumed velocity are not a substitute for them.
 
 ## 4. A sufficient generating mechanism (in this reconstruction)
 
@@ -211,7 +211,7 @@ All 16 figures captioned "Tags association from tomography to 3D model" pair a 3
 - 4/16 tomogram panels are heat maps composited over pre-existing drawings or photographs of the known interior;
 - the journal images are pixel-identical to the preprint (r = 1.00); the only axis-labelled tomograms in the section are in pixels, while the CAD model is dimensioned in metres.
 
-[TODO: the published peer-review report's comment on axes — re-verify the quote before citing; the review_report page was not accessible to an external checker on 7 Oct.]
+The same point was raised in the journal's published peer-review record, by a reviewer of an earlier submission of the same manuscript: "none of the tomograms have meaningful axes, providing an indication of size"; that reviewer asked for axes in metres, automated rather than by-eye alignment with the CAD model, and validation on well-known targets [16]. The published version's figures show the same pixel-unit axes and hand-placed tags described above.
 
 ### 7.2 The 2026 "second Sphinx" presentation (pre-registered descriptive audit)
 58 slides were published with the author's permission on a third-party site [5]. The audit found:
@@ -301,6 +301,12 @@ Reconstructed from its paper and patent and run on free data, single-pass SAR Do
 [13] Butte district mine maps: Montana Bureau of Mines & Geology; USGS I-2050-C; OSMRE National Mine Map Repository.
 [14] Reisner, G. A. (1942). *A History of the Giza Necropolis*, Vol. I. Harvard University Press; and Reisner, G. A. & Smith, W. S. (1955). *A History of the Giza Necropolis*, Vol. II: *The Tomb of Hetep-heres, the Mother of Cheops*. Harvard University Press. Individual shaft depths: Giza Archives (Harvard University / Museum of Fine Arts, Boston), giza.fas.harvard.edu — e.g. expedition diary records for the G 6000 group (shafts 1.2–7.8 m to rock or chamber).
 [15] Der Manuelian, P. (2017). The Lost Throne of Queen Hetepheres from Giza: An Archaeological Experiment in Visualization and Fabrication. *Journal of the American Research Center in Egypt* 53 (G 7000 X: chamber "more than twenty-seven meters underground").
+[16] *Remote Sensing* 14(20):5231, Peer Review Report (resubmission record, earlier submission Round 1, Reviewer 2). mdpi.com/2072-4292/14/20/5231/review_report (re-verified 11 Oct 2026).
+[17] Aki, K. (1957). Space and time spectra of stationary stochastic waves, with special reference to microtremors. *Bulletin of the Earthquake Research Institute, University of Tokyo* 35:415–456.
+[18] Park, C. B., Miller, R. D. & Xia, J. (1999). Multichannel analysis of surface waves. *Geophysics* 64(3):800–808.
+[19] Bensen, G. D. et al. (2007). Processing seismic ambient noise data to obtain reliable broad-band surface wave dispersion measurements. *Geophysical Journal International* 169(3):1239–1260.
+[20] Nakamura, Y. (1989). A method for dynamic characteristics estimation of subsurface using microtremor on the ground surface. *Quarterly Report of the Railway Technical Research Institute* 30(1):25–33.
+[21] SESAME (2004). Guidelines for the implementation of the H/V spectral ratio technique on ambient vibrations: measurements, processing and interpretation. European research project SESAME, WP12, Deliverable D23.12.
 
 ## Appendix A — claim-to-evidence map
 | Claim | Script | Result file | Pre-registration |

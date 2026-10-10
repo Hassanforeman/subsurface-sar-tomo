@@ -207,8 +207,8 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       11 Oct: v6.1 Table 1 ported (block-by-block, with "where the patent is silent" column) and Figure 1 ported
       (docs/figures/fig1_fcompare_butte.png = runs/fcompare_2024-03-07…png; it is the 256-look Butte run, inferred
       from its 270 m axis at δz 2.1 m). Ref [14] confirmed + [15] Der Manuelian 2017 (G 7000 X >27 m) added;
-      shaft range now cited as ~1 m to >27 m. Remaining paper TODOs: dispersion-paragraph refs; MDPI review_report
-      quote; Bingham/Butte/Komati run files.
+      shaft range now cited as ~1 m to >27 m. Dispersion paragraph written with refs [17]–[21]; MDPI review_report quote RE-VERIFIED 11 Oct
+      (earlier-submission R1 Reviewer 2) and cited as [16]. Only remaining paper TODO: Bingham/Butte/Komati run files.
       and non-Giza scenes are NOT on disk (checked 29 Sep; data/ holds only Giza) — re-fetch via src/fetch_umbra.py to
       regenerate. Butte rect 5.07 now disclosed in §5.1. Podcast citation [8]; v5 tables/figures to port.
 - [x] ejhong outreach POSTED 29 Sep: github.com/ejhong/sar/issues/1 (open, renders correctly). Awaiting reply. [external]
