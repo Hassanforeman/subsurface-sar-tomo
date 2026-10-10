@@ -1,8 +1,8 @@
 # No Reproducible Evidence for Deep Subsurface Structures Beneath the Giza Plateau: A Pre-Registered Reproduction of Single-Pass SAR Doppler Micro-Motion Tomography, and an Audit of Its Published Imagery
 
-**Hassan Foreman** — independent researcher
-Preprint v6.2 — DRAFT, 11 October 2026 (v6 draft 27 Sep; v6.1 7 Oct and v6.2 11 Oct revised after two adversarial reviews, §10). Supersedes v5 (August 2026). Under review at PCI Archaeology (#1130). Not yet peer reviewed.
-Code, data identifiers, pre-registrations and result files: https://github.com/Hassanforeman/subsurface-sar-tomo (Zenodo DOI 10.5281/zenodo.21065675).
+**Hassan Foreman** — independent researcher\
+Preprint v6.2 — DRAFT, 11 October 2026 (v6 draft 27 Sep; v6.1 7 Oct and v6.2 11 Oct revised after two adversarial reviews, §10). Supersedes v5 (August 2026). Under review at PCI Archaeology (#1130). Not yet peer reviewed.\
+Code, data identifiers, pre-registrations and result files: <https://github.com/Hassanforeman/subsurface-sar-tomo> (Zenodo DOI 10.5281/zenodo.21065675).
 
 > *Draft status.* Wording will change in response to reviewers. Claims point to a script and a result file in the repository (Appendix A); where a file is not yet in the repository this is stated.
 
@@ -52,6 +52,7 @@ My standard throughout: a result counts as a detection only if it exceeds a null
 Exact scene identifiers are listed in the repository.
 
 **Pipeline (a reconstruction, not the authors' code).** The authors' sub-aperture count, overlap, taper, tracking estimator and depth-scale settings are not disclosed; these were chosen as follows and are the conditions of every result here:
+
 - Doppler sub-aperture decomposition: 11 looks, 80% overlap, Hann taper.
 - Adjacent-pair sub-pixel tracking (phase correlation) of 64 × 64 patches, **accumulated into a trajectory** (my reading of the patent's block 7).
 - Degree-2 detrend; analytic-signal step; depth focus by DFT, 300 bins.
@@ -106,6 +107,7 @@ The 2022 paper writes K_z = 4πB⊥/(λ_s r sin θ). In a single pass, the only 
 The LOS-perpendicular displacement is dominated by along-track motion (kilometres). The true cross-track component — the quantity that sets elevation resolution in multi-pass SAR tomography — is of order a metre, the same order as the ~0.6 m single-pass baseline reported by Pomposi [8]; the two analyses describe different quantities and do not conflict.
 
 Consequences:
+
 - For near-linear motion the ladder is necessarily near-uniform, so, as implemented, the operator is a DFT and depth is a Fourier bin. This is a property of the geometry, not a finding about the ground.
 - The depth axis repeats every λ_s·r·sinθ/(2ΔB), and λ_s is not measured. With ΔB taken as the LOS-perpendicular step (the reading of [7]), the repeat is 292 / 240 / 71 m per metre of λ_s: with λ_s = 0.48 m, 140 / 115 / 34 m; with λ_s = 3.8 m, 1,110 / 912 / 270 m. With ΔB taken as the true cross-track step (approximately 0.07 / 0.05 / 1.07 m between adjacent look centres, assuming cross-track displacement grows linearly over the aperture), the repeat is roughly 2.7 × 10⁶ / 2.8 × 10⁶ / 1.7 × 10⁵ m per metre of λ_s, so the axis has no usable depth resolution at all. Under either reading the metre scale is fixed by an unmeasured λ_s, and with one fixed λ_s the three acquisitions put the same ground on different depth scales.
 
@@ -114,7 +116,7 @@ I cannot evaluate the authors' own (undisclosed) look centres. Every bank formed
 ### 3.3 The 22 kHz "investigation frequency" is not in the data
 The patent synthesises depth at f ≈ 22 kHz. Ambient ground motion is overwhelmingly below ~100 Hz, and the Nyquist rate of a look sequence spanning 1.2–5.0 s (the processed apertures of these Umbra products; Table 2) is of order hertz. f enters only as a final axis scale (δz = vR/2Af); it never touches the inversion.
 
-![Figure 1](../docs/figures/fig1_fcompare_butte.png)
+![](../docs/figures/fig1_fcompare_butte.png)
 
 *Figure 1 — one tomogram, three frequencies.* The identical Butte tomogram (Umbra, 2024-03-07; 24 patches; 256 looks, the §5.1 authors'-settings run — the axis span of 270 m at δz = 2.1 m implies 256 looks) rendered with f = 22,000, 1,000 and 50 Hz: δz = 2.1, 46 and 930 m, so the same feature (about two cells down) reads ~5 m, ~100 m or ~2,000 m. The data are unchanged; only the axis label rescales (δz = vR/2Af, v = 6,000 m/s). The dashed line marks 160 m, the approximate Butte mine-pool level cited in §5.1. Produced by src/tomogram.py (`_plot_fcompare`); file docs/figures/fig1_fcompare_butte.png (copy of runs/fcompare_2024-03-07-04-48-26_UMBRA-04_SICD.nitf.png, generated 3 Sep 2026).
 
@@ -126,6 +128,7 @@ The method as disclosed therefore provides no way to check the metre values repo
 
 ### 4.1 What the tracked increments carry
 Each tracked increment comes from registering two sub-looks. Look-to-look magnitude similarity on the three Giza scenes:
+
 - adjacent looks (80% spectral overlap): 0.58–0.71, about what the same filter bank gives for pure synthetic speckle (0.55–0.61);
 - looks that share no spectrum: 0.06–0.18, the speckle floor.
 
@@ -142,6 +145,7 @@ with C_ij = min(i, j) + 1 (random-walk covariance), P_d the degree-d polynomial 
 
 ### 4.3 The pre-registered falsification test, and what remains unexplained
 The August pre-registration listed as a falsification condition "a peak that survives removal of the cumulative sum". Removing the running total (series length and steering unchanged):
+
 - at Bingham Canyon and Cairo the peak leaves the surface (1.66 → 2.83 and 1.69 → 4.76 cells);
 - at Giza it does so on one scene (02-08: 1.67 → 3.83) but **stays within the 2-cell guard on 02-07 (1.75 → 1.88) and on the pre-registered primary 03-08 (1.77 → 1.95). The condition was met on two of three Giza scenes.** Accumulation is therefore sufficient to generate the artifact but is not shown to be necessary there.
 
@@ -163,7 +167,7 @@ A later pre-registered test (H) asked whether the residual reflects the *order* 
 | Cairo | Capella | 1.76 † | 2.75 | 0 |
 | Vesuvius | Umbra | 2.85 ‡ | 4.11 | 0 |
 
-Sources: Giza, runs/followup_nsub_giza_2023-03-08_UMBRA-04_SICD.nitf.json, …_2023-02-07_UMBRA-05_…, …_2023-02-08_UMBRA-04_… (the highest Giza ratio at any of the 24 Giza runs is 4.30, 02-08 at n_sub 32); docs/PREREGISTRATION_GIZA_2026-08-13.md; Bingham, docs/RESULTS_2026-07-31_FIVE_SITE.md §5; Butte, docs/SENSITIVITY_RESPONSE_BIONDI.md E4; Komati, ibid. E3. ‡ Re-run 7 Oct 2026 from a fresh download (runs/followup_nsub_2023-11-15-19-47-28_UMBRA-05_SICD.nitf.json); it reproduces the July raw contrast exactly (4.11), peak 1.66 cells, surface-pinned. † Re-run 11 Oct 2026 from a fresh download (runs/followup_nsub_CAPELLA_C13_SP_SICD_HH_20241123062737_20241123062813.ntf.json); it reproduces the July raw contrast exactly (2.75); alignment null 1.57; peak 3.6 m = 1.71 cells, surface-pinned. § Re-run 11 Oct 2026 from fresh downloads (runs/followup_nsub_2024-01-12-04-09-18_UMBRA-05_SICD.nitf.json; runs/followup_nsub_2023-08-13-07-03-04_UMBRA-05_SICD.nitf.json; runs/followup_nsub_2024-03-07-04-48-26_UMBRA-04_SICD.nitf.json); all three reproduce the July raw contrasts exactly (3.87, 2.76, 3.33); Bingham's and Butte's ratios reproduce 2.40 and 1.53; Komati's n_sub-11 ratio is 1.88 (previously reported only as a range over n_sub, 1.01–2.41); all surface-pinned (peaks 3.5, 3.7, 3.9 m = 1.66, 1.75, 1.85 cells). **Remaining gap:** the "runs clearing rule (of 8)" column for the non-Giza sites (n_sub 16–128) rests on the July results document; only the n_sub-11 runs were regenerated.
+Sources: Giza, runs/followup_nsub_giza_2023-03-08_UMBRA-04_SICD.nitf.json, runs/followup_nsub_giza_2023-02-07_UMBRA-05_SICD.nitf.json, runs/followup_nsub_giza_2023-02-08_UMBRA-04_SICD.nitf.json (the highest Giza ratio at any of the 24 Giza runs is 4.30, 02-08 at n_sub 32); docs/PREREGISTRATION_GIZA_2026-08-13.md; Bingham, docs/RESULTS_2026-07-31_FIVE_SITE.md §5; Butte, docs/SENSITIVITY_RESPONSE_BIONDI.md E4; Komati, ibid. E3. ‡ Re-run 7 Oct 2026 from a fresh download (runs/followup_nsub_2023-11-15-19-47-28_UMBRA-05_SICD.nitf.json); it reproduces the July raw contrast exactly (4.11), peak 1.66 cells, surface-pinned. † Re-run 11 Oct 2026 from a fresh download (runs/followup_nsub_CAPELLA_C13_SP_SICD_HH_20241123062737_20241123062813.ntf.json); it reproduces the July raw contrast exactly (2.75); alignment null 1.57; peak 3.6 m = 1.71 cells, surface-pinned. § Re-run 11 Oct 2026 from fresh downloads (runs/followup_nsub_2024-01-12-04-09-18_UMBRA-05_SICD.nitf.json; runs/followup_nsub_2023-08-13-07-03-04_UMBRA-05_SICD.nitf.json; runs/followup_nsub_2024-03-07-04-48-26_UMBRA-04_SICD.nitf.json); all three reproduce the July raw contrasts exactly (3.87, 2.76, 3.33); Bingham's and Butte's ratios reproduce 2.40 and 1.53; Komati's n_sub-11 ratio is 1.88 (previously reported only as a range over n_sub, 1.01–2.41); all surface-pinned (peaks 3.5, 3.7, 3.9 m = 1.66, 1.75, 1.85 cells). **Remaining gap:** the "runs clearing rule (of 8)" column for the non-Giza sites (n_sub 16–128) rests on the July results document; only the n_sub-11 runs were regenerated.
 
 **The one configuration that crosses 5×.** Under a rectangular (untapered) window, Butte gives 5.07 against the alignment null. The excess tracks inter-look leakage (lag-1 of the trajectories +0.244 rectangular, −0.010 Hann, −0.103 Blackman; r = +0.977 between lag-1 and the ratio across four windows, so suggestive only) and is absent under every taper that suppresses leakage. The same leakage link does not appear at Giza (r = −0.059). It is reported and not counted as a detection; its explanation is specific to Butte.
 
@@ -223,6 +227,7 @@ This section audits published figures and materials. It documents what they cont
 
 ### 7.1 The 2022 paper: a CAD model, tags and overlays (pre-registered)
 All 16 figures captioned "Tags association from tomography to 3D model" pair a 3-D model panel with a tomogram panel. With a detail statistic fixed and validated before the paper was obtained, the model panel carries more independent spatial detail than the tomogram in 15/16 pairs (median 9.7× on arXiv v1, 10.5× on the journal images); the exception is a heat map laid over an engraving whose hatching supplies the detail. This test was weak by design (a CAD render will beat a heat map on detail); the descriptive findings carry the weight:
+
 - every tomogram panel is a 2-D colour-mapped image with no axes or scale;
 - the link to the model is hand-placed "Tag N" labels;
 - 4/16 tomogram panels are heat maps composited over pre-existing drawings or photographs of the known interior;
@@ -232,6 +237,7 @@ The same point was raised in the journal's published peer-review record, by a re
 
 ### 7.2 The 2026 "second Sphinx" presentation (pre-registered descriptive audit)
 58 slides were published with the author's permission on a third-party site [5]. The audit found:
+
 - **The measured product is unchanged from 2022:** four unscaled 2-D jet heat maps (left, front ¾, right, top). None states a voxel size or threshold. The only metric depth axis in the set (a Great Sphinx figure, 0 to −1200 m) is the frequency-set relabel of §3.3.
 - **The 3-D sphinx is built downstream, by the slides' own account.** The pipeline slide, titled as a dialogue with an AI (Grok), lists "Multi-View Registration & 3D Reconstruction", "Thermal-to-Visible GAN (Pix2Pix / CycleGAN)", "68+ Landmark Detection (DeepFace + MediaPipe)", "Forensic Facial Approximation", "Golden Ratio & Egyptian Canon Grid Analysis" and "ArcFace / Eigenface Embedding". A Pix2Pix/CycleGAN is an image-to-image generator; face-landmark tools are built to find faces.
 - **Face-proportion grids are drawn onto the heat maps** ("linea occhi / base naso / linea bocca", golden-ratio spirals, head outlines). One heat map is perspective-warped onto a photograph of the Great Sphinx (slide image 38; file hashes in runs/press_image_audit.json).
@@ -249,6 +255,7 @@ A 2026 post presenting a Titanic "blind test" [6] states a "structural correlati
 It does not show which tool produced which pixel, why the images were made as they were, or whether anything lies beneath the mound. It shows that the recognisable geometry in the published imagery is not derivable from the displayed tomography and enters through models, drawings, photographs, templates and AI tools, several of them listed in the authors' own materials.
 
 ## 8. Independent work
+
 - **Pomposi (Zenodo, April 2026)** [8]: a geometric argument that the single-pass cross-track baseline (~0.6 m) gives elevation resolution of order 285 m, and a Giza-versus-desert sweep finding no target-specific discrimination. The baseline is consistent with the true cross-track component in Table 2. Disclosure: I privately informed the author of issues in parts of the accompanying code; I rely on the geometric argument, not on that code.
 - **ejhong, "SAR Depth, Tested" (GitHub, September 2026)** [7]: a reimplementation via the paper's K_z form with common-reference tracking on two ICEYE dwell acquisitions (Giza, Sacsayhuamán); not peer reviewed; data not public. Its first investigation was corrected by its author on 28 September 2026 (archive banner): its coherence curve, 77 µm/s velocity floor and array test were withdrawn or reinterpreted, while its null results were kept. I cite only findings the author still stands by: a periodic, freely scaled depth axis (27.4 m, correlation 1.000) and monuments indistinguishable from desert, including at surveyed cemetery shafts.
 - **"Biondi Protocol" derivative package (GitHub)** [9]: a supporter-side reconstruction stating that "several pieces of information" needed to reproduce the method were not published; revised in September 2026.
@@ -266,6 +273,7 @@ v1–v5 corrections and withdrawals are listed in the repository (v5 §10): the 
 v6 added tests F, G, H, the shape-metric application, the K_z and look-similarity measurements and the image audits.
 
 **v6.1 (7 Oct 2026), after an adversarial panel review (AI-run, Grok; the review text is available from the author on request):**
+
 - falsification condition (ii) is now reported as met on two of three Giza scenes (it had been scored "split" and "not met");
 - a deviations table (Table 5) replaces the blanket pre-registration claim; E5 is reported as not run;
 - the shape metric's identical treatments are disclosed and re-scored (02-08: 4/6 distinct);
@@ -278,12 +286,14 @@ v6 added tests F, G, H, the shape-metric application, the K_z and look-similarit
 - the AI-use, conflict-of-interest and copyright statements are corrected.
 
 **v6.1, continued (7–11 Oct 2026):**
+
 - pre-registered test I (common-reference tracking) was run: no scene passed its trackability control, so the two tracking routes could not be compared; the design's weaknesses are stated (§4.2);
 - all six Table 3 sites were re-run at n_sub 11 from fresh downloads and their run files committed; raw contrasts reproduce the July values exactly; Komati's ratio is now given at n_sub 11 (1.88) rather than as a range, and Cairo's (1.76) replaces an upper bound;
 - Table 1 and Figure 1 were ported from v5 (Figure 1's caption corrected: it is the 256-look Butte run, not 11 looks);
 - the MDPI review-report quotation was re-verified and cited [16]; the shaft-depth citation was corrected [14, 15]; the dispersion/resonance paragraph gained references [17]–[21].
 
 **v6.2 (11 Oct 2026), after a second adversarial review of v6.1 (AI-run, Grok; available on request):**
+
 - Table 3 now shows all three Giza scenes, with the pre-registered primary (03-08: 2.51, raw 3.86) first; the Giza run files are committed;
 - the Giza predictions are re-scored on the primary and on 02-07, including the increments prediction the August scoring omitted (Table 6): on the primary 5 hits, 2 partial misses, 1 not run;
 - the abstract no longer says that no run clears the rule without qualification: Butte under an untapered window (5.07) is named there, and the leakage correlation behind it is marked as resting on four windows;
@@ -293,6 +303,7 @@ v6 added tests F, G, H, the shape-metric application, the K_z and look-similarit
 - the conflict-of-interest statement says the commercial idea is set aside, not ruled out; a citation to a private file is removed.
 
 ## 11. Limitations and open items
+
 - All sites are X-band spotlight; nothing here bears on C- or L-band.
 - The mechanism is shown for adjacent-pair accumulation only. A pre-registered common-reference variant was attempted, but under its design no Giza scene passed the trackability control, so the two routes were not compared; the design had known weaknesses (§4.2) and a narrower test is open.
 - Look similarity is measured on magnitudes; complex coherence and correlation-peak height are owed.
@@ -345,6 +356,7 @@ Reconstructed from its paper and patent and run on free data, single-pass SAR Do
 |---|---|---|---|
 | K_z ladder; along/cross-track decomposition (§3.2) | src/kz_ladder_umbra.py | runs/kz_ladder_umbra.json | descriptive |
 | Look similarity (§4.1), known voids (§5.3) | src/known_voids_umbra.py | runs/known_voids_umbra.json | docs/PREREGISTRATION_KNOWN_VOIDS_2026-09-27.md |
+| Common-reference tracking, test I (§4.2) | src/common_reference.py | runs/common_reference.json; docs/RESULTS_COMMON_REFERENCE_2026-10-07.md | docs/PREREGISTRATION_COMMON_REFERENCE_2026-10-07.md |
 | Depth constant (§4.2) | src/derive_depth_constant.py | docs/RESULTS_DEPTH_CONSTANT_2026-09-02.md | — |
 | Increments residual (§4.3) | src/increments_order_null.py, src/followup_experiments.py | runs/increments_order_null.json, runs/followup_increments_giza_*.json | docs/PREREGISTRATION_INCREMENTS_2026-09-27.md; docs/PREREGISTRATION_GIZA_2026-08-13.md |
 | Shape metric on Giza (§5.4) | src/shape_metric_giza.py | runs/shape_metric_giza.json | docs/PREREGISTRATION_MINES_AND_GRANSASSO.md §C |

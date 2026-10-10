@@ -229,7 +229,9 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
 - [x] **11 Oct: paper v6.2** after Grok re-review of v6.1 (all 10 must-fix items applied; see paper §10 v6.2 list).
       DFT "any input" line also withdrawn in README, Academia blurb, podcast doc; banners on build_v5/refutation/merged.
 - [ ] NEXT: changes letter to the PCI recommender (draft: docs/private/PCI_CHANGES_LETTER_v6.2_2026-10-11.md)
-      → Hassan reviews → build v6.2 PDF → send. Grok's nice-to-have list not yet triaged. [writing/external]
+      v6.2 PDF BUILT 11 Oct: paper/Giza_SAR_Doppler_Reproduction_v6.2.pdf via `bash paper/build_v6.sh` (16 pp).
+      DECISION (Hassan, 11 Oct): HOLD — do not send v6.2 or the letter until PCI reviewer reports arrive; then
+      revise once and send v6.x + letter + response together. Grok's nice-to-have list not yet triaged. [external]
 - [ ] Candidate (NOT pre-registered): test I-b — narrower common-reference design: screened persistent-scatterer
       patches, control scored by look distance, chain-length dose–response, same estimator for both routes. [sandbox+Mac]
 **Needs data fetched on Hassan's Mac (sandbox is 403-blocked from the S3 buckets):**
