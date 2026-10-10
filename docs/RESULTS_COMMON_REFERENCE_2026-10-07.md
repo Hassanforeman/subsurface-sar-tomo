@@ -49,3 +49,20 @@ from failed registrations and must not be read as evidence either way.
   stop overlapping, the scene does not hold them together.
 - The paper keeps the mechanism scoped to accumulation. The open limitation becomes: "a common-reference
   variant was attempted (pre-registered) but the scenes are not trackable across the aperture."
+
+---
+## Correction appended 11 Oct 2026 (after the v6.1 hostile-panel re-review)
+Three statements above go further than the evidence and are withdrawn (not edited in place):
+1. "the Giza centre crops do not contain enough persistent scatterers" — **scatterer content was not measured.**
+   The failure is consistent with too few persistent scatterers but is not shown to be caused by it.
+2. The "Why it failed" table reports only the NCC tracker. The phase-correlation tracker's errors were small at
+   every look (02-07: 0.01–0.33 px; 02-08: 0.02–0.86 px; 03-08: 0.01–0.51 px; runs/common_reference.json,
+   `cr_phasecorr.sd_profile`), yet it also failed the control (median r 0.57–0.66): small scatter did not mean it
+   tracked the planted shift. Both estimators should have been reported.
+3. "the only way to build a look-to-look trajectory over the full aperture with this bank is to chain adjacent
+   steps" — **withdrawn.** What was shown is that THIS design could not register these scenes. Known design
+   weaknesses: looks ≥ 5 apart share no spectrum in this bank (sub-aperture width = 5 look spacings); no
+   scatterer screen; the control demanded r ≥ 0.9 across all 11 looks; the two routes used different estimators
+   (route and estimator confounded). A narrower design — screened scatterer patches, a control scored by look
+   distance, a chain-length dose–response — is open and would need its own pre-registration.
+The pre-registered verdict (NOT TRACKABLE under this design) stands. Paper v6.2 §4.2 carries the corrected wording.

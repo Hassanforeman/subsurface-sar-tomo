@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# SUPERSEDED (11 Oct 2026): this script builds a withdrawn earlier version. Its sentence that a DFT
+# "returns a structured, peaked spectrum from any input" is FALSE for white noise and is withdrawn;
+# see paper/PAPER_v6_DRAFT_2026-09-27.md §3.1 and §10. Kept unchanged so the historical PDF can be rebuilt.
 """
 build_refutation.py — rigorous, standalone step-by-step refutation of the single-pass
 SAR Doppler tomography claims of subsurface structures beneath the Giza plateau.

@@ -1,0 +1,40 @@
+{
+ "label": "giza_2023-02-07_UMBRA-05_SICD.nitf",
+ "experiment": "increments",
+ "n_sub": 11,
+ "overlap": 0.8,
+ "rows": [
+  {
+   "input": "real",
+   "series": "cumsum (as published)",
+   "peak_cells": 1.7474916387959867,
+   "contrast": 6.062785620158038,
+   "lag1": 0.5473004407750036
+  },
+  {
+   "input": "real",
+   "series": "increments",
+   "peak_cells": 1.8762541806020068,
+   "contrast": 1.8587492134409378,
+   "lag1": 0.08726539413771311
+  },
+  {
+   "input": "white noise",
+   "series": "cumsum (as published)",
+   "peak_median": 1.7107023411371238,
+   "peak_sd": 0.08815078759377427,
+   "contrast_median": 3.751303717171597,
+   "lag1": 0.5066345944995975,
+   "pinned_frac": 0.9966666666666667
+  },
+  {
+   "input": "white noise",
+   "series": "increments",
+   "peak_median": 2.7959866220735785,
+   "peak_sd": 0.9780800781337722,
+   "contrast_median": 1.4898137951238124,
+   "lag1": -0.04144625470922644,
+   "pinned_frac": 0.31
+  }
+ ]
+}

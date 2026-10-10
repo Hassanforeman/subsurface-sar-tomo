@@ -141,8 +141,9 @@ He is claiming the output of an inversion without the inputs that make an invers
 noise** — the exact failure your paper demonstrates. And he describes **retaining runs that "went
 well" and discarding runs that "made no sense."**
 
-For a method whose core step is a DFT — which returns structured output from *any* input,
-including noise — selecting on whether the output looks sensible does not filter out the false
+For a method whose core step turns accumulated registration noise into a confident shallow peak
+(correction 11 Oct 2026: the earlier wording "a DFT returns structured output from *any* input" is withdrawn as false
+for white noise; see paper v6 §3.1/§4.2) — selecting on whether the output looks sensible does not filter out the false
 positives. It selects *for* them. It also explains the "200+ consistent results": consistency
 measured only across the runs that were kept is not evidence of anything.
 

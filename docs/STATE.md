@@ -5,7 +5,7 @@ Rule: if any other document disagrees with this one about *status*, THIS FILE WI
 *detail*, follow the pointer this file gives. When you close or open a question, edit the
 ledgers below in the same session — that is how we stop doing double work.
 
-*Last updated: 2026-09-27 (test H: increments anomaly NOT order-driven — not anomalous vs shuffle null (10th/12th pct), weak surface-ward lean remains. Test G: known cemetery shafts NOT distinguished from bare plateau — NULL, control detected; Q3 looks decorrelate to speckle floor. Q2: paper's Kz ladder on Umbra is a DFT to 2e-5, depth scale free; test G known-voids pre-registered. Test F: streaks NOT surface-linked — our hypothesis rejected; near-miss MIXED. 2026 press-image audit: 3-D Sphinx built from 2-D heat-maps + template + GAN/face tools + chatbots, per their own slides; journal-version replication of step 2: images identical, no axes added, 15/16 again; C.4 step 2: the 2022 paper's paired figures measured — geometry is the model's; tomogram panels unscaled, 4/16 overlaid on known drawings. Previous: 26 Sep §7 step 1 negative).*
+*Last updated: 2026-10-11 (paper v6.2 after Grok re-review of v6.1: Table 3 shows all 3 Giza scenes, primary 03-08 = 2.51; predictions re-scored on primary (5 hit / 2 partial / 1 not run); abstract names Butte rect 5.07; test I wording corrected; all Table 3 run files committed incl. Giza. Previous: 7 Oct hostile panel → v6.1; test I NOT TRACKABLE.)*
 
 *How to keep this file and supersede docs correctly: `docs/DOCUMENTATION_RULES.md`. Entry point for new sessions: `/CLAUDE.md`.*
 
@@ -13,9 +13,10 @@ ledgers below in the same session — that is how we stop doing double work.
 
 ## 0. One-line status
 
-The reproduction-and-refutation is complete and public (v5 preprint + open code/data on
-GitHub/Zenodo); the 2022 Biondi/Malanga paper was **retracted 10 Aug 2026**; all three free
-Giza scenes are analysed and null; the remaining work is a short list of open items in §3.
+Public: v5 preprint (under review at PCI #1130) + open code/data. Paper v6.2 draft (11 Oct) is the current
+manuscript, revised after two adversarial reviews; next step is a changes letter + sending v6.2 to the recommender.
+The 2022 Biondi/Malanga paper was **retracted 10 Aug 2026**. All three free Giza scenes: no detection at the
+specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (incl. primary) — residual unexplained.
 
 ## 1. What is SETTLED — do NOT re-derive these (pointer = where the detail lives)
 
@@ -23,6 +24,8 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   relabels the axis (T invariant). → BIONDI_PATENT_RECIPE.md; paper §3.1–3.2; RESULTS_..._FIVE_SITE §5.
 - **Mechanism: trajectory is `np.cumsum(inc)` = a random walk; inversion is a DFT; degree-2
   detrend fixes the peak near 1.7 cells.** Reproduced from pure noise with no SAR data. → FIVE_SITE §12–§14.
+  SCOPE (7–11 Oct): sufficient, not shown necessary; specific to accumulation. Test I (common-reference) could not
+  compare routes (NOT TRACKABLE under its design; design weaknesses listed in RESULTS_COMMON_REFERENCE correction).
 - **Depth-law derivation.** peak_cells = dominant surviving DFT mode (PROVED); empirical law
   k ≈ 0.856·(d/2+1); the (d+1)/2 rule gives 1.5 vs 1.712 observed (expected, not a gap). → FIVE_SITE §15.2/§15.5.
   ONLY the closed form of the 0.856 prefactor is open (see §3).
@@ -40,7 +43,10 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - **Super-resolution inverters (Capon, MUSIC) also surface-pin** (real Giza: Bartlett 1.75, Capon 1.99,
   MUSIC 1.75 cells) — the artifact is upstream of the inverter; "you used a weak inverter" is refuted.
   → RESULTS_INVERTERS_2026-09-02.md.
-- **Five sites + Giza, two sensors: 0 detections, all surface-pinned, peak 1.2–1.9 cells.** → FIVE_SITE §1; paper Table 2.
+- **Five sites + Giza, two sensors: 0 detections at the specified Hann taper, all surface-pinned, peak 1.2–1.9 cells.**
+  Exception to keep stating: Butte with a RECTANGULAR window = 5.07 (leakage; r = +0.977 over only 4 windows).
+  n_sub-11 ratios (all run files committed 7–11 Oct): Giza 03-08 [primary] 2.51, 02-07 3.67, 02-08 2.28; Bingham 2.40;
+  Butte 1.53; Komati 1.88; Cairo 1.76; Vesuvius 2.85. Max over all 24 Giza runs 4.30. → paper v6.2 Table 3.
 - **Giza within-site repeatability (pre-registered): HIT** — 3 scenes agree to 0.10 cells, all null.
   → RESULTS_GIZA_REPEATS_2026-09-02.md.
 - **§5.4 increments anomaly is real & reproducible** (peak stays pinned on 2 of 3 Giza scenes after
@@ -68,7 +74,10 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   Khafre in their bank); (6) the public "BiondiProtocol/Replication-and-Verification" v1.7 code quantises
   registration to integer pixels. Cite at revision. Full comparison + new questions Q1-Q7 →
   COMPARISON_EJHONG_2026-09-27.md. Their raw ICEYE data are NOT public (not in ICEYE open catalogue).
-- **Commercial idea:** parked, honest "probably not". → COMMERCIAL_ASSESSMENT.md.
+  CORRECTION (ejhong archive banner, 28 Sep): (3) the array test, the R9 coherence curve, the R4 77 µm/s floor and R7
+  were withdrawn/reinterpreted by their author — do NOT cite them; only the periodic free depth axis and the
+  no-discrimination results still stand.
+- **Commercial idea:** set aside, not ruled out (paper COI wording since v6.2). → COMMERCIAL_ASSESSMENT.md.
 - **§7 shape metric, pre-registered step 1 (26 Sep): NEGATIVE by the 5/8 rule — BUT (7 Oct) raw/log/gamma are
   identical treatments, so on 6 distinct treatments 02-08 = 4/6 (majority). Report as unexplained positive of a flawed
   statistic, not a null.** Real Giza centre crops vs matched
@@ -105,7 +114,8 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
   a geometric identity for near-linear motion) → DFT.** (7 Oct: 'B⊥' here = LOS-perp displacement, mostly along-track;
   true cross-track 1.05/0.77/16 m, consistent with Pomposi ~0.6 m.)
   (CV of ΔKz 2e-6–2e-5); depth repeat = (λs·r·sinθ)/(2ΔB⊥) = 292 / 240 / 71 m per metre of the unmeasured
-  λs, different per scene. Closes the "orbit curvature ≠ DFT" caveat. → RESULTS_KZ_LADDER_2026-09-27.md;
+  λs, different per scene (LOS-perp reading). Under the true cross-track reading (ΔB ≈ 0.07/0.05/1.07 m) the repeat is
+  ~2.7e6/2.8e6/1.7e5 m per metre of λs — no usable depth resolution (paper v6.2 §3.2). Closes the "orbit curvature ≠ DFT" caveat. → RESULTS_KZ_LADDER_2026-09-27.md;
   src/kz_ladder_umbra.py; runs/kz_ladder_umbra.json.
 - **Test F (27 Sep, prereg `603ca70`): vertical streaks are NOT surface-linked — H-surface REJECTED.**
   Streak strength vs registration quality / brightness: |ρ| ≤ 0.15 in all 3 scenes (null ~0); identity
@@ -119,7 +129,9 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
 - Grok 29 Jul (config objections), Grok v2/v3 briefs, full dossiers v1/v2. → docs/private/GROK_*.
 - Grok adversarial review of v5, 2 Sep — triaged; ~3 of its P0s already fixed in v5 (two Figure 4s,
   June footer, scene-ID disclosure); the rest valid. → ADVERSARIAL_REVIEW_v5_20260902.md (user upload).
-- Independent from-scratch confirmation of the mechanism, 2 Sep. → REVIEW_INDEPENDENT_2026-09-02.md.
+- AI-assisted self-review (NOT independent; retitled 7 Oct), 2 Sep. → REVIEW_INDEPENDENT_2026-09-02.md.
+- Grok hostile panel on v6, 7 Oct → v6.1 (docs/private/TRIAGE_HOSTILE_PANEL_2026-10-07.md).
+- Grok re-review of v6.1, 11 Oct → v6.2 (10 must-fix items, all applied; nice-to-haves not yet triaged).
 
 - **The end-product detail cannot come from the data** (3 Sep): a recognizable Sphinx face with a
   0.6 m cobra at 500-1200 m is 1-3 orders of magnitude finer than the method's own resolution (honest
@@ -214,6 +226,12 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       and non-Giza scenes are NOT on disk (checked 29 Sep; data/ holds only Giza) — re-fetch via src/fetch_umbra.py to
       regenerate. Butte rect 5.07 now disclosed in §5.1. Podcast citation [8]; v5 tables/figures to port.
 - [x] ejhong outreach POSTED 29 Sep: github.com/ejhong/sar/issues/1 (open, renders correctly). Awaiting reply. [external]
+- [x] **11 Oct: paper v6.2** after Grok re-review of v6.1 (all 10 must-fix items applied; see paper §10 v6.2 list).
+      DFT "any input" line also withdrawn in README, Academia blurb, podcast doc; banners on build_v5/refutation/merged.
+- [ ] NEXT: changes letter to the PCI recommender (draft: docs/private/PCI_CHANGES_LETTER_v6.2_2026-10-11.md)
+      → Hassan reviews → build v6.2 PDF → send. Grok's nice-to-have list not yet triaged. [writing/external]
+- [ ] Candidate (NOT pre-registered): test I-b — narrower common-reference design: screened persistent-scatterer
+      patches, control scored by look distance, chain-length dose–response, same estimator for both routes. [sandbox+Mac]
 **Needs data fetched on Hassan's Mac (sandbox is 403-blocked from the S3 buckets):**
 - [ ] Volcano breadth (Merapi scenes listed; download → run). IN PROGRESS.
 - [ ] Butte rect-window anomaly (5.07 vs alignment null) + the "monotonic sites = the structured

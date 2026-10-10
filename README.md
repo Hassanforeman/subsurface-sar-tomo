@@ -16,7 +16,9 @@ the deep *inference* is not.
 What the controls show, step by step:
 
 - The patent's depth-focusing "steering matrix" is, by its own wording, a **discrete
-  Fourier transform** — which returns structured output from *any* input.
+  Fourier transform**, so depth is a Fourier bin with a free metre label. (A DFT alone does not create a
+  peak from white noise; the systematic shallow peak comes from accumulating and detrending the tracked
+  displacements — paper v6 §3.1, §4.2. Earlier wording "structured output from any input" is withdrawn.)
 - The reported depths follow from a physically impossible **~22 kHz** investigation
   frequency and are an arbitrary **relabelling of the depth axis**, not a measurement.
 - A faithful reproduction on **Butte, MT** (a densely mapped mining district) yields a
