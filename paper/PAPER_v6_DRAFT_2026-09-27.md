@@ -56,7 +56,18 @@ Exact scene identifiers are listed in the repository.
 - Adjacent-pair sub-pixel tracking (phase correlation) of 64 × 64 patches, **accumulated into a trajectory** (my reading of the patent's block 7).
 - Degree-2 detrend; analytic-signal step; depth focus by DFT, 300 bins.
 
-Table 1 maps the patent's processing blocks to this implementation. [TODO: carry over v5 Table 1, with "one-to-one" softened to "block-by-block, with the choices above where the patent is silent".]
+Table 1 maps the patent's processing blocks to this implementation, block by block, with the choices above wherever the patent is silent.
+
+*Table 1 — the patent's disclosed processing chain (WO2024008365A1, Fig. 0.5, blocks 1–11) and the corresponding component of this reconstruction (module.function in src/).*
+
+| Disclosed step | This reconstruction | Where the patent is silent |
+|---|---|---|
+| SLC image; 2-D DFT (blocks 1–2) | sarpy SICD reader; FFT inside the sub-aperture stage | — |
+| Doppler sub-apertures (master/slave) and range sub-bands (blocks 3–6) | subaperture.decompose_subapertures (sensitivity_sweep.decompose_subapertures_w for taper choice); subaperture.multichromatic_subapertures for range sub-bands | look count, overlap, taper; range sub-bands used only in the §5.1 Butte run at the authors' settings |
+| Pixel tracking between sub-apertures (block 7) | micromotion.adjacent_trajectory: adjacent-pair phase correlation, **accumulated** (cumulative sum); micromotion.detrend; optional micromotion.lrsd_denoise | estimator; adjacent-pair vs common reference; whether displacements are accumulated (my reading; see §4.2 and test I) |
+| Raw tomographic complex vectors (block 8) | per-patch detrended residual trajectory, made analytic (tomogram.analytic1d) | detrend degree; patch size and count |
+| Steering matrix = DFT depth focus (block 9) | tomogram.steering (DFT basis) and tomogram.invert_patch (power) | number of depth bins |
+| Tomogram, geocoded in depth (blocks 10–11) | depth profile per patch; tomogram.metric_depth_axis (axis label δz = vR/2Af only) | velocity v and frequency f are free inputs (§3.3) |
 
 Controls added: an alignment null that preserves each patch's depth profile; positive controls planted as displacement in the image before tracking; a surface-pinning guard in resolution cells; sub-aperture-count stability. Every stage has a synthetic self-test.
 
@@ -103,7 +114,9 @@ I cannot evaluate the authors' own (undisclosed) look centres. Every bank formed
 ### 3.3 The 22 kHz "investigation frequency" is not in the data
 The patent synthesises depth at f ≈ 22 kHz. Ambient ground motion is overwhelmingly below ~100 Hz, and the Nyquist rate of a look sequence spanning one to five seconds is of order hertz. f enters only as a final axis scale (δz = vR/2Af); it never touches the inversion.
 
-*Figure 1 — one tomogram, three frequencies:* the identical Butte tomogram places its feature at ~5 m, ~100 m or ~2,000 m for f = 22,000, 1,000 or 50 Hz. [TODO: port runs/compare_…png from v5]
+![Figure 1](../docs/figures/fig1_fcompare_butte.png)
+
+*Figure 1 — one tomogram, three frequencies.* The identical Butte tomogram (Umbra, 2024-03-07; 24 patches; 256 looks, the §5.1 authors'-settings run — the axis span of 270 m at δz = 2.1 m implies 256 looks) rendered with f = 22,000, 1,000 and 50 Hz: δz = 2.1, 46 and 930 m, so the same feature (about two cells down) reads ~5 m, ~100 m or ~2,000 m. The data are unchanged; only the axis label rescales (δz = vR/2Af, v = 6,000 m/s). The dashed line marks 160 m, the approximate Butte mine-pool level cited in §5.1. Produced by src/tomogram.py (`_plot_fcompare`); file docs/figures/fig1_fcompare_butte.png (copy of runs/fcompare_2024-03-07-04-48-26_UMBRA-04_SICD.nitf.png, generated 3 Sep 2026).
 
 The method as disclosed therefore provides no way to check the metre values reported for Giza.
 
@@ -160,7 +173,7 @@ At Butte, at the authors' settings (256 sub-apertures, 22 kHz), the only confide
 Eight predictions and four falsification conditions were committed in August. Five predictions hit, two missed, the E5 prediction was not tested (Table 5), and falsification condition (ii) was met on two of three scenes (§4.3). The three acquisitions agree on peak depth to 0.10 cells. In plan view over the whole 5674 × 5351 scene (462 tiles), surface brightness shows the plateau, pyramids and city clearly, while depth slices show no morphology. (Details in v5 §4.)
 
 ### 5.3 Known voids are not distinguished at tile scale (pre-registered test G)
-The Western and Eastern Cemeteries contain hundreds of excavated mastaba shafts, typically a few metres to a few tens of metres deep [14], beside bare plateau. Design: cemetery tiles versus bare-plateau tiles in each acquisition; brightness-matched; statistic = standardised difference (d) in depth-profile centroid; reference = the difference between two halves of the same desert box; positive control = displacement planted in a quarter of cemetery tiles before tracking. Region boxes were set from published coordinates of the pyramids and cemetery fields; no single surveyed base map was used (a limitation). The claimed second-Sphinx mound lies just west of the Western Cemetery [5], near the western edge of the W box.
+The Western and Eastern Cemeteries contain hundreds of excavated mastaba shafts, from about a metre to a few tens of metres deep (diary-recorded shafts in the Western Cemetery's G 6000 group run 1.2–7.8 m; the deepest, G 7000 X in the Eastern Cemetery, reaches more than 27 m) [14, 15], beside bare plateau. Design: cemetery tiles versus bare-plateau tiles in each acquisition; brightness-matched; statistic = standardised difference (d) in depth-profile centroid; reference = the difference between two halves of the same desert box; positive control = displacement planted in a quarter of cemetery tiles before tracking. Region boxes were set from published coordinates of the pyramids and cemetery fields; no single surveyed base map was used (a limitation). The claimed second-Sphinx mound lies just west of the Western Cemetery [5], near the western edge of the W box.
 
 *Table 4 — cemetery vs bare plateau.*
 
@@ -254,7 +267,7 @@ v6 added tests F, G, H, the shape-metric application, the K_z and look-similarit
 - Test G tests fields of shafts at tile scale, with approximate post-hoc power and unmatched surface roughness; a shaft-centred, alias-checked test with surveyed coordinates is future work.
 - The shape statistic's treatment set was flawed (§5.4).
 - Mines and Gran Sasso pre-registrations were not run.
-- Non-Giza run files are not in the repository [TODO].
+- Run files for Bingham, Butte and Komati are not in the repository (Vesuvius and Cairo were re-run and committed in October 2026) [TODO].
 - Whether surface scatterer spacing sets apparent depth on real data is untested.
 - The decision-rule attack (§6) is on synthetic input with linear per-patch filters of length ≤ 5.
 - The authors' undisclosed settings may differ from any bank tested here; the conclusions concern the method as reconstructed from its published description.
@@ -286,7 +299,8 @@ Reconstructed from its paper and patent and run on free data, single-pass SAR Do
 [11] Retraction Watch (2026). Journal retracts paper claiming network of corridors inside the Great Pyramid of Giza, 31 Aug 2026.
 [12] Umbra Open Data; Capella Open Data — AWS Registry of Open Data (CC-BY 4.0).
 [13] Butte district mine maps: Montana Bureau of Mines & Geology; USGS I-2050-C; OSMRE National Mine Map Repository.
-[14] Reisner, G. A. (1942). *A History of the Giza Necropolis*, Vol. I. Harvard University Press. [TODO: confirm shaft-depth range and add the Giza Archives (Museum of Fine Arts, Boston / Harvard) site plan.]
+[14] Reisner, G. A. (1942). *A History of the Giza Necropolis*, Vol. I. Harvard University Press; and Reisner, G. A. & Smith, W. S. (1955). *A History of the Giza Necropolis*, Vol. II: *The Tomb of Hetep-heres, the Mother of Cheops*. Harvard University Press. Individual shaft depths: Giza Archives (Harvard University / Museum of Fine Arts, Boston), giza.fas.harvard.edu — e.g. expedition diary records for the G 6000 group (shafts 1.2–7.8 m to rock or chamber).
+[15] Der Manuelian, P. (2017). The Lost Throne of Queen Hetepheres from Giza: An Archaeological Experiment in Visualization and Fabrication. *Journal of the American Research Center in Egypt* 53 (G 7000 X: chamber "more than twenty-seven meters underground").
 
 ## Appendix A — claim-to-evidence map
 | Claim | Script | Result file | Pre-registration |
@@ -299,4 +313,4 @@ Reconstructed from its paper and patent and run on free data, single-pass SAR Do
 | Streaks vs surface; near-miss (§5.4–5.5) | src/streak_surface.py | runs/streak_surface.json | docs/PREREGISTRATION_STREAKS_2026-09-27.md |
 | 2022 figures (§7.1) | src/figure_information*.py, src/figure_layout.py | runs/figure_information*.json | docs/PREREGISTRATION_FIGURES_2026-09-27.md |
 | 2026 slides (§7.2) | src/press_image_audit.py | runs/press_image_audit.json | docs/PREREGISTRATION_PRESS_IMAGES_2026-09-27.md |
-| Six-site table (§5.1) | src/followup_experiments.py | Giza: runs/followup_nsub_giza_*.json; others: [TODO] | context only (pre-dates Giza pre-registrations) |
+| Six-site table (§5.1) | src/followup_experiments.py | Giza: runs/followup_nsub_giza_*.json; Vesuvius, Cairo: runs/followup_nsub_2023-11-15-19-47-28_UMBRA-05_SICD.nitf.json, runs/followup_nsub_CAPELLA_C13_SP_SICD_HH_20241123062737_20241123062813.ntf.json; Bingham, Butte, Komati: [TODO] | context only (pre-dates Giza pre-registrations) |

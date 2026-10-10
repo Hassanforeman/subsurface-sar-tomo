@@ -204,6 +204,11 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       raw 4.11 reproduced exactly, run file committed); Cairo 1.76 (re-run 11 Oct on the Mac mini, raw 2.75
       reproduced exactly, align null 1.57, peak 1.71 cells PIN; run file committed). Bingham/Butte/Komati run files
       still not in repo. NOTE: repo now lives on the Mac mini (1.7 TB free); the iMac disk was full.
+      11 Oct: v6.1 Table 1 ported (block-by-block, with "where the patent is silent" column) and Figure 1 ported
+      (docs/figures/fig1_fcompare_butte.png = runs/fcompare_2024-03-07…png; it is the 256-look Butte run, inferred
+      from its 270 m axis at δz 2.1 m). Ref [14] confirmed + [15] Der Manuelian 2017 (G 7000 X >27 m) added;
+      shaft range now cited as ~1 m to >27 m. Remaining paper TODOs: dispersion-paragraph refs; MDPI review_report
+      quote; Bingham/Butte/Komati run files.
       and non-Giza scenes are NOT on disk (checked 29 Sep; data/ holds only Giza) — re-fetch via src/fetch_umbra.py to
       regenerate. Butte rect 5.07 now disclosed in §5.1. Podcast citation [8]; v5 tables/figures to port.
 - [x] ejhong outreach POSTED 29 Sep: github.com/ejhong/sar/issues/1 (open, renders correctly). Awaiting reply. [external]
