@@ -201,7 +201,9 @@ Giza scenes are analysed and null; the remaining work is a short list of open it
       reports, then port to build_v6.py/PDF. [writing]
       Grok referee pass applied 27 Sep (docs/private/GROK_PAPER_REVIEW_v6_2026-09-27.md). Open TODOs in draft:
       per-site alignment ratios: Giza 3.67, Bingham 2.40, Butte 1.53, Komati ≤2.41 recorded; Vesuvius 2.85 (re-run 7 Oct,
-      raw 4.11 reproduced exactly, run file committed); Cairo NOT recorded
+      raw 4.11 reproduced exactly, run file committed); Cairo 1.76 (re-run 11 Oct on the Mac mini, raw 2.75
+      reproduced exactly, align null 1.57, peak 1.71 cells PIN; run file committed). Bingham/Butte/Komati run files
+      still not in repo. NOTE: repo now lives on the Mac mini (1.7 TB free); the iMac disk was full.
       and non-Giza scenes are NOT on disk (checked 29 Sep; data/ holds only Giza) — re-fetch via src/fetch_umbra.py to
       regenerate. Butte rect 5.07 now disclosed in §5.1. Podcast citation [8]; v5 tables/figures to port.
 - [x] ejhong outreach POSTED 29 Sep: github.com/ejhong/sar/issues/1 (open, renders correctly). Awaiting reply. [external]

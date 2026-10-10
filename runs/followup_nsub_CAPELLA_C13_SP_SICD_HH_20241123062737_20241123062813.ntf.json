@@ -1,0 +1,21 @@
+{
+ "label": "CAPELLA_C13_SP_SICD_HH_20241123062737_20241123062813.ntf",
+ "experiment": "nsub",
+ "rows": [
+  {
+   "n_sub": 11,
+   "c_native": 2.754215251043078,
+   "c_fixed": 2.754215251043078,
+   "shuf_med": 1.4854013048587755,
+   "align_med": 1.5685727132971117,
+   "ratio_shuffle": 1.8541893305412713,
+   "ratio_align": 1.7558734942239376,
+   "peak_m": 3.5714285714285716,
+   "old_pinned": false,
+   "old_peak_frac": 0.3076923076923077,
+   "new_pinned": true,
+   "quality": 0.6245257813969511,
+   "verdict": "surface-pinned artifact"
+  }
+ ]
+}

@@ -145,10 +145,10 @@ A later pre-registered test (H) asked whether the residual reflects the *order* 
 | Bingham Canyon | Umbra | 2.40 | 3.87 | 0 |
 | Butte | Umbra | 1.53 | 3.33 | 0 |
 | Komati | Umbra | ≤ 2.41 (range over n_sub 1.01–2.41) | 2.76 | 0 |
-| Cairo | Capella | < 2.75 † | 2.75 | 0 |
+| Cairo | Capella | 1.76 † | 2.75 | 0 |
 | Vesuvius | Umbra | 2.85 ‡ | 4.11 | 0 |
 
-Sources: Giza, docs/PREREGISTRATION_GIZA_2026-08-13.md; Bingham, docs/RESULTS_2026-07-31_FIVE_SITE.md §5; Butte, docs/SENSITIVITY_RESPONSE_BIONDI.md E4; Komati, ibid. E3. ‡ Re-run 7 Oct 2026 from a fresh download (runs/followup_nsub_2023-11-15-19-47-28_UMBRA-05_SICD.nitf.json); it reproduces the July raw contrast exactly (4.11), peak 1.66 cells, surface-pinned. † Cairo not yet re-run; the alignment-null contrast is ≥ 1 by construction, so the ratio cannot exceed the raw contrast at n_sub 11. **Reproducibility gap:** the per-run files for the non-Giza sites (runs/followup_nsub_*) are not in the repository and those scenes are not currently on disk; the counts for n_sub > 11 at those sites rest on the July results document. [TODO: regenerate and commit.]
+Sources: Giza, docs/PREREGISTRATION_GIZA_2026-08-13.md; Bingham, docs/RESULTS_2026-07-31_FIVE_SITE.md §5; Butte, docs/SENSITIVITY_RESPONSE_BIONDI.md E4; Komati, ibid. E3. ‡ Re-run 7 Oct 2026 from a fresh download (runs/followup_nsub_2023-11-15-19-47-28_UMBRA-05_SICD.nitf.json); it reproduces the July raw contrast exactly (4.11), peak 1.66 cells, surface-pinned. † Re-run 11 Oct 2026 from a fresh download (runs/followup_nsub_CAPELLA_C13_SP_SICD_HH_20241123062737_20241123062813.ntf.json); it reproduces the July raw contrast exactly (2.75); alignment null 1.57; peak 3.6 m = 1.71 cells, surface-pinned. **Reproducibility gap:** for Bingham, Butte and Komati the per-run files (runs/followup_nsub_*) are not in the repository and those scenes are not currently on disk; the counts for n_sub > 11 at those sites rest on the July results document. [TODO: regenerate and commit.]
 
 **The one configuration that crosses 5×.** Under a rectangular (untapered) window, Butte gives 5.07 against the alignment null. The excess tracks inter-look leakage (lag-1 of the trajectories +0.244 rectangular, −0.010 Hann, −0.103 Blackman; r = +0.977 between lag-1 and the ratio across windows) and is absent under every taper that suppresses leakage. The same leakage link does not appear at Giza (r = −0.059). It is reported and not counted as a detection; its explanation is specific to Butte.
 
