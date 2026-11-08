@@ -5,7 +5,7 @@ Rule: if any other document disagrees with this one about *status*, THIS FILE WI
 *detail*, follow the pointer this file gives. When you close or open a question, edit the
 ledgers below in the same session — that is how we stop doing double work.
 
-*Last updated: 2026-10-11 (paper v6.2 after Grok re-review of v6.1: Table 3 shows all 3 Giza scenes, primary 03-08 = 2.51; predictions re-scored on primary (5 hit / 2 partial / 1 not run); abstract names Butte rect 5.07; test I wording corrected; all Table 3 run files committed incl. Giza. Previous: 7 Oct hostile panel → v6.1; test I NOT TRACKABLE.)*
+*Last updated: 2026-11-09 (paper v6.3 POSTED to Zenodo after a third Grok review — Hassan reversed the 11 Oct hold; MDPI letter of concern on Biondi's 2022 Vesuvius paper SENT. Previous: 11 Oct v6.2 after Grok re-review of v6.1.)*
 
 *How to keep this file and supersede docs correctly: `docs/DOCUMENTATION_RULES.md`. Entry point for new sessions: `/CLAUDE.md`.*
 
@@ -13,8 +13,8 @@ ledgers below in the same session — that is how we stop doing double work.
 
 ## 0. One-line status
 
-Public: v5 preprint (under review at PCI #1130) + open code/data. Paper v6.2 draft (11 Oct) is the current
-manuscript, revised after two adversarial reviews; next step is a changes letter + sending v6.2 to the recommender.
+Public: v6.3 preprint on Zenodo (9 Nov 2026; concept DOI 10.5281/zenodo.21066657), under review at PCI #1130, + open code/data.
+Previous public version was the 14 Aug Zenodo v4. Next step: tell the PCI recommender v6.3 is public (header says she is being informed); then revise once on the reports.
 The 2022 Biondi/Malanga paper was **retracted 10 Aug 2026**. All three free Giza scenes: no detection at the
 specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (incl. primary) — residual unexplained.
 
@@ -230,8 +230,15 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       DFT "any input" line also withdrawn in README, Academia blurb, podcast doc; banners on build_v5/refutation/merged.
 - [ ] NEXT: changes letter to the PCI recommender (draft: docs/private/PCI_CHANGES_LETTER_v6.2_2026-10-11.md)
       v6.2 PDF BUILT 11 Oct: paper/Giza_SAR_Doppler_Reproduction_v6.2.pdf via `bash paper/build_v6.sh` (16 pp).
-      DECISION (Hassan, 11 Oct): HOLD — do not send v6.2 or the letter until PCI reviewer reports arrive; then
-      revise once and send v6.x + letter + response together. Grok's nice-to-have list not yet triaged. [external]
+      ~~DECISION (Hassan, 11 Oct): HOLD — do not send v6.2 or the letter until PCI reviewer reports arrive; then
+      revise once and send v6.x + letter + response together. Grok's nice-to-have list not yet triaged. [external]~~
+      SUPERSEDED 9 Nov (Hassan): post now, ahead of Biondi's announced 'redemption'. Third Grok review (9 Nov) → v6.3
+      (header DRAFT removed; Vesuvius/Butte July positive controls stated in §5.1; 4/4 scoped to Giza; Table 5 prior-exposure
+      named a limitation; abstract item 5 reworded). v6.3 PDF: paper/Giza_SAR_Doppler_Reproduction_v6.3.pdf. Posted to Zenodo.
+- [ ] Tell the PCI recommender (Di Palma) that v6.3 is public; send the changes letter when reports arrive. [external]
+- [x] 9 Nov: MDPI letter of concern on Biondi 2022 Vesuvius (Remote Sens. 14(15):3828) SENT 08:04 → docs/MDPI_CONCERN_VESUVIUS_2026-11-09.md.
+      New findings in that paper: 200 Hz 'set by us' + 972 m/s set the depth scale; seismograph spectra plotted to ±22 kHz from
+      IV.VCRE/VBKN HH channels that sample at 100 sps (INGV FDSN, checked 9 Nov); Jan vs Feb 2022 acquisition date conflict. [external]
 - [ ] Candidate (NOT pre-registered): test I-b — narrower common-reference design: screened persistent-scatterer
       patches, control scored by look distance, chain-length dose–response, same estimator for both routes. [sandbox+Mac]
 **Needs data fetched on Hassan's Mac (sandbox is 403-blocked from the S3 buckets):**

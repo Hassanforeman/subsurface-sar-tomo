@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Build the v6.x preprint PDF from paper/PAPER_v6_DRAFT_2026-09-27.md (pandoc + xelatex, DejaVu fonts).
-# Usage (from repo root): bash paper/build_v6.sh [out.pdf]   default -> paper/Giza_SAR_Doppler_Reproduction_v6.2.pdf
+# Usage (from repo root): bash paper/build_v6.sh [out.pdf]   default -> paper/Giza_SAR_Doppler_Reproduction_v6.3.pdf
 # Long repository paths get LaTeX break points (build-time only; the markdown source is unchanged).
 set -euo pipefail
 cd "$(dirname "$0")"
-OUT=${1:-Giza_SAR_Doppler_Reproduction_v6.2.pdf}
+OUT=${1:-Giza_SAR_Doppler_Reproduction_v6.3.pdf}
 TMP=$(mktemp -d)
 python3 - "$TMP/paper.md" <<'PY'
 import re, sys
