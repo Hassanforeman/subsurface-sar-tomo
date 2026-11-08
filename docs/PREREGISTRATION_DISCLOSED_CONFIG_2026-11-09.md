@@ -110,3 +110,23 @@ Run files: `runs/test_j_*.json` (8 files). All scenes 512×512 centre crop, 24 p
 5. Capella (the sensor Biondi prefers, with a 35 s dwell) behaves like Umbra: surface-pinned, below 5× at every setting.
 
 **Disclosure for the paper:** v6.3's statement that no Hann run clears the rule refers to the v6.3 configuration. Under the half-band configuration two surface-pinned Butte runs exceed 5×; this must be reported if Test J is added.
+
+### Follow-up runs: Giza ×3 and Vesuvius (9 Nov 2026, ~09:30 AEST; same pre-registration, same script)
+Giza SICDs were in `data/` after all; Vesuvius was read from Hassan's external drive (My Passport for Mac).
+These collects are 1.2–5.0 s, so **Arm B (5–7 s looks) cannot be formed on any Giza or Vesuvius Umbra scene**; only Arm A ran.
+
+| Scene | Collect | n_sub | Overlap | Ratio vs alignment null | Peak (cells) | Pinned | Pos. ctrl ratio | Pos. ctrl at injected depth |
+|---|---|---|---|---|---|---|---|---|
+| Giza 03-08 (pre-registered primary) | 5.04 s | 11 | 0.900 | 4.93 | 1.71 | yes | 4.4 | yes |
+| Giza 03-08 | 5.04 s | 21 | 0.950 | **5.41** | 1.69 | yes | 5.8 | yes |
+| Giza 02-07 | 1.27 s | 11 | 0.900 | **5.85** | 1.69 | yes | 4.3 | yes |
+| Giza 02-07 | 1.27 s | 21 | 0.950 | **6.23** | 1.69 | yes | 4.5 | yes |
+| Giza 02-08 | 1.18 s | 11 | 0.900 | 2.99 | 1.84 | yes | 4.4 | yes |
+| Giza 02-08 | 1.18 s | 21 | 0.950 | 3.78 | 1.86 | yes | 4.9 | yes |
+| Vesuvius | 4.87 s | 11 | 0.900 | 4.36 | 1.67 | yes | 3.9 | yes |
+| Vesuvius | 4.87 s | 21 | 0.950 | **5.33** | 1.62 | yes | 5.1 | yes |
+
+- P1 fails further: four more runs exceed 5× (Giza 03-08 n_sub 21; Giza 02-07 both; Vesuvius n_sub 21). Across all 20 Test J runs, 6 exceed 5×; every one is surface-pinned.
+- P2 holds: 20/20 runs surface-pinned (1.62–1.86 cells), the same position as the noise control (1.62–1.66).
+- Falsification rule not triggered on any scene: no peak lies beyond the guard.
+- Real scenes at high overlap reach up to ~1.5× the noise ratio (Giza 02-07 6.23 vs noise 4.18) while the peak stays exactly where noise puts it. This is the same small, surface-located excess already reported in v6.3 (the residual on Giza scenes); the half-band setting amplifies the statistic, not the depth.
