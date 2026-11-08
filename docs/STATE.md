@@ -236,7 +236,12 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       (header DRAFT removed; Vesuvius/Butte July positive controls stated in §5.1; 4/4 scoped to Giza; Table 5 prior-exposure
       named a limitation; abstract item 5 reworded). v6.3 PDF: paper/Giza_SAR_Doppler_Reproduction_v6.3.pdf. PUBLISHED on Zenodo 9 Nov 2026 as version v6.3
       (https://zenodo.org/records/24062309, DOI 10.5281/zenodo.24062309; title, date, description updated; signed in via GitHub).
-- [ ] Tell the PCI recommender (Di Palma) that v6.3 is public; send the changes letter when reports arrive. [external]
+- [x] 9 Nov 08:33: told the PCI recommender (Di Palma, cc PCI contact) that v6.3 is public; reviewers may continue on their
+      version; one consolidated revision + response letter will follow the reports. [external]
+- [ ] Send the changes letter + revision when PCI reports arrive. [external]
+- [x] 9 Nov 08:36: replied on X (@darealHassan) to @GrassiTrevor's post arguing the retraction was political because the
+      Vesuvius paper stands: https://x.com/darealHassan/status/2119559718473744463 (method not target; Vesuvius reproduction
+      found only a surface artifact; planted signals recovered; concept DOI). [external]
 - [x] 9 Nov: MDPI letter of concern on Biondi 2022 Vesuvius (Remote Sens. 14(15):3828) SENT 08:04 → docs/MDPI_CONCERN_VESUVIUS_2026-11-09.md.
       New findings in that paper: 200 Hz 'set by us' + 972 m/s set the depth scale; seismograph spectra plotted to ±22 kHz from
       IV.VCRE/VBKN HH channels that sample at 100 sps (INGV FDSN, checked 9 Nov); Jan vs Feb 2022 acquisition date conflict. [external]
