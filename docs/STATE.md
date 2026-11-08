@@ -242,6 +242,10 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
 - [x] 9 Nov 08:36: replied on X (@darealHassan) to @GrassiTrevor's post arguing the retraction was political because the
       Vesuvius paper stands: https://x.com/darealHassan/status/2119559718473744463 (method not target; Vesuvius reproduction
       found only a surface artifact; planted signals recovered; concept DOI). [external]
+- [ ] WATCH (9 Nov): Grassi (embedded Khafre Project filmmaker; 'THE BIONDI PROTOCOL' playlist, 20 videos) tells Tsoukalos
+      'get ready for final proofs this week'. Tsoukalos (Ancient Aliens) mocked the retraction ('You don't say'). When the 'proofs'
+      appear, judge them against paper v6.3 §9 'What would change this conclusion' (4 criteria). Playlist also flags an
+      'ArchaeoSAR Project to scan all the world's most important sites' (Grassi video, ~May 2026). [external]
 - [x] 9 Nov: MDPI letter of concern on Biondi 2022 Vesuvius (Remote Sens. 14(15):3828) SENT 08:04 → docs/MDPI_CONCERN_VESUVIUS_2026-11-09.md.
       New findings in that paper: 200 Hz 'set by us' + 972 m/s set the depth scale; seismograph spectra plotted to ±22 kHz from
       IV.VCRE/VBKN HH channels that sample at 100 sps (INGV FDSN, checked 9 Nov); Jan vs Feb 2022 acquisition date conflict. [external]
