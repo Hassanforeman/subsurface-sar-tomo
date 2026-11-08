@@ -13,7 +13,7 @@ ledgers below in the same session — that is how we stop doing double work.
 
 ## 0. One-line status
 
-Public: v6.3 preprint on Zenodo (9 Nov 2026; concept DOI 10.5281/zenodo.21066657), under review at PCI #1130, + open code/data.
+Public: v6.3 preprint on Zenodo (9 Nov 2026; record 24062309, version DOI 10.5281/zenodo.24062309; concept DOI 10.5281/zenodo.21066657), under review at PCI #1130, + open code/data.
 Previous public version was the 14 Aug Zenodo v4. Next step: tell the PCI recommender v6.3 is public (header says she is being informed); then revise once on the reports.
 The 2022 Biondi/Malanga paper was **retracted 10 Aug 2026**. All three free Giza scenes: no detection at the
 specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (incl. primary) — residual unexplained.
@@ -234,7 +234,8 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       revise once and send v6.x + letter + response together. Grok's nice-to-have list not yet triaged. [external]~~
       SUPERSEDED 9 Nov (Hassan): post now, ahead of Biondi's announced 'redemption'. Third Grok review (9 Nov) → v6.3
       (header DRAFT removed; Vesuvius/Butte July positive controls stated in §5.1; 4/4 scoped to Giza; Table 5 prior-exposure
-      named a limitation; abstract item 5 reworded). v6.3 PDF: paper/Giza_SAR_Doppler_Reproduction_v6.3.pdf. Posted to Zenodo.
+      named a limitation; abstract item 5 reworded). v6.3 PDF: paper/Giza_SAR_Doppler_Reproduction_v6.3.pdf. PUBLISHED on Zenodo 9 Nov 2026 as version v6.3
+      (https://zenodo.org/records/24062309, DOI 10.5281/zenodo.24062309; title, date, description updated; signed in via GitHub).
 - [ ] Tell the PCI recommender (Di Palma) that v6.3 is public; send the changes letter when reports arrive. [external]
 - [x] 9 Nov: MDPI letter of concern on Biondi 2022 Vesuvius (Remote Sens. 14(15):3828) SENT 08:04 → docs/MDPI_CONCERN_VESUVIUS_2026-11-09.md.
       New findings in that paper: 200 Hz 'set by us' + 972 m/s set the depth scale; seismograph spectra plotted to ±22 kHz from
