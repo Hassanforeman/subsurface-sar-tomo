@@ -253,6 +253,10 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       MATLAB→C++→CUDA. QUOTES UNVERIFIED (auto-transcripts) — check audio before any public use.
 - [ ] Candidate (NOT pre-registered): Capella Giza scene (answers 'Umbra insufficient'); run his disclosed half-bandwidth +
       5–7 s sub-aperture configuration on the three Giza scenes. [Mac fetch + sandbox]
+- [x] 8 Nov 2026 (Sun 18:30 AEST): Academia notified 'Corrado read your paper' — profile link slug CMalanga, i.e. Corrado
+      Malanga (co-author of the retracted 2022 paper). He read the ACADEMIA copy, which still carries the August title
+      ('A Controlled Reproduction of Single-Source…'). Expect any Khafre Project rebuttal this week to target that version.
+- [ ] Update the Academia upload of this paper to v6.3 (title, PDF, DOI 10.5281/zenodo.24062309). [external]
 - [x] 9 Nov: MDPI letter of concern on Biondi 2022 Vesuvius (Remote Sens. 14(15):3828) SENT 08:04 → docs/MDPI_CONCERN_VESUVIUS_2026-11-09.md.
       New findings in that paper: 200 Hz 'set by us' + 972 m/s set the depth scale; seismograph spectra plotted to ±22 kHz from
       IV.VCRE/VBKN HH channels that sample at 100 sps (INGV FDSN, checked 9 Nov); Jan vs Feb 2022 acquisition date conflict. [external]
