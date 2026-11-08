@@ -246,6 +246,13 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       'get ready for final proofs this week'. Tsoukalos (Ancient Aliens) mocked the retraction ('You don't say'). When the 'proofs'
       appear, judge them against paper v6.3 §9 'What would change this conclusion' (4 criteria). Playlist also flags an
       'ArchaeoSAR Project to scan all the world's most important sites' (Grassi video, ~May 2026). [external]
+- [x] 9 Nov: method nuggets from 9 Khafre Project videos (English auto-transcripts) → docs/BIONDI_TRANSCRIPT_NUGGETS_2026-11-09.md.
+      Key: data = Capella + Umbra (+CSG); Biondi says Umbra 'power a bit insufficient'; Doppler band treated as acoustic, using
+      HALF of 22–25 kHz (0–10 kHz) and 5–7 s sub-apertures; inversion = FFT ('global operation'); 'tuned the software … go as deep
+      as you can'; 'kept on changing the parameters … in the end it's a sphinx'; 3-D models hand-built from ~200 tomographies;
+      MATLAB→C++→CUDA. QUOTES UNVERIFIED (auto-transcripts) — check audio before any public use.
+- [ ] Candidate (NOT pre-registered): Capella Giza scene (answers 'Umbra insufficient'); run his disclosed half-bandwidth +
+      5–7 s sub-aperture configuration on the three Giza scenes. [Mac fetch + sandbox]
 - [x] 9 Nov: MDPI letter of concern on Biondi 2022 Vesuvius (Remote Sens. 14(15):3828) SENT 08:04 → docs/MDPI_CONCERN_VESUVIUS_2026-11-09.md.
       New findings in that paper: 200 Hz 'set by us' + 972 m/s set the depth scale; seismograph spectra plotted to ±22 kHz from
       IV.VCRE/VBKN HH channels that sample at 100 sps (INGV FDSN, checked 9 Nov); Jan vs Feb 2022 acquisition date conflict. [external]
