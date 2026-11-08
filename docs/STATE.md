@@ -259,6 +259,11 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
 - [x] 9 Nov: Academia work 169418222 updated to v6.3 (only the v6.3 PDF attached; title, DOI 10.5281/zenodo.24062309, abstract). [external]
 - [x] 9 Nov: prebuttal table of 15 likely Khafre Project retorts, graded A/B/C → docs/PREBUTTAL_KHAFRE_2026-11-09.md.
       Open gaps to close: Capella Giza scene ('Umbra insufficient'); his disclosed half-bandwidth + 5–7 s windows.
+- [x] 9 Nov: TEST J run (pre-registered 982586b, design agreed with Grok): his disclosed half-band and 5–7 s looks on Butte,
+      Capella Cairo (35 s), Bingham, Komati + noise control. 12/12 runs surface-pinned (1.62–1.78 cells); falsification rule NOT
+      triggered; P1 FAILED: two pinned Butte runs exceed 5× (5.59, 5.09); noise alone gives 4.14–4.18; ratio tracks overlap
+      (Capella 6 s looks at 0.52 overlap: 1.88). → PREREGISTRATION_DISCLOSED_CONFIG_2026-11-09.md (results section).
+      Giza ×3 + Vesuvius under Test J still need re-download on the Mac (data/ has no Giza SICD; only the 02-07 CPHD).
 - [x] 9 Nov: MDPI letter of concern on Biondi 2022 Vesuvius (Remote Sens. 14(15):3828) SENT 08:04 → docs/MDPI_CONCERN_VESUVIUS_2026-11-09.md.
       New findings in that paper: 200 Hz 'set by us' + 972 m/s set the depth scale; seismograph spectra plotted to ±22 kHz from
       IV.VCRE/VBKN HH channels that sample at 100 sps (INGV FDSN, checked 9 Nov); Jan vs Feb 2022 acquisition date conflict. [external]

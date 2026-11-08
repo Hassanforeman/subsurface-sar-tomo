@@ -76,5 +76,37 @@ with a documented Butte level is reported but is not part of the rule.
 - A null here does not test the residual on two Giza scenes or the 02-08 shape positive; those remain open.
 
 ---
-## Results
-*(to be appended after the runs)*
+## Results (run 9 Nov 2026, 09:20–09:25 AEST, on Hassan's Mac VM; pre-registration committed first at 982586b)
+Run files: `runs/test_j_*.json` (8 files). All scenes 512×512 centre crop, 24 patches, alignment null 200 permutations.
+
+| Scene | Arm | Look time | n_sub | Overlap | Window | Ratio vs alignment null | Peak (cells) | Pinned | Pos. ctrl ratio | Pos. ctrl at injected depth |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Butte (primary) | A | 5.36 s of 10.7 | 11 | 0.900 | Hann | **5.59** | 1.78 | yes | 4.2 | yes |
+| Butte | A | 5.36 s | 21 | 0.950 | Hann | 4.85 | 1.76 | yes | 4.0 | yes |
+| Butte | B | 6.00 s | 11 | 0.921 | Hann | **5.09** | 1.73 | yes | 4.6 | yes |
+| Butte | A | 5.36 s | 11 | 0.900 | rect | 4.88 | 1.69 | yes | 5.0 | yes |
+| Capella Cairo | A | 17.5 s of 35.0 | 11 | 0.900 | Hann | 4.99 | 1.73 | yes | 4.0 | yes |
+| Capella Cairo | A | 17.5 s | 21 | 0.950 | Hann | 4.77 | 1.65 | yes | 5.0 | yes |
+| Capella Cairo | B | 6.00 s | 11 | 0.516 | Hann | 1.88 | 1.73 | yes | 4.4 | yes |
+| Capella Cairo | B | 6.00 s | 21 | 0.758 | Hann | 2.54 | 1.72 | yes | 5.1 | yes |
+| **Noise** (Butte-sized) | A | — | 11 | 0.900 | Hann | 4.14 | 1.66 | yes | 4.4 | yes |
+| **Noise** | A | — | 21 | 0.950 | Hann | 4.18 | 1.62 | yes | 4.5 | yes |
+| Bingham | A | 1.65 s of 3.3 | 11 | 0.900 | Hann | 4.58 | 1.69 | yes | 4.5 | yes |
+| Komati | A | 1.66 s of 3.3 | 11 | 0.900 | Hann | 2.95 | 1.67 | yes | 3.8 | yes |
+
+**Scoring against the pre-registered predictions**
+- **P1 (no run clears 5×): NOT MET.** Two Butte runs exceed 5× (Arm A n_sub 11: 5.59; Arm B: 5.09). Reported as a failed prediction.
+- **P2 (every run surface-pinned): MET.** 12/12 runs peak at 1.62–1.78 cells, inside the 2-cell guard, on every scene, both arms, both windows and the noise control.
+- **P3 (noise control within 1 cell of run 1, ratio of the same order): MET.** Noise 1.66 vs Butte 1.78 cells; ratio 4.14 vs 5.59.
+- **P4 (positive control recovered beyond the guard in run 1): MET** on location in every run (peak within 1 cell of the injected 3.85 cells). Its ratio, however, is 3.8–5.1, mostly below 5×.
+
+**Falsification rule: NOT triggered.** Condition (i) fails in every run (no peak beyond the guard); (iii) also fails (Butte Arm A drops from 5.59 at n_sub 11 to 4.85 at n_sub 21).
+
+**What the numbers say (interpretation, not part of the rule)**
+1. Under Biondi's own stated settings, nothing appears below the surface on any scene, including 35-second Capella data.
+2. The two threshold crossings are surface-pinned, not stable across n_sub, and largely reproduced by noise alone (4.14–4.18 at the same settings).
+3. The ratio tracks look overlap, not the scene: high-overlap half-band looks (0.90–0.95) give 2.95–5.59 on real scenes and 4.1–4.2 on noise, while the same Capella scene with low-overlap 6 s looks (0.52) gives 1.88. This is the confound flagged in the design review: near-identical adjacent looks push displacements toward the estimator floor (median |disp| 0.002–0.005 px) and inflate the alignment-null ratio.
+4. At these settings the ≥5× rule is not a reliable detector on its own: the surface-pinned artifact at Butte (5.59) scores higher than a genuine planted reflector in the same data (4.2). The 2-cell guard and n_sub stability, both pre-registered, are what correctly reject it. This repeats the E12 finding that below a floor the statistic can rank an empty scene above a real reflector.
+5. Capella (the sensor Biondi prefers, with a 35 s dwell) behaves like Umbra: surface-pinned, below 5× at every setting.
+
+**Disclosure for the paper:** v6.3's statement that no Hann run clears the rule refers to the v6.3 configuration. Under the half-band configuration two surface-pinned Butte runs exceed 5×; this must be reported if Test J is added.
