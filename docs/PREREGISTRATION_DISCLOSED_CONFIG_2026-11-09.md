@@ -130,3 +130,29 @@ These collects are 1.2–5.0 s, so **Arm B (5–7 s looks) cannot be formed on a
 - P2 holds: 20/20 runs surface-pinned (1.62–1.86 cells), the same position as the noise control (1.62–1.66).
 - Falsification rule not triggered on any scene: no peak lies beyond the guard.
 - Real scenes at high overlap reach up to ~1.5× the noise ratio (Giza 02-07 6.23 vs noise 4.18) while the peak stays exactly where noise puts it. This is the same small, surface-located excess already reported in v6.3 (the residual on Giza scenes); the half-band setting amplifies the statistic, not the depth.
+
+### POST-HOC (not pre-registered): why P1 failed — the 5× rule depends on look overlap (9 Nov 2026, ~12:05 AEST)
+Prompted by Hassan's hypothesis that the overlap setting, not the scenes, pushed scores over 5×. Script
+`src/overlap_sweep_posthoc.py`; run file `runs/overlap_sweep_posthoc_2026-11-09.json`. n_sub 11, Hann, alignment null
+(100 permutations), overlap 0.50–0.95 (look fraction 0.17–0.67); five independent pure-noise images and five real scenes.
+
+| Overlap | 0.50 | 0.60 | 0.70 | 0.80 | 0.85 | 0.90 | 0.93 | 0.95 |
+|---|---|---|---|---|---|---|---|---|
+| Noise, 5 seeds (min–max) | 1.31–3.23 | 1.08–1.70 | 1.00–2.31 | 1.51–3.10 | 2.28–2.80 | 2.15–4.27 | 4.46–5.22 | 4.02–6.79 |
+| Butte | 1.88 | 1.91 | 1.87 | 1.54 | 4.09 | 5.71 | 5.48 | 4.57 |
+| Giza 02-07 | 1.46 | 1.47 | 1.44 | 3.64 | 3.11 | 5.81 | 5.32 | 5.66 |
+| Giza 03-08 | 1.58 | 1.95 | 1.15 | 2.54 | 3.13 | 5.06 | 4.32 | 5.50 |
+| Giza 02-08 | 2.53 | 2.39 | 1.18 | 2.30 | 3.15 | 3.01 | 4.47 | 6.76 |
+| Capella Cairo | 2.06 | 1.72 | 1.59 | 1.80 | 2.19 | 5.00 | 5.27 | 5.17 |
+
+Every peak, noise and real, lies at 1.5–1.9 cells.
+
+**Reading.** (1) The alignment-null ratio climbs steeply with overlap on pure noise: below ~3 up to 0.85, then 4–7 at 0.93–0.95,
+with 4 of 5 noise images exceeding 5× at 0.93 or 0.95. The fixed 5× rule, calibrated at the default 0.8 overlap, is
+therefore not valid at the 0.90–0.95 overlaps that the half-band configuration forces; that is the main reason P1 failed.
+(2) It is not the whole story: at 0.90, Butte (5.71), Giza 02-07 (5.81), Giza 03-08 (5.06) and Capella (5.00) sit above the
+noise range (2.15–4.27), so a modest scene-dependent excess remains at that one setting. At 0.93–0.95 the real scenes fall
+inside the noise range. This is consistent with the small surface-located excess already reported in v6.3, and like it,
+it does not move the peak off the surface. (3) For the revision: decision thresholds must be derived from noise at the same
+configuration (e.g. the 95th percentile of noise ratios at that overlap) rather than a fixed 5×. This is a post-hoc
+correction and must be reported as such, alongside the failed prediction.
