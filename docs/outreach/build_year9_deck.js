@@ -32,7 +32,7 @@ async function icon(name, color, size = 256) {
   pres.author = "Hassan Foreman";
   pres.title = "Can a Satellite See Under the Pyramids?";
   pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
-  const C = pres.SchemeColor;
+  const C = { text1: HEX.dk1, text2: HEX.dk2, background1: HEX.lt1, background2: HEX.lt2, accent1: HEX.accent1, accent2: HEX.accent2, accent3: HEX.accent3, accent4: HEX.accent4, accent5: HEX.accent5, accent6: HEX.accent6 }; // literal hex: renders the same in PowerPoint, Keynote, Google Slides and phone previews
 
   // ---------- layouts ----------
   pres.defineSlideMaster({

@@ -567,3 +567,4 @@ pinning is not an order effect. A weak surface-ward lean remains, unexplained an
 - Facts kept accurate: the 2022 retracted paper is about the Great Pyramid (Khufu); the Khafre shaft claims are 2025. Deck discloses that some of our own results remain unexplained.
 - 9 Nov 13:45: Hassan sent the deck and reply to Rosan Dahal. Awaiting ICB's line-manager decision on a visit.
 - 9 Nov 13:50: the 13:46 email went without the attachment. Follow-up with the .pptx (150 KB) sent from Outlook; checked in Sent Items (paperclip shown).
+- 9 Nov 16:10: Hassan said the deck 'looks strange'. Rebuilt with literal hex colours instead of theme (scheme) colours, which Keynote, Google Slides and phone previews can mis-render. PowerPoint look unchanged. Not re-sent to ICB.
