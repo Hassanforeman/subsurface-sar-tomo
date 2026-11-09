@@ -303,6 +303,7 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
 - [ ] Email Pomposi (ally).
 - [x] 9 Nov: ICB (Rosan Dahal, Year 9 STEM) asked for a deck + invited Hassan to present. Deck built:
       docs/outreach/Radar_and_the_Pyramids_Year9.pptx. Reply sent 13:46 (no attachment); deck sent in a follow-up 13:50, attachment confirmed.
+- [ ] 10 Nov: Grassi trailer "THE BIONDI VALIDATION" (x.com/GrassiTrevor/status/2119825208802676982). Premiere 11 Nov 11:11 GMT (9:11 pm Brisbane) on youtube.com/@trevorgrassi. Likely claim: the 2022 Khufu map matches ScanPyramids' North Face Corridor. Pre-premiere criteria recorded as prebuttal #16. Watch the video before replying.
 - [ ] Watch: ICB line-manager decision on an in-person talk; agree a date only with Hassan (he works days).
 
 ## 4. Environment / mechanics (saves a session of rediscovery)
