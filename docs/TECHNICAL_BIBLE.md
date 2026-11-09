@@ -559,3 +559,9 @@ pinning is not an order effect. A weak surface-ward lean remains, unexplained an
 - Letter of concern SENT 9 Nov 2026 08:04 to remotesensing@mdpi.com (cc dme-remotesensing@mdpi.com) after a Grok adversarial check (all five points CORRECT): docs/MDPI_CONCERN_VESUVIUS_2026-11-09.md.
 - Paper v6.3 (9 Nov) after a third Grok review, PUBLISHED on Zenodo 9 Nov 2026: record 24062309, DOI 10.5281/zenodo.24062309 (new version of concept DOI 10.5281/zenodo.21066657). Build note: the cloud container lacks lmodern.sty; build with a stub (`\ProvidesPackage{lmodern}`) on TEXINPUTS — output is unaffected because the template sets DejaVu fonts.
 - Test J (9 Nov 2026): authors' disclosed configuration (half-band looks; 5–7 s looks) on Butte, Capella Cairo, Bingham, Komati + noise. All surface-pinned; two pinned Butte runs exceed 5× (P1 failed); noise reproduces ~75% of the Butte ratio; the alignment-null ratio rises with look overlap. Script src/test_j_disclosed_config.py; runs/test_j_*.json; docs/PREREGISTRATION_DISCLOSED_CONFIG_2026-11-09.md. Mac VM needs `pip install --break-system-packages sarpy scipy` each session.
+
+### 2026-11-09 — Outreach: Year 9 school deck (ICB)
+- `docs/outreach/Radar_and_the_Pyramids_Year9.pptx` (11 slides, teacher notes on every slide), built by `docs/outreach/build_year9_deck.js` (pptxgenjs).
+- Requested by Rosan Dahal (ICB Technology coordinator) for Year 9 STEM. Plain-language: echo → SAR → penetration limit → claim → four checks (repeat, null, planted signal, pre-registration) → result → depth dial → retraction/peer review → lessons.
+- Slide 8 chart uses Test J Arm A n_sub=11 peak depths (runs/test_j_*.json): Giza 1.69/1.84/1.71, Vesuvius 1.67, Butte 1.78, Cairo (Capella) 1.73, noise 1.66 cells.
+- Facts kept accurate: the 2022 retracted paper is about the Great Pyramid (Khufu); the Khafre shaft claims are 2025. Deck discloses that some of our own results remain unexplained.
