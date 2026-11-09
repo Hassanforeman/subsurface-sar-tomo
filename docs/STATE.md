@@ -313,12 +313,14 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       SAR is symmetric about the flight line, so height gives no look-to-look shift in a slant-plane image; real-orbit residual
       is 0.003-0.08 px per step per 100 m (below the 0.2 px floor). Geometry tool kept: src/test_k_parallax.py.
       Also corrected: our Giza centre crops ARE on Khufu/Khafre (SCPs), not flat ground. -> REVIEW_BIONDI2022_KHUFU section 6.
-- [ ] **OPEN, verify before the PCI response (found 10 Nov, synthetic only):** (a) baseline phase-correlation tracker reads
-      about 0 for a true 2 px shift once looks are narrow (n_sub >= 21 at overlap 0.8), and returns 0 +/- 0.04 px for independent
-      speckle; n_sub = 11 OK for >= 2 px, compresses 0.5 px to 0.13. Check on the pipeline's own code path and re-check planted
-      controls per n_sub; if confirmed, the "11-128 looks, verdict unchanged" robustness claim must be reworded. (b) Shared-band
-      blindness: overlapped looks give zero gain to real slow-time motion on speckle (both estimators); candidate result for
-      the front-end discussion. -> REVIEW_BIONDI2022_KHUFU section 6.3.
+- [x] 10 Nov: tracker check on the pipeline's own looks, synthetic + real Giza 02-07 -> RESULTS_TRACKER_BIAS_2026-11-10.md.
+      True 2 px shift read by phase correlation as 0.18 at 11 looks (same fact as E12's "12% survives", already known), 0.02 at
+      32, ~0 from 64; NCC 1.9 at 11, 1.1-1.4 at 32, 0.1-0.2 at 128. Cause: zero-lag peak of un-windowed whitened phase
+      correlation. Circular patch plants (tests F, G, I) are read exactly at any look count, so they test the back end only.
+- [ ] PCI revision wording (HOLD): state the attenuation and cause in section 5.6; qualify the 4/4 planted controls as circular
+      patch plants; qualify the 11-128 look-count claim (tracker cannot register real shifts from ~32 looks).
+- [ ] Candidate (NOT pre-registered): Giza x3 at 11 looks with NCC + noise-matched threshold, to answer "your tracker is deaf".
+- [ ] Synthetic only, to verify: shared-band blindness (overlapped looks give zero gain to real slow-time motion on speckle).
 - [ ] Remaining candidates from the review (NOT pre-registered): L Khufu known-chamber test with symmetry controls;
       M solid-pyramid simulation; N overlay permutation test on their figures; O dated scorecard of the 2022 CAD vs 2023.
 - [ ] Watch: ICB line-manager decision on an in-person talk; agree a date only with Hassan (he works days).
