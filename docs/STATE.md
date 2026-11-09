@@ -304,6 +304,15 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
 - [x] 9 Nov: ICB (Rosan Dahal, Year 9 STEM) asked for a deck + invited Hassan to present. Deck built:
       docs/outreach/Radar_and_the_Pyramids_Year9.pptx. Reply sent 13:46 (no attachment); deck sent in a follow-up 13:50, attachment confirmed.
 - [ ] 10 Nov: Grassi trailer "THE BIONDI VALIDATION" (x.com/GrassiTrevor/status/2119825208802676982). Premiere 11 Nov 11:11 GMT (9:11 pm Brisbane) on youtube.com/@trevorgrassi. Likely claim: the 2022 Khufu map matches ScanPyramids' North Face Corridor. Pre-premiere criteria recorded as prebuttal #16. Watch the video before replying.
+- [x] 10 Nov: 2022 Khufu paper re-read for its treatment of known/later-confirmed structures and its acquisition table
+      → docs/REVIEW_BIONDI2022_KHUFU_2026-11-10.md. New: paper says SAR found "no trace" of the muon Big Void (names another
+      object "Big-void"); its NFC = 15.4 × 5.7 m room + 43.9 m conduit to the Grand Gallery vs the real 9 m × 2 m blind corridor
+      (2023); metres were measured on the CAD with screen-ruler software; Table 1 (stripmap, PRF 2 kHz, 6 m antenna) cannot carry
+      12.5 kHz/24 kHz and gives δz ≈ 46 m by their own formula (arXiv only, confirm in journal PDF); "ramps" at 42° = arris slope 41.99°.
+- [ ] Candidates from that review (NOT pre-registered, nothing run): K topographic-parallax test (shift ∝ height on pyramid
+      faces); L Khufu known-chamber test with symmetry controls; M solid-pyramid simulation; N overlay permutation test on
+      their figures; O dated scorecard of the 2022 CAD vs 2023 ground truth. H2 (parallax) is a calculation only: do not
+      state publicly before Test K.
 - [ ] Watch: ICB line-manager decision on an in-person talk; agree a date only with Hassan (he works days).
 
 ## 4. Environment / mechanics (saves a session of rediscovery)
