@@ -272,6 +272,8 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       failure. Residual: at 0.90 four real scenes sit just above the 5-seed noise range (5.0–5.8 vs ≤4.27); peaks always 1.5–1.9 cells.
 - [ ] Revision: replace the fixed 5× rule with a configuration-matched noise threshold (e.g. noise 95th percentile at the same
       overlap, many seeds); report the Test J P1 failure and this post-hoc explanation together.
+      DECISION (Hassan, 9 Nov 12:08): HOLD — do not revise the paper now. Keep Test J + the overlap sweep for the PCI response
+      letter; reviewers are expected to raise the settings question. Note: the repo is public, so these results are already visible.
 - [x] 9 Nov: MDPI letter of concern on Biondi 2022 Vesuvius (Remote Sens. 14(15):3828) SENT 08:04 → docs/MDPI_CONCERN_VESUVIUS_2026-11-09.md.
       New findings in that paper: 200 Hz 'set by us' + 972 m/s set the depth scale; seismograph spectra plotted to ±22 kHz from
       IV.VCRE/VBKN HH channels that sample at 100 sps (INGV FDSN, checked 9 Nov); Jan vs Feb 2022 acquisition date conflict. [external]
