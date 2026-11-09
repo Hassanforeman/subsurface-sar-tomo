@@ -565,3 +565,4 @@ pinning is not an order effect. A weak surface-ward lean remains, unexplained an
 - Requested by Rosan Dahal (ICB Technology coordinator) for Year 9 STEM. Plain-language: echo → SAR → penetration limit → claim → four checks (repeat, null, planted signal, pre-registration) → result → depth dial → retraction/peer review → lessons.
 - Slide 8 chart uses Test J Arm A n_sub=11 peak depths (runs/test_j_*.json): Giza 1.69/1.84/1.71, Vesuvius 1.67, Butte 1.78, Cairo (Capella) 1.73, noise 1.66 cells.
 - Facts kept accurate: the 2022 retracted paper is about the Great Pyramid (Khufu); the Khafre shaft claims are 2025. Deck discloses that some of our own results remain unexplained.
+- 9 Nov 13:45: Hassan sent the deck and reply to Rosan Dahal. Awaiting ICB's line-manager decision on a visit.

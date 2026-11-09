@@ -301,8 +301,9 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       irrelevant cold-fusion-in-lithium citation [24]. No public Zebker result; no September Biondi rebuttal found.
 - [ ] Line-numbered PDF if a reviewer asks.
 - [ ] Email Pomposi (ally).
-- [ ] 9 Nov: ICB (Rosan Dahal, Year 9 STEM) asked for a deck + invited Hassan to present. Deck built:
-      docs/outreach/Radar_and_the_Pyramids_Year9.pptx. Reply drafted for Hassan; in-person visit not yet agreed (Hassan works days).
+- [x] 9 Nov: ICB (Rosan Dahal, Year 9 STEM) asked for a deck + invited Hassan to present. Deck built:
+      docs/outreach/Radar_and_the_Pyramids_Year9.pptx. Reply + deck SENT by Hassan 9 Nov ~13:45.
+- [ ] Watch: ICB line-manager decision on an in-person talk; agree a date only with Hassan (he works days).
 
 ## 4. Environment / mechanics (saves a session of rediscovery)
 
