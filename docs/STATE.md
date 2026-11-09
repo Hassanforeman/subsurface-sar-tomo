@@ -309,10 +309,18 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       object "Big-void"); its NFC = 15.4 × 5.7 m room + 43.9 m conduit to the Grand Gallery vs the real 9 m × 2 m blind corridor
       (2023); metres were measured on the CAD with screen-ruler software; Table 1 (stripmap, PRF 2 kHz, 6 m antenna) cannot carry
       12.5 kHz/24 kHz and gives δz ≈ 46 m by their own formula (arXiv only, confirm in journal PDF); "ramps" at 42° = arris slope 41.99°.
-- [ ] Candidates from that review (NOT pre-registered, nothing run): K topographic-parallax test (shift ∝ height on pyramid
-      faces); L Khufu known-chamber test with symmetry controls; M solid-pyramid simulation; N overlay permutation test on
-      their figures; O dated scorecard of the 2022 CAD vs 2023 ground truth. H2 (parallax) is a calculation only: do not
-      state publicly before Test K.
+- [x] 10 Nov: **H2 (topographic parallax) WITHDRAWN, test K cancelled** before any pre-registration or data. Straight-line
+      SAR is symmetric about the flight line, so height gives no look-to-look shift in a slant-plane image; real-orbit residual
+      is 0.003-0.08 px per step per 100 m (below the 0.2 px floor). Geometry tool kept: src/test_k_parallax.py.
+      Also corrected: our Giza centre crops ARE on Khufu/Khafre (SCPs), not flat ground. -> REVIEW_BIONDI2022_KHUFU section 6.
+- [ ] **OPEN, verify before the PCI response (found 10 Nov, synthetic only):** (a) baseline phase-correlation tracker reads
+      about 0 for a true 2 px shift once looks are narrow (n_sub >= 21 at overlap 0.8), and returns 0 +/- 0.04 px for independent
+      speckle; n_sub = 11 OK for >= 2 px, compresses 0.5 px to 0.13. Check on the pipeline's own code path and re-check planted
+      controls per n_sub; if confirmed, the "11-128 looks, verdict unchanged" robustness claim must be reworded. (b) Shared-band
+      blindness: overlapped looks give zero gain to real slow-time motion on speckle (both estimators); candidate result for
+      the front-end discussion. -> REVIEW_BIONDI2022_KHUFU section 6.3.
+- [ ] Remaining candidates from the review (NOT pre-registered): L Khufu known-chamber test with symmetry controls;
+      M solid-pyramid simulation; N overlay permutation test on their figures; O dated scorecard of the 2022 CAD vs 2023.
 - [ ] Watch: ICB line-manager decision on an in-person talk; agree a date only with Hassan (he works days).
 
 ## 4. Environment / mechanics (saves a session of rediscovery)

@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """
 Test K — topographic parallax as a known, physical inter-look displacement
-(pre-registration: docs/PREREGISTRATION_PARALLAX_2026-11-10.md).
+(never pre-registered; see STATUS).
+
+STATUS 10 Nov 2026: NOT RUN and NOT pre-registered. The geometry stage showed the predicted effect is
+0.003-0.08 px per look step per 100 m of height on the three Giza scenes, below the ~0.2 px tracking floor
+(hypothesis H2 withdrawn; see docs/REVIEW_BIONDI2022_KHUFU_2026-11-10.md, section 6). Kept as a geometry
+tool: R/Rdot projection at any slow time, look-centre times, pyramid model, QA overlay.
 
 A scatterer at height h above the focus plane is imaged, by a sub-aperture centred at slow time t,
-at the image-plane point with the same range and range-rate at t (R/Rdot projection). As t moves
-across the aperture that point moves, so adjacent Doppler looks should show the scatterer displaced
-by a known amount proportional to h. The pyramids give h from 0 to ~137 m with known geometry.
+at the image-plane point with the same range and range-rate at t (R/Rdot projection).
 
 Stages (run separately so geometry is fixed before any displacement is looked at):
   --qa       amplitude image + projected pyramid wireframe (no displacement data)
@@ -159,13 +162,13 @@ def selftest():
     pix = g.project(np.array([[0, 0, h]]), 0.0)[0]
     ok &= abs(pix[0] + h * np.cos(np.radians(inc))) < 0.05 and abs(pix[1]) < 0.05
     print(f"h={h} at COA -> row {pix[0]:.3f} (expect {-h*np.cos(np.radians(inc)):.3f}), col {pix[1]:.4f}")
-    # (3) parallax: cross-range drift = h*cot(inc)*dphi, dphi = v*dt/ground range
+    # (3) straight-line flight: the R/Rdot circle is centred on the flight line, so its intersection with a
+    #     slant plane containing that line does not move with t. Height gives NO inter-look drift here;
+    #     any drift on real data comes only from orbit curvature (see docs/REVIEW_BIONDI2022_KHUFU, section 6).
     dt = 1.0
     c1 = g.project(np.array([[0, 0, h]]), dt / 2)[0][1] - g.project(np.array([[0, 0, h]]), -dt / 2)[0][1]
-    Rg = 400e3
-    expect = h / np.tan(np.radians(inc)) * 7000 * dt / Rg
-    print(f"col drift over {dt}s: {c1:.4f} m, |expected| {expect:.4f} m")
-    ok &= abs(abs(c1) - expect) < 0.05 * expect
+    print(f"col drift over {dt}s for straight flight: {c1:.6f} m (expect 0)")
+    ok &= abs(c1) < 1e-3
     print("SELFTEST", "PASS" if ok else "FAIL")
     return ok
 

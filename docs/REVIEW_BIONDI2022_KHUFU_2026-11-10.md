@@ -1,5 +1,8 @@
 # Review of Biondi & Malanga 2022 (Khufu) ahead of "The Biondi Validation" (10 Nov 2026)
 
+> **CORRECTION, same day (10 Nov): hypothesis H2 (topographic parallax) in section 3 is WRONG and withdrawn; test K is
+> cancelled; the first bullet of section 5 is wrong. See section 6. Sections 1 and 2 (the reading of the paper) stand.**
+
 *Why:* Grassi's video (premiere 11 Nov 11:11 GMT) will argue the retracted 2022 Great Pyramid paper was validated,
 apparently by the North Face Corridor (NFC). Earlier work here covered the method (DFT, depth dial), the figures (CAD
 detail) and our reproduction. Nobody had yet read the 2022 paper for **what it says about Khufu's known and
@@ -116,3 +119,37 @@ Grade for prebuttal #16: stays **B until the video is seen**; points 1–2 are t
 
 Sources: arXiv 2208.00811; mdpi.com/2072-4292/14/20/5231 (retracted); Procureur et al. 2023, Nat. Commun. 14:1144;
 Morishima et al. 2017, Nature 552:386; en.wikipedia.org/wiki/ScanPyramids (dates).
+
+## 6. Correction and design-phase findings (10 Nov, later the same day)
+
+**6.1 H2 withdrawn.** While building test K the geometry self-test failed my own expectation. For a straight flight
+line the set of points with a given range and range-rate is a circle centred on the flight line; its intersection
+with a slant image plane that contains the flight line does not move as the radar moves. Height therefore causes
+**no** look-to-look shift in a slant-plane image; only orbit curvature leaves a residual. Computed from the real SICD
+orbit polynomials (src/test_k_parallax.py, R/Rdot projection per look, agrees with sarpy to within 1 px): shift per
+look step per 100 m of height = **0.005 px (02-07), 0.003 px (02-08), 0.07-0.08 px (03-08)**. All are below the
+~0.2 px tracking floor and 15-80x smaller than section 3 claimed. The "several pixels" figure used the ground-plane
+layover rotation, which is not what a slant-plane sub-aperture image shows. Consequences (a)-(d) listed under H2 do
+not follow. Test K was not pre-registered and no displacement data were looked at.
+
+**6.2 Section 5, first bullet, is wrong.** Our Giza centre crops are not flat ground: the SCP of scenes 02-07 and
+02-08 is Khufu and of 03-08 is Khafre, and the crops are centred there. All Giza results in the paper are on the
+pyramid bodies. Test G (cemeteries) is the flat-ground one. This removes the stated gap rather than opening one.
+
+**6.3 Synthetic design-phase findings (NOT pre-registered, synthetic data only; verify before use).**
+- *Shared-band blindness.* Speckle given a common slow-time position drift x(f) = beta*f (the signature of real
+  target motion during the collect), looks at 80% overlap: measured shift / expected shift = **0.00** for phase
+  correlation and for NCC, at every beta tried (inter-look match 0.56). Reason: adjacent overlapped looks are
+  correlated only through the spectral band they share, which is the same data in both, so the correlation peak sits
+  at zero lag. With non-overlapping looks speckle decorrelates entirely (already measured, Q3). Point-like targets:
+  NCC recovers 0.8 of the drift at 80% overlap, phase correlation 0.04. Reading: on distributed (speckle) ground the
+  sub-aperture tracking front end cannot register real slow-time motion in either regime; only isolated strong
+  scatterers can. Consistent with the measured adjacent-look match of ~0.6 = filter-bank overlap (Q3).
+- *Possible weakness in OUR tracker (open).* On Hann-band-limited synthetic speckle the baseline phase-correlation
+  estimator returns about 0 for a true rigid shift once looks are narrow: a true 2.0 px reads 2.04 at the n_sub = 11
+  band, **0.11 at n_sub = 21, 0.05 at 32, 0.00 at 64-128** (overlap 0.8 bands; NCC degrades more slowly: 1.77, 1.54,
+  0.48, 0.15). A true 0.5 px reads 0.13 even at n_sub = 11. Two independent speckle fields give 0 +/- 0.04 px instead
+  of a random shift. If this holds on the pipeline's own code path, then (i) our runs at n_sub >= 21 could not have
+  seen real displacement, and "the verdict does not change from 11 to 128 looks" is weaker evidence than stated;
+  (ii) the planted controls should be re-checked per n_sub. The n_sub = 11 results are not affected by (i).
+  **Verify first, on the repo functions, before the PCI response.**
