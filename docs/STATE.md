@@ -304,6 +304,18 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
 - [x] 9 Nov: ICB (Rosan Dahal, Year 9 STEM) asked for a deck + invited Hassan to present. Deck built:
       docs/outreach/Radar_and_the_Pyramids_Year9.pptx. Reply sent 13:46 (no attachment); deck sent in a follow-up 13:50, attachment confirmed.
 - [ ] 10 Nov: Grassi trailer "THE BIONDI VALIDATION" (x.com/GrassiTrevor/status/2119825208802676982). Premiere 11 Nov 11:11 GMT (9:11 pm Brisbane) on youtube.com/@trevorgrassi. Likely claim: the 2022 Khufu map matches ScanPyramids' North Face Corridor. Pre-premiere criteria recorded as prebuttal #16. Watch the video before replying.
+      UPDATE 11 Nov (checked 11:10 Brisbane): Grassi's launch post (x.com/GrassiTrevor/status/2120321175561920853) states the
+      claim: "replication by an independent 3rd party" by Dr. Manu Seyfzadeh, "Biondi's scans are officially independently
+      validated". So the claim is REPLICATION, not the NFC match guessed in prebuttal #16 (see new #17). Video
+      youtube.com/watch?v=SjJTRVgr9Mw is NOT out: YouTube shows "Premieres November 12 at 9:11 AM" Brisbane time
+      (= 23:11 GMT 11 Nov; the "9:11 pm Brisbane" above was wrong). Description: "Links will added at premiere."
+      PUBLISHED? NO, as of this check: no paper, preprint, Zenodo record, code release or scene IDs by Seyfzadeh found
+      (web search; his listed papers are Egyptology in SCIRP Archaeological Discovery, none on radar). The only public item
+      tied to him is the BiondiProtocol GitHub repo (docs + JSON config, built with ChatGPT, no outputs, no data; our Q6
+      note: its ROADMAP routes findings to "Seyfzadeh" [inferred]). Independence: he is a long-time Grassi collaborator
+      (interviewed in Grassi's Opus Magnum series; in the trailer call with Biondi), and Biondi co-confirms in the video.
+      NEXT: after the premiere, open the description links, record what is released (code? scene IDs? controls?), then judge
+      against prebuttal #17. Do not reply before that.
 - [x] 10 Nov: 2022 Khufu paper re-read for its treatment of known/later-confirmed structures and its acquisition table
       → docs/REVIEW_BIONDI2022_KHUFU_2026-11-10.md. New: paper says SAR found "no trace" of the muon Big Void (names another
       object "Big-void"); its NFC = 15.4 × 5.7 m room + 43.9 m conduit to the Grand Gallery vs the real 9 m × 2 m blind corridor
