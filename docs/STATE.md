@@ -316,6 +316,13 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       (interviewed in Grassi's Opus Magnum series; in the trailer call with Biondi), and Biondi co-confirms in the video.
       NEXT: after the premiere, open the description links, record what is released (code? scene IDs? controls?), then judge
       against prebuttal #17. Do not reply before that.
+      12 Nov 06:40 Brisbane: Grassi follow-up post (x.com/GrassiTrevor/status/2120581517189746957, 04:16 Brisbane): "Today, I
+      consider the matter closed"; "there can be no question that the scans are real"; SAR data "from FOUR separate companies"
+      contain deep-underground imagery; "The results, and the process itself, have now been independently reproduced." Frames
+      sceptics as claiming Biondi "manufactured hundreds of fake scan images" (strawman: our critique is that the processing makes
+      structure-like patterns from noise/surface, not fabrication). Premiere time given as "11:11 GMT/6:11pm Eastern" - these
+      disagree; YouTube page says 12 Nov 9:11 am Brisbane = 23:11 GMT = 6:11 pm Eastern, so "11:11 GMT" is a typo. Still no
+      released code, scene IDs or paper. Trailer link: youtube.com/watch?v=RI9Jmyd8A88.
 - [x] 10 Nov: 2022 Khufu paper re-read for its treatment of known/later-confirmed structures and its acquisition table
       → docs/REVIEW_BIONDI2022_KHUFU_2026-11-10.md. New: paper says SAR found "no trace" of the muon Big Void (names another
       object "Big-void"); its NFC = 15.4 × 5.7 m room + 43.9 m conduit to the Grand Gallery vs the real 9 m × 2 m blind corridor
