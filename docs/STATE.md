@@ -323,6 +323,12 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       structure-like patterns from noise/surface, not fabrication). Premiere time given as "11:11 GMT/6:11pm Eastern" - these
       disagree; YouTube page says 12 Nov 9:11 am Brisbane = 23:11 GMT = 6:11 pm Eastern, so "11:11 GMT" is a typo. Still no
       released code, scene IDs or paper. Trailer link: youtube.com/watch?v=RI9Jmyd8A88.
+      PREMIERE LIVE 12 Nov 09:11 Brisbane (80 min). At 09:33: still NO links in description ("Links will added at premiere").
+      ~20 min: screen shows Biondi's "HarmonicSAR Software" UI (whose machine not yet clear). ~21 min: Seyfzadeh: "a completely
+      independent effort", "no communications with Filippo", "I only use what he published". Slide "Biondi Protocol v1.9 -
+      Coregistration Process" (128x128 frames, cross-correlation "unnormalized phase", Fourier shift, 24x32 core) = the
+      BiondiProtocol GitHub protocol (v1.7 in Sep, now v1.9). Live chat: ArchaeoSAR / Archaeological Rescue Foundation pitch.
+      Full review scheduled 10:40 after the premiere ends.
 - [x] 10 Nov: 2022 Khufu paper re-read for its treatment of known/later-confirmed structures and its acquisition table
       → docs/REVIEW_BIONDI2022_KHUFU_2026-11-10.md. New: paper says SAR found "no trace" of the muon Big Void (names another
       object "Big-void"); its NFC = 15.4 × 5.7 m room + 43.9 m conduit to the Grand Gallery vs the real 9 m × 2 m blind corridor
