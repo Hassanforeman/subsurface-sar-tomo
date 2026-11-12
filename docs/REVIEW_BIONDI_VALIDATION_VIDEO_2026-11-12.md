@@ -77,6 +77,10 @@ confirmation of the Coffer Project ramp. Excuse given: "Manu's a dermatologist, 
 
 **"Four companies" claim:** not made or supported in the video.
 
+**Overall reading (agreed with Hassan 12 Nov):** Seyfzadeh put real effort into a sincere amateur attempt; Grassi then oversold it as final proof.
+
+**Follow-up:** Test P pre-registered 12 Nov (PREREGISTRATION_FAKE_TARGETS_2026-11-12.md). Note: the BiondiProtocol repo is no longer public (404, 12 Nov).
+
 ## Science-meter rating (Claude, for Hassan)
 2/10. Credit: re-implementation from public text, planted-shift test of co-registration, calibration on known shafts, an
 on-camera statement that positive controls should come first. Against: no negative control, no blinding, depth law and

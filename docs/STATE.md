@@ -333,13 +333,19 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       POSTED 12 Nov 10:44 as a YouTube comment on the premiere video (account @hassanforeman6119, Hassan asked Claude to post;
       full 2,838-char text, both links live). NOT posted on X. Watch for replies from Grassi/Seyfzadeh/Biondi.
       OPEN: run a noise/desert control on BiondiProtocol v1.9 itself if released.
-      CANDIDATE (12 Nov, Hassan asked "could we reproduce Manu's results?"; NOT pre-registered, NOT started):
-      v1.9 is not public (GitHub still v1.7: .docx protocol + .json config, no runnable code; checked 11:44). Plan if approved:
-      (1) build v1.7 from its docs + the parameters shown on screen (K=295, W=175, P=8, b/a>0.1, adjusted R^2, 128x128 then
-      24x32 co-registration, Dobecki-Schoch velocity, depth calibrated on Campbell's Tomb) on our free Umbra Giza scenes along
-      his GCF5->GCF6 Osiris line; (2) same line on bare desert + noise-only input; (3) "garden of forking paths" test: pre-register
-      a FAKE target (invented 3-level shaft at a random bare-desert line), then tune only his knobs (filter, lambda/velocity,
-      depth law, W, P) and count how often the fake target "matches" as well as Osiris did. Pre-register before running.
+      **TEST P PRE-REGISTERED 12 Nov** (Hassan: "ok go ahead. lets do this") -> docs/PREREGISTRATION_FAKE_TARGETS_2026-11-12.md
+      + runs/test_p_fake_targets.json (200 fake three-level shafts, seed 20261112) + src/test_p_targets.py. NOT RUN.
+      Question: with tuning freedom (315 configs: depth scale, smoothing, line shift), how often does an invented shaft
+      match as well as Osiris (10/22/33 m)? Nulls: same image, bare desert, noise. Positive control planted. "S-like" =
+      OUR reconstruction from his plot labels, not his code.
+      NEXT [runnable after Stage 0]: (1) Stage 0: read Seyfzadeh's public Facebook posts for parameters; Osiris Shaft
+      coordinates from a citable source; amplitude-only placement; selftest. Commit P.8. (2) write src/test_p_fake_targets.py
+      (pipeline) and run on 02-07 + 03-08 (02-08 secondary). Scenes: 02-07 is staged in the cloud container; others on the Mac.
+      CORRECTION 12 Nov 11:50: the BiondiProtocol GitHub repo and github.com/ejhong/sar are NO LONGER PUBLIC (GitHub API from
+      the Mac: both 404; BiondiProtocol account shows 0 public repos, account last updated 2 Nov 2026). The "checked 11:44,
+      still v1.7" note came from a web-fetch that evidently served a stored copy; date of removal unknown; do not speculate on
+      why. Consequences: v1.7 cannot be re-read; ejhong's results cannot be linked (our issue #1 there is gone too); cite
+      ejhong only as "formerly public, accessed 27 Sep 2026". Pomposi's repo is still public (pushed 10 Nov).
 - [x] 10 Nov: 2022 Khufu paper re-read for its treatment of known/later-confirmed structures and its acquisition table
       → docs/REVIEW_BIONDI2022_KHUFU_2026-11-10.md. New: paper says SAR found "no trace" of the muon Big Void (names another
       object "Big-void"); its NFC = 15.4 × 5.7 m room + 43.9 m conduit to the Grand Gallery vs the real 9 m × 2 m blind corridor
