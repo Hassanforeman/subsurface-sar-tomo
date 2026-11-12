@@ -12,7 +12,7 @@ import test_q_repeat_pass as Q
 PLANTS = [((22, 38), 12.0), ((67, 83), 22.0), ((112, 128), 33.0)]
 
 
-def planted_displacement(img, px, rs, cs):
+def planted_displacement(img, px, rs, cs, amp=1.0):
     F, lo, hi = T.spectrum_support(img)
     tg = px.reshape(-1, 2)
     allc = np.concatenate([tg] + [tg + f for f in T.FLANKS])
@@ -27,7 +27,7 @@ def planted_displacement(img, px, rs, cs):
         ref, off = T.make_pair(F, lo, hi, k)
         for r0, r1, c0, c1, d in boxes:
             th = 2 * np.pi * (d * T.CYC50 / 50.0) * k / T.W
-            off[r0:r1, c0:c1] = T.fourier_shift(off[r0:r1, c0:c1], 0.25 * np.sin(th), 0.5 * np.cos(th))
+            off[r0:r1, c0:c1] = T.fourier_shift(off[r0:r1, c0:c1], amp * 0.25 * np.sin(th), amp * 0.5 * np.cos(th))
         sh = T.shifts(ref, off, allc).reshape(7, n, 2)
         q[:, k, :] = sh[0] - 0.5 * (np.median(sh[1:4], axis=0) + np.median(sh[4:7], axis=0))
     q[..., 0] *= rs
@@ -148,9 +148,32 @@ def run(site, pairs, control_only=False):
     print({k: v for k, v in res.items() if k != "pairs"})
 
 
+def power_sim():
+    """Synthetic only: cache images for 8 lines x 3 passes and controls at 1x, 2x, 4x the standard plant."""
+    rng = np.random.default_rng(4)
+    m = np.zeros(T.CROP); m[100:900] = 1
+    def speckle():
+        w = rng.standard_normal((T.CROP, T.CROP)) + 1j * rng.standard_normal((T.CROP, T.CROP))
+        return np.fft.ifft(np.fft.fft(w, axis=1) * m, axis=1).astype(np.complex64)
+    out = {}
+    for li, lab in enumerate("ABC"):
+        step = (1.3, 2.0, 2.5)[li]
+        px = np.array([[330 + step * i, 512.0 + 0.2 * i] for i in range(T.NPOS)], np.float32)
+        ims = [Q.images(T.displacement(speckle(), px[None], 0.5, 0.5)[0]) for _ in range(8)]
+        out[f"{lab}_prim"] = np.array([x[0] for x in ims]); out[f"{lab}_sec"] = np.array([x[1] for x in ims])
+        for amp in (1.0, 2.0, 4.0):
+            p_, s_ = Q.images(planted_displacement(speckle(), px, 0.5, 0.5, amp))
+            out[f"{lab}_ctrl{amp}_prim"], out[f"{lab}_ctrl{amp}_sec"] = p_, s_
+        print("power pass", lab, flush=True)
+        np.savez_compressed(os.path.join(T.RUNS, "test_r_power_sim.npz"), **out)
+    print("POWER DONE", flush=True)
+
+
 if __name__ == "__main__":
     a = sys.argv[1:]
-    if a[0] == "--selftest":
+    if a[0] == "--power":
+        power_sim()
+    elif a[0] == "--selftest":
         selftest()
     elif a[0] == "--run":
         run(a[1], [x.split("=", 1) for x in a[2:]])

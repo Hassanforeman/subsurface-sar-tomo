@@ -55,4 +55,16 @@ scattered offsets; no line met R.2 step 3 in any pass. **Amendment R-a (before a
 are smoothed with a 7 x 7 m box (speckle reduction) before matching; thresholds unchanged. One retry
 only. If fewer than 8 lines survive, Bingham is INCONCLUSIVE and is not processed.
 
+**Bingham placement, retry with R-a (14:45):** peaks rose to 0.10-0.57 but offsets scatter up to 167 m.
+Lines passing R.2 step 3: 01-11 six, 02-26 six, 03-11 four, 05-08 five; **none passes in all four**.
+Fewer than 8 lines: **Bingham is INCONCLUSIVE and is not processed.** Cause: pit relief plus look directions
+57-118 deg; a terrain model is needed. Placement files stay on the Mac (runs/r_bing_*.npz).
+
+**Selftest gate (14:35): FAIL.** runs/test_r_selftest.json. Null behaviour correct (unplanted lines:
+p 0.20 / 0.24 / 0.78), but the planted control exceeded the different-line 95th percentile in 0 of 3 pairs
+on the primary image (2 of 3 on the secondary). The statistic is not sensitive to the standard 0.5-pixel
+plant. **No real scene has been processed under Test R.** Next (synthetic only): a power simulation with
+plants at 1x, 2x and 4x the standard size and alternative statistics, to find what repeat signal the
+comparison can detect (src/test_r_repeat_pass.py --power).
+
 *Further records to be appended.*
