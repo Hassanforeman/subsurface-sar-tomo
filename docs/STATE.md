@@ -348,6 +348,13 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       ARF page (archaeologicalrescue.org/biondi-validation, linked from Grassi's 12 Nov post): no code or scene IDs; his
       "filtered" scan 3 has adjusted R^2 max ~0.009 and its shaft silhouette sits where the map is nearly empty; interactive
       3-D HTML models embed data [runnable: analyse the Western Cemetery plotly file, e.g. depth-axis periodicity].
+      PLAN 12 Nov (Hassan: recreate more scans, show repeat scans differ). Data already held (inventory 13:25): Giza x3 passes;
+      **Vesuvius** Umbra 2023-11-15 (40.821 N 14.426 E, on the 'My Passport for Mac' drive); **Bingham mine x5 passes**
+      (2024-01-11, 01-12, 02-26, 03-11, 05-08, same scene centre; look angles differ 57-118 deg and the pit is deep, so
+      same-ground comparison needs a terrain model); Butte; Komati; Capella Cairo (35 s).
+      [ ] Test Q repeat-pass, Giza x3: PRE-REGISTERED -> docs/PREREGISTRATION_REPEAT_PASS_2026-11-12.md. Run next.
+      [ ] Exploration V: tune a Vesuvius crater line to resemble Biondi's Vesuvius echograph; same tuning on noise. Not started.
+      [ ] Bingham x5 repeat-pass: not designed (needs DEM or flat sub-area).
       Blob-matching pass (exploration): 10,000 tunings each; matching blobs in all 4 of his ovals found for shaft line
       15x, bare desert 27x, pure noise 24x (3 known levels: 48 / 55 / 62). runs/explore_p_03-08_blobs.png.
       RELEASED-DATA ANALYSIS 12 Nov -> docs/ANALYSIS_ARF_RELEASED_DATA_2026-11-12.md (src/noise_floor_adjr2.py,
