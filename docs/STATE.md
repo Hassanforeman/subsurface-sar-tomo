@@ -356,8 +356,10 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
           again because the statistic's row-mean removal erases a line-wide plant). No conclusion either way. The post-hoc
           "does not repeat" note in RESULTS_FAKE_TARGETS s5 is bannered as weakened: DO NOT CITE. Descriptive only: same-line
           minus different-line correlation +0.10 (p 0.014) for Feb7-Feb8 (one day apart), -0.02 and -0.13 with Mar8.
-      [ ] Successor repeat-pass test: new pre-registration; statistic + control must pass a synthetic selftest FIRST
-          (localised planted blobs at several positions; no row-mean removal, or plant not uniform along the line).
+      [x] Test R (successor, selftest-gated): **Giza x3 DOES NOT REPEAT** (12 Nov) -> docs/RESULTS_REPEAT_PASS_2026-11-12.md.
+          Planted repeat 0.70-0.86; real same-line effect +0.10 (p 0.014, one-day pair), -0.02, -0.13. THREE CAVEATS travel
+          with it: unblinded main numbers; sensitive only to >= ~1 px repeating displacement (0.5 px missed); our reconstruction.
+          Bingham x5: INCONCLUSIVE at placement (needs a terrain model). [needs-data: DEM for Bingham]
       [ ] Exploration V: tune a Vesuvius crater line to resemble Biondi's Vesuvius echograph; same tuning on noise. Not started.
       [ ] Bingham x5 repeat-pass: not designed (needs DEM or flat sub-area).
       Blob-matching pass (exploration): 10,000 tunings each; matching blobs in all 4 of his ovals found for shaft line

@@ -79,4 +79,5 @@ standard size; statistic and decision rule unchanged. The gate condition is met 
 only speak about repeating signals of about one pixel of oscillating displacement or more; it is blind to
 weaker ones. Giza main numbers remain those already disclosed in R.2.
 
-*Further records to be appended.*
+**Giza result (14:56): DOES NOT REPEAT (primary; unblinded main numbers; control 3 of 3 at 0.70-0.86).**
+Secondary INCONCLUSIVE (control 1 of 3). Details and caveats: RESULTS_REPEAT_PASS_2026-11-12.md.
