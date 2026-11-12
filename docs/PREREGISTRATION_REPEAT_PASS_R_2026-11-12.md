@@ -67,4 +67,16 @@ plant. **No real scene has been processed under Test R.** Next (synthetic only):
 plants at 1x, 2x and 4x the standard size and alternative statistics, to find what repeat signal the
 comparison can detect (src/test_r_repeat_pass.py --power).
 
+**Power simulation (14:54; synthetic only; runs/test_r_power_summary.json).** Share of pass pairs in which
+a planted repeat exceeded the different-line 95th percentile, primary statistic: standard plant (0.5 px)
+1 of 3 (correlations 0.03, 0.15, 0.49); twice the standard (1.0 px azimuth, 0.5 px range) 3 of 3 (0.80,
+0.78, 0.68); four times 3 of 3 (0.90, 0.85, 0.92). Smoothing or a top-10% overlap statistic did not help
+at the standard size.
+
+**Amendment R-b (before any real control or Bingham data):** the control is planted at **twice** the
+standard size; statistic and decision rule unchanged. The gate condition is met on synthetic data
+(3 of 3; null p 0.20-0.78 in the selftest). **Scope change that must travel with any verdict:** Test R can
+only speak about repeating signals of about one pixel of oscillating displacement or more; it is blind to
+weaker ones. Giza main numbers remain those already disclosed in R.2.
+
 *Further records to be appended.*

@@ -10,6 +10,7 @@ import test_p_fake_targets as T
 import test_q_repeat_pass as Q
 
 PLANTS = [((22, 38), 12.0), ((67, 83), 22.0), ((112, 128), 33.0)]
+CTRL_AMP = 2.0      # amendment R-b: control at twice the standard plant (1.0 px azimuth, 0.5 px range)
 
 
 def planted_displacement(img, px, rs, cs, amp=1.0):
@@ -59,7 +60,7 @@ def control_images(d, tag):
         z = np.load(f)
         return z["prim"], z["sec"]
     k = int(d["ctrl_line"]) if "ctrl_line" in d else int(np.argmax(d["ok"]))
-    p, s = Q.images(planted_displacement(d["crops"][k].copy(), d["px"][k], float(d["row_ss"]), float(d["col_ss"])))
+    p, s = Q.images(planted_displacement(d["crops"][k].copy(), d["px"][k], float(d["row_ss"]), float(d["col_ss"]), CTRL_AMP))
     np.savez_compressed(f, prim=p, sec=s)
     return p, s
 
