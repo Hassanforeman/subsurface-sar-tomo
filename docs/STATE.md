@@ -360,8 +360,10 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
           Planted repeat 0.70-0.86; real same-line effect +0.10 (p 0.014, one-day pair), -0.02, -0.13. THREE CAVEATS travel
           with it: unblinded main numbers; sensitive only to >= ~1 px repeating displacement (0.5 px missed); our reconstruction.
           Bingham x5: INCONCLUSIVE at placement (needs a terrain model). [needs-data: DEM for Bingham]
-      [ ] Exploration V: tune a Vesuvius crater line to resemble Biondi's Vesuvius echograph; same tuning on noise. Not started.
-      [ ] Bingham x5 repeat-pass: not designed (needs DEM or flat sub-area).
+      [x] Exploration V (12 Nov): Vesuvius look-alike is WEAK. Whole-image correlation with Biondi Fig. 8(b) 0.75-0.76 for
+          real line, brightness-only noise and pure noise alike (that is the shared top-to-bottom fade); detail-only
+          0.16 / 0.23 / 0.29; his hot patch and dark bands not reproduced. -> EXPLORATION_LOOKALIKE_2026-11-12.md.
+      [x] Bingham x5 repeat-pass: attempted under Test R; INCONCLUSIVE at placement (see Test R line).
       Blob-matching pass (exploration): 10,000 tunings each; matching blobs in all 4 of his ovals found for shaft line
       15x, bare desert 27x, pure noise 24x (3 known levels: 48 / 55 / 62). runs/explore_p_03-08_blobs.png.
       RELEASED-DATA ANALYSIS 12 Nov -> docs/ANALYSIS_ARF_RELEASED_DATA_2026-11-12.md (src/noise_floor_adjr2.py,
