@@ -51,3 +51,22 @@ tunings (0.27-0.34 at 100 draws, 0.37-0.39 at 1,000, 0.37-0.42 at 10,000). With 
 line is not the best match; noise is. The earlier ordering (shaft line highest) came from its five-fold
 larger budget. A ceiling near 0.4 is expected: the exact patch positions in his image and ours come from
 different data, so only the general texture and depth fall-off can be matched.
+
+## Fourth pass: match their blobs' location, size and intensity (12 Nov, `src/explore_p_blobs.py`, `runs/explore_p_03-08_blobs.json/.png`)
+Hassan's framing: they treat "a blob roughly where the chamber should be" as proof, so tune until ours do
+the same. Ovals: position 120, depths 10 / 22 / 33 m (known levels) and 46 m (the deeper "unknown" one),
+half-sizes 10 positions x 3 m. "Loose match", made explicit: a blob in every oval at least half as bright
+as his (relative to each image's own scale) and mean blob width and height within a factor 2 of his
+(his: 3.5 positions x 1.6 m; 16% of the image lit). 10,000 random tunings each, same budget:
+
+| Source | tunings matching all 4 ovals | matching the 3 known levels |
+|---|---|---|
+| Shaft line | 15 of 9,181 (0.16%) | 48 (0.5%) |
+| Bare desert | 27 of 9,333 (0.29%) | 55 (0.6%) |
+| Pure noise | 24 of 9,349 (0.26%) | 62 (0.7%) |
+
+So a tuning that puts matching blobs in their ovals exists for empty desert and for noise, and is found
+in about three minutes of search; desert and noise yield one slightly more often than the shaft line. It
+is rare for any single random tuning (about 1 in 400 for four ovals, 1 in 170 for three): a match needs
+deliberate dial-turning, which is what the video and his posts describe (versions 1.4 to 1.9, changed
+depth law, changed filtering, three scans). The best desert image is the closest look-alike.

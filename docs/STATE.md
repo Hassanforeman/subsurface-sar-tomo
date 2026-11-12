@@ -348,6 +348,8 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       ARF page (archaeologicalrescue.org/biondi-validation, linked from Grassi's 12 Nov post): no code or scene IDs; his
       "filtered" scan 3 has adjusted R^2 max ~0.009 and its shaft silhouette sits where the map is nearly empty; interactive
       3-D HTML models embed data [runnable: analyse the Western Cemetery plotly file, e.g. depth-axis periodicity].
+      Blob-matching pass (exploration): 10,000 tunings each; matching blobs in all 4 of his ovals found for shaft line
+      15x, bare desert 27x, pure noise 24x (3 known levels: 48 / 55 / 62). runs/explore_p_03-08_blobs.png.
       RELEASED-DATA ANALYSIS 12 Nov -> docs/ANALYSIS_ARF_RELEASED_DATA_2026-11-12.md (src/noise_floor_adjr2.py,
       runs/noise_floor_adjr2.json, runs/arf_western_cemetery_stats.json). Their Western Cemetery 3-D model embeds adjusted
       R^2 per cell (ICEYE X13, K=3208, W=1900): maximum 0.0041 in the whole model, 3 of 8 lines empty. White noise under
