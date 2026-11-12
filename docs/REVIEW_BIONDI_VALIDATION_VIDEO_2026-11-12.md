@@ -38,4 +38,47 @@ patterns (our noise-only result, paper v6.3). Caveat on our side: our noise mech
 shown for Biondi's published accumulation route; v1.9 uses "window fits / adjusted R^2", which we have not run. A noise
 control on v1.9 itself is the decisive check; ask for it rather than assert the result.
 
-Not yet checked: the first 20 min; Grassi's "four companies" claim (not discussed in the watched part).
+## Full transcript reviewed (12 Nov, 11:40; YouTube transcript, 923 segments, 1:54:49)
+Video is 1:55, not 80 min. Opening (0:00-5:10) and post-interview segment (1:26:54-1:54:49) are Grassi narration.
+
+**Independence (Grassi's own words).** "On the very first day this paper was released ... I was already in conversation with
+Dr. Manu" (0:37); "several years of hard work throughout which I was in constant conversation with him" (1:19); "I've been
+offering and even pressuring him to consider speaking with Filippo" (2:04). Seyfzadeh co-hosts Grassi's Egypt tour, on which
+Biondi presents remotely (1:53-1:54). Independent of Biondi's code: plausible. Independent of the Grassi/Biondi circle: no.
+A Rice University geophysicist (former Shell) helped him (20:40), unnamed.
+
+**Framing.** Sceptics: "not a single one of them had the first clue of how the technology works" (0:53); scientific community
+"has become a political party" (3:20); "flood the feeds of those rudest haters" ... "they owe Biondi a public apology" (3:39);
+"hammering the final nail in the skeptic's coffin" (5:03); "a skeptic's argument just means nothing to me" (1:53:06).
+Biondi: "the retraction of the paper is politic" (6:35). Nobody named; our work is not mentioned.
+
+**Retraction/litigation.** Biondi asks MDPI to retract his Vesuvius paper too ("same science") (7:32-8:46) - the same
+consistency point as our 9 Nov letter of concern. Malanga suing MDPI's executive board, asking "1 billion" plus criminal
+complaints (11:05-12:52); Biondi says he is "out of this litigation". MDPI's stated reason, read on screen (1:42:03): requires
+"rigorous experimental validation and independent confirmation", comparison with "an established reference method", and
+"simultaneous measurements obtained using seismic sensors".
+
+**Tuning after the interview (1:27:17-1:27:42).** Low-res scan shown on the call; then a higher-res scan "with some noise";
+then "another one ... with more filtering, and he got this beautiful image that picks them up perfectly". Iterating the filter
+until the image matches the known target is tuning to match. Ovals placed in Photoshop at fixed points over all scans.
+
+**New claims beyond known features.** "at least six levels beneath the third level ... something very big on the bottom"
+of the Osiris shaft (1:29:22); a lateral tunnel; "deeper chambers which Biondi had showed". None tested.
+
+**GPR/ERT "clincher" (1:34:47-1:44:42).** (a) Khafre east face: "broad correlation", "it's possible if we shift the line a
+tiny bit, we could get a lot closer". (b) Western Cemetery (Japanese GPR/ERT team, published 2024): GPR imagery is 0.5-5 m
+deep ("only about 6 ft deep"); SAR shows "a whole mess of anomalies" there plus "two huge voids ... between 25 to 48 m" that
+no GPR saw. Comparing a cluttered SAR image with a cluttered shallow area is not a validation; no blind comparison, no
+statistics, no negative area. Does not meet MDPI's criterion (simultaneous seismic sensors).
+
+**King's/Queen's Chamber control (1:45:22-1:50:38).** Pink spots "at least roughly lining up ... in terms of height, not
+horizontally"; "He hasn't adjusted it perfectly ... could be a little slightly off"; extra anomaly offered as possible
+confirmation of the Coffer Project ramp. Excuse given: "Manu's a dermatologist, so we can cut some slack".
+
+**"Four companies" claim:** not made or supported in the video.
+
+## Science-meter rating (Claude, for Hassan)
+2/10. Credit: re-implementation from public text, planted-shift test of co-registration, calibration on known shafts, an
+on-camera statement that positive controls should come first. Against: no negative control, no blinding, depth law and
+filters tuned on the targets, hand overlays, every blob counted as a hit or new discovery, nothing released, evaluator =
+Biondi, presenter = long-time collaborator with a commercial tour.
