@@ -49,4 +49,10 @@ As Q.5. In addition: Bingham is an open pit with haul roads and benches; a REPEA
 most likely be surface relief, and DOES NOT REPEAT there says nothing about Giza.
 
 ## R.6 Selftest record, amendments and results
-*To be appended.*
+**Bingham placement, first attempt (12 Nov ~14:40; amplitude only, no S-like image exists for Bingham):**
+with single-pixel chips at 1 m posting, correlation peaks against the 2024-01-12 pass were 0.02-0.15 with
+scattered offsets; no line met R.2 step 3 in any pass. **Amendment R-a (before any Bingham image):** chips
+are smoothed with a 7 x 7 m box (speckle reduction) before matching; thresholds unchanged. One retry
+only. If fewer than 8 lines survive, Bingham is INCONCLUSIVE and is not processed.
+
+*Further records to be appended.*
