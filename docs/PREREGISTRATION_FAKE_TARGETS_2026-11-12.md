@@ -152,4 +152,15 @@ image exists).* A 1024x1024 crop centred on each line. Azimuth = image columns.
   line pixel coordinates; the crop step computes no statistic. 02-07 is read directly.
 P.3-P.7 otherwise unchanged. Placement check (amplitude only) is recorded below before the main run.
 
+**Amendment A8 (12 Nov, after the synthetic selftest, before any real-scene image).** The selftest
+(`--selftest`, generated speckle, no SICD) showed that the P.5 hit rule fails its own positive control:
+the planted 10/22/33 m signal was plainly recovered in the image (runs/test_p_selftest.png) but scored
+F = 0, because the 90th-percentile threshold is set by the bright 0-2 m band (slow drift fits) that every
+image has. Options were compared **on the synthetic selftest only** (control F, p against 200 fakes on
+unplanted speckle): rows >= 4 m with percentile 90: F 0.000, p 1.0; percentile 75: F 0.206, p 0.005;
+percentile 50: F 0.848, p 0.005. Adopted: **threshold = 75th percentile of non-zero pixels deeper than
+4 m** (the strictest option tested under which a real planted signal passes). Same rule for every
+target. Busyness is reported on the same rows. Side observation from the selftest (not a result): on
+pure speckle 30% of fake targets reach 3/3 under some configuration with this rule.
+
 **Placement record and result:** *to be appended.*
