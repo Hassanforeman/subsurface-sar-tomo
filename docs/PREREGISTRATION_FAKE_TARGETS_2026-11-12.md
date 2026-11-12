@@ -163,4 +163,12 @@ percentile 50: F 0.848, p 0.005. Adopted: **threshold = 75th percentile of non-z
 target. Busyness is reported on the same rows. Side observation from the selftest (not a result): on
 pure speckle 30% of fake targets reach 3/3 under some configuration with this rule.
 
-**Placement record and result:** *to be appended.*
+**Placement record (12 Nov, amplitude only: runs/test_p_placement_02-07.png, _03-08.png).**
+- 02-07 and 03-08: the Osiris line lies along the dark causeway strip between the mastaba fields, shaft
+  mark (position 120) on the strip: PASS. Desert line on open ground with dunes/tracks, no structures:
+  PASS. No line was moved.
+- 02-08 (secondary): with the test-G pixel correction the desert line falls outside the image (column
+  about -180), so N2 cannot be computed. **02-08 is not run**; it was never in the verdict.
+- Mac note: 03-08 was cropped on the Mac with a copy of the script (runs/_test_p_extract.py) and staged.
+
+**Result:** *to be appended.*
