@@ -86,10 +86,12 @@ def render(S, amp, s, c0, vs, hs, gamma, aw):
     return img / m if m > 0 else img
 
 
-def search(draws=4000):
+def search(draws=4000, detrend=False, tag=''):
     his = his_fig()
     ok = np.isfinite(his)
     hsm = np.where(ok, his, np.nanmean(his))
+    rowm = lambda x: x - np.nanmean(np.where(ok, x, np.nan), axis=0, keepdims=True) if detrend else x
+    hcmp = rowm(hsm)
     M = np.load(os.path.join(RUNS, "explore_ves_maps.npz"))
     amp = M["amp"]
     res, imgs = {}, {}
@@ -105,7 +107,7 @@ def search(draws=4000):
             img = render(M[f"{kind}_{mode}"], amp, par["s"], par["c0"], par["vs"], par["hs"], par["gamma"], par["aw"])
             if par["mirror"]:
                 img = img[::-1]
-            c = float(np.corrcoef(img[ok], hsm[ok])[0, 1]) if img.std() > 0 else -1
+            c = float(np.corrcoef(rowm(img)[ok], hcmp[ok])[0, 1]) if img.std() > 0 else -1
             if c > best:
                 best, bpar, bimg = c, par, img
             if d + 1 in (100, 1000, draws):
@@ -113,7 +115,7 @@ def search(draws=4000):
         res[kind] = dict(best_corr=best, params=bpar, trace=trace)
         imgs[kind] = bimg
         print(kind, round(best, 3), trace, bpar, flush=True)
-    json.dump(dict(draws=draws, result=res), open(os.path.join(RUNS, "explore_ves.json"), "w"), indent=1)
+    json.dump(dict(draws=draws, result=res), open(os.path.join(RUNS, f"explore_ves{tag}.json"), "w"), indent=1)
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -130,7 +132,7 @@ def search(draws=4000):
         a.set_ylabel("nominal height (m)")
     ax[-1].set_xlabel("range direction (his pixel scale)")
     fig.suptitle("EXPLORATION: tuned after the fact to resemble his figure - different satellite, our reconstruction", y=0.995)
-    fig.tight_layout(); fig.savefig(os.path.join(RUNS, "explore_ves.png"), dpi=100)
+    fig.tight_layout(); fig.savefig(os.path.join(RUNS, f"explore_ves{tag}.png"), dpi=100)
 
 
 if __name__ == "__main__":
@@ -141,5 +143,7 @@ if __name__ == "__main__":
         maps()
     elif a[0] == "--search":
         search(int(a[1]) if len(a) > 1 else 4000)
+    elif a[0] == "--search2":
+        search(4000, detrend=True, tag="_detail")
     elif a[0] == "--all":
         prep(a[1]); maps(); search()

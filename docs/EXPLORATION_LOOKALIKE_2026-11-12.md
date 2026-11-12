@@ -79,3 +79,18 @@ lines masked: **0.23-0.39** (runs/manu_vs_biondi_panel_corr.json). Sliding one p
 pixels gives 0.03-0.10 on average and up to 0.25-0.36 at the best wrong offset. In the higher-resolution
 Seyfzadeh scan 2, the large left oval is empty. For scale: our tuned images reached 0.37-0.42 against his
 scan 1. Rough: video-frame pixels, guessed colour scale, hand-aligned by them.
+
+## Vesuvius look-alike (12 Nov, `src/explore_vesuvius_lookalike.py`, `runs/explore_ves*.json/.png`)
+Target: Fig. 8(b) of Biondi 2022 (Remote Sens. 14, 3828), read off the published figure. Ours: Umbra
+2023-11-15, a range line through the crater (2,200 positions), S-like pipeline, 4,000 random tunings per
+input. Inputs: the real line; noise carrying only the scene's brightness envelope; pure noise.
+- **Whole image:** best correlation with his figure 0.75 (real), 0.76 (brightness-only noise), 0.76 (pure
+  noise). This number is almost entirely the top-to-bottom fade that both images share; our tuned images
+  are a saturated smear and do **not** look like his figure to the eye.
+- **Detail only (each height row's mean removed):** see `explore_ves_detail.json`; real, brightness-only
+  noise and pure noise all land near 0.2-0.3. The hot patch under the crater and the dark vertical bands
+  in his figure are not reproduced.
+**Reading:** the fade with depth, which is most of what a correlation sees in his figure, comes out of
+noise as readily as out of the real line. His fine structure is not reproduced by us from any input, so
+this exploration says nothing about whether that structure is real. Different satellite (his:
+COSMO-SkyMed), different line, our reconstruction of a different author's pipeline. A weak look-alike.
