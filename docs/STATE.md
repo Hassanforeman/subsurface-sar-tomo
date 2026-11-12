@@ -352,7 +352,12 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       **Vesuvius** Umbra 2023-11-15 (40.821 N 14.426 E, on the 'My Passport for Mac' drive); **Bingham mine x5 passes**
       (2024-01-11, 01-12, 02-26, 03-11, 05-08, same scene centre; look angles differ 57-118 deg and the pit is deep, so
       same-ground comparison needs a terrain model); Butte; Komati; Capella Cairo (35 s).
-      [ ] Test Q repeat-pass, Giza x3: PRE-REGISTERED -> docs/PREREGISTRATION_REPEAT_PASS_2026-11-12.md. Run next.
+      [x] Test Q repeat-pass, Giza x3: RUN 12 Nov -> **INCONCLUSIVE** (positive control failed; redone once as Q2, failed
+          again because the statistic's row-mean removal erases a line-wide plant). No conclusion either way. The post-hoc
+          "does not repeat" note in RESULTS_FAKE_TARGETS s5 is bannered as weakened: DO NOT CITE. Descriptive only: same-line
+          minus different-line correlation +0.10 (p 0.014) for Feb7-Feb8 (one day apart), -0.02 and -0.13 with Mar8.
+      [ ] Successor repeat-pass test: new pre-registration; statistic + control must pass a synthetic selftest FIRST
+          (localised planted blobs at several positions; no row-mean removal, or plant not uniform along the line).
       [ ] Exploration V: tune a Vesuvius crater line to resemble Biondi's Vesuvius echograph; same tuning on noise. Not started.
       [ ] Bingham x5 repeat-pass: not designed (needs DEM or flat sub-area).
       Blob-matching pass (exploration): 10,000 tunings each; matching blobs in all 4 of his ovals found for shaft line

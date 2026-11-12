@@ -63,3 +63,13 @@ of half-width 20 pixels around the line's pixel path, in every pass. Rule unchan
 must exceed the different-line 95th percentile in at least 2 of 3 pairs. If it passes, the Q.4 decision
 rule is applied to the main numbers already recorded above; this verdict is labelled "Q2 (control
 redesigned after unblinding)" wherever it is quoted. If it fails again, Test Q stays INCONCLUSIVE.
+
+**Q2 result (12 Nov, 14:00): control failed again (0 of 3 pairs, primary and secondary; control
+correlations -0.23 to +0.07). Test Q is INCONCLUSIVE and stays so.** runs/test_q_control_q2.json.
+Cause, found afterwards: the comparison statistic subtracts each depth row's mean along the line, which
+removes any signal that is the same along the whole line, so the Q2 plant was erased by the statistic
+itself. Two control designs have now failed for reasons of our own making. **No conclusion about
+repeatability may be drawn from Test Q, in either direction.** Lesson recorded: the statistic and the
+control must be shown to work on a synthetic selftest before any real data are touched (as Test P did);
+Test Q skipped that step. Any successor test needs a new pre-registration with that selftest first. No
+further changes to Test Q.

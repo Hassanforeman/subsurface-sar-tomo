@@ -1,0 +1,34 @@
+{
+ "prim:Feb7-Feb8": {
+  "control_corr_q2": -0.007620103235579408,
+  "diff_p95": 0.33263170379739343,
+  "control_pass_q2": false
+ },
+ "prim:Feb7-Mar8": {
+  "control_corr_q2": 0.06642294730195439,
+  "diff_p95": 0.27635955191478817,
+  "control_pass_q2": false
+ },
+ "prim:Feb8-Mar8": {
+  "control_corr_q2": -0.23114726875129377,
+  "diff_p95": 0.2705546574657975,
+  "control_pass_q2": false
+ },
+ "verdict_q2_prim": "INCONCLUSIVE",
+ "sec:Feb7-Feb8": {
+  "control_corr_q2": -0.15545609402716434,
+  "diff_p95": 0.1563827934044004,
+  "control_pass_q2": false
+ },
+ "sec:Feb7-Mar8": {
+  "control_corr_q2": 0.03967474096696717,
+  "diff_p95": 0.16648431036461478,
+  "control_pass_q2": false
+ },
+ "sec:Feb8-Mar8": {
+  "control_corr_q2": 0.026332927261152064,
+  "diff_p95": 0.15090551009545303,
+  "control_pass_q2": false
+ },
+ "verdict_q2_sec": "INCONCLUSIVE"
+}

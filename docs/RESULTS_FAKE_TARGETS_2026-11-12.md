@@ -50,6 +50,9 @@ for an invented target.
 - The fake-target list is public: the stronger test is for him to run it on his own pipeline and data.
 
 ## 5. Post hoc: do the patches repeat between two passes over the same ground? (12 Nov, descriptive)
+> ⚠️ WEAKENED 12 Nov 14:00 by Test Q (PREREGISTRATION_REPEAT_PASS_2026-11-12.md): the same comparison statistic
+> failed to detect a planted repeating signal, twice. The near-zero correlations below therefore do NOT
+> show that the patches fail to repeat; the statistic may simply be blind. Do not cite this section.
 `runs/test_p_posthoc_repeat_pass.json`. Test P score maps (untuned pipeline), rows deeper than 4 m, 3-pixel
 smoothing, per-depth mean removed, at depth scales 0.5 / 1 / 2. Correlation of the shaft-line image from the
 7 Feb pass with the same line from the 8 Mar pass: **0.10 / -0.03 / -0.05**. For comparison, pairs that
