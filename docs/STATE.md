@@ -328,7 +328,9 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       independent effort", "no communications with Filippo", "I only use what he published". Slide "Biondi Protocol v1.9 -
       Coregistration Process" (128x128 frames, cross-correlation "unnormalized phase", Fourier shift, 24x32 core) = the
       BiondiProtocol GitHub protocol (v1.7 in Sep, now v1.9). Live chat: ArchaeoSAR / Archaeological Rescue Foundation pitch.
-      Full review scheduled 10:40 after the premiere ends.
+      REVIEWED 12 Nov (watched ~21-87 min live) -> docs/REVIEW_BIONDI_VALIDATION_VIDEO_2026-11-12.md. Verdict: demonstration,
+      not validation (known target, tuned depth, hand overlay, no negative control, nothing released). Long X reply drafted
+      for Hassan (not posted by Claude). OPEN: run a noise/desert control on BiondiProtocol v1.9 itself if released.
 - [x] 10 Nov: 2022 Khufu paper re-read for its treatment of known/later-confirmed structures and its acquisition table
       → docs/REVIEW_BIONDI2022_KHUFU_2026-11-10.md. New: paper says SAR found "no trace" of the muon Big Void (names another
       object "Big-void"); its NFC = 15.4 × 5.7 m room + 43.9 m conduit to the Grand Gallery vs the real 9 m × 2 m blind corridor
