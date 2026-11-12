@@ -1,0 +1,26 @@
+{
+ "jet_inverse": {
+  "corr": 0.302,
+  "shifted_mean": 0.098,
+  "shifted_min": -0.034,
+  "shifted_max": 0.251
+ },
+ "R_minus_B": {
+  "corr": 0.387,
+  "shifted_mean": 0.091,
+  "shifted_min": -0.108,
+  "shifted_max": 0.363
+ },
+ "brightness": {
+  "corr": 0.322,
+  "shifted_mean": 0.032,
+  "shifted_min": -0.124,
+  "shifted_max": 0.325
+ },
+ "inverted_panel_blue_minus_red": {
+  "corr": 0.23,
+  "shifted_mean": 0.055,
+  "shifted_min": -0.133,
+  "shifted_max": 0.273
+ }
+}

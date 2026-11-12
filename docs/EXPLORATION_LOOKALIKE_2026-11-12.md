@@ -70,3 +70,12 @@ in about three minutes of search; desert and noise yield one slightly more often
 is rare for any single random tuning (about 1 in 400 for four ovals, 1 in 170 for three): a match needs
 deliberate dial-turning, which is what the video and his posts describe (versions 1.4 to 1.9, changed
 depth law, changed filtering, three scans). The best desert image is the closest look-alike.
+
+## How well does Seyfzadeh's scan match Biondi's at the same place? (12 Nov, rough)
+Measured on Grassi's side-by-side frame (`four_panel_comparison_61m.png`, 61 min), which he aligned by
+hand in Photoshop ("you can stretch it a bit"). Seyfzadeh scan 1 read with the magma scale; Biondi's panel
+has no stated colour scale, so four conversions were tried. Correlation after 9-pixel smoothing, oval
+lines masked: **0.23-0.39** (runs/manu_vs_biondi_panel_corr.json). Sliding one panel sideways by 80-520
+pixels gives 0.03-0.10 on average and up to 0.25-0.36 at the best wrong offset. In the higher-resolution
+Seyfzadeh scan 2, the large left oval is empty. For scale: our tuned images reached 0.37-0.42 against his
+scan 1. Rough: video-frame pixels, guessed colour scale, hand-aligned by them.
