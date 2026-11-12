@@ -48,3 +48,13 @@ for an invented target.
 - Hit threshold (A8) was set on a synthetic selftest after the original rule failed its control.
 - N1 is contaminated by other real shafts near the causeway line (stated in P.5).
 - The fake-target list is public: the stronger test is for him to run it on his own pipeline and data.
+
+## 5. Post hoc: do the patches repeat between two passes over the same ground? (12 Nov, descriptive)
+`runs/test_p_posthoc_repeat_pass.json`. Test P score maps (untuned pipeline), rows deeper than 4 m, 3-pixel
+smoothing, per-depth mean removed, at depth scales 0.5 / 1 / 2. Correlation of the shaft-line image from the
+7 Feb pass with the same line from the 8 Mar pass: **0.10 / -0.03 / -0.05**. For comparison, pairs that
+share no ground: shaft (Feb) vs desert (Mar) 0.13 / 0.17 / 0.30; shaft (Feb) vs noise 0.41 / 0.50 / 0.24;
+desert Feb vs Mar 0.31 / 0.32 / 0.38. Same pass with the line moved 2 m: -0.12 / -0.19 / -0.11. The patch
+pattern over the shaft does not repeat from one pass to the next; unrelated pairs correlate as much or
+more (residual shared depth structure sets a baseline of roughly 0.1-0.5). Limits: two passes only,
+different satellites and resolutions (0.47x0.83 m vs 0.23x0.21 m), not pre-registered.

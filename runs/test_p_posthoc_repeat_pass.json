@@ -1,0 +1,26 @@
+{
+ "s=0.5": {
+  "shaft line, Feb pass vs Mar pass": 0.103,
+  "desert line, Feb vs Mar": 0.307,
+  "shaft (Feb) vs desert (Mar)": 0.125,
+  "shaft (Feb) vs noise": 0.406,
+  "same pass, line moved 2 m (shaft, Mar)": -0.123,
+  "same pass, line moved 2 m (noise)": -0.095
+ },
+ "s=1.0": {
+  "shaft line, Feb pass vs Mar pass": -0.031,
+  "desert line, Feb vs Mar": 0.318,
+  "shaft (Feb) vs desert (Mar)": 0.174,
+  "shaft (Feb) vs noise": 0.495,
+  "same pass, line moved 2 m (shaft, Mar)": -0.194,
+  "same pass, line moved 2 m (noise)": -0.056
+ },
+ "s=2.0": {
+  "shaft line, Feb pass vs Mar pass": -0.051,
+  "desert line, Feb vs Mar": 0.375,
+  "shaft (Feb) vs desert (Mar)": 0.304,
+  "shaft (Feb) vs noise": 0.242,
+  "same pass, line moved 2 m (shaft, Mar)": -0.112,
+  "same pass, line moved 2 m (noise)": 0.086
+ }
+}
