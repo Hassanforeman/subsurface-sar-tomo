@@ -1,0 +1,12 @@
+{"source": "https://archaeologicalrescue.org/wp-content/uploads/2026/11/Yoshimura_Y27_Y34_P8_Interactive_3D.html (plotly data read in browser, 12 Nov 2026)",
+ "header": "ICEYE X13, K=3208, W=1900, b/a>0.1, unrestricted modes, uniform lambda = 0.0807481657 m, 0.1-50 m, P=8",
+ "grid": "999 depth rows (0.05 m) x up to 62 positions (~0.97 m); lines ~2.02 m apart",
+ "lines": {"Y27": {"share_nonzero": 0.0473, "max_adjR2": 0.002895, "median_nonzero": 0.00087, "p99_nonzero": 0.00267},
+           "Y28": {"share_nonzero": 0.0754, "max_adjR2": 0.003779, "median_nonzero": 0.00092, "p99_nonzero": 0.00317},
+           "Y29": {"share_nonzero": 0.0269, "max_adjR2": 0.004112, "median_nonzero": 0.00118, "p99_nonzero": 0.00401},
+           "Y30": {"share_nonzero": 0.0346, "max_adjR2": 0.002680, "median_nonzero": 0.00083, "p99_nonzero": 0.00230},
+           "Y31": {"share_nonzero": 0.0}, "Y32": {"share_nonzero": 0.0115, "max_adjR2": 0.001219}, "Y33": {"share_nonzero": 0.0}, "Y34": {"share_nonzero": 0.0}},
+ "share_nonzero_by_depth_band_0-5_5-10_10-20_20-30_30-40_40-50": {"Y27": [0, 0.0423, 0.0013, 0.0626, 0.0349, 0.1167], "Y28": [0.2048, 0.1777, 0.0039, 0.1271, 0.0492, 0.0054], "Y29": [0.0694, 0.1384, 0.0065, 0, 0, 0.0242], "Y30": [0.1196, 0.177, 0, 0.0145, 0.01, 0]},
+ "adjacent_line_jaccard": {"Y27-Y28": {"observed": 0.116, "null_position_shift_mean_max": [0.0221, 0.1446], "null_depth_shift_mean_max": [0.0829, 0.209]},
+                           "Y28-Y29": {"observed": 0.1911, "null_position_shift_mean_max": [0.0357, 0.2088], "null_depth_shift_mean_max": [0.0341, 0.1043]},
+                           "Y29-Y30": {"observed": 0.3767, "null_position_shift_mean_max": [0.0901, 0.3113], "null_depth_shift_mean_max": [0.0099, 0.0571]}}}

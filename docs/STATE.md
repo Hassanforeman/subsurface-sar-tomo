@@ -348,6 +348,11 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       ARF page (archaeologicalrescue.org/biondi-validation, linked from Grassi's 12 Nov post): no code or scene IDs; his
       "filtered" scan 3 has adjusted R^2 max ~0.009 and its shaft silhouette sits where the map is nearly empty; interactive
       3-D HTML models embed data [runnable: analyse the Western Cemetery plotly file, e.g. depth-axis periodicity].
+      RELEASED-DATA ANALYSIS 12 Nov -> docs/ANALYSIS_ARF_RELEASED_DATA_2026-11-12.md (src/noise_floor_adjr2.py,
+      runs/noise_floor_adjr2.json, runs/arf_western_cemetery_stats.json). Their Western Cemetery 3-D model embeds adjusted
+      R^2 per cell (ICEYE X13, K=3208, W=1900): maximum 0.0041 in the whole model, 3 of 8 lines empty. White noise under
+      the same settings gives 99th pct ~0.003 and max ~0.005; autocorrelated noise far more. Neighbouring lines agree, but
+      they share input patches, so that is not confirmation. Descriptive, not pre-registered; noise model of his series unknown.
       Housekeeping: Mac repo has a stale .git lock renamed to .git/stale-index-lock-2026-11-12 (from a failed pull) and
       runs/_test_p_extract.py, runs/p_0308.npz, runs/p_0208.npz (untracked, safe to delete).
       Question: with tuning freedom (315 configs: depth scale, smoothing, line shift), how often does an invented shaft
