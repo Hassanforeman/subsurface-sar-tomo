@@ -95,4 +95,61 @@ DISTINGUISHED iff both agree; else MIXED/INCONCLUSIVE.
   by this test.
 
 ## P.8 Stage-0 record, amendments and result
-*To be appended. Deliberately empty at commit time.*
+**Stage-0 record (12 Nov 2026, ~12:30 Brisbane; committed before any Test P code touched a SICD; no
+S-like image of any scene exists yet).**
+
+*Sources read.* Seyfzadeh's public Facebook page (facebook.com/manu.seyfzadeh.2025), 21 posts, read in
+Hassan's browser. Relevant facts, in his words where quoted:
+- Data are **not public**: ICEYE Spotlight Dwell Fine, 27 Aug 2025 (24.763 s; 0.7 s used) "courtesy of
+  Athanatos Foundation"; earlier work on an April 2021 Capella scene (0.7 s excerpt). Code by "OpenAI Pro
+  ChatGPT, my trained agent Sage". Helpers named: Dr Edward Biegert, Rob Neyland.
+- Pipeline (his "Khafre west base" post): 295 overlapping **Reference/Offset pairs** of Doppler-filtered
+  images ("B-shift of ~88 Hz", "leap of 11 Hz"); co-registration 128x128 then 24x32 patch "100 x
+  over-sampled"; "nearby reference patches help remove shifts shared with the surrounding scene"; convert
+  to metres; depth model fitted; "we examine every possible window of 175 consecutive displacement
+  vectors ... the best qualifying fit supplies the score"; ellipse-shape requirement; "With P=7, a
+  positive result must belong to a run of at least seven consecutive line positions at that depth".
+- Depth focus (his "Equations" and "Great Pyramid Part III" posts): a **steering matrix** of phase
+  histories per depth, compared to the data "using a discrete Fourier Transform", Hermitian adjoint;
+  "least-squares ... maximum adjusted R^2"; lambda re-estimated from two shafts of known depth
+  (Campbell's Tomb and the shaft in Khufu's temple). This is the operator analysed in our paper s3.1-3.2.
+- **His own earlier Osiris result** ("Osiris Shaft Candidate" post, Capella data, earlier version):
+  "The result is partial ... Level 1 and 2 are not lighting up ... Level 3 ... possibly recognizable as a
+  faint structure at about 35 meters". That post gives Tier 2 as **24 m**; the video says 22 m. Protocol
+  versions named in his posts/video: 1.4 -> 1.9. The target for Test P stays 10/22/33 (the match claimed
+  in the video); 10/24/33 is reported as a secondary row.
+- Osiris Shaft coordinates: **29.975406 N, 31.135597 E** (German Wikipedia, "Osiris-Grab", geosearch API,
+  read 12 Nov 2026). No coordinate found in OSM, Wikidata or English Wikipedia.
+- Line heading 102.45 deg (the ruler shown in the video at ~56 min), position 0 at the WNW end, shaft
+  at position 120.
+
+*Amendments to P.2 (replace steps 2-6; made to follow his public description more closely, before any
+image exists).* A 1024x1024 crop centred on each line. Azimuth = image columns.
+- **A1 pairs.** Reference and Offset bands each half of the crop's azimuth spectrum (Hann), offset by
+  2.26% of the spectrum (his 88.4 Hz of ~3.9 kHz), swept rigidly in K = 295 equal steps across the
+  available spectrum. (He uses a 0.7 s excerpt; we use each Umbra scene's full aperture, 1.3-5 s.)
+- **A2 displacement.** Per pair, shift of Offset relative to Reference on a 24 (az) x 32 (rg) complex
+  patch, unnormalised cross-correlation, parabolic sub-pixel peak. Deviations: parabolic instead of 100x
+  over-sampling (compute); the 128x128 regional step is omitted because A3 removes regional shifts.
+- **A3 common mode.** Six flank patches on a 48-pixel ring (three per side, at 0 and +-45 deg from the
+  azimuth axis); median per side, mean of the two sides, subtracted from the target shift.
+- **A4** Pixels to metres with the SICD row/column spacing.
+- **A5 windows.** Every window of 175 consecutive vectors (121 windows).
+- **A6 fit.** q_n = c + u cos(theta_n) + v sin(theta_n), both components, least squares; adjusted R^2
+  (6 parameters, 350 data). theta_n = 2 pi f n with f = s * z * (12/50)/175 cycles per sample: at s = 1,
+  50 m is 12 cycles per window. **This constant is ours and arbitrary** (his K_z ladder is unpublished);
+  the s knob spans 6-24 cycles at 50 m. Depth bins 0.5-50 m, step 0.5 m. Gate: singular-value ratio of
+  [u v] > 0.1. Score = best gated window, floored at 0.
+- **A7 support.** Keep only pixels with score > 0 that lie in a run of >= 8 consecutive positions at that
+  depth (P = 8, the label on his Osiris plot). Order: score -> run filter -> smoothing knob -> hit rule.
+- P.3 line-shift knob: each shifted line is processed as its own line (own run filter).
+- **P.6 control:** the displacement is applied to the Offset image inside a 64x64-pixel tile centred on
+  desert position 60: azimuth 0.5 px x cos(theta), range 0.25 px x sin(theta), summed over the three
+  depths at s = 1. Flank patches that overlap the tile are a known weakness of this control.
+- **N3 noise:** white complex Gaussian noise shaped by the scene crop's mean azimuth and range amplitude
+  spectra, processed on the Osiris-line geometry.
+- **Data handling:** 03-08 (1.7 GB) and 02-08 are cropped on the Mac to 1024x1024 complex arrays plus
+  line pixel coordinates; the crop step computes no statistic. 02-07 is read directly.
+P.3-P.7 otherwise unchanged. Placement check (amplitude only) is recorded below before the main run.
+
+**Placement record and result:** *to be appended.*
