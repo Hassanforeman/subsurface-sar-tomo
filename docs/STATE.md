@@ -334,7 +334,16 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       full 2,838-char text, both links live). NOT posted on X. Watch for replies from Grassi/Seyfzadeh/Biondi.
       OPEN: run a noise/desert control on BiondiProtocol v1.9 itself if released.
       **TEST P PRE-REGISTERED 12 Nov** (Hassan: "ok go ahead. lets do this") -> docs/PREREGISTRATION_FAKE_TARGETS_2026-11-12.md
-      + runs/test_p_fake_targets.json (200 fake three-level shafts, seed 20261112) + src/test_p_targets.py. NOT RUN.
+      + runs/test_p_fake_targets.json (200 fake three-level shafts, seed 20261112) + src/test_p_targets.py. **RUN 12 Nov: NOT DISTINGUISHED on 02-07 and 03-08**
+      -> docs/RESULTS_FAKE_TARGETS_2026-11-12.md; src/test_p_fake_targets.py; runs/test_p_02-07.json, _03-08.json.
+      Control passed (p 0.005 both). Real Osiris shaft: 0/315 configs give a 3-level match; fakes get one in some config
+      6-15% of the time on real images, 4.5-24% on noise; >=2 of 3 levels for 67-90% of fakes (post hoc). Osiris line,
+      desert and noise images look alike. SCOPE: our S-like reconstruction on Umbra, not his code/data; we did NOT
+      reproduce his image. Stage 0 also found his own earlier post: Osiris "result is partial ... Level 1 and 2 are not
+      lighting up" (Capella, earlier version), and that his depth operator is the steering-matrix DFT of our paper s3.1.
+      His data: ICEYE Dwell Fine 27 Aug 2025 via Athanatos Foundation (not public). NOT yet announced publicly.
+      Housekeeping: Mac repo has a stale .git lock renamed to .git/stale-index-lock-2026-11-12 (from a failed pull) and
+      runs/_test_p_extract.py, runs/p_0308.npz, runs/p_0208.npz (untracked, safe to delete).
       Question: with tuning freedom (315 configs: depth scale, smoothing, line shift), how often does an invented shaft
       match as well as Osiris (10/22/33 m)? Nulls: same image, bare desert, noise. Positive control planted. "S-like" =
       OUR reconstruction from his plot labels, not his code.

@@ -1,0 +1,16 @@
+{
+ "02-07": {
+  "real_max_levels_hit": 2,
+  "fakes_same_image_mean": 1.955128205128205,
+  "fakes_same_image_share_ge2": 0.8333333333333334,
+  "desert_share_ge2": 0.82,
+  "noise_share_ge2": 0.9
+ },
+ "03-08": {
+  "real_max_levels_hit": 2,
+  "fakes_same_image_mean": 1.8076923076923077,
+  "fakes_same_image_share_ge2": 0.75,
+  "desert_share_ge2": 0.74,
+  "noise_share_ge2": 0.67
+ }
+}

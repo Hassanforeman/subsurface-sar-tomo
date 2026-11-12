@@ -171,4 +171,7 @@ pure speckle 30% of fake targets reach 3/3 under some configuration with this ru
   about -180), so N2 cannot be computed. **02-08 is not run**; it was never in the verdict.
 - Mac note: 03-08 was cropped on the Mac with a copy of the script (runs/_test_p_extract.py) and staged.
 
-**Result:** *to be appended.*
+**Result (appended 12 Nov 2026).** Both scenes **NOT DISTINGUISHED**; control passed in both (p 0.005).
+Real shaft: 0 of 315 configurations with 3/3 in 02-07 and in 03-08. Fakes reaching 3/3 in some
+configuration: 12% / 15% / 24% (02-07: same image / desert / noise) and 6% / 6% / 4.5% (03-08).
+Full table, post-hoc notes and limits: `RESULTS_FAKE_TARGETS_2026-11-12.md`.
