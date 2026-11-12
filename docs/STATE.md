@@ -342,6 +342,12 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       reproduce his image. Stage 0 also found his own earlier post: Osiris "result is partial ... Level 1 and 2 are not
       lighting up" (Capella, earlier version), and that his depth operator is the steering-matrix DFT of our paper s3.1.
       His data: ICEYE Dwell Fine 27 Aug 2025 via Athanatos Foundation (not public). NOT yet announced publicly.
+      EXPLORATION 12 Nov (not a test): free tuning to resemble his image -> docs/EXPLORATION_LOOKALIKE_2026-11-12.md,
+      src/explore_p_lookalike.py, runs/explore_p_03-08_fine.png. Tuned images from the Osiris line, bare desert and pure noise
+      all show his kind of patchy field with "hits" at 10/22/33 m (correlation with his image 0.37 / 0.27 / 0.19).
+      ARF page (archaeologicalrescue.org/biondi-validation, linked from Grassi's 12 Nov post): no code or scene IDs; his
+      "filtered" scan 3 has adjusted R^2 max ~0.009 and its shaft silhouette sits where the map is nearly empty; interactive
+      3-D HTML models embed data [runnable: analyse the Western Cemetery plotly file, e.g. depth-axis periodicity].
       Housekeeping: Mac repo has a stale .git lock renamed to .git/stale-index-lock-2026-11-12 (from a failed pull) and
       runs/_test_p_extract.py, runs/p_0308.npz, runs/p_0208.npz (untracked, safe to delete).
       Question: with tuning freedom (315 configs: depth scale, smoothing, line shift), how often does an invented shaft
