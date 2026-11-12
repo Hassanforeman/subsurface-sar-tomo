@@ -42,3 +42,12 @@ artifact (different data, different code).
 - Page claims: "independent, 3rd party replication"; retraction "politically motivated"; Grassi "in
   constant communication with them both"; Seyfzadeh "plans to present the work ... for peer review".
 - Links: MDPI litigation PDF; a ChatGPT conversation page (opusmagnum.org/cracking-the-biondi-code-with-ai).
+
+## Third pass: more dials, equal budget (12 Nov, `src/explore_p_dial.py`, `runs/explore_p_03-08_dial.json/.png`)
+10,000 random tunings each for the shaft line (one line only), bare desert and pure noise; objective =
+correlation with his scan 1 only; added dials: sideways slide +-20 positions, mirror, vertical smoothing.
+Best correlation: **shaft line 0.37, bare desert 0.39, pure noise 0.42.** Gains flatten after ~1,000
+tunings (0.27-0.34 at 100 draws, 0.37-0.39 at 1,000, 0.37-0.42 at 10,000). With an equal budget the shaft
+line is not the best match; noise is. The earlier ordering (shaft line highest) came from its five-fold
+larger budget. A ceiling near 0.4 is expected: the exact patch positions in his image and ours come from
+different data, so only the general texture and depth fall-off can be matched.
