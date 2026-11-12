@@ -47,4 +47,19 @@ line i in pass B); D = mean over all i != j of (line i in A, line j in B). Effec
   would be needed before any underground reading. Reported either way.
 
 ## Q.6 Record and result
-*To be appended.*
+**Result of the run as registered (12 Nov, 13:55 Brisbane): INCONCLUSIVE — the positive control failed.**
+All 16 lines usable. Same-line minus different-line correlation, primary image: Feb7-Feb8 +0.103 (p 0.014),
+Feb7-Mar8 -0.020 (p 0.675), Feb8-Mar8 -0.129 (p 0.998). Secondary: +0.032 (0.095), +0.009 (0.368), +0.013
+(0.263). Control (planted signal on line 0) exceeded the different-line 95th percentile in 0 of 3 pairs
+(primary) and 1 of 3 (secondary). By Q.4 the verdict is INCONCLUSIVE for both. runs/test_q_repeat_pass.json.
+
+**Why the control failed (design fault, ours):** the signal was planted in one 64 x 64-pixel tile (about
+20 of 149 positions), but the statistic correlates the whole 149-position image, so the planted part is
+outvoted by the rest of the line. The control could not pass even for a perfectly repeating signal.
+
+**Amendment Q2 (written after the numbers above were seen; they are not recomputed).** Only the control is
+redone: the same displacement (P.6 amplitudes and depths) is planted along the **whole line**, in a strip
+of half-width 20 pixels around the line's pixel path, in every pass. Rule unchanged: control correlation
+must exceed the different-line 95th percentile in at least 2 of 3 pairs. If it passes, the Q.4 decision
+rule is applied to the main numbers already recorded above; this verdict is labelled "Q2 (control
+redesigned after unblinding)" wherever it is quoted. If it fails again, Test Q stays INCONCLUSIVE.

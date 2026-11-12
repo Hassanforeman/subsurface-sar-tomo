@@ -76,6 +76,59 @@ def images(q):
     return out
 
 
+def strip_displacement(img, px, rs, cs, half=20):
+    """As T.displacement for one line, with the P.6 signal planted in a strip along the whole line (Q2)."""
+    F, lo, hi = T.spectrum_support(img)
+    tg = px.reshape(-1, 2)
+    allc = np.concatenate([tg] + [tg + f for f in T.FLANKS])
+    n = tg.shape[0]
+    r0, r1 = int(tg[:, 0].min()) - half, int(tg[:, 0].max()) + half
+    c0, c1 = int(tg[:, 1].min()) - half, int(tg[:, 1].max()) + half
+    q = np.zeros((n, T.K, 2), np.float32)
+    for k in range(T.K):
+        ref, off = T.make_pair(F, lo, hi, k)
+        dr, dc = T.plant_q(k)
+        off[r0:r1, c0:c1] = T.fourier_shift(off[r0:r1, c0:c1], dr, dc)
+        sh = T.shifts(ref, off, allc).reshape(7, n, 2)
+        q[:, k, :] = sh[0] - 0.5 * (np.median(sh[1:4], axis=0) + np.median(sh[4:7], axis=0))
+    q[..., 0] *= rs
+    q[..., 1] *= cs
+    return q
+
+
+def control_q2(pairs):
+    res = json.load(open(os.path.join(T.RUNS, "test_q_repeat_pass.json")))
+    ims = {}
+    for lab, path in pairs:
+        d = np.load(path)
+        k = int(np.argmax(d["ok"]))
+        ims[lab] = images(strip_displacement(d["crops"][k].copy(), d["px"][k], float(d["row_ss"]), float(d["col_ss"])))
+        print(lab, "control done", flush=True)
+    labs = [l for l, _ in pairs]
+    out = {}
+    for ki, kind in enumerate(("prim", "sec")):
+        npass = 0
+        for a in range(3):
+            for b in range(a + 1, 3):
+                key = f"{kind}:{labs[a]}-{labs[b]}"
+                cc = corr(ims[labs[a]][ki], ims[labs[b]][ki])
+                ok = bool(cc > res["pairs"][key]["diff_p95"])
+                npass += ok
+                out[key] = dict(control_corr_q2=cc, diff_p95=res["pairs"][key]["diff_p95"], control_pass_q2=ok)
+        P = [v for k2, v in res["pairs"].items() if k2.startswith(kind)]
+        if npass < 2:
+            v = "INCONCLUSIVE"
+        elif sum(x["p"] <= 0.05 and x["effect"] > 0 for x in P) >= 2:
+            v = "REPEATS"
+        elif sum(x["p"] > 0.20 for x in P) >= 2:
+            v = "DOES NOT REPEAT"
+        else:
+            v = "MIXED"
+        out["verdict_q2_" + kind] = v
+    json.dump(out, open(os.path.join(T.RUNS, "test_q_control_q2.json"), "w"), indent=1)
+    print(json.dumps(out, indent=1))
+
+
 def corr(a, b):
     if a.std() == 0 or b.std() == 0:
         return 0.0
@@ -160,3 +213,5 @@ if __name__ == "__main__":
         print("wrote", a[2], "ok lines:", np.where(d["ok"])[0].tolist())
     elif a[0] == "--run":
         run([x.split("=", 1) for x in a[1:]])
+    elif a[0] == "--control-q2":
+        control_q2([x.split("=", 1) for x in a[1:]])
