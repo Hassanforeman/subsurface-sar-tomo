@@ -591,5 +591,5 @@ pinning is not an order effect. A weak surface-ward lean remains, unexplained an
   return small cleaned strings). Geometry: point(h, d) = (114.23 - h - 0.7839 d, 1.2626 h - 0.6208 d) m east / up.
   The Osiris model is a Codex widget of survey geometry only.
 - 13 Nov: src/explore_sites_slike.py runs the unchanged Test P machinery on any 1024-px crop (keys crop_site, px_site);
-  about 25 min per scene on 2 cores. The whole-map adjR2 summary it writes is dominated by near-zero frequencies and is
+  about 5 min per scene on 2 cores. The whole-map adjR2 summary it writes is dominated by near-zero frequencies and is
   not comparable with Seyfzadeh's values (EXPLORATION_SITES_SLIKE_2026-11-13.md).
