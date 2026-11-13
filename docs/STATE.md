@@ -371,6 +371,12 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       R^2 per cell (ICEYE X13, K=3208, W=1900): maximum 0.0041 in the whole model, 3 of 8 lines empty. White noise under
       the same settings gives 99th pct ~0.003 and max ~0.005; autocorrelated noise far more. Neighbouring lines agree, but
       they share input patches, so that is not confirmation. Descriptive, not pre-registered; noise model of his series unknown.
+      OPEN ITEMS logged 13 Nov 15:10 (Hassan: "complete the open items"):
+      [ ] ARF models 2 and 3 (Osiris Shaft 3D; Khufu_X33_W1300_P2_Heights_3D): read embedded values, compare with the
+          noise floor as done for the Western Cemetery model. [runnable, via Hassan's browser]
+      [ ] Butte, Komati, Capella Cairo through the S-like (Manu-style) pipeline with noise control, as extra
+          "nobody claims anything here" examples. Single passes: cannot test repeatability. [runnable, Mac crops]
+      Note 13 Nov: Grassi post 2120962315054948796 (edited 05:29) re-announces the same ARF page; no new data seen.
       Housekeeping: Mac repo has a stale .git lock renamed to .git/stale-index-lock-2026-11-12 (from a failed pull) and
       runs/_test_p_extract.py, runs/p_0308.npz, runs/p_0208.npz (untracked, safe to delete).
       Question: with tuning freedom (315 configs: depth scale, smoothing, line shift), how often does an invented shaft
