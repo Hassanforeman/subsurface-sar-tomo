@@ -585,3 +585,11 @@ pinning is not an order effect. A weak surface-ward lean remains, unexplained an
 - 10 Nov: tool check src/check_tracker_bias.py -> docs/RESULTS_TRACKER_BIAS_2026-11-10.md. Baseline tracker = whitened phase correlation on un-windowed 64-px patches; it has a zero-lag peak on band-limited look amplitudes, so a true shift is attenuated ~10x at 11 looks (E12's known 12%) and fully from ~32 looks; NCC is unbiased at 11 looks. Circular patch-level plants (tests F, G, I) bypass this; E12's whole-crop plant does not.
 - 10 Nov 09:40: Mr Dahal used the deck in class with a YouTube video and asked for relevant videos; still speaking to his line manager. Reply drafted for Hassan (NASA JPL NISAR overview, JPL How InSAR Works, Smithsonian on the 2023 corridor, NASA Space Apps 2021 SAR video challenge as a class project).
 - 10 Nov: Hassan confirmed Mr Dahal showed the deck (v1) to the Year 9 class today. Videos reply drafted, not yet sent.
+- 13 Nov: all three ARF 3-D models read (ANALYSIS_ARF_MODELS_2_3_2026-11-13.md). The Khufu model stores its values as
+  73x1999 PNG textures in matplotlib magma (0-0.05), not plotly arrays; recover by nearest-colour lookup in the browser
+  (files are 403-blocked from the sandbox; the browser tool also blocks outputs that look like cookies/query strings, so
+  return small cleaned strings). Geometry: point(h, d) = (114.23 - h - 0.7839 d, 1.2626 h - 0.6208 d) m east / up.
+  The Osiris model is a Codex widget of survey geometry only.
+- 13 Nov: src/explore_sites_slike.py runs the unchanged Test P machinery on any 1024-px crop (keys crop_site, px_site);
+  about 25 min per scene on 2 cores. The whole-map adjR2 summary it writes is dominated by near-zero frequencies and is
+  not comparable with Seyfzadeh's values (EXPLORATION_SITES_SLIKE_2026-11-13.md).

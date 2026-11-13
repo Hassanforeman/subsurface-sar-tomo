@@ -1,0 +1,51 @@
+{
+ "label": "cairo",
+ "source": "s_cairo.npz",
+ "lat": 30.044245886769446,
+ "lon": 31.235726006958576,
+ "collect": "2024-11-23T06:27:38.170217",
+ "duration_s": 35.030177961,
+ "row_ss": 0.2498352734362147,
+ "col_ss": 0.041958690747443475,
+ "step_px": 5.0,
+ "position_spacing_m": 0.20979345373721736,
+ "n_configs": 315,
+ "n_fakes": 200,
+ "share_fakes_3of3_some_config": {
+  "site": 0.035,
+  "noise": 0.02
+ },
+ "median_F_fakes": {
+  "site": 0.0,
+  "noise": 0.0
+ },
+ "max_F_fakes": {
+  "site": 0.0761904761904762,
+  "noise": 0.009523809523809525
+ },
+ "busyness": {
+  "site": 0.09809936035497753,
+  "noise": 0.09434532494059777,
+  "planted": 0.129347247117892
+ },
+ "control": {
+  "F_planted": 0.273015873015873,
+  "F_same_spot_unplanted": 0.0,
+  "p_vs_site_fakes": 0.004975124378109453
+ },
+ "adjR2": {
+  "site": {
+   "max": 0.9988700151443481,
+   "p99": 0.9725789427757263,
+   "median": 0.0,
+   "share_positive": 0.23271644295302013
+  },
+  "noise": {
+   "max": 0.9975476264953613,
+   "p99": 0.9682408571243286,
+   "median": 0.0,
+   "share_positive": 0.2238003355704698
+  }
+ },
+ "control_ok": true
+}

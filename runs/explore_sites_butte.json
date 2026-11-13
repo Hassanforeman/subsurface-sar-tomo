@@ -1,0 +1,51 @@
+{
+ "label": "butte",
+ "source": "s_butte.npz",
+ "lat": 46.008224370583164,
+ "lon": -112.53437774427078,
+ "collect": "2024-03-07T04:48:27.000000",
+ "duration_s": 10.714656981333333,
+ "row_ss": 0.2506745782910171,
+ "col_ss": 0.11075457375774941,
+ "step_px": 5.0,
+ "position_spacing_m": 0.5537728687887471,
+ "n_configs": 315,
+ "n_fakes": 200,
+ "share_fakes_3of3_some_config": {
+  "site": 0.185,
+  "noise": 0.035
+ },
+ "median_F_fakes": {
+  "site": 0.0,
+  "noise": 0.0
+ },
+ "max_F_fakes": {
+  "site": 0.1492063492063492,
+  "noise": 0.07301587301587302
+ },
+ "busyness": {
+  "site": 0.09391202449270732,
+  "noise": 0.09245047498622054,
+  "planted": 0.12881922733104526
+ },
+ "control": {
+  "F_planted": 0.3523809523809524,
+  "F_same_spot_unplanted": 0.0,
+  "p_vs_site_fakes": 0.004975124378109453
+ },
+ "adjR2": {
+  "site": {
+   "max": 0.998395562171936,
+   "p99": 0.9672725200653076,
+   "median": 0.0,
+   "share_positive": 0.22982214765100673
+  },
+  "noise": {
+   "max": 0.9983546733856201,
+   "p99": 0.9715012311935425,
+   "median": 0.0,
+   "share_positive": 0.22481879194630872
+  }
+ },
+ "control_ok": true
+}

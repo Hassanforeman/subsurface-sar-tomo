@@ -1,0 +1,51 @@
+{
+ "label": "komati",
+ "source": "s_komati.npz",
+ "lat": -26.09060185377382,
+ "lon": 29.472001585229656,
+ "collect": "2023-08-13T07:03:05.000000",
+ "duration_s": 3.3133349186673478,
+ "row_ss": 0.3506080974063243,
+ "col_ss": 0.415128433602334,
+ "step_px": 2.4088930534638706,
+ "position_spacing_m": 1.0,
+ "n_configs": 315,
+ "n_fakes": 200,
+ "share_fakes_3of3_some_config": {
+  "site": 0.1,
+  "noise": 0.13
+ },
+ "median_F_fakes": {
+  "site": 0.0,
+  "noise": 0.0
+ },
+ "max_F_fakes": {
+  "site": 0.1111111111111111,
+  "noise": 0.13015873015873017
+ },
+ "busyness": {
+  "site": 0.06387927800241777,
+  "noise": 0.04423740510697032,
+  "planted": 0.13269878323861403
+ },
+ "control": {
+  "F_planted": 0.27936507936507937,
+  "F_same_spot_unplanted": 0.0,
+  "p_vs_site_fakes": 0.004975124378109453
+ },
+ "adjR2": {
+  "site": {
+   "max": 0.9989413619041443,
+   "p99": 0.9636150598526001,
+   "median": 0.0,
+   "share_positive": 0.18945805369127516
+  },
+  "noise": {
+   "max": 0.9988566040992737,
+   "p99": 0.9532752633094788,
+   "median": 0.0,
+   "share_positive": 0.16600838926174497
+  }
+ },
+ "control_ok": true
+}

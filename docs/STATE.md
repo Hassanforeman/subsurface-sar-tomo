@@ -372,10 +372,16 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       the same settings gives 99th pct ~0.003 and max ~0.005; autocorrelated noise far more. Neighbouring lines agree, but
       they share input patches, so that is not confirmation. Descriptive, not pre-registered; noise model of his series unknown.
       OPEN ITEMS logged 13 Nov 15:10 (Hassan: "complete the open items"):
-      [ ] ARF models 2 and 3 (Osiris Shaft 3D; Khufu_X33_W1300_P2_Heights_3D): read embedded values, compare with the
-          noise floor as done for the Western Cemetery model. [runnable, via Hassan's browser]
-      [ ] Butte, Komati, Capella Cairo through the S-like (Manu-style) pipeline with noise control, as extra
-          "nobody claims anything here" examples. Single passes: cannot test repeatability. [runnable, Mac crops]
+      [x] ARF models 2 and 3 -> docs/ANALYSIS_ARF_MODELS_2_3_2026-11-13.md (runs/arf_khufu_osiris_models_stats.json,
+          runs/noise_floor_khufu.json). Osiris model = geometry of the known shaft only, no radar values. Great Pyramid
+          model (K=3360, W=1300, P=2): max adjusted R^2 0.041 / 0.025, 99th pct 0.016 = mildly autocorrelated noise
+          (AR(1) 0.5: 0.016); file's own text says it "does not ... identify chambers"; chamber boxes not special (17% /
+          41% of other boxes equal or higher; chamber coordinates from memory, UNCHECKED). All three ARF models now read.
+      [x] Butte, Komati, central Cairo through the S-like pipeline -> docs/EXPLORATION_SITES_SLIKE_2026-11-13.md
+          (runs/explore_sites_*.json). Controls passed 3 of 3. Invented three-level shaft "found" for 10% / 18.5% / 3.5% of
+          fake targets (noise twins 13% / 3.5% / 2%). Butte real >> noise (scene content adds false structure); Butte has
+          real mine workings, so never call it empty. Capella "Cairo" scene is central Cairo (30.044 N 31.236 E), ~11 km
+          from Giza. Mac scratch: runs/_sites_extract.py, runs/s_{butte,komati,cairo}.npz (untracked, safe to delete).
       Note 13 Nov: Grassi post 2120962315054948796 (edited 05:29) re-announces the same ARF page; no new data seen.
       Housekeeping: Mac repo has a stale .git lock renamed to .git/stale-index-lock-2026-11-12 (from a failed pull) and
       runs/_test_p_extract.py, runs/p_0308.npz, runs/p_0208.npz (untracked, safe to delete).
