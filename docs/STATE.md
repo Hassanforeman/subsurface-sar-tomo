@@ -383,6 +383,16 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
           real mine workings, so never call it empty. Capella "Cairo" scene is central Cairo (30.044 N 31.236 E), ~11 km
           from Giza. Mac scratch: runs/_sites_extract.py, runs/s_{butte,komati,cairo}.npz (untracked, safe to delete).
       Note 13 Nov: Grassi post 2120962315054948796 (edited 05:29) re-announces the same ARF page; no new data seen.
+      15 Nov 03:12 AEST: Grassi post 2121652494153433319 relays a Seyfzadeh FB post: "negative control" = same Khufu line
+      (horizontal traverse 50.51 m above pavement, W1100, P6, b/a>0.1, scale 0-0.016) on ICEYE X33 (shows patches) and on
+      ICEYE X13 (blank), X13 explained as "incidence angle too shallow". Also claims an unnamed "official agency's space
+      division" is interested and "a paper is in the works" (UNVERIFIED). Our reading (not yet public): (a) a real step,
+      credit it; (b) not the control requested (noise / bare ground / scrambled order through the SAME data set); (c) X13 is
+      the data set of their own Western Cemetery "perfect match" model (max 0.0041), which would also look blank on a
+      0-0.016 scale; (d) explanation given after the outcome; same place + different pass = different picture is what Test R
+      found; (e) caveat: local incidence on a sloped face differs from flat ground, so (c) is a question to ask, not proof.
+      [ ] PENDING Hassan's decision (drafted, NOT posted): X reply to Grassi (13 Nov draft); YouTube comment on Danny Jones
+          clip V27WhB9B8R4 (13 Nov draft); message to Sal Pais (antigravity, 13 Nov draft).
       Housekeeping: Mac repo has a stale .git lock renamed to .git/stale-index-lock-2026-11-12 (from a failed pull) and
       runs/_test_p_extract.py, runs/p_0308.npz, runs/p_0208.npz (untracked, safe to delete).
       Question: with tuning freedom (315 configs: depth scale, smoothing, line shift), how often does an invented shaft
