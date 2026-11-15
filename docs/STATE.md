@@ -403,8 +403,12 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
       Biondi "scanned the Titanic" (posted Aug); 6:30 commercial licence planned; 1:17:00 January tour with Seyfzadeh as
       co-host plugged; 1:30:00 "not made a single penny"; 40:00 host: "a guy could sit down and do it ... do the same work".
       Agency still unnamed. Next targets named: Hawara, Valley of the Kings, Sacsayhuaman.
-      [ ] PENDING Hassan's decision (drafted, NOT posted): X reply to Grassi (13 Nov draft); YouTube comment on Danny Jones
-          clip V27WhB9B8R4 (13 Nov draft); message to Sal Pais (antigravity, 13 Nov draft).
+      [x] 15 Nov 12:58: PUBLIC COMMENT POSTED on the DeDunking livestream (as @hassanforeman6119), full text and sources
+          -> docs/PUBLIC_COMMENT_DEDUNKING_2026-11-15.md. First public statement of Test P, the ARF-file numbers, the
+          sites exploration, the repeat-pass result and the X13 question. COMMITMENTS MADE: send the 200 fake targets to
+          anyone who asks; run Seyfzadeh's code/data if released and publish either way. Watch for replies. [external]
+          Superseded drafts (not posted, dropped): X reply to Grassi (13 and 15 Nov versions); Danny Jones clip comment.
+      [ ] PENDING Hassan's decision (drafted, NOT sent): message to Sal Pais (antigravity, 13 Nov draft).
       Housekeeping: Mac repo has a stale .git lock renamed to .git/stale-index-lock-2026-11-12 (from a failed pull) and
       runs/_test_p_extract.py, runs/p_0308.npz, runs/p_0208.npz (untracked, safe to delete).
       Question: with tuning freedom (315 configs: depth scale, smoothing, line shift), how often does an invented shaft
