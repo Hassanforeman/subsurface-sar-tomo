@@ -239,6 +239,10 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
 - [x] 9 Nov 08:33: told the PCI recommender (Di Palma, cc PCI contact) that v6.3 is public; reviewers may continue on their
       version; one consolidated revision + response letter will follow the reports. [external]
 - [ ] Send the changes letter + revision when PCI reports arrive. [external]
+- [x] 17 Nov 04:16: Hassan asked PCI (Queffelec, cc Di Palma) for a status update on #1130. 18 Nov 18:55 reply from
+      Alain Queffelec: the SECOND REVIEW WAS DUE 5 NOV and is overdue; several reminders sent; PCI will contact the
+      reviewer. (First review done before 14 Aug.) Hassan replied with thanks 18 Nov 19:48. Nothing to do until reports
+      arrive; revision stays on HOLD. Do not chase again for at least 2-3 weeks. [external]
 - [x] 9 Nov 08:36: replied on X (@darealHassan) to @GrassiTrevor's post arguing the retraction was political because the
       Vesuvius paper stands: https://x.com/darealHassan/status/2119559718473744463 (method not target; Vesuvius reproduction
       found only a surface artifact; planted signals recovered; concept DOI). [external]
