@@ -420,6 +420,14 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
           Khufu model's own "does not ... identify chambers" note, chambers placed by hand; Test P (0/315, fakes ~5-24%);
           X13/X33; our limits (reconstruction, no code/data from them); agreed mine test; offered 200 fake targets; repo link.
           Left out: Test R (caveats). COMMITMENTS repeated: send fake-target list on request; run their code if released.
+      [x] 25 Nov ~06:27 AEST: Mobberley's follow-up post (x.com/FMobberleyX/status/2125292862799814950) corrected the
+          retraction framing and cited our work unnamed ("one pre-registered attempt ... same results from pure noise ...
+          monuments and open desert come out looking identical"). NEW CLAIM (unverified, no source given): Biondi has given
+          his software under NDA to Howard Zebker (Stanford), who agreed to attempt a replication. Our 4-post reply:
+          x.com/darealHassan/status/2125324761106624569 ... 4/4 x.com/darealHassan/status/2125325004174999598 (claimed the
+          preprint; tightened "same results from noise"; backed Zebker test; listed what makes it decisive: pre-written
+          targets, noise/desert/planted controls, second pass, publish either way; conceded notice gave no specifics;
+          offered fake-target list and code to Zebker's team). [external] Watch for a Zebker replication.
       [ ] PENDING Hassan's decision (drafted, NOT sent): message to Sal Pais (antigravity, 13 Nov draft).
       Housekeeping: Mac repo has a stale .git lock renamed to .git/stale-index-lock-2026-11-12 (from a failed pull) and
       runs/_test_p_extract.py, runs/p_0308.npz, runs/p_0208.npz (untracked, safe to delete).
