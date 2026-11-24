@@ -412,6 +412,14 @@ specified taper, but pre-registered falsification (ii) was MET on 2/3 scenes (in
           sites exploration, the repeat-pass result and the X13 question. COMMITMENTS MADE: send the 200 fake targets to
           anyone who asks; run Seyfzadeh's code/data if released and publish either way. Watch for replies. [external]
           Superseded drafts (not posted, dropped): X reply to Grassi (13 and 15 Nov versions); Danny Jones clip comment.
+      [x] 24 Nov ~10:45 AEST: PUBLIC X THREAD (9 posts, @darealHassan) replying to Francis Mobberley's 24 Nov post
+          (x.com/FMobberleyX/status/2124886403372732615, ~69k views; claims Seyfzadeh's scans found the King's/Queen's
+          chambers, 3 Osiris levels and the Mastaba 4000 GPR substructure; Mobberley himself endorsed a surveyed-mine test).
+          Thread: 1/9 x.com/darealHassan/status/2125025571910611018 ... 9/9 x.com/darealHassan/status/2125026226821841136.
+          Points: retraction wording; not blind (Grassi contact, Biondi judged); Western Cemetery max adjR2 0.0041 = noise;
+          Khufu model's own "does not ... identify chambers" note, chambers placed by hand; Test P (0/315, fakes ~5-24%);
+          X13/X33; our limits (reconstruction, no code/data from them); agreed mine test; offered 200 fake targets; repo link.
+          Left out: Test R (caveats). COMMITMENTS repeated: send fake-target list on request; run their code if released.
       [ ] PENDING Hassan's decision (drafted, NOT sent): message to Sal Pais (antigravity, 13 Nov draft).
       Housekeeping: Mac repo has a stale .git lock renamed to .git/stale-index-lock-2026-11-12 (from a failed pull) and
       runs/_test_p_extract.py, runs/p_0308.npz, runs/p_0208.npz (untracked, safe to delete).
